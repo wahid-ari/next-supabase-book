@@ -7,11 +7,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   switch (method) {
     case 'GET':
       if (!query.id) {
-        const { data } = await supabase.from('genre').select(`*`).order('id');
+        const { data } = await supabase.from('book_genres').select(`*`).order('id');
         res.status(200).json(data);
       } else {
-        const { data } = await supabase.from('genre').select(`*, artists (*)`).eq('id', query.id).order('id');
-        res.status(200).json(data);
+        const { data: genres } = await supabase.from('book_genres').select(`*`).eq('id', query.id).order('id');
+        const { data: books_genres } = await supabase
+          .from('book_books_genres')
+          .select(`*`)
+          .eq('genre_id', query.id)
+          .order('id');
+        const { data: books } = await supabase.from('book_books').select(`*`).order('id');
+
+        const books_by_genres = [];
+        for (const book of books) {
+          for (const genre of books_genres) {
+            if (genre.book_id == book.id) {
+              books_by_genres.push({
+                ...book,
+              });
+            }
+          }
+        }
+        // https://nextjs.org/docs/api-reference/next.config.js/headers#cache-control
+        res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+        res.status(200).json({ ...genres[0], books_by_genres });
       }
       break;
 
@@ -19,7 +38,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!body.name) {
         res.status(422).json({ error: 'Name required' });
       } else {
-        const { error } = await supabase.from('genre').insert([{ name: body.name }]);
+        const { error } = await supabase.from('book_genres').insert([
+          {
+            name: body.name,
+            link: body.link,
+          },
+        ]);
         if (error) {
           res.status(422).json({ error: error.message });
         }
@@ -31,7 +55,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!body.name) {
         res.status(422).json({ error: 'Name required' });
       } else {
-        const { error } = await supabase.from('genre').update({ name: body.name }).eq('id', body.id);
+        const { error } = await supabase
+          .from('book_genres')
+          .update({
+            name: body.name,
+            link: body.link,
+          })
+          .eq('id', body.id);
         if (error) {
           res.status(422).json({ error: error.message });
         }
@@ -43,7 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!query.id) {
         res.status(422).json({ error: 'Id required' });
       } else {
-        const { error } = await supabase.from('genre').delete().eq('id', query.id);
+        const { error } = await supabase.from('book_genres').delete().eq('id', query.id);
         if (error) {
           res.status(422).json({ error: error.message });
         }
