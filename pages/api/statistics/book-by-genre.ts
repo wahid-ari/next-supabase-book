@@ -6,23 +6,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   switch (method) {
     case 'GET':
-      const { data: songs } = await supabase.from('songs').select(`*`).order('id');
-      const { data: albums } = await supabase.from('album').select(`*`).order('id');
+      const { data: books_genres } = await supabase.from('book_books_genres').select(`*`).order('id');
+      const { data: genres } = await supabase.from('book_genres').select(`*`).order('id');
       // Make an array of object structure
       let items = [];
-      for (const album of albums) {
+      for (const genre of genres) {
         items.push({
-          id: album.id,
-          label: album.name,
+          id: genre.id,
+          label: genre.name,
           total: 0,
         });
       }
-      // Count total song that have same album
+      // Count total book that have same genre
       let result = [];
       for (const item of items) {
-        for (const song of songs) {
-          if (song.album_id == item.id) {
-            let filtered = items.filter((i) => i.id == song.album_id)[0];
+        for (const book_genre of books_genres) {
+          if (book_genre.genre_id == item.id) {
+            let filtered = items.filter((i) => i.id == book_genre.genre_id)[0];
             filtered.total += 1;
             result.push(filtered);
           }
@@ -31,12 +31,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Remove duplicate values from an array of objects in javascript
       // https://stackoverflow.com/questions/45439961/remove-duplicate-values-from-an-array-of-objects-in-javascript
       let data = result.reduce((unique, o) => {
-        if (!unique.some((obj) => obj.id === o.id)) {
+        if (!unique.some((obj: any) => obj.id === o.id)) {
           unique.push(o);
         }
         return unique;
       }, []);
-      let sortedData = data.sort((a, b) => b.total - a.total).slice(0, 10);
+      let sortedData = data.sort((a: any, b: any) => b.total - a.total).slice(0, 10);
       res.status(200).json(sortedData);
       break;
 

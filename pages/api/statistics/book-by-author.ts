@@ -6,17 +6,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   switch (method) {
     case 'GET':
-      const { data: playlists } = await supabase.from('playlist').select(`*, playlist_song (*)`).order('id');
+      const { data: books_authors } = await supabase.from('book_authors').select(`*, book_books (*)`).order('id');
       // Make an array of object structure
       let items = [];
-      for (const playlist of playlists) {
+      for (const author of books_authors) {
         items.push({
-          id: playlist.id,
-          label: playlist.name,
-          total: playlist.playlist_song.length,
+          id: author.id,
+          label: author.name,
+          total: author.book_books.length,
         });
       }
-      let sortedData = items.sort((a, b) => b.total - a.total).slice(0, 10);
+      let sortedData = items.sort((a: any, b: any) => b.total - a.total).slice(0, 10);
       res.status(200).json(sortedData);
       break;
 

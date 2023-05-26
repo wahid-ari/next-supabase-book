@@ -1,0 +1,27 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { supabase } from '@libs/supabase';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { method } = req;
+
+  switch (method) {
+    case 'GET':
+      const { data: quotes_authors } = await supabase.from('book_authors').select(`*, book_quotes(*)`).order('id');
+      // Make an array of object structure
+      let items = [];
+      for (const author of quotes_authors) {
+        items.push({
+          id: author.id,
+          label: author.name,
+          total: author.book_quotes.length,
+        });
+      }
+      let sortedData = items.sort((a: any, b: any) => b.total - a.total).slice(0, 10);
+      res.status(200).json(sortedData);
+      break;
+
+    default:
+      res.status(200).json('Method required');
+      break;
+  }
+}
