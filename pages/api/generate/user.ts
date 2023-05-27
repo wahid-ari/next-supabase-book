@@ -4,21 +4,21 @@ import { hash, compare } from 'bcryptjs';
 
 const admin_datas = [
   {
-    name: 'admin',
-    username: 'Admin',
-    password: 'password',
+    name: 'Admin',
+    username: 'admin',
+    password: '',
     type: 'admin',
   },
   {
-    name: 'develop',
-    username: 'Develop',
-    password: 'password',
+    name: 'Develop',
+    username: 'develop',
+    password: '',
     type: 'admin',
   },
   {
-    name: 'user',
-    username: 'User',
-    password: 'password',
+    name: 'User',
+    username: 'user',
+    password: '',
     type: 'user',
   },
 ];

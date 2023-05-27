@@ -33,9 +33,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(422).json({ error: 'Password required' });
       } else {
         const { data, error } = await supabase
-          .from('admin')
+          .from('book_users')
           .select(`*`)
-          .eq('username', body.username)
+          .eq('username', body.username.toLowerCase())
           .limit(1)
           .single();
         if (error) {
@@ -49,11 +49,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         delete data.created_at;
         const token = jwt.sign(
           {
+            id: data.id,
             username: data.username,
-            password: data.name,
+            name: data.name,
+            type: data.type,
           },
           process.env.JWT_SECRET
         );
+        const { data: session } = await supabase.from('book_sessions').insert({ user_id: data.id, token: token });
         // const decode = jwt.verify(token, process.env.JWT_SECRET);
         // console.log(decode)
         res.status(200).json({ ...data, token });
