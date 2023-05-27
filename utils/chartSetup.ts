@@ -22,29 +22,21 @@ function populateData(param: any, type?: string) {
   let borderColor = [];
   let labelName = '';
   switch (type) {
-    // type genre = label & total
-    case 'genre':
+    // type book = label & total
+    case 'book':
       param.map((item: any) => labels.push(item.label));
       param.map((item: any) => totals.push(item.total));
       bgColor = colors.slice(0, 13);
       borderColor = colors.slice(0, 13);
-      labelName = 'Total Artist';
+      labelName = 'Total Book';
       break;
-    // type song = label & total
-    case 'song':
+    // type quote = label & total
+    case 'quote':
       param.map((item: any) => labels.push(item.label));
       param.map((item: any) => totals.push(item.total));
       bgColor = colors.slice(1, 13);
       borderColor = colors.slice(1, 13);
-      labelName = 'Total Song';
-      break;
-    // type album = label & total
-    case 'album':
-      param.map((item: any) => labels.push(item.label));
-      param.map((item: any) => totals.push(item.total));
-      bgColor = colors.slice(2, 13);
-      borderColor = colors.slice(2, 13);
-      labelName = 'Total Album';
+      labelName = 'Total Quote';
       break;
     default:
       param.map((item: any) => labels.push(item.label));
@@ -82,39 +74,6 @@ const options = {
     },
   },
 };
-
-function optionsLineChart(theme?: string) {
-  return {
-    borderColor: 'rgba(4, 120, 200, 0.5)',
-    borderWidth: 2,
-    pointRadius: 7,
-    pointBorderColor: 'rgba(4, 120, 200, 0)',
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: '#888',
-        },
-        grid: {
-          color: theme == 'dark' ? '#3f3f46' : '#e2e8f0',
-        },
-      },
-      y: {
-        ticks: {
-          color: '#888',
-          stepSize: 1,
-        },
-        grid: {
-          color: theme == 'dark' ? '#3f3f46' : '#e2e8f0',
-        },
-      },
-    },
-  };
-}
 
 function optionsBarChart(theme?: string) {
   return {
@@ -181,4 +140,4 @@ function optionsHorizontalBarChart(theme?: string, windowWidth?: number) {
   };
 }
 
-export { populateData, options, optionsLineChart, optionsBarChart, optionsHorizontalBarChart };
+export { populateData, options, optionsBarChart, optionsHorizontalBarChart };
