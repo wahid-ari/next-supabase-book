@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import useSWR from 'swr';
-import axios from 'axios';
 import { useTheme } from 'next-themes';
 import Layout from '@components/layout/Layout';
 import Shimer from '@components/systems/Shimer';
@@ -19,8 +17,9 @@ import {
   Filler,
   Legend,
 } from 'chart.js';
-import { Line, Bar, Doughnut, Pie } from 'react-chartjs-2';
-import { populateData, options, optionsLineChart, optionsBarChart, optionsHorizontalBarChart } from '@utils/chartSetup';
+import { Bar, Doughnut, Pie } from 'react-chartjs-2';
+import { populateData, options, optionsBarChart, optionsHorizontalBarChart } from '@utils/chartSetup';
+import { useBookByAuthorData, useBookByGenreData, useQuoteByAuthorData, useQuoteByTagData } from '@libs/swr';
 
 ChartJS.register(
   CategoryScale,
@@ -35,36 +34,17 @@ ChartJS.register(
   Legend
 );
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-
 export default function Home() {
   const { theme } = useTheme();
-  const { data: artistByGenre, error: errorArtistByGenre } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_ROUTE}/api/statistics/artist-by-genre`,
-    fetcher
-  );
-  const { data: albumByArtist, error: errorAlbumByArtist } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_ROUTE}/api/statistics/album-by-artist`,
-    fetcher
-  );
-  const { data: songByAlbum, error: errorSongByAlbum } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_ROUTE}/api/statistics/song-by-album`,
-    fetcher
-  );
-  const { data: songByArtist, error: errorSongByArtist } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_ROUTE}/api/statistics/song-by-artist`,
-    fetcher
-  );
-  const { data: songByPlaylist, error: errorSongByPlaylist } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_ROUTE}/api/statistics/song-by-playlist`,
-    fetcher
-  );
+  const { data: bookByGenre, error: errorBookByGenre } = useBookByGenreData();
+  const { data: bookByAuthor, error: errorBookByAuthor } = useBookByAuthorData();
+  const { data: quoteByAuthor, error: errorQuoteByAuthor } = useQuoteByAuthorData();
+  const { data: quoteByTag, error: errorQuoteByTag } = useQuoteByTagData();
 
-  const [dataArtistByGenre, setDataArtistByGenre] = useState(null);
-  const [dataAlbumByArtist, setDataAlbumByArtist] = useState(null);
-  const [dataSongByAlbum, setDataSongByAlbum] = useState(null);
-  const [dataSongByArtist, setDataSongByArtist] = useState(null);
-  const [dataSongByPlaylist, setDataSongByPlaylist] = useState(null);
+  const [dataBookByGenre, setDataBookByGenre] = useState(null);
+  const [dataBookByAuthor, setDataBookByAuthor] = useState(null);
+  const [dataQuoteByAuthor, setDataQuoteByAuthor] = useState(null);
+  const [dataQuoteByTag, setDataQuoteByTag] = useState(null);
 
   const [windowWidth, setWindowWidth] = useState(0);
   useEffect(() => {
@@ -72,14 +52,13 @@ export default function Home() {
   }, [windowWidth]);
 
   useEffect(() => {
-    if (artistByGenre !== undefined) setDataArtistByGenre(populateData(artistByGenre, 'genre'));
-    if (albumByArtist !== undefined) setDataAlbumByArtist(populateData(albumByArtist, 'album'));
-    if (songByAlbum !== undefined) setDataSongByAlbum(populateData(songByAlbum, 'song'));
-    if (songByArtist !== undefined) setDataSongByArtist(populateData(songByArtist, 'song'));
-    if (songByPlaylist !== undefined) setDataSongByPlaylist(populateData(songByPlaylist, 'song'));
-  }, [artistByGenre, albumByArtist, songByAlbum, songByArtist, songByPlaylist]);
+    if (bookByGenre !== undefined) setDataBookByGenre(populateData(bookByGenre, 'book'));
+    if (bookByAuthor !== undefined) setDataBookByAuthor(populateData(bookByAuthor, 'book'));
+    if (quoteByAuthor !== undefined) setDataQuoteByAuthor(populateData(quoteByAuthor, 'quote'));
+    if (quoteByTag !== undefined) setDataQuoteByTag(populateData(quoteByTag, 'quote'));
+  }, [bookByGenre, bookByAuthor, quoteByAuthor, quoteByTag]);
 
-  if (errorArtistByGenre || errorAlbumByArtist || errorSongByAlbum || errorSongByArtist || errorSongByPlaylist) {
+  if (errorBookByAuthor || errorBookByGenre || errorQuoteByAuthor || errorQuoteByTag) {
     return (
       <Layout title='Statistics'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
@@ -92,26 +71,26 @@ export default function Home() {
       <Titles>Statistics</Titles>
 
       <div className='mt-5 grid grid-cols-1 gap-5 md:grid-cols-2'>
-        {dataArtistByGenre ? (
+        {dataBookByGenre ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-[#1F1F1F]'>
             <div className='bg-neutral-100/80 p-3 dark:bg-neutral-800'>
-              <Text.medium className='!text-sm'>Total Artis by Genre</Text.medium>
+              <Text.medium className='!text-sm'>Total Book by Genre</Text.medium>
             </div>
             <div className='m-auto w-72 py-3'>
-              <Pie options={options} data={dataArtistByGenre} />
+              <Pie options={options} data={dataBookByGenre} />
             </div>
           </div>
         ) : (
           <Shimer className='!h-[350px] w-full' />
         )}
 
-        {dataAlbumByArtist ? (
+        {dataQuoteByTag ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-[#1F1F1F]'>
             <div className='bg-neutral-100/80 p-3 dark:bg-neutral-800'>
-              <Text.medium className='!text-sm'>Total Album by Artist</Text.medium>
+              <Text.medium className='!text-sm'>Total Quote by Tag</Text.medium>
             </div>
             <div className='m-auto w-72 py-3'>
-              <Doughnut options={options} data={dataAlbumByArtist} />
+              <Doughnut options={options} data={dataQuoteByTag} />
             </div>
           </div>
         ) : (
@@ -120,13 +99,13 @@ export default function Home() {
       </div>
 
       <div className='mt-5'>
-        {dataSongByAlbum ? (
+        {dataBookByAuthor ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-[#1F1F1F]'>
             <div className='bg-neutral-100/80 p-3 dark:bg-neutral-800'>
-              <Text.medium className='!text-sm'>Total Song by Album</Text.medium>
+              <Text.medium className='!text-sm'>Total Book by Author</Text.medium>
             </div>
             <div className='p-3'>
-              <Bar options={optionsBarChart(theme)} data={dataSongByAlbum} height={windowWidth > 500 ? 100 : 250} />
+              <Bar options={optionsBarChart(theme)} data={dataBookByAuthor} height={windowWidth > 500 ? 100 : 250} />
             </div>
           </div>
         ) : (
@@ -135,41 +114,16 @@ export default function Home() {
       </div>
 
       <div className='mt-5'>
-        {dataSongByArtist ? (
+        {dataQuoteByAuthor ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-[#1F1F1F]'>
             <div className='bg-neutral-100/80 p-3 dark:bg-neutral-800'>
-              <Text.medium className='!text-sm'>Total Song by Artist</Text.medium>
+              <Text.medium className='!text-sm'>Total Quote by Author</Text.medium>
             </div>
             <div className='p-3'>
               <Bar
                 // @ts-ignore
                 options={optionsHorizontalBarChart(theme, windowWidth)}
-                data={dataSongByArtist}
-                height={windowWidth > 500 ? 100 : 250}
-              />
-            </div>
-          </div>
-        ) : (
-          <Shimer className='!h-96 w-full' />
-        )}
-      </div>
-
-      <div className='mt-5'>
-        {dataSongByPlaylist ? (
-          <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-[#1F1F1F]'>
-            <div className='bg-neutral-100/80 p-3 dark:bg-neutral-800'>
-              <Text.medium className='!text-sm'>Total Song by Playlist</Text.medium>
-            </div>
-            <div className='p-3'>
-              {/* <Bar
-                options={optionsHorizontalBarChart(theme, windowWidth)}
-                data={dataSongByPlaylist}
-                height={100}
-              /> */}
-
-              <Line
-                options={optionsLineChart(theme)}
-                data={dataSongByPlaylist}
+                data={dataQuoteByAuthor}
                 height={windowWidth > 500 ? 100 : 250}
               />
             </div>
