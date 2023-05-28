@@ -128,6 +128,10 @@ export default function Sidebar() {
                   Tag
                 </NavLink>
 
+                <NavLink href='/author' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
+                  Author
+                </NavLink>
+
                 <NavLink href='/artist' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
                   Artist
                 </NavLink>
