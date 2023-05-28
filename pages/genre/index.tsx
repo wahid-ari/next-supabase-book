@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import useSWR, { mutate } from 'swr';
+import { mutate } from 'swr';
+import { useGenresData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@utils/useToast';
 import { PlusSmIcon } from '@heroicons/react/outline';
@@ -13,24 +14,22 @@ import Button from '@components/systems/Button';
 import LabeledInput from '@components/systems/LabeledInput';
 import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  const cookies = nookies.get(context);
-  if (!cookies.token) {
-    return {
-      redirect: {
-        destination: '/login',
-      },
-    };
-  }
-  return {
-    props: {},
-  };
-}
-
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+// export async function getServerSideProps(context: any) {
+//   const cookies = nookies.get(context);
+//   if (!cookies.token) {
+//     return {
+//       redirect: {
+//         destination: '/login',
+//       },
+//     };
+//   }
+//   return {
+//     props: {},
+//   };
+// }
 
 export default function Genre() {
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`, fetcher);
+  const { data, error } = useGenresData();
   const { updateToast, pushToast } = useToast();
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -41,7 +40,7 @@ export default function Genre() {
 
   async function handleCreate() {
     const toastId = pushToast({
-      message: 'Saving Genre...',
+      message: `Creating ${name} genre...`,
       isLoading: true,
     });
     try {
@@ -61,7 +60,7 @@ export default function Genre() {
 
   async function handleEdit() {
     const toastId = pushToast({
-      message: 'Saving Genre...',
+      message: 'Updating genre...',
       isLoading: true,
     });
     try {
@@ -81,7 +80,7 @@ export default function Genre() {
 
   async function handleDelete() {
     const toastId = pushToast({
-      message: 'Deleting Genre...',
+      message: `Deleting ${deleteItem.name} genre...`,
       isLoading: true,
     });
     try {
@@ -111,19 +110,19 @@ export default function Genre() {
 
   if (error) {
     return (
-      <Layout title='Genre - MyMusic'>
+      <Layout title='Genre - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Genre - MyMusic'>
+    <Layout title='Genre - MyBook'>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Genre</Title>
         <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>
           <PlusSmIcon className='h-5 w-5' />
-          Add Genre
+          Add New Genre
         </Button.success>
       </div>
 
@@ -142,7 +141,7 @@ export default function Genre() {
             name='name'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder='Pop'
+            placeholder='Biography'
           />
         </div>
       </Dialog>
@@ -176,7 +175,7 @@ export default function Genre() {
         onConfirm={handleDelete}
       >
         <div className='mt-5 text-center sm:text-left'>
-          Are you sure want to delete genre <span className='font-semibold'>{deleteItem.name}</span> ?
+          Are you sure want to delete <span className='font-semibold'>{deleteItem.name}</span> ?
         </div>
       </Dialog>
 
