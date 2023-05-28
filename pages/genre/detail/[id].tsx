@@ -27,7 +27,6 @@ export async function getServerSideProps(context: any) {
 
 export default function Genre({ id }) {
   const { data, error } = useGenreData(id);
-  console.log(data);
 
   const column = useMemo(
     () => [
