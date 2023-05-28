@@ -27,6 +27,7 @@ import Dialog from '@components/systems/Dialog';
 import Modal from '@components/systems/Modal';
 import SearchBox from '@components/systems/SearchBox';
 import ReactTable from '@components/systems/ReactTable';
+import TextArea from '@components/systems/TextArea';
 import { tabledata } from '@utils/tableData';
 
 const searchBoxData = [
@@ -250,6 +251,12 @@ export default function Example() {
           </span>
           <span className='mb-3 block underline'>
             <Link href='#labeledinputdisabled'>LabeledInput.disabled</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#textarea'>TextArea</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#textareadisabled'>TextArea.disabled</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#progress'>Progress</Link>
@@ -600,6 +607,24 @@ export default function Example() {
           placeholder='confirmation'
           type='password'
         />
+      </Wrapper>
+
+      <Wrapper
+        id='textarea'
+        name='TextArea'
+        props={['label', 'className', 'id', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
+        noChildren
+      >
+        <TextArea label='TextArea' name='textarea' placeholder='text area' />
+      </Wrapper>
+
+      <Wrapper
+        id='textareadisabled'
+        name='TextArea.disabled'
+        props={['label', 'className', 'id', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
+        noChildren
+      >
+        <TextArea.disabled label='TextArea' name='textarea' placeholder='text area' />
       </Wrapper>
 
       <Wrapper id='progress' name='Progress' variant={['percentage']} props={['percent']} noChildren noProps>
