@@ -3,6 +3,8 @@ import { supabase } from '@libs/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
+  const header = req.headers.authorization;
+  const token = req.headers.authorization?.split(' ')[1] || '';
 
   switch (method) {
     case 'GET':
@@ -16,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .select(`*`)
           .eq('genre_id', query.id)
           .order('id');
-        const { data: books } = await supabase.from('book_books').select(`*`).order('id');
+        const { data: books } = await supabase.from('book_books').select(`id, title, published, image, book_authors (id, name, image)`).order('id');
 
         const books_by_genres = [];
         for (const book of books) {
@@ -70,14 +72,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break;
 
     case 'DELETE':
-      if (!query.id) {
-        res.status(422).json({ error: 'Id required' });
-      } else {
-        const { error } = await supabase.from('book_genres').delete().eq('id', query.id);
-        if (error) {
-          res.status(422).json({ error: error.message });
+      if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
+      const { data: session } = await supabase.from('book_sessions').select('*').eq('token', token).single();
+      if (session) {
+        if (!query.id) {
+          res.status(422).json({ error: 'Id required' });
+        } else {
+          const { error } = await supabase.from('book_genres').delete().eq('id', query.id);
+          if (error) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(200).json({ message: 'Success delete genre' });
         }
-        res.status(200).json({ message: 'Success delete genre' });
+      } else {
+        res.status(401).json({ message: 'Token invalid' });
       }
       break;
 
