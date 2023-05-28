@@ -14,6 +14,16 @@ export function useTagData(id: string) {
   return { data, error, isLoading };
 }
 
+export function useGenresData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/genre`, fetcher);
+  return { data, error, isLoading };
+}
+
+export function useGenreData(id: string) {
+  const { data, error, isLoading } = useSWR(id ? `${API_URL}/genre?id=${id}` : `${API_URL}/genre`, fetcher);
+  return { data, error, isLoading };
+}
+
 export function useBookByAuthorData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/statistics/book-by-author`, fetcher);
   return { data, error, isLoading };
