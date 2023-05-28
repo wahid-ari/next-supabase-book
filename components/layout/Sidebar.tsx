@@ -30,7 +30,8 @@ export default function Sidebar() {
   const [mounted, setMounted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { showNav, setShowNav } = useContext(GlobalContext);
-  const admin = nookies.get(null, 'type');
+  // const admin = nookies.get(null, 'type');
+  const admin = { type: 'admin' };
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
@@ -121,6 +122,10 @@ export default function Sidebar() {
 
                 <NavLink href='/album' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
                   Album
+                </NavLink>
+
+                <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
+                  Tag
                 </NavLink>
 
                 <NavLink href='/artist' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
