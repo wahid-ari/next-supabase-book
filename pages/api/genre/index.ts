@@ -18,7 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .select(`*`)
           .eq('genre_id', query.id)
           .order('id');
-        const { data: books } = await supabase.from('book_books').select(`id, title, published, image, book_authors (id, name, image)`).order('id');
+        const { data: books } = await supabase
+          .from('book_books')
+          .select(`id, title, published, image, book_authors (id, name, image)`)
+          .order('id');
 
         const books_by_genres = [];
         for (const book of books) {
