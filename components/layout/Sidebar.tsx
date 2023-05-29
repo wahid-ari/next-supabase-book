@@ -17,6 +17,8 @@ import {
   SearchIcon,
   LoginIcon,
   ExternalLinkIcon,
+  BookOpenIcon,
+  AnnotationIcon,
 } from '@heroicons/react/outline';
 import NavLink from '@components/systems/NavLink';
 import NavAccordion from '@components/systems/NavAccordion';
@@ -116,6 +118,26 @@ export default function Sidebar() {
                   Statistics
                 </NavLink>
 
+                <NavLink href='/author' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
+                  Author
+                </NavLink>
+
+                <NavLink href='/book' icon={<BookOpenIcon className='h-4 w-4' />} className='mt-1'>
+                  Book
+                </NavLink>
+
+                <NavLink href='/quote' icon={<AnnotationIcon className='h-4 w-4' />} className='mt-1'>
+                  Quote
+                </NavLink>
+
+                <NavLink href='/genre' icon={<ColorSwatchIcon className='h-4 w-4' />} className='mt-1'>
+                  Genre
+                </NavLink>
+
+                <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
+                  Tag
+                </NavLink>
+
                 <NavLink href='/song' icon={<MusicNoteIcon className='h-4 w-4' />} className='mt-1'>
                   Song
                 </NavLink>
@@ -124,20 +146,8 @@ export default function Sidebar() {
                   Album
                 </NavLink>
 
-                <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
-                  Tag
-                </NavLink>
-
-                <NavLink href='/author' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
-                  Author
-                </NavLink>
-
                 <NavLink href='/artist' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
                   Artist
-                </NavLink>
-
-                <NavLink href='/genre' icon={<ColorSwatchIcon className='h-4 w-4' />} className='mt-1'>
-                  Genre
                 </NavLink>
 
                 <NavLink href='/playlist' icon={<BookmarkIcon className='h-4 w-4' />} className='mt-1'>
