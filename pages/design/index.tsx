@@ -10,6 +10,7 @@ import Checkbox from '@components/systems/Checkbox';
 import Container from '@components/systems/Container';
 import Heading from '@components/systems/Heading';
 import Input from '@components/systems/Input';
+import InputDebounce from '@components/systems/InputDebounce';
 import Label from '@components/systems/Label';
 import LabeledInput from '@components/systems/LabeledInput';
 import LinkButton from '@components/systems/LinkButton';
@@ -46,6 +47,7 @@ const searchBoxData = [
 ];
 
 export default function Example() {
+  const [inputDebounceValue, setInputDebounceValue] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDangerDialog, setOpenDangerDialog] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -196,7 +198,7 @@ export default function Example() {
   const tableInstance = useRef(null);
 
   return (
-    <Layout title='Design System - MyMusic'>
+    <Layout title='Design System - MyBook'>
       <Title>Example</Title>
 
       <Wrapper id='tableofcontent' name='Table of Content' noChildren noClassName noProps>
@@ -251,6 +253,9 @@ export default function Example() {
           </span>
           <span className='mb-3 block underline'>
             <Link href='#labeledinputdisabled'>LabeledInput.disabled</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#inputdebounce'>InputDebounce</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#textarea'>TextArea</Link>
@@ -607,6 +612,33 @@ export default function Example() {
           placeholder='confirmation'
           type='password'
         />
+      </Wrapper>
+
+      <Wrapper
+        id='inputdebounce'
+        name='InputDebounce'
+        props={[
+          'id',
+          'label',
+          'type',
+          'name',
+          'placeholder',
+          'value',
+          'onChange',
+          'className',
+          'wrapperClassName',
+          'debounce',
+        ]}
+        noChildren
+      >
+        <InputDebounce
+          label='Input Debounce'
+          name='inputdebounce'
+          placeholder='Input Debounce'
+          value={inputDebounceValue}
+          onChange={(value) => setInputDebounceValue(value)}
+        />
+        <Text>{inputDebounceValue}</Text>
       </Wrapper>
 
       <Wrapper

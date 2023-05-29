@@ -11,7 +11,7 @@ function Card({ title, link, count, icon }: { title: string; link: string; count
   return (
     <Link
       href={link}
-      className='group flex items-center justify-between gap-2 rounded-md border p-4 dark:border-neutral-800 shadow'
+      className='group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800'
     >
       <div>
         <p className='mb-2 !text-lg font-semibold text-neutral-600 transition-all group-hover:text-emerald-500 dark:text-neutral-300'>
