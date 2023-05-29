@@ -12,6 +12,7 @@ import Dialog from '@components/systems/Dialog';
 import Button from '@components/systems/Button';
 import LabeledInput from '@components/systems/LabeledInput';
 import Text from '@components/systems/Text';
+import InputDebounce from '@components/systems/InputDebounce';
 import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
@@ -37,6 +38,14 @@ export default function Tags() {
   const [name, setName] = useState('');
   const [editItem, setEditItem] = useState({ id: null, name: '' });
   const [deleteItem, setDeleteItem] = useState({ id: null, name: '' });
+  const [inputDebounceValue, setInputDebounceValue] = useState('');
+
+  const filteredData =
+    inputDebounceValue === ''
+      ? data
+      : data.filter((item: any) =>
+          item.name.toLowerCase().replace(/\s+/g, '').includes(inputDebounceValue.toLowerCase().replace(/\s+/g, ''))
+        );
 
   async function handleCreate() {
     const toastId = pushToast({
@@ -118,13 +127,21 @@ export default function Tags() {
 
   return (
     <Layout title='Tags - MyBook'>
-      <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
+      <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Tags</Title>
         <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>
           <PlusSmIcon className='h-5 w-5' />
           Add New Tag
         </Button.success>
       </div>
+
+      <InputDebounce
+        label='Search'
+        name='inputdebounce'
+        placeholder='Search'
+        value={inputDebounceValue}
+        onChange={(value) => setInputDebounceValue(value)}
+      />
 
       <Dialog
         title='Create Tag'
@@ -179,7 +196,7 @@ export default function Tags() {
         </div>
       </Dialog>
 
-      {data ? (
+      {filteredData ? (
         <TableSimple
           head={
             <>
@@ -189,7 +206,7 @@ export default function Tags() {
             </>
           }
         >
-          {data.map((item: any, index: number) => {
+          {filteredData.map((item: any, index: number) => {
             return (
               <TableSimple.tr key={index}>
                 <TableSimple.td small>{index + 1}</TableSimple.td>

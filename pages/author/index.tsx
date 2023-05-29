@@ -10,9 +10,9 @@ import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import Dialog from '@components/systems/Dialog';
 import Button from '@components/systems/Button';
-import LabeledInput from '@components/systems/LabeledInput';
 import ReactTable from '@components/systems/ReactTable';
 import LinkButton from '@components/systems/LinkButton';
+import InputDebounce from '@components/systems/InputDebounce';
 import nookies from 'nookies';
 
 // export async function getServerSideProps(context: any) {
@@ -34,6 +34,7 @@ export default function Author() {
   const { updateToast, pushToast } = useToast();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteItem, setDeleteItem] = useState({ id: null, name: '' });
+  const [inputDebounceValue, setInputDebounceValue] = useState('');
 
   async function handleDelete() {
     const toastId = pushToast({
@@ -170,7 +171,7 @@ export default function Author() {
 
   return (
     <Layout title='Author - MyBook'>
-      <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
+      <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Author</Title>
         <LinkButton href='author/add' className='flex items-center gap-2'>
           <PlusSmIcon className='h-5 w-5' />
@@ -178,21 +179,19 @@ export default function Author() {
         </LinkButton>
       </div>
 
-      {data ? (
-        <>
-          <LabeledInput
-            label='Search Data'
-            id='caridata'
-            name='caridata'
-            placeholder='Keyword'
-            className='max-w-xs !py-2'
-            onChange={(e) => {
-              tableInstance.current.setGlobalFilter(e.target.value);
-            }}
-          />
+      <InputDebounce
+        label='Search'
+        name='search'
+        placeholder='Search'
+        value={inputDebounceValue}
+        onChange={(value) => {
+          setInputDebounceValue(value);
+          tableInstance?.current?.setGlobalFilter(value);
+        }}
+      />
 
-          <ReactTable columns={column} data={data} ref={tableInstance} page_size={20} itemPerPage={[10, 20, 50, 100]} />
-        </>
+      {data ? (
+        <ReactTable columns={column} data={data} ref={tableInstance} page_size={20} itemPerPage={[10, 20, 50, 100]} />
       ) : (
         <Shimer className='!h-60' />
       )}
