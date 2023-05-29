@@ -4,6 +4,11 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_ROUTE}/api`;
 
+export function useCountsData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard`, fetcher);
+  return { data, error, isLoading };
+}
+
 export function useAuthorsData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/author`, fetcher);
   return { data, error, isLoading };
