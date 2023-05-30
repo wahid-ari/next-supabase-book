@@ -9,6 +9,26 @@ export function useCountsData() {
   return { data, error, isLoading };
 }
 
+export function useBooksData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/book`, fetcher);
+  return { data, error, isLoading };
+}
+
+export function useBookData(id: string) {
+  const { data, error, isLoading } = useSWR(id ? `${API_URL}/book?id=${id}` : `${API_URL}/book`, fetcher);
+  return { data, error, isLoading };
+}
+
+export function useQuotesData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/quote`, fetcher);
+  return { data, error, isLoading };
+}
+
+export function useQuoteData(id: string) {
+  const { data, error, isLoading } = useSWR(id ? `${API_URL}/quote?id=${id}` : `${API_URL}/quote`, fetcher);
+  return { data, error, isLoading };
+}
+
 export function useAuthorsData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/author`, fetcher);
   return { data, error, isLoading };
