@@ -97,8 +97,8 @@ export default function Quote() {
                   side='top'
                   className={clsx(
                     'z-50 max-h-40 max-w-sm overflow-auto rounded-md border shadow-md',
-                    'bg-white p-2.5 !text-[15px] font-semibold leading-5 text-neutral-700',
-                    'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:scrollbar-thumb-neutral-800'
+                    'bg-white p-2.5 !text-[15px] font-medium leading-5 text-neutral-700',
+                    'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:scrollbar-thumb-neutral-700'
                   )}
                 >
                   {`"${values.quote}"`}
@@ -114,14 +114,18 @@ export default function Quote() {
         width: 300,
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
-          return (
-            <Link
-              href={`/author/detail/${original?.book_authors?.id}`}
-              className='flex items-center rounded text-sm font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
-            >
-              {original?.book_authors?.name || '-'}
-            </Link>
-          );
+          if (!original?.book_authors?.name) {
+            return '-';
+          } else {
+            return (
+              <Link
+                href={`/author/detail/${original?.book_authors?.id}`}
+                className='flex items-center rounded text-sm font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+              >
+                {original?.book_authors?.name || '-'}
+              </Link>
+            );
+          }
         },
       },
       {
@@ -134,7 +138,7 @@ export default function Quote() {
           return (
             <div>
               <Link
-                href={`author/edit/${values.id}`}
+                href={`quote/edit/${values.id}`}
                 className='mr-2 rounded bg-sky-600 px-[6px] py-[3px] text-sm font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-400'
               >
                 Edit
@@ -175,7 +179,7 @@ export default function Quote() {
     <Layout title='Quote - MyBook'>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Quote</Title>
-        <LinkButton href='author/add' className='flex items-center gap-2'>
+        <LinkButton href='quote/add' className='flex items-center gap-2'>
           <PlusSmIcon className='h-5 w-5' />
           Add New Quote
         </LinkButton>
@@ -199,7 +203,7 @@ export default function Quote() {
       )}
 
       <Dialog
-        title='Delete Author'
+        title='Delete Quote'
         open={openDeleteDialog}
         isDanger
         setOpen={setOpenDeleteDialog}
@@ -207,7 +211,7 @@ export default function Quote() {
         onConfirm={handleDelete}
       >
         <div className='mt-5 text-center sm:text-left'>
-          Are you sure want to delete <span className='font-semibold'>{deleteItem.name}</span> ?
+          Are you sure want to delete this quote <span className='font-semibold'>{deleteItem.name}</span> ?
         </div>
       </Dialog>
     </Layout>
