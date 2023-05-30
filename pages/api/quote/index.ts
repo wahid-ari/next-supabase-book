@@ -3,6 +3,8 @@ import { supabase } from '@libs/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
+  const header = req.headers.authorization;
+  const token = req.headers.authorization?.split(' ')[1] || '';
 
   switch (method) {
     case 'GET':
@@ -41,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } else {
         // get tags string from array
         let tags_string = ',';
-        body.tags.forEach((item: any) => {
+        body.tags?.forEach((item: any) => {
           tags_string = tags_string + ', ' + item.label;
         });
         let clean_tags_string = tags_string.replace(',,', '').replace(' ', '');
@@ -52,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             {
               author_id: body.author_id,
               quote: body.quote,
-              tags: clean_tags_string,
+              tags: clean_tags_string == ',' ? '' : clean_tags_string,
             },
           ])
           .select();
@@ -129,16 +131,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break;
 
     case 'DELETE':
-      if (!query.id) {
-        res.status(422).json({ error: 'Id required' });
-      } else {
-        // delete tags related to quote in book_quotes_tags table
-        const { error: errorQuotesTags } = await supabase.from('book_quotes_tags').delete().eq('quote_id', query.id);
-        const { error } = await supabase.from('book_quotes').delete().eq('id', query.id);
-        if (error || errorQuotesTags) {
-          res.status(422).json({ error: error.message });
+      if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
+      const { data: session } = await supabase.from('book_sessions').select('*').eq('token', token).single();
+      if (session) {
+        if (!query.id) {
+          res.status(422).json({ error: 'Id required' });
+        } else {
+          // delete tags related to quote in book_quotes_tags table
+          const { error: errorQuotesTags } = await supabase.from('book_quotes_tags').delete().eq('quote_id', query.id);
+          const { error } = await supabase.from('book_quotes').delete().eq('id', query.id);
+          if (error || errorQuotesTags) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(200).json({ message: 'Success delete quote' });
         }
-        res.status(200).json({ message: 'Success delete quote' });
+      } else {
+        res.status(401).json({ message: 'Token invalid' });
       }
       break;
 
