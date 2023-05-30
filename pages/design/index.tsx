@@ -30,6 +30,9 @@ import SearchBox from '@components/systems/SearchBox';
 import ReactTable from '@components/systems/ReactTable';
 import TextArea from '@components/systems/TextArea';
 import { tabledata } from '@utils/tableData';
+import Select from 'react-select';
+import * as HoverCard from '@radix-ui/react-hover-card';
+import clsx from 'clsx';
 
 const searchBoxData = [
   {
@@ -138,6 +141,23 @@ export default function Example() {
           item.name.toLowerCase().replace(/\s+/g, '').includes(querySearchBox.toLowerCase().replace(/\s+/g, ''))
         );
 
+  const reactSelectData = [
+    {
+      value: 1,
+      label: 'Option 1',
+    },
+    {
+      value: 2,
+      label: 'Option 2',
+    },
+    {
+      value: 3,
+      label: 'Option 3',
+    },
+  ];
+
+  const [reactSelect, setReactSelect] = useState();
+
   const column = useMemo(
     () => [
       {
@@ -216,10 +236,16 @@ export default function Example() {
             <Link href='#searchbox'>SearchBox</Link>
           </span>
           <span className='mb-3 block underline'>
+            <Link href='#reactselect'>React Select</Link>
+          </span>
+          <span className='mb-3 block underline'>
             <Link href='#reacttable'>React Table</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#usetoast'>useToast (hook)</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#hover-card'>HoverCard</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#badge'>Badge</Link>
@@ -413,6 +439,54 @@ export default function Example() {
         />
       </Wrapper>
 
+      <Wrapper
+        id='reactselect'
+        name='ReactSelect'
+        noProps
+        noChildren
+        props={[
+          'options',
+          'isMulti',
+          'noOptionsMessage',
+          'value',
+          'onChange',
+          'placeholder',
+          'name',
+          'classNamePrefix',
+          'theme',
+        ]}
+      >
+        <Label htmlFor='category' className='mb-2'>
+          Category
+        </Label>
+        <Select
+          aria-label='React Select'
+          // @ts-ignore
+          options={reactSelectData}
+          isMulti
+          noOptionsMessage={() => 'Not Found'}
+          value={reactSelect}
+          // @ts-ignore
+          onChange={setReactSelect}
+          placeholder='Search or Select'
+          name='category'
+          classNames={{
+            option: (option) => (option.isSelected ? '!border-red-600' : '!border-grey-300'),
+          }}
+          classNamePrefix='react-select'
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary: `#0EA5E9`,
+              primary25: `#0EA5E9`,
+              primary50: `#0EA5E9`,
+              neutral40: `#EF4444`,
+            },
+          })}
+        />
+      </Wrapper>
+
       <Wrapper id='reacttable' name='React Table' props={['columns', 'data', 'page_size', 'bordered']} noProps noWrap>
         <LabeledInput
           label='Search Data'
@@ -494,6 +568,34 @@ export default function Example() {
         <Button onClick={addToastError}>Show Me Error Toast</Button>
         <Button onClick={toastAsync}>Toast with async</Button>
       </div>
+
+      <Wrapper id='hover-card' name='HoverCard'>
+        <HoverCard.Root>
+          <HoverCard.Trigger>
+            <Link
+              href='#'
+              className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+            >
+              Hover Me
+            </Link>
+          </HoverCard.Trigger>
+          <HoverCard.Portal>
+            <HoverCard.Content
+              side='top'
+              className={clsx(
+                'z-50 max-h-40 max-w-sm overflow-auto rounded-md border shadow-md',
+                'bg-white p-2.5 !text-[15px] font-medium leading-5 text-neutral-700',
+                'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:scrollbar-thumb-neutral-700'
+              )}
+            >
+              Laborum sint culpa nisi commodo. Reprehenderit et laborum do commodo et fugiat elit ullamco. Tempor culpa
+              elit officia deserunt est amet anim. Irure nostrud esse aliquip commodo. Veniam ullamco irure non sunt
+              elit nulla cillum. Tempor ea anim non laboris consectetur aliqua laborum do enim. Anim aliquip tempor
+              dolore irure.
+            </HoverCard.Content>
+          </HoverCard.Portal>
+        </HoverCard.Root>
+      </Wrapper>
 
       <Wrapper
         id='badge'
