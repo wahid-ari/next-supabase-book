@@ -24,7 +24,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default function Author({ id }) {
+export default function Author() {
   const { updateToast, pushToast } = useToast();
   const [createItem, setCreateItem] = useState({
     name: '',
