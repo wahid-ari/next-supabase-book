@@ -175,7 +175,11 @@ export default function Example() {
         Cell: (row) => {
           const { values, original } = row.cell.row;
           return (
-            <Link href={`#`} className='text-sm font-medium text-emerald-500 hover:text-emerald-600'>
+            <Link
+              href={`#`}
+              className='rounded text-sm font-medium text-emerald-500 hover:text-emerald-600 focus:border-emerald-500 
+            focus:outline-none focus:ring-1 focus:ring-emerald-500'
+            >
               {values.name}
             </Link>
           );
