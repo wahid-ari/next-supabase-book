@@ -12,7 +12,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).send(JSON.stringify(data, null, 2));
       } else if (query.generate == 'true') {
         const { data, error } = await supabase.from('book_books_genres').insert(books_genres);
-        console.log(error);
         res.status(200).json(data);
       } else {
         const { data } = await supabase
