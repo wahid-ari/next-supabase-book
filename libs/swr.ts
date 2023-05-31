@@ -14,8 +14,11 @@ export function useBooksData() {
   return { data, error, isLoading };
 }
 
-export function useBookData(id: string) {
-  const { data, error, isLoading } = useSWR(id ? `${API_URL}/book?id=${id}` : `${API_URL}/book`, fetcher);
+export function useBookData(id: string, seo?: boolean) {
+  const { data, error, isLoading } = useSWR(
+    seo ? `${API_URL}/book?id=${id}&seo=true` : `${API_URL}/book?id=${id}`,
+    fetcher
+  );
   return { data, error, isLoading };
 }
 
@@ -34,8 +37,11 @@ export function useAuthorsData() {
   return { data, error, isLoading };
 }
 
-export function useAuthorData(id: string) {
-  const { data, error, isLoading } = useSWR(id ? `${API_URL}/author?id=${id}` : `${API_URL}/author`, fetcher);
+export function useAuthorData(id: string, seo?: boolean) {
+  const { data, error, isLoading } = useSWR(
+    seo ? `${API_URL}/author?id=${id}&seo=true` : `${API_URL}/author?id=${id}`,
+    fetcher
+  );
   return { data, error, isLoading };
 }
 
@@ -44,8 +50,11 @@ export function useTagsData() {
   return { data, error, isLoading };
 }
 
-export function useTagData(id: string) {
-  const { data, error, isLoading } = useSWR(id ? `${API_URL}/tag?id=${id}` : `${API_URL}/tag`, fetcher);
+export function useTagData(id: string, seo?: boolean) {
+  const { data, error, isLoading } = useSWR(
+    seo ? `${API_URL}/tag?id=${id}&seo=true` : `${API_URL}/tag?id=${id}`,
+    fetcher
+  );
   return { data, error, isLoading };
 }
 
@@ -54,8 +63,11 @@ export function useGenresData() {
   return { data, error, isLoading };
 }
 
-export function useGenreData(id: string) {
-  const { data, error, isLoading } = useSWR(id ? `${API_URL}/genre?id=${id}` : `${API_URL}/genre`, fetcher);
+export function useGenreData(id: string, seo?: boolean) {
+  const { data, error, isLoading } = useSWR(
+    seo ? `${API_URL}/genre?id=${id}&seo=true` : `${API_URL}/genre?id=${id}`,
+    fetcher
+  );
   return { data, error, isLoading };
 }
 
