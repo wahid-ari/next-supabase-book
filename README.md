@@ -1,5 +1,7 @@
 ## Database Design
 
+[DrawSQL](https://drawsql.app/teams/wahid-ari/diagrams/book)
+
 ![Image External](https://raw.githubusercontent.com/wahid-ari/next-supabase-book/master/public/database.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
