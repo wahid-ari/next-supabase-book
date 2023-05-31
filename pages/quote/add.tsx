@@ -39,7 +39,8 @@ export default function Quote() {
   const router = useRouter();
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [queryAuthor, setQueryAuthor] = useState('');
-
+  const [selectedTags, setSelectedTags] = useState();
+  const [listOfTags, setListOfTags] = useState();
   const filteredAuthor =
     queryAuthor === ''
       ? authors
@@ -47,12 +48,12 @@ export default function Quote() {
           item.name.toLowerCase().replace(/\s+/g, '').includes(queryAuthor.toLowerCase().replace(/\s+/g, ''))
         );
 
+  // if user selecting author, set author id
   useEffect(() => {
     if (selectedAuthor) setCreateItem((createItem) => ({ ...createItem, author_id: selectedAuthor.id }));
   }, [selectedAuthor]);
 
-  const [selectedTags, setSelectedTags] = useState();
-  const [listOfTags, setListOfTags] = useState();
+  // convert tags data from db (id, name) to match with react-select requirement (value, label)
   useEffect(() => {
     if (tags) {
       let listTags = [];
@@ -67,6 +68,7 @@ export default function Quote() {
     }
   }, [tags]);
 
+  // if user selecting tags, set tags
   useEffect(() => {
     // @ts-ignore
     setCreateItem({ ...createItem, tags: selectedTags });
@@ -118,7 +120,7 @@ export default function Quote() {
           <SearchBox
             label='Author'
             value={selectedAuthor}
-            placeholder='Search Author'
+            placeholder='Search and Select Author'
             onChange={setSelectedAuthor}
             onChangeQuery={(e) => setQueryAuthor(e.target.value)}
             afterLeave={() => setQueryAuthor('')}
@@ -129,32 +131,34 @@ export default function Quote() {
           <Shimer className='h-8' />
         )}
 
-        <Label htmlFor='tags' className='my-2'>
-          Tags
-        </Label>
         {listOfTags ? (
-          <Select
-            options={listOfTags}
-            isMulti
-            noOptionsMessage={() => 'Not Found'}
-            value={selectedTags}
-            // @ts-ignore
-            onChange={setSelectedTags}
-            placeholder='Search or Select'
-            name='tags'
-            className='mb-4 rounded'
-            classNamePrefix='react-select'
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary: `#10b981`,
-                primary25: `#10b981`,
-                primary50: `#10b981`,
-                neutral40: `#EF4444`,
-              },
-            })}
-          />
+          <>
+            <Label htmlFor='tags' className='my-2'>
+              Tags
+            </Label>
+            <Select
+              options={listOfTags}
+              isMulti
+              noOptionsMessage={() => 'Not Found'}
+              value={selectedTags}
+              // @ts-ignore
+              onChange={setSelectedTags}
+              placeholder='Search and Select Tags'
+              name='tags'
+              className='mb-4 rounded'
+              classNamePrefix='react-select'
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: `#10b981`,
+                  primary25: `#10b981`,
+                  primary50: `#10b981`,
+                  neutral40: `#EF4444`,
+                },
+              })}
+            />
+          </>
         ) : (
           <Shimer className='h-8' />
         )}
