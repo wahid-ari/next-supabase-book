@@ -70,7 +70,7 @@ export default function Author({ id }) {
                     {data?.web ? (
                       <a
                         href={data?.web}
-                        className='flex items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                        className='rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
                         target='_blank'
                         rel='noreferrer'
                       >
@@ -87,7 +87,7 @@ export default function Author({ id }) {
                     {data?.link ? (
                       <a
                         href={data?.link}
-                        className='flex items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                        className='flex w-16 items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
                         target='_blank'
                         rel='noreferrer'
                       >

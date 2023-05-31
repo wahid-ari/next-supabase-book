@@ -110,7 +110,7 @@ export default function Author() {
             return (
               <a
                 href={original?.web}
-                className='flex items-center rounded text-sm font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                className='flex w-16 items-center rounded text-sm font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
                 target='_blank'
                 rel='noreferrer'
               >
