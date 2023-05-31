@@ -18,7 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .select(`*`)
           .eq('tag_id', query.id)
           .order('id');
-        const { data: quotes } = await supabase.from('book_quotes').select(`*`).order('id');
+        const { data: quotes } = await supabase
+          .from('book_quotes')
+          .select(`*, book_authors (id, name, image)`)
+          .order('id');
 
         const quotes_by_tags = [];
         for (const tag of quotes_tags) {
