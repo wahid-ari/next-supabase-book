@@ -18,7 +18,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .select(`*`)
           .eq('quote_id', query.id)
           .order('id');
-        const { data: quotes } = await supabase.from('book_quotes').select(`*`).eq('id', query.id).order('id');
+        const { data: quotes } = await supabase
+          .from('book_quotes')
+          .select(`*, book_authors (*)`)
+          .eq('id', query.id)
+          .order('id');
 
         const quotes_with_tags = [];
         for (const quotes_tag of quotes_tags) {
@@ -126,7 +130,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(422).json({ error: error.message });
           }
         }
-        res.status(201).json({ message: 'Success update tag' });
+        res.status(201).json({ message: 'Success update quote' });
       }
       break;
 
