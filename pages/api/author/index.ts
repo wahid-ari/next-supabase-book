@@ -21,7 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } else {
         const { data }: any = await supabase
           .from('book_authors')
-          .select(`*, book_quotes (*), book_books (*)`)
+          .select(
+            `*, book_quotes (id, author_id, quote), book_books (id, author_id, title, language, pages, published, link, image)`
+          )
           .eq('id', query.id)
           .order('id');
         const { book_books, book_quotes } = data[0];
