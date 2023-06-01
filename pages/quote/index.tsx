@@ -81,7 +81,7 @@ export default function Quote() {
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
           let length = values.quote.length;
-          let text = length > 50 ? values.quote.slice(0, 45) + '...' : values.quote;
+          let text = length > 50 ? values.quote.slice(0, 45) + ' ...' : values.quote;
           return (
             <HoverCard.Root>
               <HoverCard.Trigger>
