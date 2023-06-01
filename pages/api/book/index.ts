@@ -3,6 +3,8 @@ import { supabase } from '@libs/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
+  const header = req.headers.authorization;
+  const token = req.headers.authorization?.split(' ')[1] || '';
 
   switch (method) {
     case 'GET':
@@ -55,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } else {
         // get genre string from array
         let genre_string = ',';
-        body.genre.forEach((item: any) => {
+        body.genre?.forEach((item: any) => {
           genre_string = genre_string + ', ' + item.label;
         });
         let clean_genre_string = genre_string.replace(',,', '').replace(' ', '');
@@ -73,7 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               link: body.link,
               image: body.image,
               description: body.description,
-              genre: clean_genre_string,
+              genre: clean_genre_string == ',' ? '' : clean_genre_string,
             },
           ])
           .select();
@@ -157,16 +159,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break;
 
     case 'DELETE':
-      if (!query.id) {
-        res.status(422).json({ error: 'Id required' });
-      } else {
-        // delete genre related to book in book_books_genres table
-        const { error: errorBooksGenres } = await supabase.from('book_books_genres').delete().eq('book_id', query.id);
-        const { error } = await supabase.from('book_books').delete().eq('id', query.id);
-        if (error || errorBooksGenres) {
-          res.status(422).json({ error: error.message });
+      if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
+      const { data: session } = await supabase.from('book_sessions').select('*').eq('token', token).single();
+      if (session) {
+        if (!query.id) {
+          res.status(422).json({ error: 'Id required' });
+        } else {
+          // delete genre related to book in book_books_genres table
+          const { error: errorBooksGenres } = await supabase.from('book_books_genres').delete().eq('book_id', query.id);
+          const { error } = await supabase.from('book_books').delete().eq('id', query.id);
+          if (error || errorBooksGenres) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(200).json({ message: 'Success delete book' });
         }
-        res.status(200).json({ message: 'Success delete book' });
+      } else {
+        res.status(401).json({ message: 'Token invalid' });
       }
       break;
 
