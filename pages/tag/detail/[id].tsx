@@ -53,7 +53,7 @@ export default function Tag({ id }) {
             <HoverCard.Root>
               <HoverCard.Trigger>
                 <Link
-                  href={`quote/detail/${values.id}`}
+                  href={`/quote/detail/${values.id}`}
                   className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
                 >
                   {`"${text}"`}
