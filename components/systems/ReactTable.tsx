@@ -81,18 +81,18 @@ export const ReactTable = forwardRef(
         <div className='overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-700'>
           <table {...getTableProps()} className='w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300'>
             <thead>
-              {headerGroups.map((headerGroup, i) => (
+              {headerGroups.map((headerGroup: any, i: number) => (
                 <tr
                   key={i + 1}
                   {...headerGroup.getHeaderGroupProps()}
                   className='border-b bg-gray-50 text-left text-sm font-medium dark:border-neutral-800 dark:bg-[#202020]'
                 >
-                  {headerGroup.headers.map((column, i) => (
+                  {headerGroup.headers.map((column: any, i: number) => (
                     <th
                       key={i + 1}
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                       className={`p-3 font-semibold first:w-1 ${column.Header == 'Action' && 'w-1'}
-                    ${bordered && 'border-x first:border-l-0 last:border-r-0 dark:border-x-neutral-800'}`}
+                    ${bordered ? 'border-x first:border-l-0 last:border-r-0 dark:border-x-neutral-800' : ''}`}
                     >
                       <span className='flex items-center gap-1.5'>
                         {column.render('Header')}
@@ -127,7 +127,7 @@ export const ReactTable = forwardRef(
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map((row, i) => {
+              {page.map((row: any, i: number) => {
                 prepareRow(row);
                 return (
                   <tr
@@ -135,13 +135,13 @@ export const ReactTable = forwardRef(
                     {...row.getRowProps()}
                     className='border-b bg-white text-sm text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200'
                   >
-                    {row.cells.map((cell, i) => {
+                    {row.cells.map((cell: any, i: number) => {
                       return (
                         <td
                           key={i + 1}
                           {...cell.getCellProps()}
                           className={`p-3 ${
-                            bordered && 'border-x first:border-l-0 last:border-r-0 dark:border-x-neutral-800'
+                            bordered ? 'border-x first:border-l-0 last:border-r-0 dark:border-x-neutral-800' : ''
                           }`}
                         >
                           {cell.render('Cell')}
