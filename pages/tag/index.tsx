@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import { mutate } from 'swr';
 import { useTagsData } from '@libs/swr';
 import axios from 'axios';
@@ -11,7 +12,6 @@ import Shimer from '@components/systems/Shimer';
 import Dialog from '@components/systems/Dialog';
 import Button from '@components/systems/Button';
 import LabeledInput from '@components/systems/LabeledInput';
-import Text from '@components/systems/Text';
 import InputDebounce from '@components/systems/InputDebounce';
 import nookies from 'nookies';
 
@@ -211,7 +211,12 @@ export default function Tags() {
               <TableSimple.tr key={index}>
                 <TableSimple.td small>{index + 1}</TableSimple.td>
                 <TableSimple.td>
-                  <Text>{item.name}</Text>
+                  <Link
+                    href={`tag/detail/${item.id}`}
+                    className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                  >
+                    {item.name}
+                  </Link>
                 </TableSimple.td>
                 <TableSimple.td>
                   <Button className='mr-2 !px-[6px] !py-[2px]' onClick={() => handleShowEditModal(item.id, item.name)}>
