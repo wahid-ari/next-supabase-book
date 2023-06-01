@@ -48,7 +48,7 @@ export default function Tag({ id }) {
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
           let length = values.quote.length;
-          let text = length > 50 ? values.quote.slice(0, 65) + '...' : values.quote;
+          let text = length > 50 ? values.quote.slice(0, 65) + ' ...' : values.quote;
           return (
             <HoverCard.Root>
               <HoverCard.Trigger>
