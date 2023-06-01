@@ -81,7 +81,7 @@ export default function Book() {
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
           let length = values.title.length;
-          let text = length > 30 ? values.title.slice(0, 30) + ' ...' : values.title;
+          let text = length > 30 ? values.title?.slice(0, 30) + ' ...' : values.title;
           return (
             <HoverCard.Root>
               <HoverCard.Trigger asChild>
