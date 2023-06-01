@@ -86,9 +86,9 @@ export default function Genre({ id }) {
   }
 
   return (
-    <Layout title={`${data ? data?.name + ' - MyBook' : 'Genre Detail - MyBook'}`}>
+    <Layout title={`${data ? data?.name + ' Books - MyBook' : 'Genre Detail - MyBook'}`}>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
-        {data ? <Title>{data?.name}</Title> : <Title>Genre Detail</Title>}
+        {data ? <Title>{data?.name} Books</Title> : <Title>Genre Detail</Title>}
       </div>
 
       {data ? (
