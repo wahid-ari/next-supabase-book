@@ -6,6 +6,8 @@ import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import ReactTable from '@components/systems/ReactTable';
 import LabeledInput from '@components/systems/LabeledInput';
+import * as HoverCard from '@radix-ui/react-hover-card';
+import clsx from 'clsx';
 import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
@@ -45,13 +47,31 @@ export default function Genre({ id }) {
         width: 300,
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
+          let length = values.title.length;
+          let text = length > 50 ? values.title?.slice(0, 60) + ' ...' : values.title;
           return (
-            <Link
-              href={`/book/detail/${original.id}`}
-              className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
-            >
-              {values.title}
-            </Link>
+            <HoverCard.Root>
+              <HoverCard.Trigger asChild>
+                <Link
+                  href={`/book/detail/${values.id}`}
+                  className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                >
+                  {text}
+                </Link>
+              </HoverCard.Trigger>
+              <HoverCard.Portal>
+                <HoverCard.Content
+                  side='top'
+                  className={clsx(
+                    'z-50 max-h-40 max-w-sm overflow-auto rounded-md border shadow-md',
+                    'bg-white p-2.5 !text-[15px] font-medium leading-5 text-neutral-700',
+                    'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:scrollbar-thumb-neutral-700'
+                  )}
+                >
+                  {values.title}
+                </HoverCard.Content>
+              </HoverCard.Portal>
+            </HoverCard.Root>
           );
         },
       },

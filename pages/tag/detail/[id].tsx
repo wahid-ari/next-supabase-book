@@ -51,7 +51,7 @@ export default function Tag({ id }) {
           let text = length > 50 ? values.quote.slice(0, 65) + ' ...' : values.quote;
           return (
             <HoverCard.Root>
-              <HoverCard.Trigger>
+              <HoverCard.Trigger asChild>
                 <Link
                   href={`/quote/detail/${values.id}`}
                   className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
