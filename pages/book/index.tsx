@@ -84,7 +84,7 @@ export default function Book() {
           let text = length > 30 ? values.title.slice(0, 30) + ' ...' : values.title;
           return (
             <HoverCard.Root>
-              <HoverCard.Trigger>
+              <HoverCard.Trigger asChild>
                 <Link
                   href={`book/detail/${values.id}`}
                   className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
@@ -134,7 +134,7 @@ export default function Book() {
         width: 300,
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
-          let year = values.published.split('-')[0];
+          let year = values.published?.split('-')[0];
           return year || '-';
         },
       },
