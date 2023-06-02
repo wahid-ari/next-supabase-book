@@ -202,7 +202,7 @@ export default function Quote({ id }) {
           )}
 
           <Button.success onClick={handleSave} className='w-full'>
-            Save
+            Update
           </Button.success>
         </div>
       ) : (
