@@ -1,6 +1,10 @@
 {
-  "name": "next-supabase-music",
+  "name": "next-supabase-book",
   "private": true,
+  "author": {
+    "name": "wahidari",
+    "github": "https://github.com/wahidari"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
