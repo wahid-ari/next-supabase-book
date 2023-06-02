@@ -56,8 +56,6 @@ export default function Book() {
   const [selectedGenres, setSelectedGenres] = useState();
   const [listOfGenres, setListOfGenres] = useState();
 
-  console.log(createItem);
-
   // if user selecting author, set author id
   useEffect(() => {
     if (selectedAuthor) setCreateItem((createItem) => ({ ...createItem, author_id: selectedAuthor.id }));
@@ -117,132 +115,136 @@ export default function Book() {
         <Title>Create Book</Title>
       </div>
 
-      <div className='max-w-lg'>
-        {filteredAuthor ? (
-          <SearchBox
-            label='Author'
-            value={selectedAuthor}
-            placeholder='Search and Select Author'
-            onChange={setSelectedAuthor}
-            onChangeQuery={(e) => setQueryAuthor(e.target.value)}
-            afterLeave={() => setQueryAuthor('')}
-            filtered={filteredAuthor}
-            query={queryAuthor}
+      <div className='grid grid-cols-1 gap-x-8 md:grid-cols-2'>
+        <div>
+          <LabeledInput
+            label='Title'
+            type='text'
+            name='title'
+            value={createItem.title}
+            onChange={(e) => setCreateItem({ ...createItem, title: e.target.value })}
+            placeholder='The Hunger Games'
           />
-        ) : (
-          <Shimer className='h-8' />
-        )}
 
-        {listOfGenres ? (
-          <>
-            <Label htmlFor='genre' className='my-2'>
-              Genre
-            </Label>
-            <Select
-              options={listOfGenres}
-              isMulti
-              noOptionsMessage={() => 'Not Found'}
-              value={selectedGenres}
-              // @ts-ignore
-              onChange={setSelectedGenres}
-              placeholder='Search and Select Genre'
-              name='genre'
-              className='mb-4 rounded'
-              classNamePrefix='react-select'
-              theme={(theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary: `#10b981`,
-                  primary25: `#10b981`,
-                  primary50: `#10b981`,
-                  neutral40: `#EF4444`,
-                },
-              })}
+          <LabeledInput
+            label='ISBN (Optional)'
+            type='number'
+            min={0}
+            name='isbn'
+            value={createItem.isbn}
+            onChange={(e) => setCreateItem({ ...createItem, isbn: e.target.value })}
+            placeholder='9780684830490'
+            onKeyPress={(e: any) => !/[0-9]/.test(e.key) && e.preventDefault()}
+          />
+
+          <LabeledInput
+            label='Language (Optional)'
+            type='text'
+            name='language'
+            value={createItem.language}
+            onChange={(e) => setCreateItem({ ...createItem, language: e.target.value })}
+            placeholder='English'
+          />
+
+          <LabeledInput
+            label='Total Page (Optional)'
+            type='number'
+            min={0}
+            name='pages'
+            value={createItem.pages}
+            onChange={(e) => setCreateItem({ ...createItem, pages: e.target.value })}
+            placeholder='100'
+            onKeyPress={(e: any) => !/[0-9]/.test(e.key) && e.preventDefault()}
+          />
+
+          <LabeledInput
+            label='Published Date (Optional)'
+            type='date'
+            name='published'
+            value={createItem.published}
+            onChange={(e) => setCreateItem({ ...createItem, published: e.target.value })}
+            placeholder='2023-05-05'
+          />
+
+          <LabeledInput
+            label='GoodReads URL (Optional)'
+            type='text'
+            name='goodreads'
+            value={createItem.link}
+            onChange={(e) => setCreateItem({ ...createItem, link: e.target.value })}
+            placeholder='https://www.goodreads.com/book/show/2767052-the-hunger-games'
+          />
+        </div>
+        <div>
+          <LabeledInput
+            label='Image URL (Optional)'
+            type='text'
+            name='image'
+            value={createItem.image}
+            onChange={(e) => setCreateItem({ ...createItem, image: e.target.value })}
+            placeholder='https://images.gr-assets.com/books/1630199330p5/153394.jpg'
+          />
+
+          <TextArea
+            label='Description (Optional)'
+            name='description'
+            height={5}
+            value={createItem.description}
+            onChange={(e) => setCreateItem({ ...createItem, description: e.target.value })}
+            placeholder='Could you survive on your own in the wild, with every one out to make sure you dont live to see the morning?'
+          />
+
+          {filteredAuthor ? (
+            <SearchBox
+              label='Author'
+              value={selectedAuthor}
+              placeholder='Search and Select Author'
+              onChange={setSelectedAuthor}
+              onChangeQuery={(e) => setQueryAuthor(e.target.value)}
+              afterLeave={() => setQueryAuthor('')}
+              filtered={filteredAuthor}
+              query={queryAuthor}
             />
-          </>
-        ) : (
-          <Shimer className='h-8' />
-        )}
+          ) : (
+            <Shimer className='h-10' />
+          )}
 
-        <LabeledInput
-          label='Title'
-          type='text'
-          name='title'
-          value={createItem.title}
-          onChange={(e) => setCreateItem({ ...createItem, title: e.target.value })}
-          placeholder='The Hunger Games'
-        />
+          {listOfGenres ? (
+            <>
+              <Label htmlFor='genre' className='my-2'>
+                Genre
+              </Label>
+              <Select
+                options={listOfGenres}
+                isMulti
+                noOptionsMessage={() => 'Not Found'}
+                value={selectedGenres}
+                // @ts-ignore
+                onChange={setSelectedGenres}
+                placeholder='Search and Select Genre'
+                name='genre'
+                className='mb-4 rounded'
+                classNamePrefix='react-select'
+                theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    primary: `#10b981`,
+                    primary25: `#10b981`,
+                    primary50: `#10b981`,
+                    neutral40: `#EF4444`,
+                  },
+                })}
+              />
+            </>
+          ) : (
+            <Shimer className='h-10' />
+          )}
 
-        <LabeledInput
-          label='ISBN (Optional)'
-          type='number'
-          min={0}
-          name='isbn'
-          value={createItem.isbn}
-          onChange={(e) => setCreateItem({ ...createItem, isbn: e.target.value })}
-          placeholder='9780684830490'
-          onKeyPress={(e: any) => !/[0-9]/.test(e.key) && e.preventDefault()}
-        />
-
-        <LabeledInput
-          label='Language (Optional)'
-          type='text'
-          name='language'
-          value={createItem.language}
-          onChange={(e) => setCreateItem({ ...createItem, language: e.target.value })}
-          placeholder='English'
-        />
-
-        <LabeledInput
-          label='Total Page (Optional)'
-          type='number'
-          min={0}
-          name='pages'
-          value={createItem.pages}
-          onChange={(e) => setCreateItem({ ...createItem, pages: e.target.value })}
-          placeholder='100'
-          onKeyPress={(e: any) => !/[0-9]/.test(e.key) && e.preventDefault()}
-        />
-
-        <LabeledInput
-          label='Published Date (Optional)'
-          type='date'
-          name='published'
-          value={createItem.published}
-          onChange={(e) => setCreateItem({ ...createItem, published: e.target.value })}
-          placeholder='2023-05-05'
-        />
-
-        <LabeledInput
-          label='GoodReads URL (Optional)'
-          type='text'
-          name='goodreads'
-          value={createItem.link}
-          onChange={(e) => setCreateItem({ ...createItem, link: e.target.value })}
-          placeholder='https://www.goodreads.com/book/show/2767052-the-hunger-games'
-        />
-
-        <LabeledInput
-          label='Image URL (Optional)'
-          type='text'
-          name='image'
-          value={createItem.image}
-          onChange={(e) => setCreateItem({ ...createItem, image: e.target.value })}
-          placeholder='https://images.gr-assets.com/books/1630199330p5/153394.jpg'
-        />
-
-        <TextArea
-          label='Description (Optional)'
-          name='description'
-          value={createItem.description}
-          onChange={(e) => setCreateItem({ ...createItem, description: e.target.value })}
-          placeholder='Could you survive on your own in the wild, with every one out to make sure you dont live to see the morning?'
-        />
-
-        <Button.success onClick={handleSave} className='w-full'>
-          Save
-        </Button.success>
+          <Button.success onClick={handleSave} className='mt-3.5 w-full'>
+            Save
+          </Button.success>
+        </div>
       </div>
     </Layout>
   );
