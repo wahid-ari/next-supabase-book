@@ -143,47 +143,6 @@ html {
   outline-offset: 3px;
 }
 
-/* React H5 Audio Player  */
-.rhap_main-controls {
-  margin-left: 64px;
-}
-
-@media (max-width: 575.98px) {
-  .rhap_main-controls {
-    margin-left: 0px;
-  }
-
-  #rhap_current-time {
-    display: none;
-  }
-
-  .rhap_time.rhap_total-time {
-    display: none;
-  }
-
-  .rhap_progress-container {
-    margin: 0 !important;
-  }
-}
-
-#rhap_current-time {
-  color: var(--primary-text-color);
-  font-size: 14px !important;
-}
-
-.rhap_time.rhap_total-time {
-  color: var(--primary-text-color);
-  font-size: 14px !important;
-}
-
-.rhap_additional-controls {
-  display: none !important;
-}
-
-.rhap_header {
-  font-size: 15px !important;
-}
-
 /* NProgress */
 /* Progress Bar on Top of Page  */
 html[class='light'] {
@@ -201,18 +160,4 @@ html[class='dark'] {
 
 #nprogress .spinner-icon {
   display: none;
-}
-
-/* React Lite youtube embed play button */
-.yt-lite > .lty-playbtn {
-  transition: all 0.4s !important;
-}
-
-.yt-lite:hover > .lty-playbtn {
-  background-color: #ff0000;
-}
-
-.yt-lite::before {
-  height: 100% !important;
-  background-size: contain;
 }
