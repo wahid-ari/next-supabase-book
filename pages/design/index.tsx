@@ -464,6 +464,8 @@ export default function Example() {
           Category
         </Label>
         <Select
+          id='selectbox'
+          instanceId='selectbox'
           aria-label='React Select'
           // @ts-ignore
           options={reactSelectData}
@@ -482,9 +484,9 @@ export default function Example() {
             ...theme,
             colors: {
               ...theme.colors,
-              primary: `#0EA5E9`,
-              primary25: `#0EA5E9`,
-              primary50: `#0EA5E9`,
+              primary: `#10b981`,
+              primary25: `#10b981`,
+              primary50: `#10b981`,
               neutral40: `#EF4444`,
             },
           })}
@@ -575,7 +577,7 @@ export default function Example() {
 
       <Wrapper id='hover-card' name='HoverCard'>
         <HoverCard.Root>
-          <HoverCard.Trigger>
+          <HoverCard.Trigger asChild>
             <Link
               href='#'
               className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
