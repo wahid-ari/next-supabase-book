@@ -67,7 +67,7 @@ export default function Home() {
   }
 
   return (
-    <Layout title='Statistics - MyMusic'>
+    <Layout title='Statistics - MyBook'>
       <Titles>Statistics</Titles>
 
       <div className='mt-5 grid grid-cols-1 gap-5 md:grid-cols-2'>

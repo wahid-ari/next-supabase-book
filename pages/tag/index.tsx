@@ -119,7 +119,7 @@ export default function Tags() {
 
   if (error) {
     return (
-      <Layout title='Genre - MyMusic'>
+      <Layout title='Genre - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );

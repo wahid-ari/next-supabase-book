@@ -113,14 +113,14 @@ export default function Artist() {
 
   if (error || errorGenre) {
     return (
-      <Layout title='Artist - MyMusic'>
+      <Layout title='Artist - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Artist - MyMusic'>
+    <Layout title='Artist - MyBook'>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Artist</Title>
         <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>

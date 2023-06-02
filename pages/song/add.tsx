@@ -91,14 +91,14 @@ export default function AddSong() {
 
   if (errorAlbum || errorArtist) {
     return (
-      <Layout title='Add Song - MyMusic'>
+      <Layout title='Add Song - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Add Song - MyMusic'>
+    <Layout title='Add Song - MyBook'>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Add Song</Title>
       </div>

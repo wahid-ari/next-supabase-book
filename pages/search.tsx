@@ -115,14 +115,14 @@ export default function Search() {
 
   if (error) {
     return (
-      <Layout title='Search - MyMusic'>
+      <Layout title='Search - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Search - MyMusic'>
+    <Layout title='Search - MyBook'>
       <Title>Search</Title>
 
       <form className='mt-2' onSubmit={handleSubmit}>

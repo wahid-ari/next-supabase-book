@@ -20,14 +20,14 @@ export default function Playlist() {
 
   if (errorPlaylist) {
     return (
-      <Layout title='Playlist - MyMusic'>
+      <Layout title='Playlist - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Playlist - MyMusic' description='Browse playlists - MyMusic'>
+    <Layout title='Playlist - MyBook' description='Browse playlists - MyBook'>
       <Title>Playlist</Title>
 
       <LabeledInput

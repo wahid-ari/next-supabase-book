@@ -75,30 +75,30 @@ export default function Register() {
 
   return (
     <>
-      <HeadSeo title='Register - MyMusic' description='Register - MyMusic' />
+      <HeadSeo title='Register - MyBook' description='Register - MyBook' />
 
       <div className='min-h-screen w-screen text-sm font-medium dark:bg-white sm:grid sm:grid-cols-2 '>
         <div className='banner flex flex-col justify-between gap-2 p-8 sm:hidden'>
           <div>
-            <h1 className='text-4xl font-bold text-white'>MyMusic</h1>
+            <h1 className='text-4xl font-bold text-white'>MyBook</h1>
           </div>
           <p className='text-base font-normal text-white'>
-            With MyMusic, it&apos;s easy to find the right music for every moment - on your phone, your computer, your
+            With MyBook, it&apos;s easy to find the right music for every moment - on your phone, your computer, your
             tablet and more.
           </p>
-          <p className='font-semibold text-white'>© MyMusic - 2023</p>
+          <p className='font-semibold text-white'>© MyBook - 2023</p>
         </div>
 
         <div className='banner hidden flex-col justify-between gap-2 px-8 py-12 sm:flex'>
           <div>
-            <h1 className='font-bold text-white sm:text-4xl md:text-5xl'>MyMusic</h1>
+            <h1 className='font-bold text-white sm:text-4xl md:text-5xl'>MyBook</h1>
             <br />
             <p className='text-base font-normal text-white'>
-              With MyMusic, it&apos;s easy to find the right music for every moment - on your phone, your computer, your
+              With MyBook, it&apos;s easy to find the right music for every moment - on your phone, your computer, your
               tablet and more.
             </p>
           </div>
-          <p className='font-semibold text-white'>© MyMusic - 2023</p>
+          <p className='font-semibold text-white'>© MyBook - 2023</p>
         </div>
 
         <div className='flex w-full items-center justify-center px-8 py-16 md:px-16 md:py-0'>

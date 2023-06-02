@@ -14,7 +14,7 @@ export default function HeadSeo({ title, description }: Props) {
   let headTitle = `${title}`;
   let headDescription = `${description ? description : title}`;
 
-  let ogTitle = title.split('- MyMusic');
+  let ogTitle = title.split('- MyBook');
 
   const socialCard =
     route === '/'

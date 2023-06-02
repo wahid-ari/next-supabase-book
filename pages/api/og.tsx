@@ -17,9 +17,9 @@ export default async function handler(req: NextApiRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const hasTitle = searchParams.has('title');
-    const titleLength = hasTitle ? searchParams.get('title')?.slice(0, 70) : 'MyMusic';
+    const titleLength = hasTitle ? searchParams.get('title')?.slice(0, 70) : 'MyBook';
     let title = titleLength.length == 70 ? titleLength + '...' : titleLength;
-    title = title || 'MyMusic';
+    title = title || 'MyBook';
 
     return new ImageResponse(
       (
@@ -57,7 +57,7 @@ export default async function handler(req: NextApiRequest) {
                 fontWeight: 700,
               }}
             >
-              MyMusic
+              MyBook
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export default async function handler(req: NextApiRequest) {
               color: '#fff',
             }}
           >
-            With MyMusic, its easy to find the right music for every moment.
+            With MyBook, its easy to find the right music for every moment.
           </p>
         </div>
       ),

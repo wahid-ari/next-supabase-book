@@ -90,7 +90,7 @@ export default function Sidebar() {
             <XIcon className='h-5 w-5 text-gray-500 transition-all hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-200' />
           </button>
           <p className='py-2.5 text-left text-base font-semibold tracking-wide text-neutral-800 dark:text-neutral-100'>
-            MyMusic
+            MyBook
           </p>
           <div className='cursor-pointer pt-1'>
             <ThemeChanger />

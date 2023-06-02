@@ -121,14 +121,14 @@ export default function Playlist({ id }) {
 
   if (error || errorSong) {
     return (
-      <Layout title='Playlist Detail - MyMusic'>
+      <Layout title='Playlist Detail - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title={`${data ? `${data?.playlist[0]?.name} Playlist - MyMusic` : 'Playlist Detail - MyMusic'}`}>
+    <Layout title={`${data ? `${data?.playlist[0]?.name} Playlist - MyBook` : 'Playlist Detail - MyBook'}`}>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         {data ? <Title>{data?.playlist[0]?.name} Playlist</Title> : <Title>Playlist Detail</Title>}
         <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>

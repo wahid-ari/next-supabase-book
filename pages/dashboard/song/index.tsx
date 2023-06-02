@@ -37,14 +37,14 @@ export default function Songs() {
 
   if (errorSongs) {
     return (
-      <Layout title='Songs - MyMusic'>
+      <Layout title='Songs - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Songs - MyMusic' description='Browse songs - MyMusic'>
+    <Layout title='Songs - MyBook' description='Browse songs - MyBook'>
       <Title>Songs</Title>
 
       <LabeledInput

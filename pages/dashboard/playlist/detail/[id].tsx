@@ -57,7 +57,7 @@ function Page({ id }) {
 
   if (errorDetailPlaylist) {
     return (
-      <Layout title='Playlist Detail - MyMusic'>
+      <Layout title='Playlist Detail - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
@@ -65,9 +65,9 @@ function Page({ id }) {
 
   return (
     <Layout
-      title={detailPlaylist ? detailPlaylist?.playlist[0]?.name + ' - MyMusic' : 'Playlist - MyMusic'}
+      title={detailPlaylist ? detailPlaylist?.playlist[0]?.name + ' - MyBook' : 'Playlist - MyBook'}
       description={
-        detailPlaylist ? 'Listen to ' + detailPlaylist?.playlist[0]?.name + ' - MyMusic' : 'Playlist - MyMusic'
+        detailPlaylist ? 'Listen to ' + detailPlaylist?.playlist[0]?.name + ' - MyBook' : 'Playlist - MyBook'
       }
     >
       <Title>{detailPlaylist ? detailPlaylist?.playlist[0]?.name : 'Playlist'}</Title>

@@ -40,7 +40,7 @@ function Page({ id }) {
 
   if (error) {
     return (
-      <Layout title='Song Detail - MyMusic'>
+      <Layout title='Song Detail - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
@@ -48,9 +48,9 @@ function Page({ id }) {
 
   return (
     <Layout
-      title={`${data ? data[0]?.name + ' - ' + data[0]?.artists?.name + ' - MyMusic' : 'Song Detail - MyMusic'}`}
+      title={`${data ? data[0]?.name + ' - ' + data[0]?.artists?.name + ' - MyBook' : 'Song Detail - MyBook'}`}
       description={`${
-        data ? 'Listen to ' + data[0]?.name + ' by ' + data[0]?.artists?.name + ' - MyMusic' : 'Song Detail - MyMusic'
+        data ? 'Listen to ' + data[0]?.name + ' by ' + data[0]?.artists?.name + ' - MyBook' : 'Song Detail - MyBook'
       }`}
     >
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
