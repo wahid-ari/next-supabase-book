@@ -126,6 +126,73 @@ export default function Book() {
             placeholder='The Hunger Games'
           />
 
+          {listOfGenres ? (
+            <>
+              <Label htmlFor='genre' className='my-2'>
+                Genre
+              </Label>
+              <Select
+                options={listOfGenres}
+                isMulti
+                noOptionsMessage={() => 'Not Found'}
+                value={selectedGenres}
+                // @ts-ignore
+                onChange={setSelectedGenres}
+                placeholder='Search and Select Genre'
+                name='genre'
+                className='mb-4 rounded'
+                classNamePrefix='react-select'
+                theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    primary: `#10b981`,
+                    primary25: `#10b981`,
+                    primary50: `#10b981`,
+                    neutral40: `#EF4444`,
+                  },
+                })}
+              />
+            </>
+          ) : (
+            <Shimer className='h-10' />
+          )}
+
+          {filteredAuthor ? (
+            <SearchBox
+              label='Author'
+              value={selectedAuthor}
+              placeholder='Search and Select Author'
+              onChange={setSelectedAuthor}
+              onChangeQuery={(e) => setQueryAuthor(e.target.value)}
+              afterLeave={() => setQueryAuthor('')}
+              filtered={filteredAuthor}
+              query={queryAuthor}
+            />
+          ) : (
+            <Shimer className='h-10' />
+          )}
+
+          <LabeledInput
+            wrapperClassName='mt-0.5'
+            label='Image URL (Optional)'
+            type='text'
+            name='image'
+            value={createItem.image}
+            onChange={(e) => setCreateItem({ ...createItem, image: e.target.value })}
+            placeholder='https://images.gr-assets.com/books/1630199330p5/153394.jpg'
+          />
+
+          <TextArea
+            label='Description (Optional)'
+            name='description'
+            height={4}
+            value={createItem.description}
+            onChange={(e) => setCreateItem({ ...createItem, description: e.target.value })}
+            placeholder='Could you survive on your own in the wild, with every one out to make sure you dont live to see the morning?'
+          />
+        </div>
+        <div>
           <LabeledInput
             label='ISBN (Optional)'
             type='number'
@@ -174,72 +241,6 @@ export default function Book() {
             onChange={(e) => setCreateItem({ ...createItem, link: e.target.value })}
             placeholder='https://www.goodreads.com/book/show/2767052-the-hunger-games'
           />
-        </div>
-        <div>
-          <LabeledInput
-            label='Image URL (Optional)'
-            type='text'
-            name='image'
-            value={createItem.image}
-            onChange={(e) => setCreateItem({ ...createItem, image: e.target.value })}
-            placeholder='https://images.gr-assets.com/books/1630199330p5/153394.jpg'
-          />
-
-          <TextArea
-            label='Description (Optional)'
-            name='description'
-            height={5}
-            value={createItem.description}
-            onChange={(e) => setCreateItem({ ...createItem, description: e.target.value })}
-            placeholder='Could you survive on your own in the wild, with every one out to make sure you dont live to see the morning?'
-          />
-
-          {filteredAuthor ? (
-            <SearchBox
-              label='Author'
-              value={selectedAuthor}
-              placeholder='Search and Select Author'
-              onChange={setSelectedAuthor}
-              onChangeQuery={(e) => setQueryAuthor(e.target.value)}
-              afterLeave={() => setQueryAuthor('')}
-              filtered={filteredAuthor}
-              query={queryAuthor}
-            />
-          ) : (
-            <Shimer className='h-10' />
-          )}
-
-          {listOfGenres ? (
-            <>
-              <Label htmlFor='genre' className='my-2'>
-                Genre
-              </Label>
-              <Select
-                options={listOfGenres}
-                isMulti
-                noOptionsMessage={() => 'Not Found'}
-                value={selectedGenres}
-                // @ts-ignore
-                onChange={setSelectedGenres}
-                placeholder='Search and Select Genre'
-                name='genre'
-                className='mb-4 rounded'
-                classNamePrefix='react-select'
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary: `#10b981`,
-                    primary25: `#10b981`,
-                    primary50: `#10b981`,
-                    neutral40: `#EF4444`,
-                  },
-                })}
-              />
-            </>
-          ) : (
-            <Shimer className='h-10' />
-          )}
 
           <Button.success onClick={handleSave} className='mt-3.5 w-full'>
             Save
