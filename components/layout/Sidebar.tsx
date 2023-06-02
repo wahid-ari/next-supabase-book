@@ -10,10 +10,8 @@ import {
   TemplateIcon,
   CollectionIcon,
   UserGroupIcon,
-  MusicNoteIcon,
   ColorSwatchIcon,
   BookmarkIcon,
-  ChartPieIcon,
   SearchIcon,
   LoginIcon,
   ExternalLinkIcon,
@@ -33,7 +31,7 @@ export default function Sidebar() {
   const [openModal, setOpenModal] = useState(false);
   const { showNav, setShowNav } = useContext(GlobalContext);
   // const admin = nookies.get(null, 'type');
-  const admin = { type: 'admin' };
+  const admin = { name: 'admin', type: 'admin' };
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
@@ -114,10 +112,6 @@ export default function Sidebar() {
                   Search
                 </NavLink>
 
-                <NavLink href='/statistics' icon={<ChartPieIcon className='h-4 w-4' />} className='mt-1'>
-                  Statistics
-                </NavLink>
-
                 <NavLink href='/author' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
                   Author
                 </NavLink>
@@ -136,22 +130,6 @@ export default function Sidebar() {
 
                 <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
                   Tag
-                </NavLink>
-
-                <NavLink href='/song' icon={<MusicNoteIcon className='h-4 w-4' />} className='mt-1'>
-                  Song
-                </NavLink>
-
-                <NavLink href='/album' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
-                  Album
-                </NavLink>
-
-                <NavLink href='/artist' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
-                  Artist
-                </NavLink>
-
-                <NavLink href='/playlist' icon={<BookmarkIcon className='h-4 w-4' />} className='mt-1'>
-                  Playlist
                 </NavLink>
 
                 <NavLink href='/settings' icon={<CogIcon className='h-4 w-4' />} className='mt-1'>
@@ -190,10 +168,6 @@ export default function Sidebar() {
 
                 <NavLink href='/search' icon={<SearchIcon className='h-4 w-4' />} className='mt-1'>
                   Search
-                </NavLink>
-
-                <NavLink href='/statistics' icon={<ChartPieIcon className='h-4 w-4' />} className='mt-1'>
-                  Statistics
                 </NavLink>
 
                 {admin.type == 'user' && (
