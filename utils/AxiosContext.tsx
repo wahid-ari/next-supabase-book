@@ -2,9 +2,9 @@ import { createContext, ReactNode } from 'react';
 import nookies from 'nookies';
 import axios from 'axios';
 
-export const AxiosConfigContext = createContext(null);
+export const AxiosContext = createContext(null);
 
-export const AxiosConfigProvider = ({ children }: { children: ReactNode }) => {
+export const AxiosProvider = ({ children }: { children: ReactNode }) => {
   const token = nookies.get(null, 'token');
 
   // // can be set up here, or in page file like in pages/data.js
@@ -16,5 +16,5 @@ export const AxiosConfigProvider = ({ children }: { children: ReactNode }) => {
     // console.log("Axios Header Auth UNSET: ", token.token)
   }
 
-  return <AxiosConfigContext.Provider value={{ token }}>{children}</AxiosConfigContext.Provider>;
+  return <AxiosContext.Provider value={{ token }}>{children}</AxiosContext.Provider>;
 };

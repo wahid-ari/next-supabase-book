@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { GlobalProvider } from '@utils/GlobalContext';
-// import { AxiosConfigProvider } from "@utils/useAxiosConfig";
+// import { AxiosProvider } from "@utils/AxiosContext";
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
 import { Inter } from 'next/font/google';
@@ -51,12 +51,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   ) : (
     <ThemeProvider attribute='class' storageKey='theme' enableSystem={false} defaultTheme='light'>
       <GlobalProvider>
-        {/* <AxiosConfigProvider> */}
+        {/* <AxiosProvider> */}
         <main className={inter.className}>
           <Toaster />
           <Component {...pageProps} />
         </main>
-        {/* </AxiosConfigProvider> */}
+        {/* </AxiosProvider> */}
       </GlobalProvider>
     </ThemeProvider>
   );
