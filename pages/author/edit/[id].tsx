@@ -144,9 +144,9 @@ export default function Author({ id }) {
             placeholder='Suzanne Collins has been busy writing for childrens television. She has worked on the staffs of several Nickelodeon shows, including the Emmy-nominated hit Clarissa Explains it All and The Mystery Files of Shelby Woo.'
           />
 
-          <Button onClick={handleEdit} className='w-full'>
+          <Button.success onClick={handleEdit} className='w-full'>
             Update
-          </Button>
+          </Button.success>
         </div>
       ) : (
         <Shimer className='!h-60' />
