@@ -43,7 +43,7 @@ export default function Book({ id }) {
     isbn: '',
     language: '',
     pages: '',
-    published: '',
+    published: null,
     link: '',
     image: '',
     description: '',
