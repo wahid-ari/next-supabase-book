@@ -8,10 +8,6 @@ import Title from '@components/systems/Title';
 import Text from '@components/systems/Text';
 import Button from '@components/systems/Button';
 import Heading from '@components/systems/Heading';
-import AlbumItem from '@components/dashboard/AlbumItem';
-import SongListItem from '@components/dashboard/SongListItem';
-import ArtistItem from '@components/dashboard/ArtistItem';
-import PlaylistItem from '@components/dashboard/PlaylistItem';
 import { BookmarkIcon, CollectionIcon, MusicNoteIcon, UserGroupIcon } from '@heroicons/react/outline';
 import { useSearchHistoryStore } from '@store/useStore';
 
@@ -159,7 +155,7 @@ export default function Search() {
                 Songs
               </Heading>
               <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
-                {data?.songs?.map((item: any, index: number) => (
+                {/* {data?.songs?.map((item: any, index: number) => (
                   <SongListItem
                     key={index}
                     href={`dashboard/song/detail/${item.id}`}
@@ -168,7 +164,7 @@ export default function Search() {
                     artist={item.artist_name}
                     noPlayer
                   />
-                ))}
+                ))} */}
               </div>
             </>
           ) : null}
@@ -179,7 +175,7 @@ export default function Search() {
                 Albums
               </Heading>
               <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-                {data?.albums?.map((item: any, index: number) => (
+                {/* {data?.albums?.map((item: any, index: number) => (
                   <AlbumItem
                     key={index}
                     href={`dashboard/album/detail/${item.id}`}
@@ -187,7 +183,7 @@ export default function Search() {
                     title={item.name}
                     artist={item.artist_name}
                   />
-                ))}
+                ))} */}
               </div>
             </>
           ) : null}
@@ -198,14 +194,14 @@ export default function Search() {
                 Artists
               </Heading>
               <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[400px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                {data?.artists?.map((item: any, index: number) => (
+                {/* {data?.artists?.map((item: any, index: number) => (
                   <ArtistItem
                     key={index}
                     href={`dashboard/artist/detail/${item.id}`}
                     imageSrc={item.cover_url}
                     title={item.name}
                   />
-                ))}
+                ))} */}
               </div>
             </>
           ) : null}
@@ -216,14 +212,14 @@ export default function Search() {
                 Playlists
               </Heading>
               <div className='mt-2 grid grid-cols-1 gap-4 pb-4 sm:grid-cols-2 xl:grid-cols-4'>
-                {data?.playlists?.map((item: any, index: number) => (
+                {/* {data?.playlists?.map((item: any, index: number) => (
                   <PlaylistItem
                     key={index}
                     index={index}
                     href={`/dashboard/playlist/detail/${item.id}`}
                     title={item.name}
                   />
-                ))}
+                ))} */}
               </div>
             </>
           ) : null}
@@ -257,7 +253,7 @@ export default function Search() {
                     </button>
                   </div>
                   <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
-                    {songsHistory?.map((item: any, index: number) => (
+                    {/* {songsHistory?.map((item: any, index: number) => (
                       <SongListItem
                         key={index}
                         href={`dashboard/song/detail/${item.id}`}
@@ -266,7 +262,7 @@ export default function Search() {
                         artist={item.artist_name}
                         noPlayer
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </>
               ) : null}
@@ -283,7 +279,7 @@ export default function Search() {
                     </button>
                   </div>
                   <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-                    {albumsHistory?.map((item: any, index: number) => (
+                    {/* {albumsHistory?.map((item: any, index: number) => (
                       <AlbumItem
                         key={index}
                         href={`dashboard/album/detail/${item.id}`}
@@ -291,7 +287,7 @@ export default function Search() {
                         title={item.name}
                         artist={item.artist_name}
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </>
               ) : null}
@@ -308,14 +304,14 @@ export default function Search() {
                     </button>
                   </div>
                   <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[400px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                    {artistsHistory?.map((item: any, index: number) => (
+                    {/* {artistsHistory?.map((item: any, index: number) => (
                       <ArtistItem
                         key={index}
                         href={`dashboard/artist/detail/${item.id}`}
                         imageSrc={item.cover_url}
                         title={item.name}
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </>
               ) : null}
@@ -332,14 +328,14 @@ export default function Search() {
                     </button>
                   </div>
                   <div className='mt-2 grid grid-cols-1 gap-4 pb-4 sm:grid-cols-2 xl:grid-cols-4'>
-                    {playlistsHistory?.map((item: any, index: number) => (
+                    {/* {playlistsHistory?.map((item: any, index: number) => (
                       <PlaylistItem
                         key={index}
                         index={index}
                         href={`/dashboard/playlist/detail/${item.id}`}
                         title={item.name}
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </>
               ) : null}
