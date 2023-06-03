@@ -5,7 +5,7 @@ import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import nookies from 'nookies';
-import { ExternalLinkIcon } from '@heroicons/react/outline';
+import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
@@ -44,17 +44,23 @@ export default function Author({ id }) {
 
       {data ? (
         <div className='gap-6 sm:flex'>
-          {data?.image && (
-            <div className='mx-auto w-2/4 overflow-hidden sm:mx-0 sm:w-1/4 lg:w-1/5'>
+          {data?.image ? (
+            <div className='mx-auto w-3/5 overflow-hidden sm:mx-0 sm:w-1/4 lg:w-1/5'>
               <Image
                 alt={data?.name}
                 src={data?.image}
                 width={250}
                 height={250}
-                className={`w-52 rounded ${isLoading ? 'blur-2xl' : 'blur-0'}`}
+                className={`mx-auto w-52 rounded ${isLoading ? 'blur-2xl' : 'blur-0'}`}
                 onLoadingComplete={() => setLoading(false)}
                 unoptimized
               />
+            </div>
+          ) : (
+            <div className='mx-auto w-3/5 overflow-hidden sm:mx-0 sm:w-1/4 lg:w-1/5'>
+              <div className='flex h-64 w-full items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+                <PhotographIcon className='h-16 w-16 text-neutral-500' />
+              </div>
             </div>
           )}
           <div className='mt-6 w-full sm:mt-0 sm:w-3/4'>
@@ -100,9 +106,11 @@ export default function Author({ id }) {
                   </td>
                 </tr>
               </table>
-              <p className='mt-4 text-[15px] leading-6 text-neutral-800 dark:text-neutral-100'>{data?.bio}</p>
+              <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.bio}</p>
             </div>
           </div>
+          {/* TODO Add Book Section */}
+          {/* TODO Add Quote Section */}
         </div>
       ) : (
         <div className='gap-6 sm:flex'>
