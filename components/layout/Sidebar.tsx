@@ -137,7 +137,7 @@ export default function Sidebar() {
                 </NavLink>
 
                 <a
-                  href='https://my-music-docs.vercel.app'
+                  href='https://my-book-docs.vercel.app'
                   className={clsx(
                     'my-1 flex w-full items-center justify-start gap-2 px-3 py-2 transition-all',
                     'rounded text-sm font-medium text-gray-600 hover:text-emerald-600 dark:text-neutral-300',
@@ -181,7 +181,7 @@ export default function Sidebar() {
                 </NavLink>
 
                 <a
-                  href='https://my-music-docs.vercel.app'
+                  href='https://my-book-docs.vercel.app'
                   className={clsx(
                     'mb-1 mt-1 flex w-full items-center justify-start gap-2 px-3 py-2 transition-all',
                     'rounded text-sm font-medium text-gray-600 hover:text-emerald-600 dark:text-neutral-300',

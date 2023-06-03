@@ -83,8 +83,8 @@ export default function Register() {
             <h1 className='text-4xl font-bold text-white'>MyBook</h1>
           </div>
           <p className='text-base font-normal text-white'>
-            With MyBook, it&apos;s easy to find the right music for every moment - on your phone, your computer, your
-            tablet and more.
+            Find books you&apos;ll love, and keep track of the books you want to read. Be part of the largest community
+            of book lovers on MyBook
           </p>
           <p className='font-semibold text-white'>© MyBook - 2023</p>
         </div>
@@ -94,8 +94,8 @@ export default function Register() {
             <h1 className='font-bold text-white sm:text-4xl md:text-5xl'>MyBook</h1>
             <br />
             <p className='text-base font-normal text-white'>
-              With MyBook, it&apos;s easy to find the right music for every moment - on your phone, your computer, your
-              tablet and more.
+              Find books you&apos;ll love, and keep track of the books you want to read. Be part of the largest
+              community of book lovers on MyBook
             </p>
           </div>
           <p className='font-semibold text-white'>© MyBook - 2023</p>

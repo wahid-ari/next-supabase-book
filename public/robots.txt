@@ -7,4 +7,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://my-musicc.vercel.app/sitemap.xml 
+Sitemap: https://my-bookk.vercel.app/sitemap.xml 

@@ -1,106 +1,82 @@
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_ROUTE}`;
 
-function generateSiteMap(songs: any, albums: any, artists: any, playlists: any) {
+function generateSiteMap(books: any, authors: any, genres: any, tags: any) {
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    
-      <!-- Manually set the URLs we know already-->
+      
+      <!-- Manually generate page-->
       <url>
         <loc>${BASE_URL}</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>1.00</priority>
       </url>
       <url>
-        <loc>${BASE_URL}/search</loc>
+        <loc>${BASE_URL}/books</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>0.80</priority>
       </url>
       <url>
-        <loc>${BASE_URL}/statistics</loc>
+        <loc>${BASE_URL}/authors</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>0.80</priority>
       </url>
       <url>
-        <loc>${BASE_URL}/dashboard/song</loc>
+        <loc>${BASE_URL}/genres</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>0.80</priority>
       </url>
       <url>
-        <loc>${BASE_URL}/dashboard/album</loc>
-        <lastmod>${today.toISOString()}</lastmod>
-        <priority>0.80</priority>
-      </url>
-      <url>
-        <loc>${BASE_URL}/dashboard/artist</loc>
-        <lastmod>${today.toISOString()}</lastmod>
-        <priority>0.80</priority>
-      </url>
-      <url>
-        <loc>${BASE_URL}/dashboard/playlist</loc>
-        <lastmod>${today.toISOString()}</lastmod>
-        <priority>0.80</priority>
-      </url>
-      <url>
-        <loc>${BASE_URL}/login</loc>
-        <lastmod>${today.toISOString()}</lastmod>
-        <priority>0.80</priority>
-      </url>
-      <url>
-        <loc>${BASE_URL}/register</loc>
+        <loc>${BASE_URL}/tags</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>0.80</priority>
       </url>
 
-  <!-- Automatically generate dynamic : any page-->
-  ${songs
-    .map((song: any) => {
+  ${books
+    .map((book: any) => {
       return `
       <url>
-        <loc>${`${BASE_URL}/dashboard/song/detail/${song.id}`}</loc>
+        <loc>${`${BASE_URL}/books/detail/${book.id}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
     })
     .join('')}
   
-  <!-- Automatically generate dynamic albums page-->
-  ${albums
-    .map((album: any) => {
-      return `
+    ${authors
+      .map((author: any) => {
+        return `
       <url>
-        <loc>${`${BASE_URL}/dashboard/album/detail/${album.id}`}</loc>
+        <loc>${`${BASE_URL}/authors/detail/${author.id}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
-    })
-    .join('')}
+      })
+      .join('')}
     
-  <!-- Automatically generate dynamic artists page-->
-  ${artists
-    .map((artist: any) => {
-      return `
+    ${genres
+      .map((genre: any) => {
+        return `
       <url>
-        <loc>${`${BASE_URL}/dashboard/artist/detail/${artist.id}`}</loc>
+        <loc>${`${BASE_URL}/genres/detail/${genre.id}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
-    })
-    .join('')}
-  
-  <!-- Automatically generate dynamic playlists page-->
-  ${playlists
-    .map((playlist: any) => {
-      return `
+      })
+      .join('')}
+    
+    ${tags
+      .map((tag: any) => {
+        return `
       <url>
-        <loc>${`${BASE_URL}/dashboard/playlist/detail/${playlist.id}`}</loc>
+        <loc>${`${BASE_URL}/tags/detail/${tag.id}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
-    })
-    .join('')}
+      })
+      .join('')}
 
     </urlset>
   `;
@@ -112,17 +88,17 @@ export default function SiteMap() {
 
 export async function getServerSideProps({ res }) {
   // We make an API call to gather the URLs for our site
-  const getAllSongs = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/song`);
-  const songs = await getAllSongs.json();
-  const getAllAlbums = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/album`);
-  const albums = await getAllAlbums.json();
-  const getAllArtists = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/artist`);
-  const artists = await getAllArtists.json();
-  const getAllPlaylists = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/playlist`);
-  const playlists = await getAllPlaylists.json();
+  const getAllBooks = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book`);
+  const books = await getAllBooks.json();
+  const getAllAuthors = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/author`);
+  const authors = await getAllAuthors.json();
+  const getAllGenres = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
+  const genres = await getAllGenres.json();
+  const getAllTags = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/tag`);
+  const tags = await getAllTags.json();
 
   // We generate the XML sitemap with the data
-  const sitemap = generateSiteMap(songs, albums, artists, playlists);
+  const sitemap = generateSiteMap(books, authors, genres, tags);
 
   res.setHeader('Content-Type', 'text/xml');
   // we send the XML to the browser
