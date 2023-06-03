@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .order('id');
         const { data: books } = await supabase
           .from('book_books')
-          .select(`*, book_authors (id, name, image)`)
+          .select(`*, book_authors (id, name, image, bio, web)`)
           .eq('id', query.id)
           .order('id');
 
@@ -71,7 +71,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               isbn: body.isbn,
               language: body.language,
               pages: body.pages,
-              published: body.published,
+              published: body.published ? body.published : null,
               link: body.link,
               image: body.image,
               description: body.description,
@@ -123,7 +123,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             isbn: body.isbn,
             language: body.language,
             pages: body.pages,
-            published: body.published,
+            published: body.published ? body.published : null,
             link: body.link,
             image: body.image,
             description: body.description,
