@@ -8,7 +8,7 @@ import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
 import nookies from 'nookies';
 import Link from 'next/link';
 import Heading from '@components/systems/Heading';
-import Text from '@components/systems/Text';
+import ShowMore from '@components/systems/ShowMore';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
@@ -131,17 +131,22 @@ export default function Book({ id }) {
               <Heading h2>About the author</Heading>
               <div className='flex items-center gap-3'>
                 {data?.book_authors?.image ? (
-                  <Image
-                    alt={data?.book_authors?.name}
-                    src={data?.book_authors?.image}
-                    width={50}
-                    height={50}
-                    className={`h-20 w-20 rounded-full object-cover brightness-90 transition-all duration-300 hover:brightness-100 ${
-                      isLoading ? 'blur-2xl' : 'blur-0'
-                    }`}
-                    onLoadingComplete={() => setLoading(false)}
-                    unoptimized
-                  />
+                  <Link
+                    href={`/author/detail/${data?.book_authors?.id}`}
+                    className='rounded text-base font-medium text-neutral-900 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500 dark:text-neutral-100'
+                  >
+                    <Image
+                      alt={data?.book_authors?.name}
+                      src={data?.book_authors?.image}
+                      width={50}
+                      height={50}
+                      className={`h-20 w-20 rounded-full object-cover brightness-90 transition-all duration-300 hover:brightness-100 ${
+                        isLoading ? 'blur-2xl' : 'blur-0'
+                      }`}
+                      onLoadingComplete={() => setLoading(false)}
+                      unoptimized
+                    />
+                  </Link>
                 ) : (
                   <div className='flex h-20 w-20 items-center justify-center rounded-full bg-neutral-200 dark:bg-neutral-800'>
                     <PhotographIcon className='h-8 w-8 text-neutral-500' />
@@ -169,9 +174,9 @@ export default function Book({ id }) {
                   )}
                 </div>
               </div>
-              <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
+              <ShowMore count={400} className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
                 {data?.book_authors?.bio}
-              </p>
+              </ShowMore>
             </div>
           </div>
         </div>
