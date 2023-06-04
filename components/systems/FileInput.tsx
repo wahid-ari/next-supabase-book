@@ -46,8 +46,8 @@ export default function FileInput({ id, className, label, name, value, onChange,
         className={clsx(
           className,
           'mt-2 hidden h-12 w-full rounded-md bg-white px-4 py-[0.6rem] text-sm font-medium transition-all dark:bg-neutral-900 dark:text-neutral-100',
-          'border border-gray-300 outline-none focus:border-emerald-800 dark:border-neutral-800 dark:focus:border-emerald-300',
-          'ring-gray-300 focus:ring-1 focus:ring-emerald-800 dark:ring-neutral-600 dark:focus:ring-emerald-900'
+          'border border-gray-300 outline-none focus:border-emerald-500 dark:border-neutral-800 dark:focus:border-emerald-500',
+          'ring-gray-300 focus:ring-1 focus:ring-emerald-500 dark:ring-neutral-600 dark:focus:ring-emerald-500'
         )}
         required
       />
