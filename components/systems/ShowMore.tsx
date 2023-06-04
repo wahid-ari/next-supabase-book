@@ -28,12 +28,12 @@ export default function ShowMore({ className, children, count = 200 }: Props) {
             'group absolute left-1/2 top-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 transform',
             'items-center gap-x-1 whitespace-nowrap rounded-full border bg-white px-2.5 py-0.5',
             'shadow transition-all dark:border-neutral-700 dark:bg-neutral-900',
-            'text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+            'text-xs font-medium text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100'
           )}
         >
           {showMore ? 'Show Less' : 'Show More'}
           <ChevronDownIcon
-            className={`h-4 w-4 text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300 ${
+            className={`h-4 w-4 text-gray-600 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-200 ${
               showMore ? 'rotate-180 transition-all duration-500' : 'rotate-0 transition-all duration-300'
             }`}
           />
