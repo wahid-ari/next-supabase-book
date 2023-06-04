@@ -29,10 +29,13 @@ import Modal from '@components/systems/Modal';
 import SearchBox from '@components/systems/SearchBox';
 import ReactTable from '@components/systems/ReactTable';
 import TextArea from '@components/systems/TextArea';
+import ShowMore from '@components/systems/ShowMore';
 import { tabledata } from '@utils/tableData';
-import Select from 'react-select';
+import ReactSelect from 'react-select';
+import Select from '@components/systems/Select';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import clsx from 'clsx';
+import FileInput from '@components/systems/FileInput';
 
 const searchBoxData = [
   {
@@ -221,6 +224,16 @@ export default function Example() {
 
   const tableInstance = useRef(null);
 
+  const [file, setFile] = useState({ name: '' });
+  function handleFileChange(e: any) {
+    setFile({ ...file, name: e.target.files[0].name, [e.target.name]: e.target.files[0] });
+  }
+
+  const [selectedColor, setSelectedColor] = useState('blue');
+  function handleSelectColor(e: any) {
+    setSelectedColor(e.target.value);
+  }
+
   return (
     <Layout title='Design System - MyBook'>
       <Title>Example</Title>
@@ -240,10 +253,10 @@ export default function Example() {
             <Link href='#searchbox'>SearchBox</Link>
           </span>
           <span className='mb-3 block underline'>
-            <Link href='#reactselect'>React Select</Link>
+            <Link href='#reactselect'>ReactSelect</Link>
           </span>
           <span className='mb-3 block underline'>
-            <Link href='#reacttable'>React Table</Link>
+            <Link href='#reacttable'>ReactTable</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#usetoast'>useToast (hook)</Link>
@@ -276,6 +289,9 @@ export default function Example() {
             <Link href='#inputdisabled'>Input.disabled</Link>
           </span>
           <span className='mb-3 block underline'>
+            <Link href='#fileinput'>FileInput</Link>
+          </span>
+          <span className='mb-3 block underline'>
             <Link href='#label'>Label</Link>
           </span>
           <span className='mb-3 block underline'>
@@ -292,6 +308,9 @@ export default function Example() {
           </span>
           <span className='mb-3 block underline'>
             <Link href='#textareadisabled'>TextArea.disabled</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#select'>Select</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#progress'>Progress</Link>
@@ -325,6 +344,9 @@ export default function Example() {
           </span>
           <span className='mb-3 block underline'>
             <Link href='#section'>Section</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#show-more'>ShowMore</Link>
           </span>
         </div>
       </Wrapper>
@@ -463,7 +485,7 @@ export default function Example() {
         <Label htmlFor='category' className='mb-2'>
           Category
         </Label>
-        <Select
+        <ReactSelect
           id='selectbox'
           instanceId='selectbox'
           aria-label='React Select'
@@ -767,6 +789,34 @@ export default function Example() {
         <TextArea.disabled label='TextArea' name='textarea' placeholder='text area' />
       </Wrapper>
 
+      <Wrapper
+        id='fileinput'
+        name='FileInput'
+        props={['id', 'className', 'label', 'name', 'value', 'onChange']}
+        noChildren
+      >
+        <FileInput label='File' name='File' value={file ? file.name : ''} onChange={handleFileChange} accept='.pdf' />
+      </Wrapper>
+
+      <Wrapper id='select' name='Select' props={['label', 'id', 'name', 'value', 'onChange']}>
+        <Select
+          label='Select Color'
+          id='color'
+          name='color'
+          value={selectedColor ? selectedColor : 'Choose Color'}
+          onChange={handleSelectColor}
+        >
+          <Select.option value='red'>Red</Select.option>
+          <Select.option value='blue'>Blue</Select.option>
+          <Select.option value='green'>Green</Select.option>
+        </Select>
+      </Wrapper>
+
+      <Wrapper id='selectnativeoption' name='Select.option' props={['value']} noClassName>
+        <Select.option value='red'>Red</Select.option>
+        <Select.option value='blue'>Blue</Select.option>
+      </Wrapper>
+
       <Wrapper id='progress' name='Progress' variant={['percentage']} props={['percent']} noChildren noProps>
         <Progress percent={45} />
         <br />
@@ -904,6 +954,16 @@ export default function Example() {
         <Section.small>
           <Text>Section Small</Text>
         </Section.small>
+      </Wrapper>
+
+      <Wrapper id='show-more' name='ShowMore' props={['count']} noProps>
+        <ShowMore>
+          Id amet commodo exercitation aliqua irure exercitation adipisicing ipsum cillum elit. Cillum non dolor cillum
+          mollit incididunt tempor quis reprehenderit labore velit sunt anim ipsum quis. Id nostrud anim ut excepteur
+          pariatur. Eu ad esse nisi et fugiat. Exercitation culpa cupidatat consequat veniam commodo aute id enim Lorem
+          id consectetur aliqua. Quis culpa do est non irure aliquip proident exercitation aliqua mollit anim dolor
+          labore.
+        </ShowMore>
       </Wrapper>
     </Layout>
   );
