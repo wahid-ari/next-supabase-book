@@ -91,6 +91,7 @@ export default function Author() {
       {
         Header: 'Born',
         accessor: 'born',
+        disableSortBy: true,
         width: 300,
         Cell: (row: any) => {
           const { values, original } = row.cell.row;
