@@ -1,39 +1,23 @@
 import { create } from 'zustand';
 
 export const useSearchHistoryStore: any = create((set: any) => ({
-  songsHistory: [],
-  albumsHistory: [],
-  artistsHistory: [],
-  playlistsHistory: [],
-  setSongsHistory: (param: any) => {
+  booksHistory: [],
+  authorsHistory: [],
+  setBooksHistory: (param: any) => {
     set((state: any) => ({
-      songsHistory: state.songsHistory.concat(param),
+      booksHistory: state.booksHistory.concat(param),
     }));
   },
-  setAlbumsHistory: (param: any) => {
+  setAuthorsHistory: (param: any) => {
     set((state: any) => ({
-      albumsHistory: state.albumsHistory.concat(param),
+      authorsHistory: [...state.authorsHistory.concat(param)],
     }));
   },
-  setArtistsHistory: (param: any) => {
-    set((state: any) => ({
-      artistsHistory: [...state.artistsHistory.concat(param)],
-    }));
-  },
-  setPlaylistsHistory: (param: any) => {
-    set((state: any) => ({
-      playlistsHistory: [...state.playlistsHistory.concat(param)],
-    }));
-  },
-  resetSongsHistory: () => set({ songsHistory: [] }),
-  resetAlbumsHistory: () => set({ albumsHistory: [] }),
-  resetArtistsHistory: () => set({ artistsHistory: [] }),
-  resetPlaylistsHistory: () => set({ playlistsHistory: [] }),
+  resetBooksHistory: () => set({ booksHistory: [] }),
+  resetAuthorsHistory: () => set({ authorsHistory: [] }),
   resetAllSearchHistory: () =>
     set({
-      songsHistory: [],
-      albumsHistory: [],
-      artistsHistory: [],
-      playlistsHistory: [],
+      booksHistory: [],
+      authorsHistory: [],
     }),
 }));
