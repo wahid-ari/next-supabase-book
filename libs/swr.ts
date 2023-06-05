@@ -71,6 +71,11 @@ export function useGenreData(id: string, seo?: boolean) {
   return { data, error, isLoading };
 }
 
+export function useSearchData(query: string | string[]) {
+  const { data, error, isLoading } = useSWR(`${API_URL}/search?q=${query}`, fetcher);
+  return { data, error, isLoading };
+}
+
 export function useBookByAuthorData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/statistics/book-by-author`, fetcher);
   return { data, error, isLoading };
