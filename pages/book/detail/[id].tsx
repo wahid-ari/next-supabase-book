@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { useBookData } from '@libs/swr';
 import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
-import nookies from 'nookies';
-import Link from 'next/link';
 import Heading from '@components/systems/Heading';
 import ShowMore from '@components/systems/ShowMore';
+import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
@@ -155,7 +155,7 @@ export default function Book({ id }) {
                 <div>
                   <Link
                     href={`/author/detail/${data?.book_authors?.id}`}
-                    className='rounded text-base font-medium text-neutral-900 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500 dark:text-neutral-100'
+                    className='rounded text-base font-medium text-neutral-900 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500 dark:text-neutral-100 dark:hover:text-emerald-500'
                   >
                     {data?.book_authors?.name}
                   </Link>
