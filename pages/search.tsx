@@ -1,39 +1,28 @@
 import { useRef, useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import { useSearchData } from '@libs/swr';
+import { useSearchHistoryStore } from '@store/useStore';
 import Layout from '@components/layout/Layout';
 import LabeledInput from '@components/systems/LabeledInput';
 import Title from '@components/systems/Title';
 import Text from '@components/systems/Text';
 import Button from '@components/systems/Button';
 import Heading from '@components/systems/Heading';
-import { BookmarkIcon, CollectionIcon, MusicNoteIcon, UserGroupIcon } from '@heroicons/react/outline';
-import { useSearchHistoryStore } from '@store/useStore';
-
-const fetcher = (url: string) => fetch(url).then((result) => result.json());
+import BookListItem from '@components/dashboard/BookListItem';
 
 export default function Search() {
   const router = useRouter();
   const search = router.query.q;
   const query = useRef(search);
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/search?q=${search}`, fetcher);
+  const { data, error } = useSearchData(search);
 
-  const songsHistory = useSearchHistoryStore((state: any) => state.songsHistory);
-  const setSongsHistory = useSearchHistoryStore((state: any) => state.setSongsHistory);
-  const resetSongsHistory = useSearchHistoryStore((state: any) => state.resetSongsHistory);
+  const booksHistory = useSearchHistoryStore((state: any) => state.booksHistory);
+  const setBooksHistory = useSearchHistoryStore((state: any) => state.setBooksHistory);
+  const resetBooksHistory = useSearchHistoryStore((state: any) => state.resetBooksHistory);
 
-  const albumsHistory = useSearchHistoryStore((state: any) => state.albumsHistory);
-  const setAlbumsHistory = useSearchHistoryStore((state: any) => state.setAlbumsHistory);
-  const resetAlbumsHistory = useSearchHistoryStore((state: any) => state.resetAlbumsHistory);
-
-  const artistsHistory = useSearchHistoryStore((state: any) => state.artistsHistory);
-  const setArtistsHistory = useSearchHistoryStore((state: any) => state.setArtistsHistory);
-  const resetArtistsHistory = useSearchHistoryStore((state: any) => state.resetArtistsHistory);
-
-  const playlistsHistory = useSearchHistoryStore((state: any) => state.playlistsHistory);
-  const setPlaylistsHistory = useSearchHistoryStore((state: any) => state.setPlaylistsHistory);
-  const resetPlaylistsHistory = useSearchHistoryStore((state: any) => state.resetPlaylistsHistory);
+  const authorsHistory = useSearchHistoryStore((state: any) => state.authorsHistory);
+  const setAuthorsHistory = useSearchHistoryStore((state: any) => state.setAuthorsHistory);
+  const resetAuthorsHistory = useSearchHistoryStore((state: any) => state.resetAuthorsHistory);
 
   const resetAllSearchHistory = useSearchHistoryStore((state: any) => state.resetAllSearchHistory);
 
@@ -51,50 +40,28 @@ export default function Search() {
   }
 
   useEffect(() => {
-    if (data?.songs?.length > 0) {
+    if (data?.books?.length > 0) {
       // if already searching
-      if (songsHistory.length > 0) {
+      if (booksHistory.length > 0) {
         // compare history with new search result
-        let newSongs = compareSearchResult(songsHistory, data?.songs);
-        if (newSongs != songsHistory) {
-          setSongsHistory(newSongs);
+        let newBooks = compareSearchResult(booksHistory, data?.books);
+        if (newBooks != booksHistory) {
+          setBooksHistory(newBooks);
         }
       } else {
         // first time searching, set search result to search history directly
-        setSongsHistory(data?.songs);
+        setBooksHistory(data?.books);
       }
     }
-    // Album
-    if (data?.albums?.length > 0) {
-      if (albumsHistory.length > 0) {
-        let newAlbums = compareSearchResult(albumsHistory, data?.albums);
-        if (newAlbums != albumsHistory) {
-          setAlbumsHistory(newAlbums);
+    // Authors
+    if (data?.authors?.length > 0) {
+      if (authorsHistory.length > 0) {
+        let newAuthors = compareSearchResult(authorsHistory, data?.authors);
+        if (newAuthors != authorsHistory) {
+          setAuthorsHistory(newAuthors);
         }
       } else {
-        setAlbumsHistory(data?.albums);
-      }
-    }
-    // Artist
-    if (data?.artists?.length > 0) {
-      if (artistsHistory.length > 0) {
-        let newArtists = compareSearchResult(artistsHistory, data?.artists);
-        if (newArtists != artistsHistory) {
-          setArtistsHistory(newArtists);
-        }
-      } else {
-        setArtistsHistory(data?.artists);
-      }
-    }
-    // Playlist
-    if (data?.playlists?.length > 0) {
-      if (playlistsHistory.length > 0) {
-        let newPlaylists = compareSearchResult(playlistsHistory, data?.playlists);
-        if (newPlaylists != playlistsHistory) {
-          setPlaylistsHistory(newPlaylists);
-        }
-      } else {
-        setPlaylistsHistory(data?.playlists);
+        setAuthorsHistory(data?.authors);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,7 +93,7 @@ export default function Search() {
           <LabeledInput
             wrapperClassName='w-full sm:max-w-sm'
             name='search'
-            placeholder='Search song, artist, album or playlist'
+            placeholder='Search Title, Author, ISBN'
             type='text'
             onChange={(e) => (query.current = e.target.value)}
           />
@@ -140,42 +107,38 @@ export default function Search() {
         <>
           {!data && <Text>Searching...</Text>}
 
-          {data?.songs.length < 1 &&
-          data?.albums.length < 1 &&
-          data?.artists.length < 1 &&
-          data?.playlists.length < 1 ? (
+          {data?.books.length < 1 && data?.authors.length < 1 ? (
             <div className='rounded border border-red-500 p-3'>
               <p className='text-red-500'>{`No results for "${query.current || search}"`}</p>
             </div>
           ) : null}
 
-          {data?.songs.length > 0 ? (
+          {data?.books.length > 0 ? (
             <>
               <Heading h3 className='mt-6'>
-                Songs
+                Books
               </Heading>
-              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
-                {/* {data?.songs?.map((item: any, index: number) => (
-                  <SongListItem
+              <div className='mt-2 space-y-4'>
+                {data?.books?.map((item: any, index: number) => (
+                  <BookListItem
                     key={index}
-                    href={`dashboard/song/detail/${item.id}`}
-                    imageSrc={item.cover_url}
-                    title={item.name}
-                    artist={item.artist_name}
-                    noPlayer
+                    href={`/book/detail/${item.id}`}
+                    image={item.image_small}
+                    title={item.title}
+                    published={item.published}
                   />
-                ))} */}
+                ))}
               </div>
             </>
           ) : null}
 
-          {data?.albums.length > 0 ? (
+          {data?.authors.length > 0 ? (
             <>
               <Heading h3 className='mt-6'>
-                Albums
+                Authors
               </Heading>
               <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-                {/* {data?.albums?.map((item: any, index: number) => (
+                {/* {data?.authors?.map((item: any, index: number) => (
                   <AlbumItem
                     key={index}
                     href={`dashboard/album/detail/${item.id}`}
@@ -187,99 +150,63 @@ export default function Search() {
               </div>
             </>
           ) : null}
-
-          {data?.artists.length > 0 ? (
-            <>
-              <Heading h3 className='mt-6'>
-                Artists
-              </Heading>
-              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[400px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                {/* {data?.artists?.map((item: any, index: number) => (
-                  <ArtistItem
-                    key={index}
-                    href={`dashboard/artist/detail/${item.id}`}
-                    imageSrc={item.cover_url}
-                    title={item.name}
-                  />
-                ))} */}
-              </div>
-            </>
-          ) : null}
-
-          {data?.playlists.length > 0 ? (
-            <>
-              <Heading h3 className='mt-6'>
-                Playlists
-              </Heading>
-              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 sm:grid-cols-2 xl:grid-cols-4'>
-                {/* {data?.playlists?.map((item: any, index: number) => (
-                  <PlaylistItem
-                    key={index}
-                    index={index}
-                    href={`/dashboard/playlist/detail/${item.id}`}
-                    title={item.name}
-                  />
-                ))} */}
-              </div>
-            </>
-          ) : null}
         </>
-      ) : (
+      ) : booksHistory?.length > 0 || authorsHistory?.length > 0 ? (
         <>
-          {songsHistory?.length > 0 ||
-          albumsHistory?.length > 0 ||
-          artistsHistory?.length > 0 ||
-          playlistsHistory?.length > 0 ? (
+          <div className='mt-6 flex items-center justify-between'>
+            <Heading h2 className='!mb-0 text-[22px]'>
+              Recent Search
+            </Heading>
+            <button
+              onClick={resetAllSearchHistory}
+              className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
+            >
+              Clear All
+            </button>
+          </div>
+
+          {booksHistory?.length > 0 ? (
             <>
-              <div className='mt-6 flex items-center justify-between'>
-                <Heading h3>Recent Search</Heading>
+              <div className='mb-4 mt-6 flex items-center justify-between'>
+                <Heading h3 className='!mb-0'>
+                  Books
+                </Heading>
                 <button
-                  onClick={resetAllSearchHistory}
+                  onClick={resetBooksHistory}
                   className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
                 >
-                  Clear All
+                  Clear
                 </button>
               </div>
+              <div className='mt-2 space-y-4'>
+                {booksHistory?.map((item: any, index: number) => (
+                  <BookListItem
+                    key={index}
+                    href={`/book/detail/${item.id}`}
+                    image={item.image_small}
+                    title={item.title}
+                    published={item.published}
+                  />
+                ))}
+              </div>
+            </>
+          ) : null}
 
-              {songsHistory?.length > 0 ? (
-                <>
-                  <div className='mt-6 flex items-center justify-between'>
-                    <Heading>Songs</Heading>
-                    <button
-                      onClick={resetSongsHistory}
-                      className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
-                    >
-                      Clear
-                    </button>
-                  </div>
-                  <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
-                    {/* {songsHistory?.map((item: any, index: number) => (
-                      <SongListItem
-                        key={index}
-                        href={`dashboard/song/detail/${item.id}`}
-                        imageSrc={item.cover_url}
-                        title={item.name}
-                        artist={item.artist_name}
-                        noPlayer
-                      />
-                    ))} */}
-                  </div>
-                </>
-              ) : null}
-
-              {albumsHistory?.length > 0 ? (
-                <>
-                  <div className='mt-6 flex items-center justify-between'>
-                    <Heading>Albums</Heading>
-                    <button
-                      onClick={resetAlbumsHistory}
-                      className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
-                    >
-                      Clear
-                    </button>
-                  </div>
-                  <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-                    {/* {albumsHistory?.map((item: any, index: number) => (
+          {authorsHistory?.length > 0 ? (
+            <>
+              <div className='mb-4 mt-6 flex items-center justify-between'>
+                <Heading h3 className='!mb-0'>
+                  Authors
+                </Heading>
+                <button
+                  onClick={resetAuthorsHistory}
+                  className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
+                >
+                  Clear
+                </button>
+              </div>
+              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
+                {/* {authorsHistory?.map((item: any, index: number) => (
                       <AlbumItem
                         key={index}
                         href={`dashboard/album/detail/${item.id}`}
@@ -288,109 +215,11 @@ export default function Search() {
                         artist={item.artist_name}
                       />
                     ))} */}
-                  </div>
-                </>
-              ) : null}
-
-              {artistsHistory?.length > 0 ? (
-                <>
-                  <div className='mt-6 flex items-center justify-between'>
-                    <Heading>Artists</Heading>
-                    <button
-                      onClick={resetArtistsHistory}
-                      className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
-                    >
-                      Clear
-                    </button>
-                  </div>
-                  <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[400px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                    {/* {artistsHistory?.map((item: any, index: number) => (
-                      <ArtistItem
-                        key={index}
-                        href={`dashboard/artist/detail/${item.id}`}
-                        imageSrc={item.cover_url}
-                        title={item.name}
-                      />
-                    ))} */}
-                  </div>
-                </>
-              ) : null}
-
-              {playlistsHistory?.length > 0 ? (
-                <>
-                  <div className='mt-6 flex items-center justify-between'>
-                    <Heading>Playlists</Heading>
-                    <button
-                      onClick={resetPlaylistsHistory}
-                      className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
-                    >
-                      Clear
-                    </button>
-                  </div>
-                  <div className='mt-2 grid grid-cols-1 gap-4 pb-4 sm:grid-cols-2 xl:grid-cols-4'>
-                    {/* {playlistsHistory?.map((item: any, index: number) => (
-                      <PlaylistItem
-                        key={index}
-                        index={index}
-                        href={`/dashboard/playlist/detail/${item.id}`}
-                        title={item.name}
-                      />
-                    ))} */}
-                  </div>
-                </>
-              ) : null}
+              </div>
             </>
           ) : null}
         </>
-      )}
-
-      <Heading className='mt-6'>Browse Categories</Heading>
-      <div className='mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>
-        <Link
-          href='/dashboard/song'
-          className='group h-20 rounded-lg bg-gradient-to-br from-cyan-500 to-purple-500 p-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500'
-        >
-          <div className='flex h-full w-full items-center gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
-            <MusicNoteIcon className='h-8 w-8 text-cyan-500 transition-all duration-300 ease-in group-hover:text-white' />
-            <h2 className='bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Songs
-            </h2>
-          </div>
-        </Link>
-        <Link
-          href='/dashboard/album'
-          className='group h-20 rounded-lg bg-gradient-to-br from-red-500 to-yellow-500 p-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
-        >
-          <div className='flex h-full w-full items-center gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
-            <CollectionIcon className='h-8 w-8 text-red-500 transition-all duration-300 ease-in group-hover:text-white' />
-            <h2 className='bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Albums
-            </h2>
-          </div>
-        </Link>
-        <Link
-          href='/dashboard/artist'
-          className='group h-20 rounded-lg bg-gradient-to-br from-emerald-500 to-blue-500 p-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
-        >
-          <div className='flex h-full w-full items-center gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
-            <UserGroupIcon className='h-8 w-8 text-emerald-500 transition-all duration-300 ease-in group-hover:text-white' />
-            <h2 className='bg-gradient-to-r from-emerald-500 to-blue-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Artists
-            </h2>
-          </div>
-        </Link>
-        <Link
-          href='/dashboard/playlist'
-          className='group h-20 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 p-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500'
-        >
-          <div className='flex h-full w-full items-center gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
-            <BookmarkIcon className='h-8 w-8 text-violet-500 transition-all duration-300 ease-in group-hover:text-white' />
-            <h2 className='bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Playlists
-            </h2>
-          </div>
-        </Link>
-      </div>
+      ) : null}
     </Layout>
   );
 }
