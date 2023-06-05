@@ -4,6 +4,21 @@
 
 ![Image External](https://raw.githubusercontent.com/wahid-ari/next-supabase-book/master/public/database.png)
 
+## Supabase
+
+create function to search in table (book_books) using multiple columns (title, isbn)
+
+// https://supabase.com/docs/guides/database/full-text-search#search-multiple-columns
+// create function in supabase > sql editor > new query
+
+```sql
+ create function title_isbn(book_books) returns text as $$
+   select $1.title || ' ' || $1.isbn;
+ $$ language sql immutable;
+```
+
+// view function in supabase > database > function
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
