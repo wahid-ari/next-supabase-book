@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useAuthorData } from '@libs/swr';
+import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
 import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import nookies from 'nookies';
-import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
+import Heading from '@components/systems/Heading';
+import Link from 'next/link';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
@@ -68,19 +70,20 @@ export default function Author({ id }) {
               <table className='text-[15px]'>
                 <tr>
                   <td className='flex pb-2 pr-4 font-semibold'>Born</td>
-                  <td className='pb-2'>{data?.born ? data.born : '-'}</td>
+                  <td className='w-full pb-2'>{data?.born ? data.born : '-'}</td>
                 </tr>
                 <tr>
                   <td className='flex pb-2 pr-4 font-semibold'>Website</td>
-                  <td className='pb-2'>
+                  <td className='w-10 pb-2'>
                     {data?.web ? (
                       <a
                         href={data?.web}
-                        className='rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                        className='flex w-16 items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
                         target='_blank'
                         rel='noreferrer'
                       >
-                        {data?.web}
+                        Open
+                        <ExternalLinkIcon className='ml-1 h-4 w-4' />
                       </a>
                     ) : (
                       '-'
@@ -108,9 +111,59 @@ export default function Author({ id }) {
               </table>
               <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.bio}</p>
             </div>
+            <div className='mt-5'>
+              <Heading>{data?.name} Books</Heading>
+              {data?.books.map((item: any) => {
+                return (
+                  <Link
+                    key={item.id}
+                    href={`/book/detail/${item.id}`}
+                    className='group mb-5 flex gap-3 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500'
+                  >
+                    {item.image_small ? (
+                      <Image
+                        alt={item.name}
+                        src={item.image_small}
+                        width={50}
+                        height={70}
+                        className={`w-12 rounded brightness-90 group-hover:brightness-100 ${
+                          isLoading ? 'blur-2xl' : 'blur-0'
+                        }`}
+                        onLoadingComplete={() => setLoading(false)}
+                        unoptimized
+                      />
+                    ) : (
+                      <div className='flex h-16 w-12 items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+                        <PhotographIcon className='h-8 w-8 text-neutral-500' />
+                      </div>
+                    )}
+                    <div>
+                      <p className='text-[15px] font-medium text-neutral-700 transition-all duration-200 group-hover:text-emerald-500 dark:text-neutral-100 '>
+                        {item.title}
+                      </p>
+                      <p className='text-sm text-neutral-600 dark:text-neutral-200'>
+                        {item.published ? item.published.split('-')[0] : '-'}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+            <div className='mt-6'>
+              <Heading>{data?.name} Quotes</Heading>
+              {data?.quotes.map((item: any) => {
+                return (
+                  <div key={item.id} className='mb-4 border-b pb-2 dark:border-b-neutral-700'>
+                    <p className='text-[15px] font-medium text-neutral-900 dark:text-neutral-100'>
+                      &#8220;{item.quote}&#8221;
+                    </p>
+                    <p className='text-sm italic text-neutral-700 dark:text-neutral-300'>- {data?.name}</p>
+                  </div>
+                );
+              })}
+            </div>
+            {/* TODO Add Quote Section */}
           </div>
-          {/* TODO Add Book Section */}
-          {/* TODO Add Quote Section */}
         </div>
       ) : (
         <div className='gap-6 sm:flex'>
