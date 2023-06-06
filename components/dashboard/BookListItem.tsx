@@ -27,13 +27,13 @@ export default function BookListItem({ href, image, title, published, ...props }
               alt={title}
               src={image}
               fill
-              className={`rounded brightness-90 hover:brightness-100 ${isLoading ? 'blur-2xl' : 'blur-0'}`}
+              className={`rounded object-cover brightness-90 hover:brightness-100 ${isLoading ? 'blur-2xl' : 'blur-0'}`}
               onLoadingComplete={() => setLoading(false)}
               unoptimized
             />
           </div>
         ) : (
-          <div className='flex h-20 w-14 items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+          <div className='flex h-20 w-14 items-center justify-center rounded bg-neutral-200 dark:bg-neutral-800'>
             <PhotographIcon className='h-8 w-8 text-neutral-500' />
           </div>
         )}
