@@ -23,6 +23,7 @@ export default function HeadSeo({ title, description }: Props) {
 
   return (
     <Head>
+      {/* TODO https://swr.vercel.app/docs/prefetching */}
       <title>{headTitle}</title>
       <meta name='description' content={headDescription} />
       <meta name='og:description' content={headDescription} />
