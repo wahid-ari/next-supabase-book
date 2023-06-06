@@ -10,7 +10,7 @@ export function useCountsData() {
 }
 
 export function useBooksData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/book`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/book`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
@@ -23,7 +23,7 @@ export function useBookData(id: string, seo?: boolean) {
 }
 
 export function useQuotesData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/quote`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/quote`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
@@ -33,7 +33,7 @@ export function useQuoteData(id: string) {
 }
 
 export function useAuthorsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/author`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/author`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
@@ -46,7 +46,7 @@ export function useAuthorData(id: string, seo?: boolean) {
 }
 
 export function useTagsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/tag`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/tag`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
@@ -59,7 +59,7 @@ export function useTagData(id: string, seo?: boolean) {
 }
 
 export function useGenresData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/genre`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/genre`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
