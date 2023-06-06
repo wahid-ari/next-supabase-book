@@ -60,7 +60,7 @@ export default function Author({ id }) {
             </div>
           ) : (
             <div className='mx-auto w-3/5 overflow-hidden sm:mx-0 sm:w-1/4 lg:w-1/5'>
-              <div className='flex h-64 w-full items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+              <div className='flex h-64 w-full items-center justify-center rounded bg-neutral-200 dark:bg-neutral-800'>
                 <PhotographIcon className='h-16 w-16 text-neutral-500' />
               </div>
             </div>
@@ -123,17 +123,17 @@ export default function Author({ id }) {
                     {item.image_small ? (
                       <Image
                         alt={item.name}
-                        src={item.image_small}
+                        src={item.image_small?.replace('SX50', 'SX150').replace('SY75', 'SX150')}
                         width={50}
                         height={70}
-                        className={`w-12 rounded brightness-90 group-hover:brightness-100 ${
+                        className={`w-12 rounded object-cover brightness-90 group-hover:brightness-100 ${
                           isLoading ? 'blur-2xl' : 'blur-0'
                         }`}
                         onLoadingComplete={() => setLoading(false)}
                         unoptimized
                       />
                     ) : (
-                      <div className='flex h-16 w-12 items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+                      <div className='flex h-[72px] w-12 items-center justify-center rounded bg-neutral-200 dark:bg-neutral-800'>
                         <PhotographIcon className='h-8 w-8 text-neutral-500' />
                       </div>
                     )}
