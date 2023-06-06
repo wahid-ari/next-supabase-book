@@ -9,6 +9,7 @@ import Text from '@components/systems/Text';
 import Button from '@components/systems/Button';
 import Heading from '@components/systems/Heading';
 import BookListItem from '@components/dashboard/BookListItem';
+import AuthorListItem from '@components/dashboard/AuthorListItem';
 
 export default function Search() {
   const router = useRouter();
@@ -105,7 +106,7 @@ export default function Search() {
 
       {search ? (
         <>
-          {!data && <Text>Searching...</Text>}
+          {!data && <Text>Searching &#8220;{search}&#8221;...</Text>}
 
           {data?.books.length < 1 && data?.authors.length < 1 ? (
             <div className='rounded border border-red-500 p-3'>
@@ -123,7 +124,7 @@ export default function Search() {
                   <BookListItem
                     key={index}
                     href={`/book/detail/${item.id}`}
-                    image={item.image_small}
+                    image={item.image_small?.replace('SX50', 'SX150').replace('SY75', 'SX150')}
                     title={item.title}
                     published={item.published}
                   />
@@ -137,16 +138,16 @@ export default function Search() {
               <Heading h3 className='mt-6'>
                 Authors
               </Heading>
-              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-                {/* {data?.authors?.map((item: any, index: number) => (
-                  <AlbumItem
+              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
+                {data?.authors?.map((item: any, index: number) => (
+                  <AuthorListItem
                     key={index}
-                    href={`dashboard/album/detail/${item.id}`}
-                    imageSrc={item.cover}
-                    title={item.name}
-                    artist={item.artist_name}
+                    href={`/author/detail/${item.id}`}
+                    image={item.image}
+                    name={item.name}
+                    web={item.web}
                   />
-                ))} */}
+                ))}
               </div>
             </>
           ) : null}
@@ -183,7 +184,7 @@ export default function Search() {
                   <BookListItem
                     key={index}
                     href={`/book/detail/${item.id}`}
-                    image={item.image_small}
+                    image={item.image_small?.replace('SX50', 'SX150').replace('SY75', 'SX150')}
                     title={item.title}
                     published={item.published}
                   />
@@ -194,7 +195,7 @@ export default function Search() {
 
           {authorsHistory?.length > 0 ? (
             <>
-              <div className='mb-4 mt-6 flex items-center justify-between'>
+              <div className='mb-4 mt-8 flex items-center justify-between'>
                 <Heading h3 className='!mb-0'>
                   Authors
                 </Heading>
@@ -205,16 +206,16 @@ export default function Search() {
                   Clear
                 </button>
               </div>
-              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-                {/* {authorsHistory?.map((item: any, index: number) => (
-                      <AlbumItem
-                        key={index}
-                        href={`dashboard/album/detail/${item.id}`}
-                        imageSrc={item.cover}
-                        title={item.name}
-                        artist={item.artist_name}
-                      />
-                    ))} */}
+              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
+                {authorsHistory?.map((item: any, index: number) => (
+                  <AuthorListItem
+                    key={index}
+                    href={`/author/detail/${item.id}`}
+                    image={item.image}
+                    name={item.name}
+                    web={item.web}
+                  />
+                ))}
               </div>
             </>
           ) : null}
