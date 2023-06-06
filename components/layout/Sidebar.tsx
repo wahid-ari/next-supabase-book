@@ -54,21 +54,7 @@ export default function Sidebar() {
   async function handleLogout() {
     setOpenModal(false);
     hideMenu();
-    // sometimes, this not work,
-    // the token has been deleted in backend,
-    // but the cookies in browser still exist
-    nookies.destroy(null, 'id');
-    nookies.destroy(null, 'username');
-    nookies.destroy(null, 'name');
-    nookies.destroy(null, 'type');
-    nookies.destroy(null, 'token');
-    // so try this, seems work
-    document.cookie = 'id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'username=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'name=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    router.push('/');
+    router.push('/logout');
   }
 
   return (
