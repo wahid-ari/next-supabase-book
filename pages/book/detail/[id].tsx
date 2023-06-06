@@ -61,7 +61,7 @@ export default function Book({ id }) {
             </div>
           ) : (
             <div className='mx-auto w-3/5 overflow-hidden sm:mx-0 sm:w-1/4 lg:w-1/5'>
-              <div className='flex h-64 w-full items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+              <div className='flex h-64 w-full items-center justify-center rounded bg-neutral-200 dark:bg-neutral-800'>
                 <PhotographIcon className='h-16 w-16 text-neutral-500' />
               </div>
             </div>
@@ -174,9 +174,11 @@ export default function Book({ id }) {
                   )}
                 </div>
               </div>
-              <ShowMore count={400} className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
-                {data?.book_authors?.bio}
-              </ShowMore>
+              {data?.book_authors?.bio ? (
+                <ShowMore count={400} className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
+                  {data?.book_authors?.bio}
+                </ShowMore>
+              ) : null}
             </div>
           </div>
         </div>
