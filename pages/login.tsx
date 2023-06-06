@@ -112,7 +112,7 @@ export default function Login() {
           <div className='w-full sm:max-w-md'>
             <Image
               alt='Logo'
-              src='/icon.jpg'
+              src='/icon.png'
               width={100}
               height={100}
               className='mx-auto mb-16 hidden sm:block'
