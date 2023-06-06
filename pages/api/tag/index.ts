@@ -1,6 +1,25 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from '@libs/supabase';
 
+async function getSessionToken(res: NextApiResponse, header: string, token: string) {
+  if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
+  const { data } = await supabase.from('book_sessions').select('*').eq('token', token).single();
+  if (data) return data;
+  else res.status(401).json({ message: 'Token invalid' });
+}
+
+async function writeLogs(user_id: number, action: string, table: string = '', data_id: string | string[] = '') {
+  const { error } = await supabase.from('book_logs').insert([
+    {
+      user_id: user_id,
+      action: action,
+      table: table,
+      description: `user ${user_id} ${action} book_tags ${data_id}`,
+    },
+  ]);
+  return error;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
   const header = req.headers.authorization;
@@ -47,44 +66,62 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break;
 
     case 'POST':
-      if (!body.name) {
-        res.status(422).json({ error: 'Name required' });
-      } else {
-        const { error } = await supabase.from('book_tags').insert([
-          {
-            name: body.name,
-            link: body.link,
-          },
-        ]);
-        if (error) {
-          res.status(422).json({ error: error.message });
+      // Check session
+      const sessionPost = await getSessionToken(res, header, token);
+      if (sessionPost) {
+        if (!body.name) {
+          res.status(422).json({ error: 'Name required' });
+        } else {
+          const { error } = await supabase.from('book_tags').insert([
+            {
+              name: body.name,
+              link: body.link,
+            },
+          ]);
+          if (error) {
+            res.status(422).json({ error: error.message });
+          }
+          // Write logs
+          const errorLogs = await writeLogs(sessionPost.user_id, 'create', 'book_tags');
+          if (errorLogs) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(200).json({ message: 'Success add tag' });
         }
-        res.status(200).json({ message: 'Success add tag' });
       }
       break;
 
     case 'PUT':
-      if (!body.name) {
-        res.status(422).json({ error: 'Name required' });
-      } else {
-        const { error } = await supabase
-          .from('book_tags')
-          .update({
-            name: body.name,
-            link: body.link,
-          })
-          .eq('id', body.id);
-        if (error) {
-          res.status(422).json({ error: error.message });
+      // Check session
+      const sessionPut = await getSessionToken(res, header, token);
+      if (sessionPut) {
+        if (!body.name) {
+          res.status(422).json({ error: 'Name required' });
+        } else {
+          const { error } = await supabase
+            .from('book_tags')
+            .update({
+              name: body.name,
+              link: body.link,
+            })
+            .eq('id', body.id);
+          if (error) {
+            res.status(422).json({ error: error.message });
+          }
+          // Write logs
+          const errorLogs = await writeLogs(sessionPut.user_id, 'update', 'book_tags', body.id);
+          if (errorLogs) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(201).json({ message: 'Success update tag' });
         }
-        res.status(201).json({ message: 'Success update tag' });
       }
       break;
 
     case 'DELETE':
-      if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
-      const { data: session } = await supabase.from('book_sessions').select('*').eq('token', token).single();
-      if (session) {
+      // Check session
+      const sessionDelete = await getSessionToken(res, header, token);
+      if (sessionDelete) {
         if (!query.id) {
           res.status(422).json({ error: 'Id required' });
         } else {
@@ -92,10 +129,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           if (error) {
             res.status(422).json({ error: error.message });
           }
+          // Write logs
+          const errorLogs = await writeLogs(sessionDelete.user_id, 'delete', 'book_tags', query.id);
+          if (errorLogs) {
+            res.status(422).json({ error: error.message });
+          }
           res.status(200).json({ message: 'Success delete tag' });
         }
-      } else {
-        res.status(401).json({ message: 'Token invalid' });
       }
       break;
 
