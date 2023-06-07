@@ -25,9 +25,11 @@ export default function Logout() {
   }
 
   useEffect(() => {
+    // if token exist and user visit /logout, do logout session
     if (token) {
       postLogout();
     }
+    // if status true after logout session make sure to delete cookie
     if (status) {
       document.cookie = 'id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
       document.cookie = 'username=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
@@ -35,10 +37,11 @@ export default function Logout() {
       document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
       document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
     }
+    // if no token redirect to '/'
     if (!token && status == false) {
       router.push('/');
     }
-  }, [status, token]);
+  });
 
   return '';
 }
