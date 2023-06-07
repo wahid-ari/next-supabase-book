@@ -4,6 +4,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_ROUTE}/api`;
 
+// get total record count on each table
 export function useCountsData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/dashboard`, fetcher);
   return { data, error, isLoading };
@@ -24,6 +25,12 @@ export function useBookData(id: string, seo?: boolean) {
 
 export function useQuotesData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/quote`, fetcher);
+  return { data, error, isLoading };
+}
+
+// get all Quotes with all Tags in each Quote
+export function useQuotesWithTagsData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/quote/with-tags`, fetcher);
   return { data, error, isLoading };
 }
 
@@ -58,6 +65,12 @@ export function useTagData(id: string, seo?: boolean) {
   return { data, error, isLoading };
 }
 
+// get total Quote in each Tag
+export function useTagTotalQuoteData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/tag/total-quote`, fetcher);
+  return { data, error, isLoading };
+}
+
 export function useGenresData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/genre`, fetcher);
   return { data, error, isLoading };
@@ -68,6 +81,12 @@ export function useGenreData(id: string, seo?: boolean) {
     seo ? `${API_URL}/genre?id=${id}&seo=true` : `${API_URL}/genre?id=${id}`,
     fetcher
   );
+  return { data, error, isLoading };
+}
+
+// get total Book in each Genre
+export function useGenreTotalBookData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/genre/total-book`, fetcher);
   return { data, error, isLoading };
 }
 
