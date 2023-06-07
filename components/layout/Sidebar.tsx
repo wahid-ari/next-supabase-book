@@ -30,8 +30,7 @@ export default function Sidebar() {
   const [mounted, setMounted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { showNav, setShowNav } = useContext(GlobalContext);
-  // const admin = nookies.get(null, 'type');
-  const admin = { name: 'admin', type: 'admin' };
+  const admin = nookies.get(null, 'type');
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
@@ -87,102 +86,61 @@ export default function Sidebar() {
             'scrollbar scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
           )}
         >
-          {mounted ? (
-            admin.type == 'admin' ? (
-              <>
-                <NavLink isHome href='/' icon={<ViewGridIcon className='h-4 w-4' />}>
-                  Dashboard
-                </NavLink>
+          <NavLink isHome href='/' icon={<ViewGridIcon className='h-4 w-4' />}>
+            Dashboard
+          </NavLink>
 
-                <NavLink href='/search' icon={<SearchIcon className='h-4 w-4' />} className='mt-1'>
-                  Search
-                </NavLink>
+          <NavLink href='/search' icon={<SearchIcon className='h-4 w-4' />} className='mt-1'>
+            Search
+          </NavLink>
 
-                <NavLink href='/author' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
-                  Author
-                </NavLink>
+          <NavLink href='/author' icon={<UserGroupIcon className='h-4 w-4' />} className='mt-1'>
+            Author
+          </NavLink>
 
-                <NavLink href='/book' icon={<BookOpenIcon className='h-4 w-4' />} className='mt-1'>
-                  Book
-                </NavLink>
+          <NavLink href='/book' icon={<BookOpenIcon className='h-4 w-4' />} className='mt-1'>
+            Book
+          </NavLink>
 
-                <NavLink href='/quote' icon={<AnnotationIcon className='h-4 w-4' />} className='mt-1'>
-                  Quote
-                </NavLink>
+          <NavLink href='/quote' icon={<AnnotationIcon className='h-4 w-4' />} className='mt-1'>
+            Quote
+          </NavLink>
 
-                <NavLink href='/genre' icon={<ColorSwatchIcon className='h-4 w-4' />} className='mt-1'>
-                  Genre
-                </NavLink>
+          <NavLink href='/genre' icon={<ColorSwatchIcon className='h-4 w-4' />} className='mt-1'>
+            Genre
+          </NavLink>
 
-                <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
-                  Tag
-                </NavLink>
+          <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
+            Tag
+          </NavLink>
 
-                <NavLink href='/settings' icon={<CogIcon className='h-4 w-4' />} className='mt-1'>
-                  Settings
-                </NavLink>
+          <NavLink href='/settings' icon={<CogIcon className='h-4 w-4' />} className='mt-1'>
+            Settings
+          </NavLink>
 
-                <a
-                  href='https://my-book-docs.vercel.app'
-                  className={clsx(
-                    'my-1 flex w-full items-center justify-start gap-2 px-3 py-2 transition-all',
-                    'rounded text-sm font-medium text-gray-600 hover:text-emerald-600 dark:text-neutral-300',
-                    'hover:bg-gray-100 dark:hover:bg-neutral-800 dark:hover:text-emerald-500',
-                    'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
-                  )}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <ExternalLinkIcon className='h-4 w-4' />
-                  Docs
-                </a>
+          <a
+            href='https://my-book-docs.vercel.app'
+            className={clsx(
+              'my-1 flex w-full items-center justify-start gap-2 px-3 py-2 transition-all',
+              'rounded text-sm font-medium text-gray-600 hover:text-emerald-600 dark:text-neutral-300',
+              'hover:bg-gray-100 dark:hover:bg-neutral-800 dark:hover:text-emerald-500',
+              'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
+            )}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <ExternalLinkIcon className='h-4 w-4' />
+            Docs
+          </a>
 
-                {/* <NavAccordion title="Design" routeName="design" icon={<TemplateIcon className="w-4 h-4" />}>
-                  <NavLink
-                    href="/design"
-                    icon={<TemplateIcon className="w-4 h-4" />}
-                  >
-                    Example
-                  </NavLink>
-                </NavAccordion> */}
-              </>
-            ) : (
-              <>
-                <NavLink isHome href='/' icon={<ViewGridIcon className='h-4 w-4' />}>
-                  Dashboard
-                </NavLink>
-
-                <NavLink href='/search' icon={<SearchIcon className='h-4 w-4' />} className='mt-1'>
-                  Search
-                </NavLink>
-
-                {admin.type == 'user' && (
-                  <NavLink href='/my-playlist' icon={<BookmarkIcon className='h-4 w-4' />} className='mt-1'>
-                    My Playlist
-                  </NavLink>
-                )}
-
-                <NavLink href='/settings' icon={<CogIcon className='h-4 w-4' />} className='mt-1'>
-                  Settings
-                </NavLink>
-
-                <a
-                  href='https://my-book-docs.vercel.app'
-                  className={clsx(
-                    'mb-1 mt-1 flex w-full items-center justify-start gap-2 px-3 py-2 transition-all',
-                    'rounded text-sm font-medium text-gray-600 hover:text-emerald-600 dark:text-neutral-300',
-                    'hover:bg-gray-100 dark:hover:bg-neutral-800 dark:hover:text-emerald-500',
-                    'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
-                  )}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <ExternalLinkIcon className='h-4 w-4' />
-                  Docs
-                </a>
-              </>
-            )
-          ) : null}
+          {/* <NavAccordion title="Design" routeName="design" icon={<TemplateIcon className="w-4 h-4" />}>
+            <NavLink
+              href="/design"
+              icon={<TemplateIcon className="w-4 h-4" />}
+            >
+              Example
+            </NavLink>
+          </NavAccordion> */}
         </div>
 
         <hr className='mt-2 dark:border-neutral-800' />
