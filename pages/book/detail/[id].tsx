@@ -50,7 +50,7 @@ export default function Book({ id }) {
           {data?.image ? (
             <div className='top-16 mx-auto w-3/5 self-start overflow-hidden sm:sticky sm:mx-0 sm:w-1/4 lg:w-1/5'>
               <Image
-                alt={data?.name}
+                alt={data?.title}
                 src={data?.image}
                 width={250}
                 height={250}
@@ -69,64 +69,65 @@ export default function Book({ id }) {
           <div className='mt-6 w-full sm:mt-0 sm:w-3/4'>
             <div>
               <table className='text-[15px]'>
-                <tr>
-                  <td className='flex pb-2 pr-4 font-semibold'>ISBN</td>
-                  <td className='pb-2'>{data?.isbn ? data.isbn : '-'}</td>
-                </tr>
-                <tr>
-                  <td className='flex pb-2 pr-4 font-semibold'>Language</td>
-                  <td className='pb-2'>{data?.language ? data.language : '-'}</td>
-                </tr>
-                <tr>
-                  <td className='flex pb-2 pr-4 font-semibold'>Pages</td>
-                  <td className='pb-2'>{data?.pages ? data.pages : '-'}</td>
-                </tr>
-                <tr>
-                  <td className='flex pb-2 pr-4 font-semibold'>Published</td>
-                  <td className='pb-2'>{data?.published ? data.published : '-'}</td>
-                </tr>
-                <tr>
-                  <td className='flex pb-2 pr-4 font-semibold'>Genre</td>
-                  <td className='pb-2'>
-                    <p className='font-medium text-neutral-700 dark:text-neutral-200'>
-                      {data?.genre_array.map((item: any, index: number) => {
-                        return (
-                          <>
+                <tbody>
+                  <tr>
+                    <td className='flex pb-2 pr-4 font-semibold'>ISBN</td>
+                    <td className='pb-2'>{data?.isbn ? data.isbn : '-'}</td>
+                  </tr>
+                  <tr>
+                    <td className='flex pb-2 pr-4 font-semibold'>Language</td>
+                    <td className='pb-2'>{data?.language ? data.language : '-'}</td>
+                  </tr>
+                  <tr>
+                    <td className='flex pb-2 pr-4 font-semibold'>Pages</td>
+                    <td className='pb-2'>{data?.pages ? data.pages : '-'}</td>
+                  </tr>
+                  <tr>
+                    <td className='flex pb-2 pr-4 font-semibold'>Published</td>
+                    <td className='pb-2'>{data?.published ? data.published : '-'}</td>
+                  </tr>
+                  <tr>
+                    <td className='flex pb-2 pr-4 font-semibold'>Genre</td>
+                    <td className='pb-2'>
+                      <p className='font-medium text-neutral-700 dark:text-neutral-200'>
+                        {data?.genre_array.map((item: any, index: number) => {
+                          return (
                             <Link
                               key={index + 1}
                               href={`/genre/detail/${item.id}`}
                               className='rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
                             >
                               {item.name}
+                              {index < data.genre_array.length - 1 ? ', ' : ''}
                             </Link>
-                            {index < data.genre_array.length - 1 ? ', ' : ''}
-                          </>
-                        );
-                      })}
-                      {data.genre_array?.length < 1 && '-'}
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td className='flex pb-2 pr-4 font-semibold'>Goodreads</td>
-                  <td className='pb-2'>
-                    {data?.link ? (
-                      <a
-                        href={data?.link}
-                        className='flex w-16 items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
-                        target='_blank'
-                        rel='noreferrer'
-                      >
-                        Open
-                        <ExternalLinkIcon className='ml-1 h-4 w-4' />
-                      </a>
-                    ) : (
-                      '-'
-                    )}
-                  </td>
-                </tr>
+                          );
+                        })}
+                        {data.genre_array?.length < 1 && '-'}
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='flex pb-2 pr-4 font-semibold'>Goodreads</td>
+                    <td className='pb-2'>
+                      {data?.link ? (
+                        <a
+                          href={data?.link}
+                          className='flex w-16 items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                          target='_blank'
+                          rel='noreferrer'
+                        >
+                          Open
+                          <ExternalLinkIcon className='ml-1 h-4 w-4' />
+                        </a>
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
               </table>
               <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.description}</p>
+              {/* FIX this layout  */}
               <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
               <Heading h2>About the author</Heading>
               <div className='flex items-center gap-3'>

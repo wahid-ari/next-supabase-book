@@ -1,9 +1,9 @@
+import Link from 'next/link';
 import { useQuoteData } from '@libs/swr';
 import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import nookies from 'nookies';
-import Link from 'next/link';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
@@ -38,7 +38,7 @@ export default function Quote({ id }) {
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         {data ? <Title>Quote by {data?.book_authors?.name}</Title> : <Title>Quote Detail</Title>}
       </div>
-
+      {/* FIX this layout  */}
       {data ? (
         <div>
           <p className='mb-1 text-base'>&#8220;{data.quote}&#8221;</p>
@@ -53,16 +53,14 @@ export default function Quote({ id }) {
               Tags :{' '}
               {data?.tags_array.map((item: any, index: number) => {
                 return (
-                  <>
-                    <Link
-                      key={index + 1}
-                      href={`/tag/detail/${item.id}`}
-                      className='rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
-                    >
-                      {item.name}
-                    </Link>
+                  <Link
+                    key={index + 1}
+                    href={`/tag/detail/${item.id}`}
+                    className='rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                  >
+                    {item.name}
                     {index < data.tags_array.length - 1 ? ', ' : ''}
-                  </>
+                  </Link>
                 );
               })}
             </p>
