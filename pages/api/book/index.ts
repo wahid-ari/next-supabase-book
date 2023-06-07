@@ -13,8 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .from('book_books')
           .select(`id, author_id, title, language, pages, published, link, image, book_authors (id, name)`)
           .order('id');
-        // https://nextjs.org/docs/api-reference/next.config.js/headers#cache-control
-        res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
         res.status(200).json(data);
       } else if (query.id && query.seo) {
         const { data } = await supabase.from('book_books').select(`title, description`).eq('id', query.id).single();
