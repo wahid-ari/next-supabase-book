@@ -1,0 +1,4 @@
+id,name,username,password,type,created_at
+1,Admin,admin,$2a$08$sfhEzfy0TGSijqBO17OD5OVJEDNgJ//1PpoI3h.TLkVptXM6ZcmeC,admin,2023-05-26 10:21:44+00
+2,Develop,develop,$2a$08$yXmEzCEa/.JEHqsCrmEJputp.0y.AA30AjaJyhSBwmNZDwR4lIMVq,admin,2023-05-26 10:21:44+00
+3,User,user,$2a$08$jnke2MdXsnCioRp8PgpFAOE8YebvKpWLUyUcyfjJug6SES89rHNMC,user,2023-05-26 10:21:44+00
