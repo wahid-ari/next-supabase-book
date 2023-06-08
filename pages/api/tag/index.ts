@@ -1,24 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { supabase } from '@libs/supabase';
-
-async function getSessionToken(res: NextApiResponse, header: string, token: string) {
-  if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
-  const { data } = await supabase.from('book_sessions').select('*').eq('token', token).single();
-  if (data) return data;
-  else res.status(401).json({ message: 'Token invalid' });
-}
-
-async function writeLogs(user_id: number, action: string, table: string = '', data_id: string | string[] = '') {
-  const { error } = await supabase.from('book_logs').insert([
-    {
-      user_id: user_id,
-      action: action,
-      table: table,
-      description: `user ${user_id} ${action} book_tags ${data_id}`,
-    },
-  ]);
-  return error;
-}
+import { supabase, getSessionToken, writeLogs } from '@libs/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
