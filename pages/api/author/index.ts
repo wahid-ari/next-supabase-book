@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { supabase } from '@libs/supabase';
+import { supabase, getSessionToken, writeLogs } from '@libs/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
@@ -40,52 +40,70 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break;
 
     case 'POST':
-      if (!body.name) {
-        res.status(422).json({ error: 'Name required' });
-      } else {
-        const { error } = await supabase.from('book_authors').insert([
-          {
-            name: body.name,
-            link: body.link,
-            image: body.image,
-            born: body.born,
-            web: body.web,
-            bio: body.bio,
-          },
-        ]);
-        if (error) {
-          res.status(422).json({ error: error.message });
+      // Check session
+      const sessionPost = await getSessionToken(res, header, token);
+      if (sessionPost) {
+        if (!body.name) {
+          res.status(422).json({ error: 'Name required' });
+        } else {
+          const { error } = await supabase.from('book_authors').insert([
+            {
+              name: body.name,
+              link: body.link,
+              image: body.image,
+              born: body.born,
+              web: body.web,
+              bio: body.bio,
+            },
+          ]);
+          if (error) {
+            res.status(422).json({ error: error.message });
+          }
+          // Write logs
+          const errorLogs = await writeLogs(sessionPost.user_id, 'create', 'book_authors');
+          if (errorLogs) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(200).json({ message: 'Success add author' });
         }
-        res.status(200).json({ message: 'Success add author' });
       }
       break;
 
     case 'PUT':
-      if (!body.name) {
-        res.status(422).json({ error: 'Name required' });
-      } else {
-        const { error } = await supabase
-          .from('book_authors')
-          .update({
-            name: body.name,
-            link: body.link,
-            image: body.image,
-            born: body.born,
-            web: body.web,
-            bio: body.bio,
-          })
-          .eq('id', body.id);
-        if (error) {
-          res.status(422).json({ error: error.message });
+      // Check session
+      const sessionPut = await getSessionToken(res, header, token);
+      if (sessionPut) {
+        if (!body.name) {
+          res.status(422).json({ error: 'Name required' });
+        } else {
+          const { error } = await supabase
+            .from('book_authors')
+            .update({
+              name: body.name,
+              link: body.link,
+              image: body.image,
+              born: body.born,
+              web: body.web,
+              bio: body.bio,
+            })
+            .eq('id', body.id);
+          if (error) {
+            res.status(422).json({ error: error.message });
+          }
+          // Write logs
+          const errorLogs = await writeLogs(sessionPut.user_id, 'update', 'book_authors', body.id);
+          if (errorLogs) {
+            res.status(422).json({ error: error.message });
+          }
+          res.status(201).json({ message: 'Success update author' });
         }
-        res.status(201).json({ message: 'Success update author' });
       }
       break;
 
     case 'DELETE':
-      if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
-      const { data: session } = await supabase.from('book_sessions').select('*').eq('token', token).single();
-      if (session) {
+      // Check session
+      const sessionDelete = await getSessionToken(res, header, token);
+      if (sessionDelete) {
         if (!query.id) {
           res.status(422).json({ error: 'Id required' });
         } else {
@@ -93,10 +111,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           if (error) {
             res.status(422).json({ error: error.message });
           }
+          // Write logs
+          const errorLogs = await writeLogs(sessionDelete.user_id, 'delete', 'book_authors', query.id);
+          if (errorLogs) {
+            res.status(422).json({ error: error.message });
+          }
           res.status(200).json({ message: 'Success delete author' });
         }
-      } else {
-        res.status(401).json({ message: 'Token invalid' });
       }
       break;
 
