@@ -3,9 +3,14 @@ import { useTheme } from 'next-themes';
 import {
   useBookByAuthorData,
   useBookByGenreData,
+  useCountsData,
   useQuoteByAuthorData,
   useQuoteByTagData,
-  useCountsData,
+  useTotalAuthorsData,
+  useTotalBooksData,
+  useTotalGenresData,
+  useTotalQuotesData,
+  useTotalTagsData,
 } from '@libs/swr';
 import Layout from '@components/layout/Layout';
 import Titles from '@components/systems/Title';
@@ -44,6 +49,11 @@ ChartJS.register(
 
 export default function Home() {
   const { data, error } = useCountsData();
+  const { data: totalAuthors, error: errorTotalAuthors } = useTotalAuthorsData();
+  const { data: totalBooks, error: errorTotalBooks } = useTotalBooksData();
+  const { data: totalGenres, error: errorTotalGenres } = useTotalGenresData();
+  const { data: totalQuotes, error: errorTotalQuotes } = useTotalQuotesData();
+  const { data: totalTags, error: errorTotalTags } = useTotalTagsData();
   const { theme } = useTheme();
   const { data: bookByGenre, error: errorBookByGenre } = useBookByGenreData();
   const { data: bookByAuthor, error: errorBookByAuthor } = useBookByAuthorData();
@@ -67,7 +77,18 @@ export default function Home() {
     if (quoteByTag !== undefined) setDataQuoteByTag(populateData(quoteByTag, 'quote'));
   }, [bookByGenre, bookByAuthor, quoteByAuthor, quoteByTag]);
 
-  if (error || errorBookByAuthor || errorBookByGenre || errorQuoteByAuthor || errorQuoteByTag) {
+  if (
+    // error ||
+    errorTotalAuthors ||
+    errorTotalBooks ||
+    errorTotalGenres ||
+    errorTotalQuotes ||
+    errorTotalTags ||
+    errorBookByAuthor ||
+    errorBookByGenre ||
+    errorQuoteByAuthor ||
+    errorQuoteByTag
+  ) {
     return (
       <Layout title='Dashboard - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
@@ -79,7 +100,11 @@ export default function Home() {
     <Layout
       title='Dashboard - MyBook'
       prefetch={[
-        '/api/dashboard',
+        '/api/dashboard/total-authors',
+        '/api/dashboard/total-books',
+        '/api/dashboard/total-genres',
+        '/api/dashboard/total-quotes',
+        '/api/dashboard/total-tags',
         '/api/statistics/book-by-author',
         '/api/statistics/book-by-genre',
         '/api/statistics/quote-by-author',
@@ -89,6 +114,33 @@ export default function Home() {
       <Titles>Dashboard</Titles>
 
       <div className='mt-8 grid grid-cols-1 gap-4 min-[350px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+        {totalAuthors ? (
+          <Card title='Author' link='/author' count={totalAuthors.authors} icon={<UserGroupIcon />} />
+        ) : (
+          <Shimer className='!h-24 w-full' />
+        )}
+        {totalBooks ? (
+          <Card title='Book' link='/book' count={totalBooks.books} icon={<BookOpenIcon />} />
+        ) : (
+          <Shimer className='!h-24 w-full' />
+        )}
+        {totalQuotes ? (
+          <Card title='Quote' link='/quote' count={totalQuotes.quotes} icon={<AnnotationIcon />} />
+        ) : (
+          <Shimer className='!h-24 w-full' />
+        )}
+        {totalGenres ? (
+          <Card title='Genre' link='/genre' count={totalGenres.genres} icon={<ColorSwatchIcon />} />
+        ) : (
+          <Shimer className='!h-24 w-full' />
+        )}
+        {totalTags ? (
+          <Card title='Tag' link='/tag' count={totalTags.tags} icon={<CollectionIcon />} />
+        ) : (
+          <Shimer className='!h-24 w-full' />
+        )}
+      </div>
+      {/* <div className='mt-8 grid grid-cols-1 gap-4 min-[350px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
         {data ? (
           <>
             <Card title='Author' link='/author' count={data.authors} icon={<UserGroupIcon />} />
@@ -106,7 +158,7 @@ export default function Home() {
             <Shimer className='!h-24 w-full' />
           </>
         )}
-      </div>
+      </div> */}
 
       <div className='mt-5 grid grid-cols-1 gap-5 md:grid-cols-2'>
         {dataBookByGenre ? (
