@@ -186,7 +186,7 @@ export default function Book() {
   }
 
   return (
-    <Layout title='Book - MyBook'>
+    <Layout title='Book - MyBook' prefetch={['/api/book']}>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Book</Title>
         <LinkButton href='book/add' className='flex items-center gap-2'>
@@ -198,6 +198,7 @@ export default function Book() {
       <InputDebounce
         label='Search'
         name='search'
+        id='search'
         placeholder='Search'
         value={inputDebounceValue}
         onChange={(value) => {

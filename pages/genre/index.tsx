@@ -126,7 +126,7 @@ export default function Genre() {
   }
 
   return (
-    <Layout title='Genre - MyBook'>
+    <Layout title='Genre - MyBook' prefetch={['/api/genre']}>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Genre</Title>
         <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>
@@ -137,6 +137,7 @@ export default function Genre() {
 
       <InputDebounce
         label='Search'
+        id='inputdebounce'
         name='inputdebounce'
         placeholder='Search'
         value={inputDebounceValue}

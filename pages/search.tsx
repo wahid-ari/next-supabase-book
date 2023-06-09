@@ -94,6 +94,7 @@ export default function Search() {
           <LabeledInput
             wrapperClassName='w-full sm:max-w-sm'
             name='search'
+            id='search'
             placeholder='Search Title, Author, ISBN'
             type='text'
             onChange={(e) => (query.current = e.target.value)}

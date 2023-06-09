@@ -176,7 +176,7 @@ export default function Quote() {
   }
 
   return (
-    <Layout title='Quote - MyBook'>
+    <Layout title='Quote - MyBook' prefetch={['/api/quote']}>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Quote</Title>
         <LinkButton href='quote/add' className='flex items-center gap-2'>
@@ -188,6 +188,7 @@ export default function Quote() {
       <InputDebounce
         label='Search'
         name='search'
+        id='search'
         placeholder='Search'
         value={inputDebounceValue}
         onChange={(value) => {

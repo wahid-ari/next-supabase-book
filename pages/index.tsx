@@ -1,5 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import {
   useBookByAuthorData,
@@ -12,6 +11,7 @@ import Layout from '@components/layout/Layout';
 import Titles from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import Text from '@components/systems/Text';
+import Card from '@components/dashboard/Card';
 import { AnnotationIcon, BookOpenIcon, CollectionIcon, ColorSwatchIcon, UserGroupIcon } from '@heroicons/react/outline';
 import {
   Chart as ChartJS,
@@ -41,25 +41,6 @@ ChartJS.register(
   Filler,
   Legend
 );
-
-function Card({ title, link, count, icon }: { title: string; link: string; count: number; icon?: ReactNode }) {
-  return (
-    <Link
-      href={link}
-      className='group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800'
-    >
-      <div>
-        <p className='mb-1 text-xl font-extrabold text-neutral-800 dark:text-neutral-100'>{count}</p>
-        <p className='text-base font-semibold text-neutral-600 transition-all group-hover:text-emerald-500 dark:text-neutral-300'>
-          {title}
-        </p>
-      </div>
-      <div className='h-12 w-12 text-neutral-300 transition-all duration-500 group-hover:text-emerald-500 dark:text-neutral-700 dark:group-hover:text-emerald-600'>
-        {icon}
-      </div>
-    </Link>
-  );
-}
 
 export default function Home() {
   const { data, error } = useCountsData();
@@ -95,7 +76,16 @@ export default function Home() {
   }
 
   return (
-    <Layout title='Dashboard - MyBook'>
+    <Layout
+      title='Dashboard - MyBook'
+      prefetch={[
+        '/api/dashboard',
+        '/api/statistics/book-by-author',
+        '/api/statistics/book-by-genre',
+        '/api/statistics/quote-by-author',
+        '/api/statistics/quote-by-tag',
+      ]}
+    >
       <Titles>Dashboard</Titles>
 
       <div className='mt-8 grid grid-cols-1 gap-4 min-[350px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
