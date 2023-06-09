@@ -170,9 +170,7 @@ export default function Book({ id }) {
                       Web
                       <ExternalLinkIcon className='ml-1 h-4 w-4' />
                     </a>
-                  ) : (
-                    '-'
-                  )}
+                  ) : null}
                 </div>
               </div>
               {data?.book_authors?.bio ? (

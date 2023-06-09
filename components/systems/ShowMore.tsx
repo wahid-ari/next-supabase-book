@@ -15,7 +15,7 @@ export default function ShowMore({ className, children, count = 200 }: Props) {
   return (
     <div className={`${className ? className + ' ' : ''} relative`}>
       <p>{text}</p>
-      <div className='relative py-3' role='seperator'>
+      <div className='relative py-3'>
         <div
           className={`absolute bottom-3 z-0 h-8 w-full bg-gradient-to-b from-white/70 to-white dark:from-neutral-900/70 dark:to-neutral-900 ${
             showMore && 'hidden'

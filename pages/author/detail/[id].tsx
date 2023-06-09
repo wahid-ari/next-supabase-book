@@ -130,7 +130,7 @@ export default function Author({ id }) {
                           src={item.image_small?.replace('SX50', 'SX150').replace('SY75', 'SX150')}
                           width={50}
                           height={70}
-                          className={`w-12 rounded object-cover brightness-90 group-hover:brightness-100 ${
+                          className={`w-14 rounded object-cover brightness-90 group-hover:brightness-100 ${
                             isLoading ? 'blur-2xl' : 'blur-0'
                           }`}
                           onLoadingComplete={() => setLoading(false)}
@@ -164,7 +164,7 @@ export default function Author({ id }) {
                       <p className='text-[15px] font-medium text-neutral-900 dark:text-neutral-100'>
                         &#8220;{item.quote}&#8221;
                       </p>
-                      <p className='text-sm italic text-neutral-700 dark:text-neutral-300'>- {data?.name}</p>
+                      <p className='mt-1 text-sm italic text-neutral-700 dark:text-neutral-300'>- {data?.name}</p>
                     </div>
                   );
                 })}

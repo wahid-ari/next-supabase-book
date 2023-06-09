@@ -46,24 +46,25 @@ export default function Register() {
           pushToast({ message: el, isError: true });
         });
       } else {
-        const toastId = pushToast({
-          message: 'Registering...',
-          isLoading: true,
-        });
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/register`, form);
-        if (res.status == 200) {
-          nookies.set(null, 'id', res.data.id, { path: '/' });
-          nookies.set(null, 'username', res.data.username, { path: '/' });
-          nookies.set(null, 'name', res.data.name, { path: '/' });
-          nookies.set(null, 'type', res.data.type, { path: '/' });
-          nookies.set(null, 'token', res.data.token, { path: '/' });
-          updateToast({
-            toastId,
-            message: 'Success Register',
-            isError: false,
-          });
-          Router.replace('/');
-        }
+        // const toastId = pushToast({
+        //   message: 'Registering...',
+        //   isLoading: true,
+        // });
+        // const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/register`, form);
+        // if (res.status == 200) {
+        //   nookies.set(null, 'id', res.data.id, { path: '/' });
+        //   nookies.set(null, 'username', res.data.username, { path: '/' });
+        //   nookies.set(null, 'name', res.data.name, { path: '/' });
+        //   nookies.set(null, 'type', res.data.type, { path: '/' });
+        //   nookies.set(null, 'token', res.data.token, { path: '/' });
+        //   updateToast({
+        //     toastId,
+        //     message: 'Success Register',
+        //     isError: false,
+        //   });
+        //   Router.replace('/');
+        // }
+        Router.replace('/');
       }
     } catch (error) {
       dismissToast();
@@ -105,7 +106,7 @@ export default function Register() {
           <div className='w-full sm:max-w-md'>
             <Image
               alt='Logo'
-              src='/icon.jpg'
+              src='/icon.png'
               width={100}
               height={100}
               className='mx-auto mb-16 hidden sm:block'
