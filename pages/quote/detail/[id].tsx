@@ -38,7 +38,7 @@ export default function Quote({ id }) {
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         {data ? <Title>Quote by {data?.book_authors?.name}</Title> : <Title>Quote Detail</Title>}
       </div>
-      {/* FIX this layout  */}
+
       {data ? (
         <div>
           <p className='mb-1 text-base'>&#8220;{data.quote}&#8221;</p>

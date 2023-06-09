@@ -127,7 +127,7 @@ export default function Book({ id }) {
                 </tbody>
               </table>
               <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.description}</p>
-              {/* FIX this layout  */}
+
               <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
               <Heading h2>About the author</Heading>
               <div className='flex items-center gap-3'>

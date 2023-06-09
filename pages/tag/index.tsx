@@ -119,14 +119,14 @@ export default function Tags() {
 
   if (error) {
     return (
-      <Layout title='Genre - MyBook'>
+      <Layout title='Tags - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <Layout title='Tags - MyBook'>
+    <Layout title='Tags - MyBook' prefetch={['/api/tag']}>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Tags</Title>
         <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>
@@ -137,6 +137,7 @@ export default function Tags() {
 
       <InputDebounce
         label='Search'
+        id='inputdebounce'
         name='inputdebounce'
         placeholder='Search'
         value={inputDebounceValue}
