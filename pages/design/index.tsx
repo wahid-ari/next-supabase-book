@@ -678,12 +678,16 @@ export default function Example() {
 
       <Wrapper id='linkbutton' name='LinkButton' variant={['secondary', 'tertary']} props={['href']}>
         <div className='flex flex-wrap items-center gap-2'>
-          <LinkButton href='/' className='flex items-center gap-2'>
+          <LinkButton href='/design#linkbutton' className='flex items-center gap-2' data-testid='link-button'>
             <ArrowSmRightIcon className='h-5 w-5' />
-            TambahLink to some page
+            Link Button
           </LinkButton>
-          <LinkButton.secondary href='/'>Link to some page</LinkButton.secondary>
-          <LinkButton.tertary href='/'>Link to some page</LinkButton.tertary>
+          <LinkButton.secondary href='/design#linkbutton' data-testid='link-button-secondary'>
+            Link Button Secondary
+          </LinkButton.secondary>
+          <LinkButton.tertary href='/design#linkbutton' data-testid='link-button-tertary'>
+            Link Button Tertary
+          </LinkButton.tertary>
         </div>
       </Wrapper>
 
