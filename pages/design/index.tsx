@@ -632,26 +632,26 @@ export default function Example() {
         props={['isLarge']}
       >
         <div className='flex flex-wrap items-center gap-y-2'>
-          <Badge>blue</Badge>
-          <Badge.dark>dark</Badge.dark>
-          <Badge.red>red</Badge.red>
-          <Badge.green>green</Badge.green>
-          <Badge.yellow>yellow</Badge.yellow>
-          <Badge.indigo>indigo</Badge.indigo>
-          <Badge.purple>purple</Badge.purple>
-          <Badge.pink>pink</Badge.pink>
+          <Badge data-testid='badge'>badge</Badge>
+          <Badge.dark data-testid='badge-dark'>dark</Badge.dark>
+          <Badge.red data-testid='badge-red'>red</Badge.red>
+          <Badge.green data-testid='badge-green'>green</Badge.green>
+          <Badge.yellow data-testid='badge-yellow'>yellow</Badge.yellow>
+          <Badge.indigo data-testid='badge-indigo'>indigo</Badge.indigo>
+          <Badge.purple data-testid='badge-purple'>purple</Badge.purple>
+          <Badge.pink data-testid='badge-pink'>pink</Badge.pink>
         </div>
         <br />
         <br />
         <div className='flex flex-wrap items-center gap-y-2'>
-          <Badge isLarge>blue</Badge>
-          <Badge.dark isLarge>dark</Badge.dark>
-          <Badge.red isLarge>red</Badge.red>
-          <Badge.green isLarge>green</Badge.green>
-          <Badge.yellow isLarge>yellow</Badge.yellow>
-          <Badge.indigo isLarge>indigo</Badge.indigo>
-          <Badge.purple isLarge>purple</Badge.purple>
-          <Badge.pink isLarge>pink</Badge.pink>
+          <Badge isLarge data-testid='badge-large'>badge</Badge>
+          <Badge.dark isLarge data-testid='badge-dark-large'>dark</Badge.dark>
+          <Badge.red isLarge data-testid='badge-red-large'>red</Badge.red>
+          <Badge.green isLarge data-testid='badge-green-large'>green</Badge.green>
+          <Badge.yellow isLarge data-testid='badge-yellow-large'>yellow</Badge.yellow>
+          <Badge.indigo isLarge data-testid='badge-indigo-large'>indigo</Badge.indigo>
+          <Badge.purple isLarge data-testid='badge-purple-large'>purple</Badge.purple>
+          <Badge.pink isLarge data-testid='badge-pink-large'>pink</Badge.pink>
         </div>
       </Wrapper>
 
@@ -705,16 +705,19 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='container' name='Container' props={['small']}>
-        <Container>
-          <Text>Content</Text>
+        <Container data-testid='container'>
+          <Text>Container</Text>
+        </Container>
+        <Container small data-testid='container-small'>
+          <Text>Container Small</Text>
         </Container>
       </Wrapper>
 
       <Wrapper id='heading' name='Heading' props={['h1', 'h2', 'h3']}>
-        <Heading h1>Heading 1</Heading>
-        <Heading h2>Heading 2</Heading>
-        <Heading h3>Heading 3</Heading>
-        <Heading>Heading 4 (default)</Heading>
+        <Heading h1 data-testid='heading-h1'>Heading 1</Heading>
+        <Heading h2 data-testid='heading-h2'>Heading 2</Heading>
+        <Heading h3 data-testid='heading-h3'>Heading 3</Heading>
+        <Heading data-testid='heading-h4'>Heading 4 (default)</Heading>
       </Wrapper>
 
       <Wrapper id='input' name='Input' props={['type', 'name', 'placeholder', 'value', 'onChange']}>
