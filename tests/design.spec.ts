@@ -259,7 +259,7 @@ test.describe('Testing Design Page', () => {
     await expect(checkbox).toBeVisible();
     await expect(checkbox).not.toBeChecked();
     await expect(checkbox).toHaveClass(
-      /h-4 w-4 cursor-pointer rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 text-emerald-600/
+      /h-4 w-4 rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer/
     );
     await expect(checkboxLabel).toContainText('Checkbox');
   });
@@ -269,7 +269,7 @@ test.describe('Testing Design Page', () => {
     await expect(checkbox).toBeVisible();
     await expect(checkbox).toBeChecked();
     await expect(checkbox).toHaveClass(
-      /h-4 w-4 cursor-pointer rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 text-emerald-600/
+      /h-4 w-4 rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer/
     );
     await expect(checkboxLabel).toContainText('Checkbox Checked');
   });
@@ -278,8 +278,10 @@ test.describe('Testing Design Page', () => {
     const checkboxLabel = page.locator('label').filter({ hasText: /^Checkbox Disabled$/ });
     await expect(checkbox).toBeVisible();
     await expect(checkbox).not.toBeChecked();
+    await expect(checkbox).toBeDisabled();
+    await expect(checkbox).toHaveAttribute('disabled', '');
     await expect(checkbox).toHaveClass(
-      /h-4 w-4 cursor-not-allowed rounded border-neutral-300 text-emerald-600 dark:border-neutral-700/
+      /h-4 w-4 rounded border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700/
     );
     await expect(checkboxLabel).toContainText('Checkbox Disabled');
   });
@@ -288,9 +290,57 @@ test.describe('Testing Design Page', () => {
     const checkboxLabel = page.locator('label').filter({ hasText: /^Checkbox Checked Disabled$/ });
     await expect(checkbox).toBeVisible();
     await expect(checkbox).toBeChecked();
+    await expect(checkbox).toBeDisabled();
+    await expect(checkbox).toHaveAttribute('disabled', '');
     await expect(checkbox).toHaveClass(
-      /h-4 w-4 cursor-not-allowed rounded border-neutral-300 text-emerald-600 dark:border-neutral-700/
+      /h-4 w-4 rounded border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700/
     );
     await expect(checkboxLabel).toContainText('Checkbox Checked Disabled');
+  });
+
+  // Radio ----------------------------------------------------
+  test('renders a Radio component', async ({ page }) => {
+    const radio = page.getByTestId('radio');
+    const radioLabel = page.locator('label').filter({ hasText: /^Blue$/ });
+    await expect(radio).toBeVisible();
+    await expect(radio).not.toBeChecked();
+    await expect(radio).toHaveClass(
+      /h-4 w-4 border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer/
+    );
+    await expect(radioLabel).toContainText('Blue');
+  });
+  test('renders a Radio Checked component', async ({ page }) => {
+    const radio = page.getByTestId('radio-checked');
+    const radioLabel = page.locator('label').filter({ hasText: /^Red$/ });
+    await expect(radio).toBeVisible();
+    await expect(radio).toBeChecked();
+    await expect(radio).toHaveClass(
+      /h-4 w-4 border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer/
+    );
+    await expect(radioLabel).toContainText('Red');
+  });
+  test('renders a Radio Disabled component', async ({ page }) => {
+    const radio = page.getByTestId('radio-disabled');
+    const radioLabel = page.locator('label').filter({ hasText: /^Radio Disabled$/ });
+    await expect(radio).toBeVisible();
+    await expect(radio).not.toBeChecked();
+    await expect(radio).toBeDisabled();
+    await expect(radio).toHaveAttribute('disabled', '');
+    await expect(radio).toHaveClass(
+      /h-4 w-4 border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700/
+    );
+    await expect(radioLabel).toContainText('Radio Disabled');
+  });
+  test('renders a Radio Checked Disabled component', async ({ page }) => {
+    const radio = page.getByTestId('radio-checked-disabled');
+    const radioLabel = page.locator('label').filter({ hasText: /^Radio Checked Disabled$/ });
+    await expect(radio).toBeVisible();
+    await expect(radio).toBeChecked();
+    await expect(radio).toBeDisabled();
+    await expect(radio).toHaveAttribute('disabled', '');
+    await expect(radio).toHaveClass(
+      /h-4 w-4 border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700/
+    );
+    await expect(radioLabel).toContainText('Radio Checked Disabled');
   });
 });
