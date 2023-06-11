@@ -11,7 +11,7 @@ type Props = {
 
 export default function Checkbox({ label, name, value, onChange, defaultChecked, ...props }: Props) {
   return (
-    <div className='mb-3 flex items-center'>
+    <div className='group mb-3 flex items-center'>
       <input
         {...props}
         id={name}
@@ -21,12 +21,12 @@ export default function Checkbox({ label, name, value, onChange, defaultChecked,
         defaultChecked={defaultChecked}
         type='checkbox'
         className={clsx(
-          'h-4 w-4 cursor-pointer rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500',
+          'h-4 w-4 rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer',
           'text-emerald-600 dark:bg-neutral-900 dark:text-emerald-600 dark:checked:bg-emerald-600',
           'dark:border-neutral-700 dark:ring-offset-neutral-900 dark:focus:ring-emerald-600'
         )}
       />
-      <label htmlFor={name} className='ml-2 text-sm text-neutral-800 dark:text-neutral-300'>
+      <label htmlFor={name} className='ml-2 text-sm text-neutral-800 group-hover:cursor-pointer dark:text-neutral-300'>
         {label}
       </label>
     </div>
@@ -42,7 +42,7 @@ type DisabledProps = {
 
 Checkbox.disabled = ({ label, name, defaultChecked, ...props }: DisabledProps) => {
   return (
-    <div className='mb-3 flex items-center'>
+    <div className='group mb-3 flex items-center'>
       <input
         {...props}
         disabled
@@ -52,10 +52,13 @@ Checkbox.disabled = ({ label, name, defaultChecked, ...props }: DisabledProps) =
         type='checkbox'
         className={clsx(
           defaultChecked ? 'dark:bg-emerald-600' : 'dark:bg-transparent',
-          'h-4 w-4 cursor-not-allowed rounded border-neutral-300 text-emerald-600 dark:border-neutral-700'
+          'h-4 w-4 rounded border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700'
         )}
       />
-      <label htmlFor={name} className='ml-2 text-sm text-neutral-800 dark:text-neutral-300'>
+      <label
+        htmlFor={name}
+        className='ml-2 text-sm text-neutral-800 group-hover:cursor-not-allowed dark:text-neutral-300'
+      >
         {label}
       </label>
     </div>
