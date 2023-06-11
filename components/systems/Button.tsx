@@ -19,6 +19,7 @@ export default function Button({ className, type, value, onClick, disabled, chil
       {...props}
       type={type}
       onClick={onClick}
+      disabled={disabled}
       value={value}
       className={clsx(
         className,
@@ -79,6 +80,7 @@ Button.success = ({ className, type, value, onClick, disabled, children, ...prop
       {...props}
       type={type}
       onClick={onClick}
+      disabled={disabled}
       value={value}
       className={clsx(
         className,
@@ -98,6 +100,7 @@ Button.danger = ({ className, type, value, onClick, disabled, children, ...props
       {...props}
       type={type}
       onClick={onClick}
+      disabled={disabled}
       value={value}
       className={clsx(
         className,
