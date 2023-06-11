@@ -251,4 +251,46 @@ test.describe('Testing Design Page', () => {
     );
     await expect(badge).toHaveText('pink');
   });
+
+  // Checkbox ----------------------------------------------------
+  test('renders a Checkbox component', async ({ page }) => {
+    const checkbox = page.getByTestId('checkbox');
+    const checkboxLabel = page.locator('label').filter({ hasText: /^Checkbox$/ });
+    await expect(checkbox).toBeVisible();
+    await expect(checkbox).not.toBeChecked();
+    await expect(checkbox).toHaveClass(
+      /h-4 w-4 cursor-pointer rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 text-emerald-600/
+    );
+    await expect(checkboxLabel).toContainText('Checkbox');
+  });
+  test('renders a Checkbox Checked component', async ({ page }) => {
+    const checkbox = page.getByTestId('checkbox-checked');
+    const checkboxLabel = page.locator('label').filter({ hasText: /^Checkbox Checked$/ });
+    await expect(checkbox).toBeVisible();
+    await expect(checkbox).toBeChecked();
+    await expect(checkbox).toHaveClass(
+      /h-4 w-4 cursor-pointer rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 text-emerald-600/
+    );
+    await expect(checkboxLabel).toContainText('Checkbox Checked');
+  });
+  test('renders a Checkbox Disabled component', async ({ page }) => {
+    const checkbox = page.getByTestId('checkbox-disabled');
+    const checkboxLabel = page.locator('label').filter({ hasText: /^Checkbox Disabled$/ });
+    await expect(checkbox).toBeVisible();
+    await expect(checkbox).not.toBeChecked();
+    await expect(checkbox).toHaveClass(
+      /h-4 w-4 cursor-not-allowed rounded border-neutral-300 text-emerald-600 dark:border-neutral-700/
+    );
+    await expect(checkboxLabel).toContainText('Checkbox Disabled');
+  });
+  test('renders a Checkbox Checked Disabled component', async ({ page }) => {
+    const checkbox = page.getByTestId('checkbox-checked-disabled');
+    const checkboxLabel = page.locator('label').filter({ hasText: /^Checkbox Checked Disabled$/ });
+    await expect(checkbox).toBeVisible();
+    await expect(checkbox).toBeChecked();
+    await expect(checkbox).toHaveClass(
+      /h-4 w-4 cursor-not-allowed rounded border-neutral-300 text-emerald-600 dark:border-neutral-700/
+    );
+    await expect(checkboxLabel).toContainText('Checkbox Checked Disabled');
+  });
 });
