@@ -871,10 +871,15 @@ export default function Example() {
         noClassName
         noChildren
       >
-        <Radio name='radio' label='Blue' />
-        <Radio name='radio' label='Red' />
-        <Radio.disabled name='radios' label='Disabled Radio' />
-        <Radio.disabled name='radios' label='Disabled Checked Radio' defaultChecked />
+        <Radio name='radio' id='radio-blue' label='Blue' data-testid='radio' />
+        <Radio name='radio' id='radio-red' label='Red' defaultChecked data-testid='radio-checked' />
+        <Radio.disabled name='radios' label='Radio Disabled' data-testid='radio-disabled' />
+        <Radio.disabled
+          name='radios'
+          label='Radio Checked Disabled'
+          defaultChecked
+          data-testid='radio-checked-disabled'
+        />
       </Wrapper>
 
       <Wrapper id='shimer' name='Shimer' noChildren noProps>
