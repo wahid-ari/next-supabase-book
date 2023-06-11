@@ -52,5 +52,31 @@ test.describe('Testing Design Page', () => {
     await expect(button).toHaveClass(/cursor-not-allowed/);
     await expect(button).toBeDisabled();
     await expect(button).toHaveText('Disabled');
+    await expect(button).toHaveAttribute('disabled', '');
+  });
+
+  // LINK BUTTON ----------------------------------------------------
+  test('renders a Link Button component', async ({ page }) => {
+    const linkbutton = page.getByTestId('link-button');
+    await expect(linkbutton).toBeVisible();
+    await expect(linkbutton).toHaveClass(/text-sm rounded bg-emerald-600 px-3 py-1.5 font-medium/);
+    await expect(linkbutton).toHaveText('Link Button');
+    await expect(linkbutton).toHaveAttribute('href', '/design#linkbutton');
+  });
+  test('renders a Link Button Secondary component', async ({ page }) => {
+    const linkbutton = page.getByTestId('link-button-secondary');
+    await expect(linkbutton).toBeVisible();
+    await expect(linkbutton).toHaveClass(
+      /text-sm rounded border border-neutral-300 bg-gray-50 px-3 py-1.5 font-medium/
+    );
+    await expect(linkbutton).toHaveText('Link Button Secondary');
+    await expect(linkbutton).toHaveAttribute('href', '/design#linkbutton');
+  });
+  test('renders a Link Button Tertary component', async ({ page }) => {
+    const linkbutton = page.getByTestId('link-button-tertary');
+    await expect(linkbutton).toBeVisible();
+    await expect(linkbutton).toHaveClass(/text-sm rounded px-3 py-1.5 font-medium text-neutral-600/);
+    await expect(linkbutton).toHaveText('Link Button Tertary');
+    await expect(linkbutton).toHaveAttribute('href', '/design#linkbutton');
   });
 });
