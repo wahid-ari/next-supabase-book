@@ -36,3 +36,10 @@ yarn-error.log*
 
 # changelog
 CHANGELOG.md
+
+# playwright
+/playwright-report
+/test-results
+
+# pnpm
+pnpm-lock.yaml
