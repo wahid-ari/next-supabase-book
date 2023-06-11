@@ -644,14 +644,30 @@ export default function Example() {
         <br />
         <br />
         <div className='flex flex-wrap items-center gap-y-2'>
-          <Badge isLarge data-testid='badge-large'>badge</Badge>
-          <Badge.dark isLarge data-testid='badge-dark-large'>dark</Badge.dark>
-          <Badge.red isLarge data-testid='badge-red-large'>red</Badge.red>
-          <Badge.green isLarge data-testid='badge-green-large'>green</Badge.green>
-          <Badge.yellow isLarge data-testid='badge-yellow-large'>yellow</Badge.yellow>
-          <Badge.indigo isLarge data-testid='badge-indigo-large'>indigo</Badge.indigo>
-          <Badge.purple isLarge data-testid='badge-purple-large'>purple</Badge.purple>
-          <Badge.pink isLarge data-testid='badge-pink-large'>pink</Badge.pink>
+          <Badge isLarge data-testid='badge-large'>
+            badge
+          </Badge>
+          <Badge.dark isLarge data-testid='badge-dark-large'>
+            dark
+          </Badge.dark>
+          <Badge.red isLarge data-testid='badge-red-large'>
+            red
+          </Badge.red>
+          <Badge.green isLarge data-testid='badge-green-large'>
+            green
+          </Badge.green>
+          <Badge.yellow isLarge data-testid='badge-yellow-large'>
+            yellow
+          </Badge.yellow>
+          <Badge.indigo isLarge data-testid='badge-indigo-large'>
+            indigo
+          </Badge.indigo>
+          <Badge.purple isLarge data-testid='badge-purple-large'>
+            purple
+          </Badge.purple>
+          <Badge.pink isLarge data-testid='badge-pink-large'>
+            pink
+          </Badge.pink>
         </div>
       </Wrapper>
 
@@ -699,9 +715,15 @@ export default function Example() {
         noClassName
         noChildren
       >
-        <Checkbox name='checkbox 1' label='Checkbox' />
-        <Checkbox.disabled name='Disabled Checkbox' />
-        <Checkbox.disabled name='Disabled Checked Checkbox' defaultChecked />
+        <Checkbox name='checkbox-default' label='Checkbox' data-testid='checkbox' />
+        <Checkbox name='checkbox-checked' label='Checkbox Checked' data-testid='checkbox-checked' defaultChecked />
+        <Checkbox.disabled name='checkbox-disabled' label='Checkbox Disabled' data-testid='checkbox-disabled' />
+        <Checkbox.disabled
+          name='checkbox-checked-disabled'
+          label='Checkbox Checked Disabled'
+          data-testid='checkbox-checked-disabled'
+          defaultChecked
+        />
       </Wrapper>
 
       <Wrapper id='container' name='Container' props={['small']}>
@@ -714,9 +736,15 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='heading' name='Heading' props={['h1', 'h2', 'h3']}>
-        <Heading h1 data-testid='heading-h1'>Heading 1</Heading>
-        <Heading h2 data-testid='heading-h2'>Heading 2</Heading>
-        <Heading h3 data-testid='heading-h3'>Heading 3</Heading>
+        <Heading h1 data-testid='heading-h1'>
+          Heading 1
+        </Heading>
+        <Heading h2 data-testid='heading-h2'>
+          Heading 2
+        </Heading>
+        <Heading h3 data-testid='heading-h3'>
+          Heading 3
+        </Heading>
         <Heading data-testid='heading-h4'>Heading 4 (default)</Heading>
       </Wrapper>
 
