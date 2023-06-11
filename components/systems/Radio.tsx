@@ -2,38 +2,33 @@ import { CheckIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 
 type Props = {
+  id?: string;
   label?: string;
   name: string;
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  checked?: boolean;
+  defaultChecked?: boolean;
   [props: string]: any;
 };
 
-export default function Radio({ label, name, value, onChange, checked, ...props }: Props) {
+export default function Radio({ id, label, name, value, onChange, defaultChecked, ...props }: Props) {
   return (
-    <div className='mb-3 text-sm'>
-      <label className='group relative cursor-pointer select-none pb-0.5 pl-6 text-gray-800 dark:text-neutral-300'>
+    <div className='group mb-3 flex items-center'>
+      <input
+        {...props}
+        id={id}
+        type='radio'
+        value={value}
+        name={name}
+        defaultChecked={defaultChecked}
+        className={clsx(
+          'h-4 w-4 border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer',
+          'text-emerald-600 dark:bg-neutral-900 dark:text-emerald-600 dark:checked:bg-emerald-600',
+          'dark:border-neutral-700 dark:ring-offset-neutral-900 dark:focus:ring-emerald-600'
+        )}
+      />
+      <label htmlFor={id} className='ml-2 text-sm text-neutral-800 group-hover:cursor-pointer dark:text-neutral-300'>
         {label}
-        <input
-          {...props}
-          name={name}
-          value={value}
-          onChange={onChange}
-          checked={checked}
-          type='radio'
-          className='peer absolute h-0 w-0 cursor-pointer opacity-0'
-        />
-        <span
-          className={clsx(
-            'absolute -top-0.5 left-0 mt-0.5 h-4 w-4 rounded-full transition-all',
-            'border border-neutral-300 peer-checked:border-emerald-800 dark:border-neutral-800 dark:peer-checked:border-emerald-500',
-            'group-hover:border-emerald-800 group-hover:peer-checked:border-neutral-300',
-            'dark:group-hover:border-emerald-500 dark:group-hover:peer-checked:border-neutral-800',
-            'peer-checked:bg-emerald-800 dark:peer-checked:bg-emerald-500'
-          )}
-        />
-        <CheckIcon className='absolute left-[0.05rem] top-[0.05rem] mt-[0.05rem] hidden h-3.5 w-3.5 text-white peer-checked:block' />
       </label>
     </div>
   );
@@ -42,31 +37,30 @@ export default function Radio({ label, name, value, onChange, checked, ...props 
 type DisabledProps = {
   label?: string;
   name: string;
-  checked?: boolean;
+  defaultChecked?: boolean;
   [props: string]: any;
 };
 
-Radio.disabled = ({ label, name, checked, ...props }: DisabledProps) => {
+Radio.disabled = ({ label, name, defaultChecked, ...props }: DisabledProps) => {
   return (
-    <div className='mb-3 cursor-not-allowed text-sm'>
-      <label className='pointer-events-none relative select-none pb-0.5 pl-6 text-gray-800 dark:text-neutral-300'>
+    <div className='group mb-3 flex items-center'>
+      <input
+        {...props}
+        disabled
+        id={name}
+        name={name}
+        defaultChecked={defaultChecked}
+        type='radio'
+        className={clsx(
+          defaultChecked ? 'dark:bg-emerald-600' : 'dark:bg-transparent',
+          'h-4 w-4 border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700'
+        )}
+      />
+      <label
+        htmlFor={name}
+        className='ml-2 text-sm text-neutral-800 group-hover:cursor-not-allowed dark:text-neutral-300'
+      >
         {label}
-        <input
-          {...props}
-          name={name}
-          checked={checked}
-          disabled
-          type='radio'
-          className='peer absolute h-0 w-0 opacity-0'
-        />
-        <span
-          className={clsx(
-            'absolute -top-0.5 left-0 mt-0.5 h-4 w-4 rounded-full transition-all',
-            'border border-neutral-300 dark:border-neutral-800',
-            'peer-checked:border-emerald-800 peer-checked:bg-emerald-800 dark:peer-checked:border-emerald-500 dark:peer-checked:bg-emerald-500'
-          )}
-        />
-        <CheckIcon className='absolute left-[0.05rem] top-[0.05rem] mt-[0.05rem] hidden h-3.5 w-3.5 text-white peer-checked:block' />
       </label>
     </div>
   );
