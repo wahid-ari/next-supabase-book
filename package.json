@@ -11,7 +11,12 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier -w .",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "test": "npx playwright test",
+    "test-ui": "npx playwright test --ui",
+    "test-report": "npx playwright show-report",
+    "test-trace": "npx playwright show-trace trace.zip",
+    "test-generator": "npx playwright codegen http://localhost:3000"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",
@@ -44,6 +49,7 @@
     "zustand": "^4.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.35.0",
     "@tailwindcss/forms": "^0.5.2",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
