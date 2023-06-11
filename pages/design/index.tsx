@@ -662,14 +662,17 @@ export default function Example() {
         props={['type', 'value', 'disabled', 'onClick']}
       >
         <div className='flex flex-wrap items-center gap-2'>
-          <Button>Primary</Button>
-          <Button.success>Success</Button.success>
-          <Button.danger className='flex items-center gap-2'>
+          <Button data-testid='button-primary'>Primary</Button>
+          <Button.success data-testid='button-success'>Success</Button.success>
+          <Button.danger data-testid='button-danger' className='flex items-center gap-2'>
             <ArrowSmRightIcon className='h-4 w-4' />
             Danger
           </Button.danger>
-          <Button.secondary>Secondary</Button.secondary>
-          <Button.tertary>Tertary</Button.tertary>
+          <Button.secondary data-testid='button-secondary'>Secondary</Button.secondary>
+          <Button.tertary data-testid='button-tertary'>Tertary</Button.tertary>
+          <Button data-testid='button-disabled' disabled>
+            Disabled
+          </Button>
         </div>
       </Wrapper>
 
