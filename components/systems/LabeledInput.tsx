@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 
 type Props = {
-  id?: string;
   wrapperClassName?: string;
   className?: string;
   label?: string;
@@ -14,7 +13,6 @@ type Props = {
 };
 
 export default function LabeledInput({
-  id,
   wrapperClassName,
   className,
   label,
@@ -32,7 +30,6 @@ export default function LabeledInput({
       </label>
       <input
         {...props}
-        id={id}
         type={type}
         name={name}
         placeholder={placeholder}
