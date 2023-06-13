@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
+import clsx from 'clsx';
 
 type Props = {
   label?: string;
-  id?: string;
   name: string;
   className?: string;
   defaultValue?: any;
@@ -11,7 +11,7 @@ type Props = {
   [props: string]: any;
 };
 
-export default function Select({ label, id, name, className, defaultValue, onChange, children, ...props }: Props) {
+export default function Select({ label, name, className, defaultValue, onChange, children, ...props }: Props) {
   return (
     <div className=''>
       {label && (
@@ -21,17 +21,16 @@ export default function Select({ label, id, name, className, defaultValue, onCha
       )}
       <select
         {...props}
-        id={id}
+        id={name}
         name={name}
         defaultValue={defaultValue}
         onChange={onChange}
-        className={`
-          ${className ? className + ' ' : ''}
-          mt-2 block w-full cursor-pointer rounded-md border border-gray-300 bg-white px-3 py-[0.3rem]
-          text-sm font-medium outline-none  
-          transition-all focus:border-emerald-500 focus:outline-none 
-          focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white
-        `}
+        className={clsx(
+          className,
+          'mt-2 block w-full cursor-pointer rounded-md border border-gray-300 bg-white px-3 py-[0.3rem]',
+          'text-sm font-medium outline-none transition-all focus:border-emerald-500 focus:outline-none',
+          'focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+        )}
       >
         {children}
       </select>
