@@ -798,7 +798,6 @@ export default function Example() {
         id='inputdebounce'
         name='InputDebounce'
         props={[
-          'id',
           'label',
           'type',
           'name',
@@ -825,28 +824,30 @@ export default function Example() {
       <Wrapper
         id='textarea'
         name='TextArea'
-        props={['label', 'className', 'id', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
+        props={['label', 'className', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
         noChildren
       >
-        <TextArea label='TextArea' name='textarea' placeholder='text area' />
+        <TextArea label='TextArea' name='textarea' placeholder='text area' data-testid='textarea' />
       </Wrapper>
 
       <Wrapper
         id='textareadisabled'
         name='TextArea.disabled'
-        props={['label', 'className', 'id', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
+        props={['label', 'className', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
         noChildren
       >
-        <TextArea.disabled label='TextArea' name='textarea' placeholder='text area' />
+        <TextArea.disabled label='TextArea' name='textarea' placeholder='text area' data-testid='textarea-disabled' />
       </Wrapper>
 
-      <Wrapper
-        id='fileinput'
-        name='FileInput'
-        props={['id', 'className', 'label', 'name', 'value', 'onChange']}
-        noChildren
-      >
-        <FileInput label='File' name='File' value={file ? file.name : ''} onChange={handleFileChange} accept='.pdf' />
+      <Wrapper id='fileinput' name='FileInput' props={['className', 'label', 'name', 'value', 'onChange']} noChildren>
+        <FileInput
+          data-testid='fileinput'
+          label='File'
+          name='File'
+          value={file ? file.name : ''}
+          onChange={handleFileChange}
+          accept='.pdf'
+        />
       </Wrapper>
 
       <Wrapper id='select' name='Select' props={['label', 'id', 'name', 'value', 'onChange']}>
@@ -856,6 +857,7 @@ export default function Example() {
           name='color'
           value={selectedColor ? selectedColor : 'Choose Color'}
           onChange={handleSelectColor}
+          data-testid='select'
         >
           <Select.option value='red'>Red</Select.option>
           <Select.option value='blue'>Blue</Select.option>
@@ -864,8 +866,15 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='selectnativeoption' name='Select.option' props={['value']} noClassName>
-        <Select.option value='red'>Red</Select.option>
-        <Select.option value='blue'>Blue</Select.option>
+        <Select.option value='red' data-testid='selectoption-red'>
+          Red
+        </Select.option>
+        <Select.option value='blue' data-testid='selectoption-blue'>
+          Blue
+        </Select.option>
+        <Select.option value='green' data-testid='selectoption-green'>
+          Green
+        </Select.option>
       </Wrapper>
 
       <Wrapper id='progress' name='Progress' variant={['percentage']} props={['percent']} noChildren noProps>
