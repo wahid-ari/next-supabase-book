@@ -3,7 +3,6 @@ import clsx from 'clsx';
 type Props = {
   label?: string;
   className?: string;
-  id?: string;
   name: string;
   placeholder?: string;
   value?: string;
@@ -12,17 +11,7 @@ type Props = {
   [props: string]: any;
 };
 
-export default function TextArea({
-  label,
-  className,
-  id,
-  name,
-  placeholder,
-  value,
-  onChange,
-  height,
-  ...props
-}: Props) {
+export default function TextArea({ label, className, name, placeholder, value, onChange, height, ...props }: Props) {
   return (
     <div className='mb-4'>
       {label && (
@@ -32,7 +21,7 @@ export default function TextArea({
       )}
       <textarea
         {...props}
-        id={id}
+        id={name}
         name={name}
         rows={height}
         placeholder={placeholder}
@@ -48,7 +37,7 @@ export default function TextArea({
   );
 }
 
-TextArea.disabled = ({ label, className, id, name, placeholder, value, onChange, height, ...props }: Props) => {
+TextArea.disabled = ({ label, className, name, placeholder, value, onChange, height, ...props }: Props) => {
   return (
     <div className='mb-4'>
       {label && (
@@ -58,7 +47,7 @@ TextArea.disabled = ({ label, className, id, name, placeholder, value, onChange,
       )}
       <textarea
         {...props}
-        id={id}
+        id={name}
         name={name}
         rows={height}
         placeholder={placeholder}
