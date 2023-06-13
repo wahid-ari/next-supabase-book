@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import Button from './Button';
 
 type Props = {
-  id?: string;
   className?: string;
   label: string;
   name: string;
@@ -13,7 +12,7 @@ type Props = {
   [props: string]: any;
 };
 
-export default function FileInput({ id, className, label, name, value, onChange, ...props }: Props) {
+export default function FileInput({ className, label, name, value, onChange, ...props }: Props) {
   // const ref = useRef<HTMLInputElement>(null);
   const ref = useRef(null);
 
@@ -38,7 +37,7 @@ export default function FileInput({ id, className, label, name, value, onChange,
       <input
         ref={ref}
         {...props}
-        id={id}
+        id={name}
         type='file'
         name={name}
         value=''
