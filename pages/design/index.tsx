@@ -373,7 +373,7 @@ export default function Example() {
 
       <Wrapper
         id='dialog'
-        name='Dialog'
+        name='Dialog (Radix)'
         noClassName
         noProps
         props={['open', 'setOpen', 'title', 'children', 'isDanger', 'onClose', 'onConfirm', 'showIcon']}
@@ -411,7 +411,7 @@ export default function Example() {
 
       <Wrapper
         id='modal'
-        name='Modal'
+        name='Modal (HeadlessUI)'
         noClassName
         noProps
         props={['open', 'title', 'children', 'isDanger', 'onClose', 'onConfirm', 'showIcon']}
@@ -749,24 +749,35 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='input' name='Input' props={['type', 'name', 'placeholder', 'value', 'onChange']}>
-        <Input name='input' placeholder='Input default' />
+        <Input name='input' placeholder='Input default' data-testid='input' />
       </Wrapper>
 
       <Wrapper id='inputdisabled' name='Input.disabled' props={['type', 'name', 'placeholder', 'defaultValue']}>
-        <Input.disabled name='input' placeholder='Input default' defaultValue='Has a value' />
+        <Input.disabled
+          name='input'
+          placeholder='Input default'
+          defaultValue='Has a value'
+          data-testid='input-disabled'
+        />
       </Wrapper>
 
       <Wrapper id='label' name='Label'>
-        <Label>Ut deserunt do est irure.</Label>
+        <Label data-testid='label'>Label</Label>
       </Wrapper>
 
       <Wrapper
         id='labeledinput'
         name='LabeledInput'
-        props={['id', 'label', 'name', 'type', 'placeholder', 'value', 'onChange']}
+        props={['label', 'name', 'type', 'placeholder', 'value', 'onChange']}
       >
-        <LabeledInput label='Email' name='email' placeholder='Email' type='text' />
-        <LabeledInput label='Password' name='password' placeholder='Your Password' type='password' />
+        <LabeledInput label='Email' name='email' placeholder='Email' type='text' data-testid='labeledinput' />
+        <LabeledInput
+          label='Password'
+          name='password'
+          placeholder='Your Password'
+          type='password'
+          data-testid='labeledinput-password'
+        />
       </Wrapper>
 
       <Wrapper
@@ -779,6 +790,7 @@ export default function Example() {
           name='confirmation'
           placeholder='confirmation'
           type='password'
+          data-testid='labeledinput-disabled'
         />
       </Wrapper>
 
@@ -805,8 +817,9 @@ export default function Example() {
           placeholder='Input Debounce'
           value={inputDebounceValue}
           onChange={(value) => setInputDebounceValue(value)}
+          data-testid='inputdebounce'
         />
-        <Text>{inputDebounceValue}</Text>
+        <Text data-testid='inputdebounce-text'>{inputDebounceValue}</Text>
       </Wrapper>
 
       <Wrapper
