@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 type Props = {
-  id?: string;
   name?: string;
   label?: string;
   placeholder?: string;
@@ -16,7 +15,6 @@ type Props = {
 };
 
 export default function InputDebounce({
-  id,
   name,
   label,
   placeholder,
@@ -48,7 +46,7 @@ export default function InputDebounce({
       </label>
       <input
         {...props}
-        id={id}
+        id={name}
         type={type}
         name={name}
         placeholder={placeholder}
