@@ -408,4 +408,26 @@ test.describe('Testing Design Page', () => {
     const text = page.getByTestId('inputdebounce-text');
     await expect(text).toHaveText('inputdebounce');
   });
+
+  // TextArea ----------------------------------------------------
+  test('renders a TextArea component', async ({ page }) => {
+    const textarea = page.getByTestId('textarea');
+    await expect(textarea).toBeVisible();
+    await expect(textarea).toBeEnabled();
+    await expect(textarea).toBeEditable();
+    await expect(textarea).toHaveValue('');
+    await expect(textarea).toHaveClass(
+      'mt-2 w-full rounded-md bg-white p-3 text-sm outline-none transition-all dark:bg-neutral-900 dark:text-white min-h-[80px] border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700'
+    );
+  });
+  test('renders a TextArea Disabled component', async ({ page }) => {
+    const textarea = page.getByTestId('textarea-disabled');
+    await expect(textarea).toBeVisible();
+    await expect(textarea).not.toBeEnabled();
+    await expect(textarea).not.toBeEditable();
+    await expect(textarea).toHaveValue('');
+    await expect(textarea).toHaveClass(
+      'mt-2 w-full cursor-not-allowed rounded-md p-3 text-sm text-neutral-500 min-h-[80px] border border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800'
+    );
+  });
 });
