@@ -2,6 +2,7 @@ import { useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/solid';
+import clsx from 'clsx';
 
 type Props = {
   title?: string;
@@ -29,7 +30,13 @@ export default function NavAccordion({ title, routeName, icon, children }: Props
       <Disclosure defaultOpen={isOpen}>
         {({ open }) => (
           <>
-            <Disclosure.Button className='mb-1 flex w-full items-center justify-start gap-2 rounded py-2 pl-3 text-gray-700 outline-none transition-all hover:text-emerald-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500 dark:text-neutral-300 dark:hover:text-emerald-500'>
+            <Disclosure.Button
+              className={clsx(
+                'mb-1 flex w-full items-center justify-start gap-2 rounded py-2 pl-3 text-gray-700 outline-none transition-all', 
+                'hover:text-emerald-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500', 
+                'dark:text-neutral-300 dark:hover:text-emerald-500'
+              )}
+            >
               <div className='flex-grow text-left text-sm'>
                 <div className='flex items-center gap-2'>
                   {icon}

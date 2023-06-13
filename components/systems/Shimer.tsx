@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useTheme } from 'next-themes';
+import clsx from 'clsx';
 
 export default function Shimer({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
@@ -16,8 +17,8 @@ export default function Shimer({ className }: { className?: string }) {
   }
 
   return theme == 'dark' ? (
-    <Skeleton className={`${className ? className + ' ' : ''}h-10 mb-2`} baseColor='#262626' highlightColor='#404040' />
+    <Skeleton className={clsx(className, 'mb-2 h-10')} baseColor='#262626' highlightColor='#404040' />
   ) : (
-    <Skeleton className={`${className ? className + ' ' : ''}h-10 mb-2`} />
+    <Skeleton className={clsx(className, 'mb-2 h-10')} />
   );
 }

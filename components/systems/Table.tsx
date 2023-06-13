@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { clsx } from 'clsx';
 import Button from './Button';
 
 type Props = {
@@ -29,9 +30,9 @@ export default function Table({
 }: Props) {
   return (
     <div
-      className={`${
-        className ? className + ' ' : ''
-      }w-full rounded border shadow-sm dark:border-neutral-800 lg:max-w-[calc(100vw_-_17rem)]`}
+      className={clsx('w-full rounded border shadow-sm dark:border-neutral-800 lg:max-w-[calc(100vw_-_17rem)]',
+        className
+      )}
     >
       <div className='w-full overflow-auto scrollbar scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800 lg:max-w-[calc(100vw_-_17rem)]'>
         <table className='w-full table-auto whitespace-nowrap text-neutral-700 dark:text-neutral-400'>
@@ -104,9 +105,10 @@ Table.tr = ({ className, children, ...props }: TrProps) => {
   return (
     <tr
       {...props}
-      className={`${
-        className ? className + ' ' : ''
-      }text-sm border-b bg-white text-neutral-600 hover:bg-gray-50 dark:border-neutral-800 dark:bg-transparent dark:text-neutral-200`}
+      className={clsx(
+        'border-b bg-white text-sm text-neutral-600 hover:bg-gray-50 dark:border-neutral-800 dark:bg-transparent dark:text-neutral-200',
+        className
+      )}
     >
       {children}
     </tr>
@@ -122,7 +124,7 @@ type TdProps = {
 
 Table.td = ({ className, shrink, children, ...props }: TdProps) => {
   return (
-    <td {...props} className={`${className ? className + ' ' : ''}p-4 ${shrink ? 'w-1' : ''}`}>
+    <td {...props} className={clsx('p-4', className, shrink && 'w-1')}>
       {children}
     </td>
   );

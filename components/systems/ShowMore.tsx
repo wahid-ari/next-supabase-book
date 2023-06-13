@@ -13,13 +13,14 @@ export default function ShowMore({ className, children, count = 200 }: Props) {
   const text = showMore ? children : children?.slice(0, count) + '...';
 
   return (
-    <div className={`${className ? className + ' ' : ''} relative`}>
+    <div className={clsx(className, 'relative')}>
       <p>{text}</p>
       <div className='relative py-3'>
         <div
-          className={`absolute bottom-3 z-0 h-8 w-full bg-gradient-to-b from-white/70 to-white dark:from-neutral-900/70 dark:to-neutral-900 ${
+          className={clsx(
+            'absolute bottom-3 z-0 h-8 w-full bg-gradient-to-b from-white/70 to-white dark:from-neutral-900/70 dark:to-neutral-900',
             showMore && 'hidden'
-          }`}
+          )}
         />
         <div className='relative z-[1] border-b border-neutral-200 dark:border-neutral-700' />
         <button
@@ -33,9 +34,10 @@ export default function ShowMore({ className, children, count = 200 }: Props) {
         >
           {showMore ? 'Show Less' : 'Show More'}
           <ChevronDownIcon
-            className={`h-4 w-4 text-gray-600 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-200 ${
+            className={clsx(
+              'h-4 w-4 text-gray-600 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-200',
               showMore ? 'rotate-180 transition-all duration-500' : 'rotate-0 transition-all duration-300'
-            }`}
+            )}
           />
         </button>
       </div>

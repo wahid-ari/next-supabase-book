@@ -28,7 +28,7 @@ export default function SearchBox({
     <Combobox value={value} by='id' onChange={onChange}>
       <div className='relative mt-1 pb-1'>
         {label && <Combobox.Label className='text-gray-800 dark:text-neutral-300'>{label}</Combobox.Label>}
-        <div className='relative my-2 w-full cursor-default overflow-hidden rounded-md border border-neutral-300 p-[1px] p-[1px] text-left text-sm dark:border-neutral-600'>
+        <div className='relative my-2 w-full cursor-default overflow-hidden rounded-md border border-neutral-300 p-[1px] text-left text-sm dark:border-neutral-600'>
           <Combobox.Input
             className='w-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm font-medium text-neutral-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500 dark:bg-neutral-900 dark:text-white'
             displayValue={(data: any) => data?.name}

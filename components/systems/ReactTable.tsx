@@ -8,6 +8,7 @@ import {
   ChevronUpIcon,
 } from '@heroicons/react/outline';
 import { useTable, usePagination, useSortBy, useFilters, useGlobalFilter } from 'react-table';
+import clsx from 'clsx';
 
 type Props = {
   columns: any;
@@ -161,9 +162,12 @@ export const ReactTable = forwardRef(
               onClick={() => gotoPage(0)}
               disabled={!canPreviousPage}
               aria-label='First'
-              className={`rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none 
-            focus:ring-1 focus:ring-emerald-500 ${!canPreviousPage && 'cursor-not-allowed'} 
-            ${canPreviousPage && 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'}`}
+              className={clsx(
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                canPreviousPage
+                  ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
+                  : 'cursor-not-allowed'
+              )}
             >
               <ChevronDoubleLeftIcon className='h-5 w-5 text-neutral-600 transition-all hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-white' />
             </button>{' '}
@@ -171,9 +175,12 @@ export const ReactTable = forwardRef(
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
               aria-label='Prev'
-              className={`rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none 
-            focus:ring-1 focus:ring-emerald-500 ${!canPreviousPage && 'cursor-not-allowed'} 
-            ${canPreviousPage && 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'}`}
+              className={clsx(
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                canPreviousPage
+                  ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
+                  : 'cursor-not-allowed'
+              )}
             >
               <ChevronLeftIcon className='h-5 w-5 text-neutral-600 transition-all hover:text-neutral-700 dark:text-neutral-300 dark:hover:text-neutral-100' />
             </button>{' '}
@@ -184,9 +191,12 @@ export const ReactTable = forwardRef(
               onClick={() => nextPage()}
               disabled={!canNextPage}
               aria-label='Next'
-              className={`rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none 
-            focus:ring-1 focus:ring-emerald-500 ${!canNextPage && 'cursor-not-allowed'} 
-            ${canNextPage && 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'}`}
+              className={clsx(
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                canNextPage
+                  ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
+                  : 'cursor-not-allowed'
+              )}
             >
               <ChevronRightIcon className='h-5 w-5 text-neutral-600 transition-all hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-white' />
             </button>{' '}
@@ -194,9 +204,12 @@ export const ReactTable = forwardRef(
               onClick={() => gotoPage(pageCount - 1)}
               disabled={!canNextPage}
               aria-label='Last'
-              className={`rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none 
-            focus:ring-1 focus:ring-emerald-500 ${!canNextPage && 'cursor-not-allowed'} 
-            ${canNextPage && 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'}`}
+              className={clsx(
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                canNextPage
+                  ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
+                  : 'cursor-not-allowed'
+              )}
             >
               <ChevronDoubleRightIcon className='h-5 w-5 text-neutral-600 transition-all hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-white' />
             </button>{' '}
@@ -213,10 +226,11 @@ export const ReactTable = forwardRef(
                 const page = e.target.value ? Number(e.target.value) - 1 : 0;
                 gotoPage(page);
               }}
-              className='w-[72px] rounded-md border border-gray-300 bg-white px-3
-              py-[0.4rem] text-sm outline-none  
-              transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 
-              focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+              className={clsx(
+                'w-[72px] rounded-md border border-gray-300 bg-white px-3 py-[0.4rem] text-sm outline-none',
+                'transition-all focus:border-emerald-500 focus:outline-none focus:ring-2',
+                'focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+              )}
               placeholder='1'
             />
             <select
@@ -224,10 +238,11 @@ export const ReactTable = forwardRef(
               onChange={(e) => {
                 setPageSize(Number(e.target.value));
               }}
-              className='block w-[100px] cursor-pointer rounded-md border border-gray-300 bg-white px-3
-            py-[0.4rem] text-sm outline-none  
-            transition-all focus:border-emerald-500 focus:outline-none 
-            focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+              className={clsx(
+                'block w-[100px] cursor-pointer rounded-md border border-gray-300 bg-white px-3',
+                'py-[0.4rem] text-sm outline-none transition-all focus:border-emerald-500 focus:outline-none',
+                'focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+              )}
             >
               {itemPerPage.map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
