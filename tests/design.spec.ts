@@ -343,4 +343,69 @@ test.describe('Testing Design Page', () => {
     );
     await expect(radioLabel).toContainText('Radio Checked Disabled');
   });
+
+  // Input ----------------------------------------------------
+  test('renders a Input component', async ({ page }) => {
+    const input = page.getByTestId('input');
+    await expect(input).toBeVisible();
+    await expect(input).toBeEnabled();
+    await expect(input).toBeEditable();
+    await expect(input).toHaveValue('');
+    await expect(input).toHaveClass(/mt-2 w-full rounded-md border bg-white px-4/);
+  });
+  test('renders a Input Disabled component', async ({ page }) => {
+    const input = page.getByTestId('input-disabled');
+    await expect(input).toBeVisible();
+    await expect(input).not.toBeEnabled();
+    await expect(input).not.toBeEditable();
+    await expect(input).toHaveValue('Has a value');
+    await expect(input).toHaveClass(/mt-2 w-full cursor-not-allowed rounded-md/);
+  });
+
+  // Label ----------------------------------------------------
+  test('renders a Label component', async ({ page }) => {
+    const label = page.getByTestId('label');
+    await expect(label).toBeVisible();
+    await expect(label).toHaveText('Label');
+    await expect(label).toHaveClass(/block text-gray-800 dark:text-neutral-300/);
+  });
+
+  // LabeledInput ----------------------------------------------------
+  test('renders a LabeledInput component', async ({ page }) => {
+    const input = page.getByTestId('labeledinput');
+    await expect(input).toBeVisible();
+    await expect(input).toBeEnabled();
+    await expect(input).toBeEditable();
+    await expect(input).toHaveValue('');
+    await expect(input).toHaveClass(/mt-2 w-full rounded-md px-4/);
+  });
+  test('renders a LabeledInput type Password component', async ({ page }) => {
+    const input = page.getByTestId('labeledinput-password');
+    await expect(input).toBeVisible();
+    await expect(input).toBeEnabled();
+    await expect(input).toBeEditable();
+    await expect(input).toHaveValue('');
+    await expect(input).toHaveAttribute('type', 'password');
+    await expect(input).toHaveClass(/mt-2 w-full rounded-md px-4/);
+  });
+  test('renders a LabeledInput Disabled component', async ({ page }) => {
+    const input = page.getByTestId('labeledinput-disabled');
+    await expect(input).toBeVisible();
+    await expect(input).not.toBeEnabled();
+    await expect(input).not.toBeEditable();
+    await expect(input).toHaveClass(/mt-2 w-full cursor-not-allowed rounded-md/);
+  });
+
+  // InputDebounce ----------------------------------------------------
+  test('renders a InputDebounce component', async ({ page }) => {
+    const input = page.getByTestId('inputdebounce');
+    await expect(input).toBeVisible();
+    await expect(input).toBeEnabled();
+    await expect(input).toBeEditable();
+    await expect(input).toHaveValue('');
+    await expect(input).toHaveClass(/mt-2 w-full rounded-md border border-gray-300 text-sm/);
+    await page.getByTestId('inputdebounce').fill('inputdebounce');
+    const text = page.getByTestId('inputdebounce-text');
+    await expect(text).toHaveText('inputdebounce');
+  });
 });
