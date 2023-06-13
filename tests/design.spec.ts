@@ -430,4 +430,33 @@ test.describe('Testing Design Page', () => {
       'mt-2 w-full cursor-not-allowed rounded-md p-3 text-sm text-neutral-500 min-h-[80px] border border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800'
     );
   });
+
+  // FileInput ----------------------------------------------------
+  test('renders a FileInput component', async ({ page }) => {
+    const fileinput = page.getByTestId('fileinput');
+    await expect(fileinput).not.toBeVisible();
+    await expect(fileinput).toBeEnabled();
+    await expect(fileinput).toBeEditable();
+    await expect(fileinput).toHaveValue('');
+    await expect(fileinput).toHaveClass(/mt-2 hidden h-12 w-full rounded-md bg-white px-4/);
+  });
+
+  // Select ----------------------------------------------------
+  test('renders a Select component', async ({ page }) => {
+    const select = page.getByTestId('select');
+    await expect(select).toBeVisible();
+    await expect(select).toBeEnabled();
+    await expect(select).toBeEditable();
+    await expect(select).toHaveValue('blue');
+    await expect(select).toHaveClass(/mt-2 block w-full cursor-pointer rounded-md border/);
+    await expect(page.getByTestId('selectoption-red')).toBeVisible();
+    await expect(page.getByTestId('selectoption-red')).toHaveAttribute('value', 'red');
+    await expect(page.getByTestId('selectoption-red')).toHaveText('Red');
+    await expect(page.getByTestId('selectoption-blue')).toBeVisible();
+    await expect(page.getByTestId('selectoption-blue')).toHaveAttribute('value', 'blue');
+    await expect(page.getByTestId('selectoption-blue')).toHaveText('Blue');
+    await expect(page.getByTestId('selectoption-green')).toBeVisible();
+    await expect(page.getByTestId('selectoption-green')).toHaveAttribute('value', 'green');
+    await expect(page.getByTestId('selectoption-green')).toHaveText('Green');
+  });
 });
