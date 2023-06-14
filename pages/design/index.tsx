@@ -259,7 +259,7 @@ export default function Example() {
             <Link href='#reacttable'>ReactTable</Link>
           </span>
           <span className='mb-3 block underline'>
-            <Link href='#usetoast'>useToast (hook)</Link>
+            <Link href='#usetoast'>useToast</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#hover-card'>HoverCard</Link>
@@ -482,7 +482,7 @@ export default function Example() {
           'theme',
         ]}
       >
-        <Label htmlFor='category' className='mb-2'>
+        <Label htmlFor='selectbox' className='mb-2'>
           Category
         </Label>
         <ReactSelect
@@ -497,7 +497,7 @@ export default function Example() {
           // @ts-ignore
           onChange={setReactSelect}
           placeholder='Search or Select'
-          name='category'
+          name='selectbox'
           classNames={{
             option: (option) => (option.isSelected ? '!border-red-600' : '!border-grey-300'),
           }}
