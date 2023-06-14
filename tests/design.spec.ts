@@ -490,3 +490,176 @@ test.describe('Testing Select Component', () => {
     await expect(page.getByTestId('selectoption-green')).toHaveText('Green');
   });
 });
+
+test.describe('Testing Progress Component', () => {
+  // Progress ----------------------------------------------------
+  test('renders a Progress component', async ({ page }) => {
+    const progress = page.getByTestId('progress');
+    await expect(progress).toBeVisible();
+    await expect(progress).toHaveClass(/h-1.5 rounded-full bg-emerald-600/);
+    // await expect(progress).toHaveCSS('width', '45%');
+    await expect(progress).toHaveCSS('width', '423.891px');
+  });
+  test('renders a ProgressPercentage Zero component', async ({ page }) => {
+    const progress = page.getByTestId('progress-zero');
+    await expect(progress).toBeVisible();
+    await expect(progress).toHaveText('0%');
+    await expect(progress).toHaveClass(/rounded-full p-0.5 text-center text-xs font-medium leading-none/);
+    // await expect(progress).toHaveCSS('width', '0%');
+    await expect(progress).toHaveCSS('width', '4px');
+  });
+  test('renders a ProgressPercentage Percent component', async ({ page }) => {
+    const progress = page.getByTestId('progress-percent');
+    await expect(progress).toBeVisible();
+    await expect(progress).toHaveText('75 %');
+    await expect(progress).toHaveClass(/rounded-full p-0.5 text-center text-xs font-medium leading-none/);
+    // await expect(progress).toHaveCSS('width', '75%');
+    await expect(progress).toHaveCSS('width', '706.5px');
+  });
+});
+
+test.describe('Testing Shimer Component', () => {
+  // Shimer ----------------------------------------------------
+  test('renders a Shimer component', async ({ page }) => {
+    const shimerContainer = page.getByTestId('shimer');
+    await expect(shimerContainer).toBeVisible();
+    await expect(shimerContainer).toHaveAttribute('aria-live', 'polite');
+    await expect(shimerContainer).toHaveAttribute('aria-busy', 'true');
+  });
+});
+
+test.describe('Testing Tabs Component', () => {
+  // Tabs ----------------------------------------------------
+  test('renders a Tabs component', async ({ page }) => {
+    const tabs = page.getByTestId('tabs');
+    await expect(tabs).toBeVisible();
+    await expect(tabs).toHaveClass(
+      /flex whitespace-nowrap border-b border-neutral-200 font-medium dark:border-neutral-800/
+    );
+    await expect(tabs).toHaveAttribute('role', 'tablist');
+    await expect(tabs).toContainText('Tab A');
+    await expect(tabs).toContainText('Tab B');
+    await expect(tabs).toContainText('Tab C');
+  });
+  test('renders a Tabs.panel component', async ({ page }) => {
+    const tabs = page.getByTestId('tabs-panel');
+    await expect(tabs).toBeVisible();
+    await expect(tabs).toHaveClass(/rounded-xl py-2 text-neutral-700 dark:text-neutral-200/);
+    await expect(tabs).toHaveAttribute('role', 'tabpanel');
+    await expect(tabs).toContainText('Tabs Panel');
+  });
+});
+
+test.describe('Testing Table Component', () => {
+  // Table ----------------------------------------------------
+  test('renders a Table component', async ({ page }) => {
+    const table = page.getByTestId('table');
+    await expect(table).toBeVisible();
+    await expect(table).toHaveClass(/w-full table-auto whitespace-nowrap text-neutral-700 dark:text-neutral-400/);
+  });
+  test('renders a Table.tr component', async ({ page }) => {
+    const table = page.getByTestId('table-tr');
+    await expect(table).toBeVisible();
+    await expect(table).toHaveClass(
+      /border-b bg-white text-sm text-neutral-600 hover:bg-gray-50 dark:border-neutral-800 dark:bg-transparent dark:text-neutral-200/
+    );
+  });
+  test('renders a Table.td component', async ({ page }) => {
+    const table = page.getByTestId('table-td');
+    await expect(table).toBeVisible();
+    await expect(table).toHaveClass(/p-4/);
+  });
+});
+
+test.describe('Testing Text Component', () => {
+  // Text ----------------------------------------------------
+  test('renders a Text component', async ({ page }) => {
+    const text = page.getByTestId('text');
+    await expect(text).toBeVisible();
+    await expect(text).toHaveClass(/text-sm text-neutral-700 dark:text-neutral-200/);
+    await expect(text).toHaveText('Default');
+  });
+  test('renders a Text.light component', async ({ page }) => {
+    const text = page.getByTestId('text-light');
+    await expect(text).toBeVisible();
+    await expect(text).toHaveClass(/text-sm font-light text-neutral-700 dark:text-neutral-200/);
+    await expect(text).toHaveText('Light');
+  });
+  test('renders a Text.medium component', async ({ page }) => {
+    const text = page.getByTestId('text-medium');
+    await expect(text).toBeVisible();
+    await expect(text).toHaveClass(/text-sm font-medium text-neutral-700 dark:text-neutral-200/);
+    await expect(text).toHaveText('Medium');
+  });
+  test('renders a Text.semibold component', async ({ page }) => {
+    const text = page.getByTestId('text-semibold');
+    await expect(text).toBeVisible();
+    await expect(text).toHaveClass(/text-sm font-semibold text-neutral-700 dark:text-neutral-200/);
+    await expect(text).toHaveText('Semibold');
+  });
+  test('renders a Text.bold component', async ({ page }) => {
+    const text = page.getByTestId('text-bold');
+    await expect(text).toBeVisible();
+    await expect(text).toHaveClass(/text-sm font-bold text-neutral-700 dark:text-neutral-200/);
+    await expect(text).toHaveText('Bold');
+  });
+  test('renders a Text.extrabold component', async ({ page }) => {
+    const text = page.getByTestId('text-extrabold');
+    await expect(text).toBeVisible();
+    await expect(text).toHaveClass(/text-sm font-extrabold text-neutral-700 dark:text-neutral-200/);
+    await expect(text).toHaveText('Extrabold');
+  });
+});
+
+test.describe('Testing Card Component', () => {
+  // Card ----------------------------------------------------
+  test('renders a Card component', async ({ page }) => {
+    const card = page.getByTestId('card');
+    await expect(card).toBeVisible();
+    await expect(card).toHaveClass(/rounded-lg border p-3 dark:border-neutral-800 lg:p-6/);
+    await expect(card).toHaveText('Card Content');
+  });
+});
+
+test.describe('Testing Section Component', () => {
+  // Section ----------------------------------------------------
+  test('renders a Section component', async ({ page }) => {
+    const section = page.getByTestId('section');
+    await expect(section).toBeVisible();
+    await expect(section).toHaveClass(/my-2 rounded-md border bg-white p-8 py-4/);
+    await expect(section).toHaveText('Section Default');
+  });
+  test('renders a Section.small component', async ({ page }) => {
+    const section = page.getByTestId('section-small');
+    await expect(section).toBeVisible();
+    await expect(section).toHaveClass(/my-2 rounded-md border bg-white p-8 py-2/);
+    await expect(section).toHaveText('Section Small');
+  });
+});
+
+test.describe('Testing ShowMore Component', () => {
+  // ShowMore ----------------------------------------------------
+  test('renders a ShowMore component', async ({ page }) => {
+    const showmore = page.getByTestId('showmore');
+    await expect(showmore).toBeVisible();
+    await expect(showmore).toHaveClass(/relative/);
+    await expect(showmore).toContainText(
+      `Id amet commodo exercitation aliqua irure exercitation adipisicing ipsum cillum elit. Cillum non dolor cillum mollit incididunt tempor quis reprehenderit labore velit sunt anim ipsum quis. Id nostrud ...`
+    );
+  });
+  test('renders a ShowMore component and Click Button', async ({ page }) => {
+    const showmore = page.getByTestId('showmore');
+    await expect(showmore).toBeVisible();
+    await expect(showmore).toContainText(
+      `Id amet commodo exercitation aliqua irure exercitation adipisicing ipsum cillum elit. Cillum non dolor cillum mollit incididunt tempor quis reprehenderit labore velit sunt anim ipsum quis. Id nostrud ...`
+    );
+    await page.getByLabel('Show More').click();
+    await expect(showmore).toContainText(
+      `Id amet commodo exercitation aliqua irure exercitation adipisicing ipsum cillum elit. Cillum non dolor cillum
+          mollit incididunt tempor quis reprehenderit labore velit sunt anim ipsum quis. Id nostrud anim ut excepteur
+          pariatur. Eu ad esse nisi et fugiat. Exercitation culpa cupidatat consequat veniam commodo aute id enim Lorem
+          id consectetur aliqua. Quis culpa do est non irure aliquip proident exercitation aliqua mollit anim dolor
+          labore.`
+    );
+  });
+});
