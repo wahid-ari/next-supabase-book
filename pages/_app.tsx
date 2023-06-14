@@ -45,7 +45,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return router.pathname == '/login' || router.pathname == '/register' ? (
     <>
-      <Toaster />
+      <Toaster
+        gutter={0}
+        toastOptions={{
+          style: {
+            maxWidth: 380,
+            padding: '2px 8px',
+          },
+        }}
+      />
       <Component {...pageProps} />
     </>
   ) : (
@@ -53,7 +61,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalProvider>
         <AxiosProvider>
           <main className={inter.className}>
-            <Toaster />
+            <Toaster
+              gutter={0}
+              toastOptions={{
+                style: {
+                  maxWidth: 380,
+                  padding: '2px 8px',
+                },
+              }}
+            />
             <Component {...pageProps} />
           </main>
         </AxiosProvider>

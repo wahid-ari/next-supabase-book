@@ -12,21 +12,31 @@ type UpdateProps = {
   isError?: boolean;
 };
 
+// https://github.com/timolins/react-hot-toast/issues/110
 export default function useToast() {
   const pushToast = ({ message, isError, isLoading }: PushProps) => {
     if (!isError && !isLoading) {
       toast.success(<span className='text-sm font-medium'>{message}</span>, {
         duration: 4000,
         position: 'top-right',
+        style: {
+          maxWidth: 380,
+        },
       });
     } else if (!isLoading) {
       toast.error(<span className='text-sm font-medium'>{message}</span>, {
         id: message,
         position: 'top-right',
+        style: {
+          maxWidth: 380,
+        },
       });
     } else {
       return toast.loading(<span className='text-sm font-medium'>{message}</span>, {
         position: 'top-right',
+        style: {
+          maxWidth: 380,
+        },
       });
     }
   };
@@ -37,11 +47,17 @@ export default function useToast() {
         id: toastId,
         duration: 4000,
         position: 'top-right',
+        style: {
+          maxWidth: 380,
+        },
       });
     } else {
       toast.error(<span className='text-sm font-medium'>{message}</span>, {
         id: toastId,
         position: 'top-right',
+        style: {
+          maxWidth: 380,
+        },
       });
     }
   };
