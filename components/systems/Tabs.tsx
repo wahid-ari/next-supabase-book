@@ -6,12 +6,14 @@ type Props = {
   items: string[];
   children: ReactNode;
   className?: string;
+  [props: string]: any;
 };
 
-export default function Tabs({ items, children, className }: Props) {
+export default function Tabs({ items, children, className, ...props }: Props) {
   return (
     <Tab.Group>
       <Tab.List
+        {...props}
         className={clsx(
           'flex whitespace-nowrap border-b border-neutral-200 font-medium dark:border-neutral-800',
           className
@@ -43,12 +45,13 @@ export default function Tabs({ items, children, className }: Props) {
 type PanelProps = {
   children: ReactNode;
   className?: string;
+  [props: string]: any;
 };
 
-Tabs.panel = ({ children, className }: PanelProps) => {
+Tabs.panel = ({ children, className, ...props }: PanelProps) => {
   return (
     <>
-      <Tab.Panel className={clsx('rounded-xl py-2 text-neutral-700 dark:text-neutral-200', className)}>
+      <Tab.Panel {...props} className={clsx('rounded-xl py-2 text-neutral-700 dark:text-neutral-200', className)}>
         {children}
       </Tab.Panel>
     </>

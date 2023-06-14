@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { useTheme } from 'next-themes';
 import clsx from 'clsx';
 
-export default function Shimer({ className }: { className?: string }) {
+export default function Shimer({ className, dataTestId }: { className?: string; dataTestId?: string }) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   // useEffect only runs on the client, so now we can safely show the UI
@@ -17,8 +17,13 @@ export default function Shimer({ className }: { className?: string }) {
   }
 
   return theme == 'dark' ? (
-    <Skeleton className={clsx(className, 'mb-2 h-10')} baseColor='#262626' highlightColor='#404040' />
+    <Skeleton
+      containerTestId={dataTestId}
+      className={clsx(className, 'mb-2 h-10')}
+      baseColor='#262626'
+      highlightColor='#404040'
+    />
   ) : (
-    <Skeleton className={clsx(className, 'mb-2 h-10')} />
+    <Skeleton containerTestId={dataTestId} className={clsx(className, 'mb-2 h-10')} />
   );
 }

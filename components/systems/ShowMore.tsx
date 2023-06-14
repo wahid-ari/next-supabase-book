@@ -6,14 +6,15 @@ type Props = {
   className?: string;
   children: string;
   count?: number;
+  [props: string]: any;
 };
 
-export default function ShowMore({ className, children, count = 200 }: Props) {
+export default function ShowMore({ className, children, count = 200, ...props }: Props) {
   const [showMore, setShowMore] = useState(false);
   const text = showMore ? children : children?.slice(0, count) + '...';
 
   return (
-    <div className={clsx(className, 'relative')}>
+    <div {...props} className={clsx(className, 'relative')}>
       <p>{text}</p>
       <div className='relative py-3'>
         <div
@@ -24,6 +25,7 @@ export default function ShowMore({ className, children, count = 200 }: Props) {
         />
         <div className='relative z-[1] border-b border-neutral-200 dark:border-neutral-700' />
         <button
+          aria-label='Show More'
           onClick={() => setShowMore(!showMore)}
           className={clsx(
             'group absolute left-1/2 top-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 transform',

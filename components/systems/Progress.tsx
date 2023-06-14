@@ -3,37 +3,31 @@ import clsx from 'clsx';
 type Props = {
   className?: string;
   percent: number;
+  [props: string]: any;
 };
 
-export default function Progress({ className, percent }: Props) {
+export default function Progress({ className, percent, ...props }: Props) {
   return (
-    <div className={clsx(className, 'h-1 w-full rounded-full bg-gray-200 dark:bg-neutral-800')}>
-      <div className='h-1 rounded-full bg-emerald-600 dark:bg-emerald-500' style={{ width: `${percent}%` }}></div>
+    <div className={clsx(className, 'h-1.5 w-full rounded-full bg-gray-200 dark:bg-neutral-800')}>
+      <div {...props} className='h-1.5 rounded-full bg-emerald-600' style={{ width: `${percent}%` }}></div>
     </div>
   );
 }
 
-Progress.percentage = ({ className, percent }: Props) => {
+Progress.percentage = ({ className, percent, ...props }: Props) => {
   return (
     <div className='w-full rounded-full bg-gray-200 dark:bg-neutral-800'>
-      {percent > 0 ? (
-        <div
-          className={clsx(
-            'rounded-full bg-emerald-600 p-0.5 text-center text-xs font-medium leading-none text-emerald-100',
-            className
-          )}
-          style={{ width: percent + '%' }}
-        >
-          {percent} %
-        </div>
-      ) : (
-        <div
-          className='rounded-full p-0.5 text-center text-xs font-medium leading-none text-gray-800 dark:text-neutral-200'
-          style={{ width: percent + '%' }}
-        >
-          0%
-        </div>
-      )}
+      <div
+        {...props}
+        className={clsx(
+          'rounded-full p-0.5 text-center text-xs font-medium leading-none',
+          percent > 0 ? 'bg-emerald-600 text-emerald-100' : 'text-gray-800 dark:text-neutral-200',
+          className
+        )}
+        style={{ width: percent + '%' }}
+      >
+        {percent > 0 ? `${percent} %` : '0%'}
+      </div>
     </div>
   );
 };
