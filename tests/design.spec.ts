@@ -9,7 +9,9 @@ test.describe('Testing Design Page', () => {
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Design/);
   });
+});
 
+test.describe('Testing Button Component', () => {
   // BUTTON ----------------------------------------------------
   test('renders a Button component', async ({ page }) => {
     const button = page.getByTestId('button-primary');
@@ -54,12 +56,16 @@ test.describe('Testing Design Page', () => {
     await expect(button).toHaveText('Disabled');
     await expect(button).toHaveAttribute('disabled', '');
   });
+});
 
+test.describe('Testing LinkButton Component', () => {
   // LINK BUTTON ----------------------------------------------------
   test('renders a Link Button component', async ({ page }) => {
     const linkbutton = page.getByTestId('link-button');
     await expect(linkbutton).toBeVisible();
-    await expect(linkbutton).toHaveClass(/text-sm rounded bg-emerald-600 px-3 py-1.5 font-medium/);
+    await expect(linkbutton).toHaveClass(
+      /flex items-center gap-2 rounded bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white/
+    );
     await expect(linkbutton).toHaveText('Link Button');
     await expect(linkbutton).toHaveAttribute('href', '/design#linkbutton');
   });
@@ -67,7 +73,7 @@ test.describe('Testing Design Page', () => {
     const linkbutton = page.getByTestId('link-button-secondary');
     await expect(linkbutton).toBeVisible();
     await expect(linkbutton).toHaveClass(
-      /text-sm rounded border border-neutral-300 bg-gray-50 px-3 py-1.5 font-medium/
+      /rounded border border-neutral-300 bg-gray-50 px-3 py-1.5 text-sm font-medium text-neutral-800/
     );
     await expect(linkbutton).toHaveText('Link Button Secondary');
     await expect(linkbutton).toHaveAttribute('href', '/design#linkbutton');
@@ -75,11 +81,13 @@ test.describe('Testing Design Page', () => {
   test('renders a Link Button Tertary component', async ({ page }) => {
     const linkbutton = page.getByTestId('link-button-tertary');
     await expect(linkbutton).toBeVisible();
-    await expect(linkbutton).toHaveClass(/text-sm rounded px-3 py-1.5 font-medium text-neutral-600/);
+    await expect(linkbutton).toHaveClass(/rounded px-3 py-1.5 text-sm font-medium text-neutral-600/);
     await expect(linkbutton).toHaveText('Link Button Tertary');
     await expect(linkbutton).toHaveAttribute('href', '/design#linkbutton');
   });
+});
 
+test.describe('Testing Heading Component', () => {
   // Heading ----------------------------------------------------
   test('renders a Heading H1 component', async ({ page }) => {
     const heading = page.getByTestId('heading-h1');
@@ -105,7 +113,9 @@ test.describe('Testing Design Page', () => {
     await expect(heading).toHaveClass(/mb-4 text-lg font-medium text-neutral-800 dark:text-neutral-100/);
     await expect(heading).toHaveText(/Heading 4/);
   });
+});
 
+test.describe('Testing Container Component', () => {
   // Container ----------------------------------------------------
   test('renders a Container component', async ({ page }) => {
     const container = page.getByTestId('container');
@@ -119,7 +129,9 @@ test.describe('Testing Design Page', () => {
     await expect(container).toHaveClass(/p-2 relative mb-2 rounded-md border bg-white/);
     await expect(container).toHaveText('Container Small');
   });
+});
 
+test.describe('Testing Badge Component', () => {
   // Badge ----------------------------------------------------
   test('renders a Badge component', async ({ page }) => {
     const badge = page.getByTestId('badge');
@@ -251,7 +263,9 @@ test.describe('Testing Design Page', () => {
     );
     await expect(badge).toHaveText('pink');
   });
+});
 
+test.describe('Testing Checkbox Component', () => {
   // Checkbox ----------------------------------------------------
   test('renders a Checkbox component', async ({ page }) => {
     const checkbox = page.getByTestId('checkbox');
@@ -297,7 +311,9 @@ test.describe('Testing Design Page', () => {
     );
     await expect(checkboxLabel).toContainText('Checkbox Checked Disabled');
   });
+});
 
+test.describe('Testing Radio Component', () => {
   // Radio ----------------------------------------------------
   test('renders a Radio component', async ({ page }) => {
     const radio = page.getByTestId('radio');
@@ -343,7 +359,9 @@ test.describe('Testing Design Page', () => {
     );
     await expect(radioLabel).toContainText('Radio Checked Disabled');
   });
+});
 
+test.describe('Testing Input Component', () => {
   // Input ----------------------------------------------------
   test('renders a Input component', async ({ page }) => {
     const input = page.getByTestId('input');
@@ -361,7 +379,9 @@ test.describe('Testing Design Page', () => {
     await expect(input).toHaveValue('Has a value');
     await expect(input).toHaveClass(/mt-2 w-full cursor-not-allowed rounded-md/);
   });
+});
 
+test.describe('Testing Label Component', () => {
   // Label ----------------------------------------------------
   test('renders a Label component', async ({ page }) => {
     const label = page.getByTestId('label');
@@ -369,7 +389,9 @@ test.describe('Testing Design Page', () => {
     await expect(label).toHaveText('Label');
     await expect(label).toHaveClass(/block text-gray-800 dark:text-neutral-300/);
   });
+});
 
+test.describe('Testing LabeledInput Component', () => {
   // LabeledInput ----------------------------------------------------
   test('renders a LabeledInput component', async ({ page }) => {
     const input = page.getByTestId('labeledinput');
@@ -395,7 +417,9 @@ test.describe('Testing Design Page', () => {
     await expect(input).not.toBeEditable();
     await expect(input).toHaveClass(/mt-2 w-full cursor-not-allowed rounded-md/);
   });
+});
 
+test.describe('Testing InputDebounce Component', () => {
   // InputDebounce ----------------------------------------------------
   test('renders a InputDebounce component', async ({ page }) => {
     const input = page.getByTestId('inputdebounce');
@@ -403,12 +427,14 @@ test.describe('Testing Design Page', () => {
     await expect(input).toBeEnabled();
     await expect(input).toBeEditable();
     await expect(input).toHaveValue('');
-    await expect(input).toHaveClass(/mt-2 w-full rounded-md border border-gray-300 text-sm/);
+    await expect(input).toHaveClass(/mt-2 w-full rounded-md border border-gray-300/);
     await page.getByTestId('inputdebounce').fill('inputdebounce');
     const text = page.getByTestId('inputdebounce-text');
     await expect(text).toHaveText('inputdebounce');
   });
+});
 
+test.describe('Testing TextArea Component', () => {
   // TextArea ----------------------------------------------------
   test('renders a TextArea component', async ({ page }) => {
     const textarea = page.getByTestId('textarea');
@@ -430,7 +456,9 @@ test.describe('Testing Design Page', () => {
       'mt-2 w-full cursor-not-allowed rounded-md p-3 text-sm text-neutral-500 min-h-[80px] border border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800'
     );
   });
+});
 
+test.describe('Testing FileInput Component', () => {
   // FileInput ----------------------------------------------------
   test('renders a FileInput component', async ({ page }) => {
     const fileinput = page.getByTestId('fileinput');
@@ -440,7 +468,9 @@ test.describe('Testing Design Page', () => {
     await expect(fileinput).toHaveValue('');
     await expect(fileinput).toHaveClass(/mt-2 hidden h-12 w-full rounded-md bg-white px-4/);
   });
+});
 
+test.describe('Testing Select Component', () => {
   // Select ----------------------------------------------------
   test('renders a Select component', async ({ page }) => {
     const select = page.getByTestId('select');
