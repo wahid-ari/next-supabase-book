@@ -147,15 +147,15 @@ export default function Example() {
   const reactSelectData = [
     {
       value: 1,
-      label: 'Option 1',
+      label: 'Romance',
     },
     {
       value: 2,
-      label: 'Option 2',
+      label: 'Comedy',
     },
     {
       value: 3,
-      label: 'Option 3',
+      label: 'History',
     },
   ];
 
@@ -383,6 +383,7 @@ export default function Example() {
         <br />
 
         <Dialog
+          data-testid='dialog'
           title='Confirmation'
           open={openDialog}
           showIcon
@@ -397,6 +398,7 @@ export default function Example() {
         <Button.danger onClick={() => setOpenDangerDialog(true)}>Open Danger Dialog</Button.danger>
 
         <Dialog
+          data-testid='dialog-danger'
           title='Delete Confirmation'
           open={openDangerDialog}
           showIcon
@@ -421,6 +423,7 @@ export default function Example() {
         <br />
 
         <Modal
+          data-testid='modal'
           title='Confirmation'
           open={openModal}
           showIcon
@@ -434,6 +437,7 @@ export default function Example() {
         <Button.danger onClick={() => setOpenDangerModal(true)}>Open Danger Modal</Button.danger>
 
         <Modal
+          data-testid='modal-danger'
           title='Delete Confirmation'
           open={openDangerModal}
           showIcon
@@ -454,6 +458,7 @@ export default function Example() {
         props={['label', 'value', 'placeholder', 'onChange', 'query', 'onChangeQuery', 'afterLeave', 'filtered']}
       >
         <SearchBox
+          data-testid='searchbox'
           label='Search Box'
           value={selectedSearchBox}
           placeholder='Search or Select'
@@ -482,12 +487,12 @@ export default function Example() {
           'theme',
         ]}
       >
-        <Label htmlFor='selectbox' className='mb-2'>
+        <Label htmlFor='reactselect' className='mb-2'>
           Category
         </Label>
         <ReactSelect
-          id='selectbox'
-          instanceId='selectbox'
+          id='reactselect'
+          instanceId='reactselect'
           aria-label='React Select'
           // @ts-ignore
           options={reactSelectData}
@@ -497,7 +502,7 @@ export default function Example() {
           // @ts-ignore
           onChange={setReactSelect}
           placeholder='Search or Select'
-          name='selectbox'
+          name='reactselect'
           classNames={{
             option: (option) => (option.isSelected ? '!border-red-600' : '!border-grey-300'),
           }}

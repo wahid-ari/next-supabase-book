@@ -737,3 +737,101 @@ test.describe('Testing RactTable Component', () => {
     await expect(reacttable).toContainText('amparo@qnekt.com');
   });
 });
+
+test.describe('Testing RactSelect Component', () => {
+  // RactSelect ----------------------------------------------------
+  test('renders a RactSelect component', async ({ page }) => {
+    const reactselect = page.locator('.react-select__input-container');
+    await expect(reactselect).toBeVisible();
+    await expect(reactselect).toHaveClass(/react-select__input-container/);
+    await page.locator('.react-select__input-container').click();
+    await expect(page.getByText('Comedy', { exact: true })).toBeVisible();
+    await page.getByText('Comedy', { exact: true }).click();
+    await expect(page.getByText('Comedy', { exact: true })).toBeVisible();
+    await page.getByRole('combobox', { name: 'React Select' }).fill('history');
+    await expect(page.getByText('History', { exact: true })).toBeVisible();
+    await page.getByText('History', { exact: true }).click();
+    await expect(page.getByText('History', { exact: true })).toBeVisible();
+  });
+});
+
+test.describe('Testing SearchBox Component', () => {
+  // SearchBox ----------------------------------------------------
+  test('renders a SearchBox component', async ({ page }) => {
+    const searchbox = page.getByTestId('searchbox');
+    await expect(searchbox).toBeVisible();
+    await expect(searchbox).toHaveClass(
+      /w-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm font-medium text-neutral-900/
+    );
+    await searchbox.fill('Option 1');
+    await expect(page.getByRole('option', { name: 'Option 1' })).toBeVisible();
+    await expect(page.getByRole('option', { name: 'Option 1' })).toHaveClass(
+      /relative cursor-default select-none py-2 pl-10 pr-4/
+    );
+    await page.getByRole('option', { name: 'Option 1' }).click();
+    await expect(page.getByRole('option', { name: 'Option 1' })).toHaveAttribute('aria-selected', 'true');
+    await searchbox.fill('Option 2');
+    await expect(page.getByRole('option', { name: 'Option 2' })).toBeVisible();
+    await expect(page.getByRole('option', { name: 'Option 2' })).toHaveClass(
+      /relative cursor-default select-none py-2 pl-10 pr-4/
+    );
+    await page.getByRole('option', { name: 'Option 2' }).click();
+    await expect(page.getByRole('option', { name: 'Option 2' })).toHaveAttribute('aria-selected', 'true');
+  });
+});
+
+test.describe('Testing Modal Component', () => {
+  // Modal ----------------------------------------------------
+  test('renders a Modal component', async ({ page }) => {
+    await page.getByRole('button', { name: 'Open Modal' }).click();
+    const modal = page.getByTestId('modal');
+    await expect(modal).toBeVisible();
+    await expect(modal).toHaveClass(/relative inline-block max-w-lg transform overflow-hidden rounded-lg bg-white/);
+    await expect(modal).toContainText('Confirmation');
+    await expect(modal)
+      .toContainText(`Mollit incididunt ex exercitation sunt incididunt culpa reprehenderit esse magna laborum. Do velit ipsum
+      consectetur aliquip mollit nisi irure quis Lorem eu non sit.`);
+    await page.getByRole('button', { name: 'Cancel' }).click();
+    await expect(modal).not.toBeVisible();
+  });
+  test('renders a Modal Danger component', async ({ page }) => {
+    await page.getByRole('button', { name: 'Open Danger Modal' }).click();
+    const modal = page.getByTestId('modal-danger');
+    await expect(modal).toBeVisible();
+    await expect(modal).toHaveClass(/relative inline-block max-w-lg transform overflow-hidden rounded-lg bg-white/);
+    await expect(modal).toContainText('Delete Confirmation');
+    await expect(modal).toContainText(
+      `Danger Content Fugiat consectetur nulla qui veniam. Aliquip ipsum dolore eiusmod Lorem ipsum fugiat.`
+    );
+    await page.getByTestId('modal-danger').getByRole('button', { name: 'Delete' }).click();
+    await expect(modal).not.toBeVisible();
+  });
+});
+
+test.describe('Testing Dialog Component', () => {
+  // Dialog ----------------------------------------------------
+  test('renders a Dialog component', async ({ page }) => {
+    await page.getByRole('button', { name: 'Open Dialog' }).click();
+    const dialog = page.getByTestId('dialog');
+    await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveClass(/bg-white dark:bg-neutral-900 opacity-100 scale-100/);
+    await expect(dialog).toContainText('Confirmation');
+    await expect(dialog)
+      .toContainText(`Mollit incididunt ex exercitation sunt incididunt culpa reprehenderit esse magna laborum. Do velit ipsum
+      consectetur aliquip mollit nisi irure quis Lorem eu non sit.`);
+    await page.getByRole('button', { name: 'Cancel' }).click();
+    await expect(dialog).not.toBeVisible();
+  });
+  test('renders a Dialog Danger component', async ({ page }) => {
+    await page.getByRole('button', { name: 'Open Danger Dialog' }).click();
+    const dialog = page.getByTestId('dialog-danger');
+    await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveClass(/bg-white dark:bg-neutral-900 opacity-100 scale-100/);
+    await expect(dialog).toContainText('Delete Confirmation');
+    await expect(dialog).toContainText(
+      `Danger Content Fugiat consectetur nulla qui veniam. Aliquip ipsum dolore eiusmod Lorem ipsum fugiat.`
+    );
+    await page.getByTestId('dialog-danger').getByRole('button', { name: 'Delete' }).click();
+    await expect(dialog).not.toBeVisible();
+  });
+});
