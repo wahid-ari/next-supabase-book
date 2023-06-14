@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/outline';
+import clsx from 'clsx';
 
 type Props = {
   label?: string;
@@ -56,20 +57,24 @@ export default function SearchBox({
                 <Combobox.Option
                   key={item.id}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    clsx(
+                      'relative cursor-default select-none py-2 pl-10 pr-4',
                       active ? 'bg-emerald-600 text-white' : 'text-gray-900 dark:text-white'
-                    }`
+                    )
                   }
                   value={item}
                 >
                   {({ selected, active }) => (
                     <>
-                      <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{item.name}</span>
+                      <span className={clsx('block truncate', selected ? 'font-medium' : 'font-normal')}>
+                        {item.name}
+                      </span>
                       {selected ? (
                         <span
-                          className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                          className={clsx(
+                            'absolute inset-y-0 left-0 flex items-center pl-3',
                             active ? 'text-white' : 'text-teal-600'
-                          }`}
+                          )}
                         >
                           <CheckIcon className='h-5 w-5' aria-hidden='true' />
                         </span>

@@ -30,7 +30,8 @@ export default function Table({
 }: Props) {
   return (
     <div
-      className={clsx('w-full rounded border shadow-sm dark:border-neutral-800 lg:max-w-[calc(100vw_-_17rem)]',
+      className={clsx(
+        'w-full rounded border shadow-sm dark:border-neutral-800 lg:max-w-[calc(100vw_-_17rem)]',
         className
       )}
     >

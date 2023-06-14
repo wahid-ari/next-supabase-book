@@ -78,7 +78,7 @@ export const ReactTable = forwardRef(
     useImperativeHandle(ref, () => instance);
 
     return (
-      <div className={`w-full rounded border dark:border-neutral-800 ${className ? className + ' ' : ''}`}>
+      <div className={clsx('w-full rounded border dark:border-neutral-800', className)}>
         <div className='overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-700'>
           <table {...getTableProps()} className='w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300'>
             <thead>

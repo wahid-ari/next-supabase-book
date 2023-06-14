@@ -54,8 +54,8 @@ export default function InputDebounce({
         onChange={(e) => setValue(e.target.value)}
         className={clsx(
           className,
-          'mt-2 w-full rounded-md border border-gray-300 text-sm',
-          'bg-white px-4 py-[0.6rem] font-medium outline-none ring-gray-300 transition-all',
+          'mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm',
+          'font-medium outline-none ring-gray-300 transition-all',
           'focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:border-neutral-700',
           'dark:bg-neutral-900 dark:text-neutral-100 dark:ring-neutral-600 dark:focus:border-emerald-500',
           'dark:focus:ring-emerald-500'

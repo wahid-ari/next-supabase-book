@@ -59,8 +59,7 @@ export default function Dialog({
           <DialogRadix.Content
             forceMount
             className={clsx(
-              'fixed z-50',
-              'w-[90%] max-w-lg rounded-lg',
+              'fixed z-50 w-[90%] max-w-lg rounded-lg',
               'left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]',
               'bg-white dark:bg-neutral-900'
             )}
@@ -73,7 +72,7 @@ export default function Dialog({
               <XIcon className='h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400' />
             </DialogRadix.Close>
 
-            <div className={`p-5 ${showIcon && 'sm:flex sm:gap-4'}`}>
+            <div className={clsx('p-5', showIcon && 'sm:flex sm:gap-4')}>
               {showIcon ? (
                 isDanger ? (
                   <div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0'>
