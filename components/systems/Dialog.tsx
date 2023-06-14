@@ -16,6 +16,7 @@ type Props = {
   onConfirm?: () => void;
   showIcon?: boolean;
   confirmText?: string;
+  [props: string]: any;
 };
 
 export default function Dialog({
@@ -29,6 +30,7 @@ export default function Dialog({
   onConfirm,
   showIcon,
   confirmText = 'Confirm',
+  ...props
 }: Props) {
   return (
     <DialogRadix.Root open={open} onOpenChange={setOpen}>
@@ -57,6 +59,7 @@ export default function Dialog({
           leaveTo='opacity-0 scale-95'
         >
           <DialogRadix.Content
+            {...props}
             forceMount
             className={clsx(
               'fixed z-50 w-[90%] max-w-lg rounded-lg',

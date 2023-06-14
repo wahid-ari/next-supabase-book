@@ -12,12 +12,24 @@ type Props = {
   onConfirm?: () => void;
   showIcon?: boolean;
   confirmText?: string;
+  [props: string]: any;
 };
 
-export default function Modal({ open, title, children, isDanger, onClose, onConfirm, showIcon, confirmText }: Props) {
+export default function Modal({
+  open,
+  title,
+  children,
+  isDanger,
+  onClose,
+  onConfirm,
+  showIcon,
+  confirmText,
+  ...props
+}: Props) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as='div' className='fixed inset-0 z-50 overflow-y-auto' open={open} onClose={onClose}>
+        {/* This element is to trick the browser into centering the modal contents horizontally. */}
         <div className='px-4 pt-4 text-center sm:block sm:p-0'>
           <Transition.Child
             as={Fragment}
@@ -31,7 +43,7 @@ export default function Modal({ open, title, children, isDanger, onClose, onConf
             <Dialog.Overlay className='fixed inset-0 bg-black opacity-30 transition-opacity' />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
+          {/* This element is to trick the browser into centering the modal contents vertically. */}
           <span className='inline-block h-screen align-middle' aria-hidden='true'>
             &#8203;
           </span>
@@ -44,7 +56,10 @@ export default function Modal({ open, title, children, isDanger, onClose, onConf
             leaveFrom='opacity-100 translate-y-0 sm:scale-100'
             leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
           >
-            <div className='relative inline-block max-w-lg transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all dark:bg-neutral-900'>
+            <div
+              {...props}
+              className='relative inline-block max-w-lg transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all dark:bg-neutral-900'
+            >
               <div className='p-5 sm:flex sm:gap-4'>
                 {showIcon ? (
                   isDanger ? (
