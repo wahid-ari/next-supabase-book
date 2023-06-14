@@ -17,10 +17,11 @@ type Props = {
   className?: string;
   bordered?: boolean;
   itemPerPage?: number[];
+  [props: string]: any;
 };
 
 export const ReactTable = forwardRef(
-  ({ columns, data, page_size = 5, className, bordered, itemPerPage = [5, 10, 20] }: Props, ref) => {
+  ({ columns, data, page_size = 5, className, bordered, itemPerPage = [5, 10, 20], ...props }: Props, ref) => {
     // Use the state and functions returned from useTable to build your UI
     const defaultColumn = useMemo(
       () => ({
@@ -44,10 +45,6 @@ export const ReactTable = forwardRef(
             },
             {
               id: 'songs.id',
-              desc: false,
-            },
-            {
-              id: 'album.id',
               desc: false,
             },
           ],
@@ -80,7 +77,11 @@ export const ReactTable = forwardRef(
     return (
       <div className={clsx('w-full rounded border dark:border-neutral-800', className)}>
         <div className='overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-700'>
-          <table {...getTableProps()} className='w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300'>
+          <table
+            {...getTableProps()}
+            {...props}
+            className='w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300'
+          >
             <thead>
               {headerGroups.map((headerGroup: any, i: number) => (
                 <tr

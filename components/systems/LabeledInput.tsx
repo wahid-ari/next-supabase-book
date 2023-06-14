@@ -24,7 +24,7 @@ export default function LabeledInput({
   ...props
 }: Props) {
   return (
-    <div className={`mb-4 ${wrapperClassName}`}>
+    <div className={clsx('mb-4', wrapperClassName)}>
       <label className='block text-sm text-gray-800 dark:text-neutral-300' htmlFor={name}>
         {label}
       </label>
