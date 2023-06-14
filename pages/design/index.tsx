@@ -878,11 +878,11 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='progress' name='Progress' variant={['percentage']} props={['percent']} noChildren noProps>
-        <Progress percent={45} />
+        <Progress percent={45} data-testid='progress' />
         <br />
-        <Progress.percentage percent={0} />
+        <Progress.percentage percent={0} data-testid='progress-zero' />
         <br />
-        <Progress.percentage percent={75} />
+        <Progress.percentage percent={75} data-testid='progress-percent' />
       </Wrapper>
 
       <Wrapper
@@ -905,13 +905,13 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='shimer' name='Shimer' noChildren noProps>
-        <Shimer className='max-w-[5rem]' />
+        <Shimer className='max-w-[5rem]' dataTestId='shimer' />
         <Shimer className='max-w-[10rem]' />
         <Shimer className='max-w-[15rem]' />
       </Wrapper>
 
       <Wrapper id='tabs' name='Tabs' props={['items']}>
-        <Tabs items={['Tab A', 'Tab B', 'Tab C']}>
+        <Tabs items={['Tab A', 'Tab B', 'Tab C']} data-testid='tabs'>
           <Tabs.panel>
             <Heading className='mb-0'>Tab Content A</Heading>
           </Tabs.panel>
@@ -926,7 +926,7 @@ export default function Example() {
 
       <Wrapper id='tabitem' name='Tabs.panel' noProps>
         <Tabs items={['Tab']}>
-          <Tabs.panel>
+          <Tabs.panel data-testid='tabs-panel'>
             <Heading className='mb-0'>Tabs Panel</Heading>
           </Tabs.panel>
         </Tabs>
@@ -945,6 +945,7 @@ export default function Example() {
           currentPage={1}
           next={onNext}
           prev={onPrev}
+          data-testid='table'
           head={
             <>
               <Table.td shrink>No</Table.td>
@@ -993,36 +994,64 @@ export default function Example() {
         </Table>
       </Wrapper>
 
-      <Wrapper id='tabletr' name='Table.tr' noWrap />
+      <Wrapper id='tabletr' name='Table.tr' noWrap>
+        <Table>
+          <Table.tr data-testid='table-tr'>
+            <Table.td>
+              <Badge>Table.tr</Badge>
+            </Table.td>
+          </Table.tr>
+        </Table>
+      </Wrapper>
 
-      <Wrapper id='tabletd' name='Table.td' props={['shrink']} noWrap />
+      <Wrapper id='tabletd' name='Table.td' props={['shrink']} noWrap>
+        <Table>
+          <Table.tr>
+            <Table.td data-testid='table-td'>
+              <Badge>Table.td</Badge>
+            </Table.td>
+          </Table.tr>
+        </Table>
+      </Wrapper>
 
       <Wrapper id='text' name='Text' variant={['light', 'medium', 'semibold', 'bold', 'extrabold']}>
-        <Text.light className='mb-2'>Light</Text.light>
-        <Text className='mb-2'>Default</Text>
-        <Text.medium className='mb-2'>Medium</Text.medium>
-        <Text.semibold className='mb-2'>Semibold</Text.semibold>
-        <Text.bold className='mb-2'>Bold</Text.bold>
-        <Text.extrabold className='mb-2'>Extrabold</Text.extrabold>
+        <Text.light data-testid='text-light' className='mb-2'>
+          Light
+        </Text.light>
+        <Text data-testid='text' className='mb-2'>
+          Default
+        </Text>
+        <Text.medium data-testid='text-medium' className='mb-2'>
+          Medium
+        </Text.medium>
+        <Text.semibold data-testid='text-semibold' className='mb-2'>
+          Semibold
+        </Text.semibold>
+        <Text.bold data-testid='text-bold' className='mb-2'>
+          Bold
+        </Text.bold>
+        <Text.extrabold data-testid='text-extrabold' className='mb-2'>
+          Extrabold
+        </Text.extrabold>
       </Wrapper>
 
       <Wrapper id='card' name='Card'>
-        <Card>
+        <Card data-testid='card'>
           <Text>Card Content</Text>
         </Card>
       </Wrapper>
 
       <Wrapper id='section' name='Section' variant={['small']}>
-        <Section>
+        <Section data-testid='section'>
           <Text>Section Default</Text>
         </Section>
-        <Section.small>
+        <Section.small data-testid='section-small'>
           <Text>Section Small</Text>
         </Section.small>
       </Wrapper>
 
       <Wrapper id='show-more' name='ShowMore' props={['count']} noProps>
-        <ShowMore>
+        <ShowMore data-testid='showmore'>
           Id amet commodo exercitation aliqua irure exercitation adipisicing ipsum cillum elit. Cillum non dolor cillum
           mollit incididunt tempor quis reprehenderit labore velit sunt anim ipsum quis. Id nostrud anim ut excepteur
           pariatur. Eu ad esse nisi et fugiat. Exercitation culpa cupidatat consequat veniam commodo aute id enim Lorem
