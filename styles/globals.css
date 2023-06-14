@@ -109,6 +109,10 @@ html {
   color: white !important;
 }
 
+.react-select__indicator-separator {
+  @apply !bg-neutral-200 dark:!bg-neutral-600;
+}
+
 /* Splide Carousel SLider  */
 .splide__arrow {
   background: rgb(0, 0, 0) !important;
