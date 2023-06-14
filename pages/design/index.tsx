@@ -67,21 +67,21 @@ export default function Example() {
   });
 
   const addToast = () => {
-    pushToast({ message: 'This is a toast message', isError: false });
+    pushToast({ message: 'This is a success toast message', isError: false });
   };
 
   const addToastError = () => {
-    pushToast({ message: 'This is a toast message', isError: true });
+    pushToast({ message: 'This is a error toast message', isError: true });
   };
 
   const toastAsync = () => {
     const toastId = pushToast({
-      message: 'Loading Posting Data',
+      message: 'Loading Posting Async Data',
       isLoading: true,
     });
     setTimeout(() => {
-      updateToast({ toastId, message: 'Posting Data Success', isError: false });
-    }, 3000);
+      updateToast({ toastId, message: 'Posting Data Async Success', isError: false });
+    }, 2000);
   };
 
   let userSchema = yup.object().shape({
@@ -526,7 +526,7 @@ export default function Example() {
             tableInstance.current.setGlobalFilter(e.target.value);
           }}
         />
-        <ReactTable columns={column} data={tabledata} ref={tableInstance} page_size={5} />
+        <ReactTable data-testid='reacttable' columns={column} data={tabledata} ref={tableInstance} page_size={5} />
       </Wrapper>
 
       <Wrapper id='usetoast' name='useToast (hook)' noProps noChildren noClassName>
@@ -592,14 +592,20 @@ export default function Example() {
       </Wrapper>
 
       <div className='flex flex-wrap items-center gap-2'>
-        <Button onClick={addToast}>Show Me Toast</Button>
-        <Button onClick={addToastError}>Show Me Error Toast</Button>
-        <Button onClick={toastAsync}>Toast with async</Button>
+        <Button data-testid='toastbutton' onClick={addToast}>
+          Show Me Toast
+        </Button>
+        <Button data-testid='toastbutton-error' onClick={addToastError}>
+          Show Me Error Toast
+        </Button>
+        <Button data-testid='toastbutton-async' onClick={toastAsync}>
+          Toast with async
+        </Button>
       </div>
 
       <Wrapper id='hover-card' name='HoverCard'>
         <HoverCard.Root>
-          <HoverCard.Trigger asChild>
+          <HoverCard.Trigger data-testid='hovercard' asChild>
             <Link
               href='#'
               className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
@@ -610,9 +616,10 @@ export default function Example() {
           <HoverCard.Portal>
             <HoverCard.Content
               side='top'
+              data-testid='hovercard-content'
               className={clsx(
                 'z-50 max-h-40 max-w-sm overflow-auto rounded-md border shadow-md',
-                'bg-white p-2.5 !text-[15px] font-medium leading-5 text-neutral-700',
+                'bg-white p-2.5 !text-[15px] leading-5 text-neutral-700',
                 'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:scrollbar-thumb-neutral-700'
               )}
             >
