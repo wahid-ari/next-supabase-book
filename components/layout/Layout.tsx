@@ -38,9 +38,9 @@ export default function Layout({ children, title, description, prefetch }: Props
           {/* Show on Mobile */}
           <div
             className={clsx(
-              'flex items-center justify-between gap-x-4 border-b px-4 py-3 dark:border-neutral-800 lg:hidden',
-              'overflow-x-auto bg-white/95 dark:bg-neutral-900/90',
-              'scrollbar scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
+              'flex items-center justify-between gap-x-4 border-b px-4 py-3 lg:hidden',
+              'overflow-x-auto bg-white/95 dark:border-neutral-800 dark:bg-neutral-900/90',
+              'scrollbar scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
             )}
           >
             <Breadcrumb />
@@ -50,9 +50,7 @@ export default function Layout({ children, title, description, prefetch }: Props
           <div
             className={clsx(
               'hidden items-center justify-between gap-x-4 border-b px-4 py-3 dark:border-neutral-800 lg:flex',
-              'sticky top-0 z-40',
-              'bg-white/50 dark:bg-neutral-900/30',
-              'backdrop-blur-md backdrop-filter'
+              'sticky top-0 z-40 bg-white/50 backdrop-blur-md backdrop-filter dark:bg-neutral-900/30'
             )}
           >
             <Breadcrumb />

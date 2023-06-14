@@ -33,15 +33,15 @@ export default function Akun({ className }: Props) {
           <>
             <Menu.Button
               className={clsx(
-                'inline-flex w-full items-center justify-center rounded',
-                'text-gray-700 hover:text-gray-900 focus:outline-none dark:text-neutral-300 dark:hover:text-neutral-100',
+                'inline-flex w-full items-center justify-center rounded text-gray-700 hover:text-gray-900',
+                'focus:outline-none dark:text-neutral-300 dark:hover:text-neutral-100',
                 'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
               )}
             >
               {mounted && admin?.name}
 
               <ChevronDownIcon
-                className={`${open ? 'rotate-180' : 'rotate-0'} ml-1 h-5 w-4 pb-0.5 transition-all duration-200`}
+                className={clsx('ml-1 h-5 w-4 pb-0.5 transition-all duration-200', open ? 'rotate-180' : 'rotate-0')}
                 aria-hidden='true'
               />
             </Menu.Button>
@@ -70,11 +70,12 @@ export default function Akun({ className }: Props) {
                     {({ active }) => (
                       <Link
                         href='/settings'
-                        className={`${
+                        className={clsx(
+                          'flex w-full rounded px-2 py-1.5 text-sm',
                           active
                             ? 'bg-gray-100 text-emerald-600 transition-all dark:bg-neutral-900 dark:text-emerald-500'
                             : 'text-gray-700 dark:text-neutral-300'
-                        } flex w-full rounded px-2 py-1.5 text-sm`}
+                        )}
                       >
                         Setting
                       </Link>
@@ -84,11 +85,12 @@ export default function Akun({ className }: Props) {
                     {({ active }) => (
                       <button
                         onClick={() => setOpenModal(true)}
-                        className={`${
+                        className={clsx(
+                          'flex w-full rounded px-2 py-1.5 text-sm',
                           active
                             ? 'bg-gray-100 text-red-600 transition-all dark:bg-neutral-900 dark:text-red-500'
                             : 'text-red-500 dark:text-red-500'
-                        } flex w-full rounded px-2 py-1.5 text-sm`}
+                        )}
                       >
                         Logout
                       </button>

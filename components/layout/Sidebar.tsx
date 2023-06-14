@@ -59,9 +59,10 @@ export default function Sidebar() {
   return (
     <>
       <div
-        className={`${
+        className={clsx(
+          'z-50 flex h-screen max-h-screen w-screen flex-col flex-nowrap border-r bg-white dark:border-neutral-800 dark:bg-neutral-900 lg:w-60',
           showNav ? 'fixed lg:relative' : 'top-0 hidden lg:sticky lg:flex'
-        } z-50 flex h-screen max-h-screen w-screen flex-col flex-nowrap border-r bg-white dark:border-neutral-800 dark:bg-neutral-900 lg:w-60`}
+        )}
       >
         <div className='flex items-center justify-between gap-2 px-5'>
           <button
@@ -133,14 +134,11 @@ export default function Sidebar() {
             Docs
           </a>
 
-          {/* <NavAccordion title="Design" routeName="design" icon={<TemplateIcon className="w-4 h-4" />}>
-            <NavLink
-              href="/design"
-              icon={<TemplateIcon className="w-4 h-4" />}
-            >
+          <NavAccordion title='Design' routeName='design' icon={<TemplateIcon className='h-4 w-4' />}>
+            <NavLink href='/design' icon={<TemplateIcon className='h-4 w-4' />}>
               Example
             </NavLink>
-          </NavAccordion> */}
+          </NavAccordion>
         </div>
 
         <hr className='mt-2 dark:border-neutral-800' />
