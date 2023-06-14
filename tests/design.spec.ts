@@ -663,3 +663,77 @@ test.describe('Testing ShowMore Component', () => {
     );
   });
 });
+
+test.describe('Testing HoverCard Component', () => {
+  // HoverCard ----------------------------------------------------
+  test('renders a HoverCard component', async ({ page }) => {
+    const hovercard = page.getByTestId('hovercard');
+    await expect(hovercard).toBeVisible();
+    await expect(hovercard).toHaveClass(
+      /rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500/
+    );
+    await expect(hovercard).toContainText('Hover Me');
+    await expect(hovercard).toHaveAttribute('data-state', 'closed');
+  });
+  test('renders a HoverCard component and Hover', async ({ page }) => {
+    const hovercard = page.getByTestId('hovercard');
+    await expect(hovercard).toBeVisible();
+    await expect(hovercard).toHaveClass(
+      /rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500/
+    );
+    await expect(hovercard).toContainText('Hover Me');
+    await expect(hovercard).toHaveAttribute('data-state', 'closed');
+    await hovercard.hover();
+    await expect(hovercard).toHaveAttribute('data-state', 'open');
+    const hovercardContent = page.getByTestId('hovercard-content');
+    await expect(hovercardContent).toBeVisible();
+    await expect(hovercardContent)
+      .toContainText(`Laborum sint culpa nisi commodo. Reprehenderit et laborum do commodo et fugiat elit ullamco. Tempor culpa
+              elit officia deserunt est amet anim. Irure nostrud esse aliquip commodo. Veniam ullamco irure non sunt
+              elit nulla cillum. Tempor ea anim non laboris consectetur aliqua laborum do enim. Anim aliquip tempor
+              dolore irure.`);
+  });
+});
+
+test.describe('Testing Toast Component', () => {
+  // Toast ----------------------------------------------------
+  test('renders a Toast Success component', async ({ page }) => {
+    const toastbutton = page.getByTestId('toastbutton');
+    await expect(toastbutton).toBeVisible();
+    await expect(toastbutton).toContainText('Show Me Toast');
+    await toastbutton.click();
+    await expect(page.getByText('This is a success toast message')).toBeVisible();
+  });
+  test('renders a Toast Error component', async ({ page }) => {
+    const toastbutton = page.getByTestId('toastbutton-error');
+    await expect(toastbutton).toBeVisible();
+    await expect(toastbutton).toContainText('Show Me Error Toast');
+    await toastbutton.click();
+    await expect(page.getByText('This is a error toast message')).toBeVisible();
+  });
+  test('renders a Toast Async component', async ({ page }) => {
+    const toastbutton = page.getByTestId('toastbutton-async');
+    await expect(toastbutton).toBeVisible();
+    await expect(toastbutton).toContainText('Toast with async');
+    await toastbutton.click();
+    await expect(page.getByText('Loading Posting Async Data')).toBeVisible();
+    await expect(page.getByText('Posting Data Async Success')).toBeVisible();
+  });
+});
+
+test.describe('Testing RactTable Component', () => {
+  // RactTable ----------------------------------------------------
+  test('renders a RactTable component', async ({ page }) => {
+    const reacttable = page.getByTestId('reacttable');
+    await expect(reacttable).toBeVisible();
+    await expect(reacttable).toHaveClass('w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300');
+    // Head
+    await expect(reacttable).toContainText('No');
+    await expect(reacttable).toContainText('Name');
+    await expect(reacttable).toContainText('Email');
+    // Body
+    await expect(reacttable).toContainText('1');
+    await expect(reacttable).toContainText('Amparo Mooney');
+    await expect(reacttable).toContainText('amparo@qnekt.com');
+  });
+});
