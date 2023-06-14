@@ -27,7 +27,10 @@ export default function BookListItem({ href, image, title, published, ...props }
               alt={title}
               src={image}
               fill
-              className={`rounded object-cover brightness-90 hover:brightness-100 ${isLoading ? 'blur-2xl' : 'blur-0'}`}
+              className={clsx(
+                'rounded object-cover brightness-90 hover:brightness-100',
+                isLoading ? 'blur-2xl' : 'blur-0'
+              )}
               onLoadingComplete={() => setLoading(false)}
               unoptimized
             />

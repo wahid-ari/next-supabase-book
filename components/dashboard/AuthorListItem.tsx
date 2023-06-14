@@ -27,9 +27,10 @@ export default function AuthorListItem({ href, image, name, web, ...props }: Pro
               alt={name}
               src={image}
               fill
-              className={`rounded-full object-cover brightness-90 hover:brightness-100 ${
+              className={clsx(
+                'rounded-full object-cover brightness-90 hover:brightness-100',
                 isLoading ? 'blur-2xl' : 'blur-0'
-              }`}
+              )}
               onLoadingComplete={() => setLoading(false)}
               unoptimized
             />
