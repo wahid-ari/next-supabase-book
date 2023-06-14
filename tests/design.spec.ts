@@ -835,3 +835,66 @@ test.describe('Testing Dialog Component', () => {
     await expect(dialog).not.toBeVisible();
   });
 });
+
+test.describe('Testing YUP Validation Component', () => {
+  // YUP Validation ----------------------------------------------------
+  test('All fields empty', async ({ page }) => {
+    await page.getByRole('button', { name: 'Submit Yup' }).click();
+    await expect(page.getByText('Username required')).toBeVisible();
+    await expect(page.getByText('Username must be alphabet')).toBeVisible();
+    await expect(page.getByText('Email required')).toBeVisible();
+    await expect(page.getByText('Number must be valid')).toBeVisible();
+    await expect(page.getByText('Number positive must be valid')).toBeVisible();
+  });
+  test('Username fill', async ({ page }) => {
+    await page.getByTestId('username-yup').fill('username');
+    await page.getByRole('button', { name: 'Submit Yup' }).click();
+    await expect(page.getByText('Username required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet')).not.toBeVisible();
+    await expect(page.getByText('Email required')).toBeVisible();
+    await expect(page.getByText('Number must be valid')).toBeVisible();
+    await expect(page.getByText('Number positive must be valid')).toBeVisible();
+  });
+  test('Email fill', async ({ page }) => {
+    await page.getByTestId('username-yup').fill('username');
+    await page.getByTestId('email-yup').fill('username@gmail.com');
+    await page.getByRole('button', { name: 'Submit Yup' }).click();
+    await expect(page.getByText('Username required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet')).not.toBeVisible();
+    await expect(page.getByText('Email required')).not.toBeVisible();
+    await expect(page.getByText('Number must be valid')).toBeVisible();
+    await expect(page.getByText('Number positive must be valid')).toBeVisible();
+  });
+  test('Number fill', async ({ page }) => {
+    await page.getByTestId('username-yup').fill('username');
+    await page.getByTestId('email-yup').fill('username@gmail.com');
+    await page.getByTestId('number-yup').fill('1');
+    await page.getByRole('button', { name: 'Submit Yup' }).click();
+    await expect(page.getByText('Username required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet')).not.toBeVisible();
+    await expect(page.getByText('Email required')).not.toBeVisible();
+    await expect(page.getByText('Number must be valid')).not.toBeVisible();
+    await expect(page.getByText('Number positive must be valid')).toBeVisible();
+  });
+  test('Positive Number fill', async ({ page }) => {
+    await page.getByTestId('username-yup').fill('username');
+    await page.getByTestId('email-yup').fill('username@gmail.com');
+    await page.getByTestId('number-yup').fill('1');
+    await page.getByTestId('positive-yup').fill('5');
+    await page.getByRole('button', { name: 'Submit Yup' }).click();
+    await expect(page.getByText('Username required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet')).not.toBeVisible();
+    await expect(page.getByText('Email required')).not.toBeVisible();
+    await expect(page.getByText('Number must be valid')).not.toBeVisible();
+    await expect(page.getByText('Number positive must be valid')).not.toBeVisible();
+  });
+  test('All filled', async ({ page }) => {
+    await page.getByTestId('username-yup').fill('username');
+    await page.getByTestId('email-yup').fill('username@gmail.com');
+    await page.getByTestId('number-yup').fill('1');
+    await page.getByTestId('positive-yup').fill('5');
+    await page.getByRole('button', { name: 'Submit Yup' }).click();
+    await expect(page.getByText('Posting YUP Data')).toBeVisible();
+    await expect(page.getByText('Success Posting YUP Data')).toBeVisible();
+  });
+});

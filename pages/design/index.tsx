@@ -62,19 +62,19 @@ export default function Example() {
   const [user, setUser] = useState({
     username: '',
     email: '',
-    angka: '',
-    angka_positif: '',
+    angka: null,
+    angka_positif: null,
   });
 
-  const addToast = () => {
+  function addToast() {
     pushToast({ message: 'This is a success toast message', isError: false });
-  };
+  }
 
-  const addToastError = () => {
+  function addToastError() {
     pushToast({ message: 'This is a error toast message', isError: true });
-  };
+  }
 
-  const toastAsync = () => {
+  function toastAsync() {
     const toastId = pushToast({
       message: 'Loading Posting Async Data',
       isLoading: true,
@@ -82,37 +82,37 @@ export default function Example() {
     setTimeout(() => {
       updateToast({ toastId, message: 'Posting Data Async Success', isError: false });
     }, 2000);
-  };
+  }
 
   let userSchema = yup.object().shape({
     username: yup
       .string()
-      .required('Username harus diisi')
-      .matches(/^[A-Za-z]+$/, 'Username harus berupa huruf'),
-    email: yup.string().email('Email harus valid').required('Email harus diisi').typeError('Email harus validwetewt'),
+      .required('Username required')
+      .matches(/^[A-Za-z]+$/, 'Username must be alphabet'),
+    email: yup.string().email('Email must be valid').required('Email required').typeError('Email must be valid'),
     angka: yup
       .number()
-      .required('Angka harus diisi')
-      .integer('Angka harus berupa integer bukan float')
-      .typeError('Angka harus valid'),
+      .required('Number required')
+      .integer('Number must be integer not float')
+      .typeError('Number must be valid'),
     angka_positif: yup
       .number()
-      .required('Angka harus diisi')
-      .positive('Angka harus positif')
-      .integer('Angka harus berupa integer bukan float')
-      .typeError('Angka harus valid'),
+      .required('Number positive required')
+      .positive('Number positive must be positif')
+      .integer('Number positive must be integer not float')
+      .typeError('Number positive must be valid'),
   });
 
-  const checker = async (schema: any, param: any) => {
+  async function checker(schema: any, param: any) {
     try {
       await schema.validate(param, { abortEarly: false });
       return { valid: true };
     } catch (err) {
       return { valid: false, errors: err.errors };
     }
-  };
+  }
 
-  const checkValid = async () => {
+  async function checkValid() {
     try {
       const { valid, errors } = await checker(userSchema, user);
       if (!valid && errors) {
@@ -121,19 +121,29 @@ export default function Example() {
           pushToast({ message: el, isError: true });
         });
       }
-      console.log(valid);
+      // console.log(valid);
+      // console.log(errors);
+      if (valid) {
+        const toastId = pushToast({
+          message: 'Posting YUP Data',
+          isLoading: true,
+        });
+        setTimeout(() => {
+          updateToast({ toastId, message: 'Success Posting YUP Data', isError: false });
+        }, 2000);
+      }
     } catch (e) {
       console.error(e);
     }
-  };
+  }
 
-  const handleUserChange = (e) => {
+  function handleUserChange(e) {
     setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
-  };
+  }
 
-  const onNext = () => {};
+  function onNext() {}
 
-  const onPrev = () => {};
+  function onPrev() {}
 
   const [selectedSearchBox, setSelectedSearchBox] = useState();
   const [querySearchBox, setQuerySearchBox] = useState('');
@@ -241,7 +251,7 @@ export default function Example() {
       <Wrapper id='tableofcontent' name='Table of Content' noChildren noClassName noProps>
         <div className='columns-2 text-emerald-600 dark:text-emerald-500 sm:columns-3'>
           <span className='mb-3 block underline'>
-            <Link href='#validation'>Validation (yup)</Link>
+            <Link href='#validation'>Validation</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#dialog'>Dialog</Link>
@@ -351,24 +361,44 @@ export default function Example() {
         </div>
       </Wrapper>
 
-      <Wrapper id='validation' name='Validation' noChildren noClassName noProps>
+      <Wrapper id='validation' name='Validation  (yup)' noChildren noClassName noProps>
         <LabeledInput
+          data-testid='username-yup'
           label='Username'
           name='username'
           value={user.username}
           placeholder='Username'
           onChange={handleUserChange}
         />
-        <LabeledInput label='Email' name='email' value={user.email} placeholder='Email' onChange={handleUserChange} />
-        <LabeledInput label='Angka' name='angka' value={user.angka} placeholder='Angka' onChange={handleUserChange} />
         <LabeledInput
-          label='Angka Positif'
-          name='angka_positif'
-          value={user.angka_positif}
-          placeholder='Number Positif'
+          data-testid='email-yup'
+          label='Email'
+          name='email'
+          type='email'
+          value={user.email}
+          placeholder='Email'
           onChange={handleUserChange}
         />
-        <Button onClick={checkValid}>Submit</Button>
+        <LabeledInput
+          data-testid='number-yup'
+          type='number'
+          label='Number'
+          name='angka'
+          value={user.angka}
+          placeholder='Number'
+          onChange={handleUserChange}
+        />
+        <LabeledInput
+          data-testid='positive-yup'
+          type='number'
+          min={0}
+          label='Positif Number'
+          name='angka_positif'
+          value={user.angka_positif}
+          placeholder='Positif Number'
+          onChange={handleUserChange}
+        />
+        <Button onClick={checkValid}>Submit Yup</Button>
       </Wrapper>
 
       <Wrapper
