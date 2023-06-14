@@ -37,7 +37,7 @@ export default function Table({
         className
       )}
     >
-      <div className='w-full overflow-auto scrollbar scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800 lg:max-w-[calc(100vw_-_17rem)]'>
+      <div className='w-full overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800 lg:max-w-[calc(100vw_-_17rem)]'>
         <table {...props} className='w-full table-auto whitespace-nowrap text-neutral-700 dark:text-neutral-400'>
           <thead>
             <tr className='whitespace-nowrap border-b bg-gray-50 text-sm font-bold dark:border-neutral-800 dark:bg-[#202020]'>
@@ -66,14 +66,15 @@ export default function Table({
               <p className='whitespace-nowrap'>No data</p>
             ) : (
               <p className='whitespace-nowrap'>
-                Showing <span className='font-bold'>{(currentPage - 1) * 10 + 1}</span> -{' '}
-                <span className='font-bold'>{currentPage !== totalPage ? currentPage * 10 : totalData}</span> from{' '}
+                Showing <span className='font-bold'>{(currentPage - 1) * 5 + 1}</span> -{' '}
+                <span className='font-bold'>{currentPage !== totalPage ? currentPage * 5 : totalData}</span> from{' '}
                 <span className='font-bold'>{totalData}</span> data
               </p>
             )}
             <div className='flex items-center justify-end gap-2'>
               <Button.secondary
                 id='prev'
+                title='Prev'
                 aria-label='Prev'
                 onClick={prev}
                 disabled={currentPage < 2}
@@ -83,6 +84,7 @@ export default function Table({
               </Button.secondary>
               <Button.secondary
                 id='next'
+                title='Next'
                 aria-label='Next'
                 onClick={next}
                 disabled={currentPage === totalPage}

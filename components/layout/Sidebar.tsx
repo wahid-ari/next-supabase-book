@@ -84,7 +84,7 @@ export default function Sidebar() {
         <div
           className={clsx(
             'flex flex-col flex-nowrap gap-1 overflow-auto border-t px-4 pt-4 dark:border-neutral-800 sm:flex-grow',
-            'scrollbar scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
+            'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
           )}
         >
           <NavLink isHome href='/' icon={<ViewGridIcon className='h-4 w-4' />}>

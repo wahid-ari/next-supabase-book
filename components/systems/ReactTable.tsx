@@ -163,6 +163,7 @@ export const ReactTable = forwardRef(
               onClick={() => gotoPage(0)}
               disabled={!canPreviousPage}
               aria-label='First'
+              title='First'
               className={clsx(
                 'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
                 canPreviousPage
@@ -176,6 +177,7 @@ export const ReactTable = forwardRef(
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
               aria-label='Prev'
+              title='Prev'
               className={clsx(
                 'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
                 canPreviousPage
@@ -192,6 +194,7 @@ export const ReactTable = forwardRef(
               onClick={() => nextPage()}
               disabled={!canNextPage}
               aria-label='Next'
+              title='Next'
               className={clsx(
                 'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
                 canNextPage
@@ -205,6 +208,7 @@ export const ReactTable = forwardRef(
               onClick={() => gotoPage(pageCount - 1)}
               disabled={!canNextPage}
               aria-label='Last'
+              title='Last'
               className={clsx(
                 'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
                 canNextPage
@@ -219,6 +223,7 @@ export const ReactTable = forwardRef(
           <div className='flex items-center justify-center gap-2 sm:justify-end'>
             <span className='text-sm text-neutral-800 dark:text-gray-200'>Go to page</span>
             <input
+              title='Page'
               type='number'
               min={1}
               max={pageOptions.length}
@@ -235,6 +240,7 @@ export const ReactTable = forwardRef(
               placeholder='1'
             />
             <select
+              title='Data'
               value={pageSize}
               onChange={(e) => {
                 setPageSize(Number(e.target.value));

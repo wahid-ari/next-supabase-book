@@ -40,7 +40,7 @@ export default function Layout({ children, title, description, prefetch }: Props
             className={clsx(
               'flex items-center justify-between gap-x-4 border-b px-4 py-3 lg:hidden',
               'overflow-x-auto bg-white/95 dark:border-neutral-800 dark:bg-neutral-900/90',
-              'scrollbar scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
+              'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
             )}
           >
             <Breadcrumb />

@@ -25,7 +25,7 @@ export default function FileInput({ className, label, name, value, onChange, ...
       <label className='block text-sm text-gray-800 dark:text-neutral-300' htmlFor={name}>
         {label}
       </label>
-      <Button.secondary onClick={handleClick} className='mt-2 w-full truncate !py-2'>
+      <Button.secondary title='Select File' onClick={handleClick} className='mt-2 w-full truncate !py-2'>
         {value !== '' ? (
           value
         ) : (
