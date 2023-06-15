@@ -13,6 +13,7 @@
     "format": "prettier -w .",
     "type-check": "tsc",
     "test": "npx playwright test",
+    "test-dashboard": "npx playwright test dashboard",
     "test-ui": "npx playwright test --ui",
     "test-report": "npx playwright show-report",
     "test-trace": "npx playwright show-trace trace.zip",
