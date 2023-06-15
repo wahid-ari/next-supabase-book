@@ -85,3 +85,31 @@ test.describe('Testing Statistic', () => {
     await expect(quoteByTag).toHaveClass(/text-sm font-medium text-neutral-700 dark:text-neutral-200/);
   });
 });
+
+test.describe('Testing Link', () => {
+  test('should open Author page', async ({ page }) => {
+    await page.getByTestId('author-count').click();
+    await expect(page).toHaveURL(/author/);
+    await expect(page).toHaveTitle(/Author/);
+  });
+  test('should open Book page', async ({ page }) => {
+    await page.getByTestId('book-count').click();
+    await expect(page).toHaveURL(/book/);
+    await expect(page).toHaveTitle(/Book/);
+  });
+  test('should open Quote page', async ({ page }) => {
+    await page.getByTestId('quote-count').click();
+    await expect(page).toHaveURL(/quote/);
+    await expect(page).toHaveTitle(/Quote/);
+  });
+  test('should open Genre page', async ({ page }) => {
+    await page.getByTestId('genre-count').click();
+    await expect(page).toHaveURL(/genre/);
+    await expect(page).toHaveTitle(/Genre/);
+  });
+  test('should open Tag page', async ({ page }) => {
+    await page.getByTestId('tag-count').click();
+    await expect(page).toHaveURL(/tag/);
+    await expect(page).toHaveTitle(/Tag/);
+  });
+});
