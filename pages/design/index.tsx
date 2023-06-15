@@ -180,7 +180,8 @@ export default function Example() {
       const validZod = zodSchema.safeParse(admin);
       if (validZod.success === false) {
         dismissToast();
-        console.log(validZod.error.issues);
+        // console.log(validZod.error);
+        // console.log(validZod.error.issues);
         validZod.error.issues.forEach((el) => {
           pushToast({ message: el.message, isError: true });
         });

@@ -898,3 +898,92 @@ test.describe('Testing YUP Validation Component', () => {
     await expect(page.getByText('Success Posting YUP Data')).toBeVisible();
   });
 });
+
+test.describe('Testing ZOD Validation Component', () => {
+  // ZOD Validation ----------------------------------------------------
+  test('All fields empty', async ({ page }) => {
+    await page.getByRole('button', { name: 'Submit Zod' }).click();
+    await expect(page.getByText('Username is required')).toBeVisible();
+    await expect(page.getByText('Username must be alphabet without space')).toBeVisible();
+    await expect(page.getByText('Email is required')).toBeVisible();
+    await expect(page.getByText('Invalid email address')).toBeVisible();
+    await expect(page.getByText('Age is required')).toBeVisible();
+    await expect(page.getByText('Password is required', { exact: true })).toBeVisible();
+    await expect(page.getByText('Password length minimal is 8', { exact: true })).toBeVisible();
+    await expect(page.getByText('Confirm Password is required')).toBeVisible();
+  });
+  test('Username fill', async ({ page }) => {
+    await page.getByTestId('username-zod').fill('username');
+    await page.getByRole('button', { name: 'Submit Zod' }).click();
+    await expect(page.getByText('Username is required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet without space')).not.toBeVisible();
+    await expect(page.getByText('Email is required')).toBeVisible();
+    await expect(page.getByText('Invalid email address')).toBeVisible();
+    await expect(page.getByText('Age is required')).toBeVisible();
+    await expect(page.getByText('Password is required', { exact: true })).toBeVisible();
+    await expect(page.getByText('Password length minimal is 8', { exact: true })).toBeVisible();
+    await expect(page.getByText('Confirm Password is required')).toBeVisible();
+  });
+  test('Email fill', async ({ page }) => {
+    await page.getByTestId('username-zod').fill('username');
+    await page.getByTestId('email-zod').fill('username@gmail.com');
+    await page.getByRole('button', { name: 'Submit Zod' }).click();
+    await expect(page.getByText('Username is required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet without space')).not.toBeVisible();
+    await expect(page.getByText('Email is required')).not.toBeVisible();
+    await expect(page.getByText('Invalid email address')).not.toBeVisible();
+    await expect(page.getByText('Age is required')).toBeVisible();
+    await expect(page.getByText('Password is required', { exact: true })).toBeVisible();
+    await expect(page.getByText('Password length minimal is 8', { exact: true })).toBeVisible();
+    await expect(page.getByText('Confirm Password is required')).toBeVisible();
+  });
+  test('Age fill', async ({ page }) => {
+    await page.getByTestId('username-zod').fill('username');
+    await page.getByTestId('email-zod').fill('username@gmail.com');
+    await page.getByTestId('age-zod').fill('18');
+    await page.getByRole('button', { name: 'Submit Zod' }).click();
+    await expect(page.getByText('Username is required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet without space')).not.toBeVisible();
+    await expect(page.getByText('Email is required')).not.toBeVisible();
+    await expect(page.getByText('Invalid email address')).not.toBeVisible();
+    await expect(page.getByText('Age is required')).not.toBeVisible();
+    await expect(page.getByText('Password is required', { exact: true })).toBeVisible();
+    await expect(page.getByText('Password length minimal is 8', { exact: true })).toBeVisible();
+    await expect(page.getByText('Confirm Password is required')).toBeVisible();
+  });
+  test('Password fill', async ({ page }) => {
+    await page.getByTestId('username-zod').fill('username');
+    await page.getByTestId('email-zod').fill('username@gmail.com');
+    await page.getByTestId('age-zod').fill('18');
+    await page.getByTestId('password-zod').fill('password');
+    await page.getByRole('button', { name: 'Submit Zod' }).click();
+    await expect(page.getByText('Username is required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet without space')).not.toBeVisible();
+    await expect(page.getByText('Email is required')).not.toBeVisible();
+    await expect(page.getByText('Invalid email address')).not.toBeVisible();
+    await expect(page.getByText('Age is required')).not.toBeVisible();
+    await expect(page.getByText('Password is required', { exact: true })).not.toBeVisible();
+    await expect(page.getByText('Password length minimal is 8', { exact: true })).not.toBeVisible();
+    await expect(page.getByText('Confirm Password is required')).toBeVisible();
+    await expect(page.getByText('Oops! Password doesnt match')).toBeVisible();
+  });
+  test('All filled', async ({ page }) => {
+    await page.getByTestId('username-zod').fill('username');
+    await page.getByTestId('email-zod').fill('username@gmail.com');
+    await page.getByTestId('age-zod').fill('18');
+    await page.getByTestId('password-zod').fill('password');
+    await page.getByTestId('confirmPassword-zod').fill('password');
+    await page.getByRole('button', { name: 'Submit Zod' }).click();
+    await expect(page.getByText('Username is required')).not.toBeVisible();
+    await expect(page.getByText('Username must be alphabet without space')).not.toBeVisible();
+    await expect(page.getByText('Email is required')).not.toBeVisible();
+    await expect(page.getByText('Invalid email address')).not.toBeVisible();
+    await expect(page.getByText('Age is required')).not.toBeVisible();
+    await expect(page.getByText('Password is required', { exact: true })).not.toBeVisible();
+    await expect(page.getByText('Password length minimal is 8', { exact: true })).not.toBeVisible();
+    await expect(page.getByText('Confirm Password is required')).not.toBeVisible();
+    await expect(page.getByText('Oops! Password doesnt match')).not.toBeVisible();
+    await expect(page.getByText('Posting ZOD Data')).toBeVisible();
+    await expect(page.getByText('Success Posting ZOD Data')).toBeVisible();
+  });
+});
