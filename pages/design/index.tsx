@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState, useRef, useMemo } from 'react';
 import * as yup from 'yup';
+import { z } from 'zod';
 import useToast from '@utils/useToast';
 import Layout from '@components/layout/Layout';
 import Badge from '@components/systems/Badge';
@@ -62,8 +63,15 @@ export default function Example() {
   const [user, setUser] = useState({
     username: '',
     email: '',
-    angka: null,
-    angka_positif: null,
+    angka: '',
+    angka_positif: '',
+  });
+  const [admin, setAdmin] = useState({
+    username: '',
+    email: '',
+    age: '',
+    password: '',
+    confirmPassword: '',
   });
 
   function addToast() {
@@ -89,7 +97,7 @@ export default function Example() {
       .string()
       .required('Username required')
       .matches(/^[A-Za-z]+$/, 'Username must be alphabet'),
-    email: yup.string().email('Email must be valid').required('Email required').typeError('Email must be valid'),
+    email: yup.string().required('Email required').email('Email must be valid').typeError('Email must be valid'),
     angka: yup
       .number()
       .required('Number required')
@@ -102,6 +110,35 @@ export default function Example() {
       .integer('Number positive must be integer not float')
       .typeError('Number positive must be valid'),
   });
+
+  const zodSchema = z
+    .object({
+      username: z
+        .string()
+        .regex(/^[A-Za-z]+$/, { message: 'Username must be alphabet without space' })
+        .min(1, { message: 'Username is required' }),
+      email: z.string().min(1, { message: 'Email is required' }).email({ message: 'Invalid email address' }),
+      age: z
+        .number({
+          required_error: 'Age is required',
+          invalid_type_error: 'Age is required',
+        })
+        .positive({ message: 'Age must be a positive number' })
+        .gt(17, { message: 'Age must be a greater than 17' })
+        .int({ message: 'Age must be an integer' }),
+      password: z
+        .string()
+        .nonempty({
+          message: 'Password is required',
+        })
+        .min(8, { message: 'Password length minimal is 8' }),
+      confirmPassword: z.string().nonempty({
+        message: 'Confirm Password is required',
+      }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: 'Oops! Password doesnt match',
+    });
 
   async function checker(schema: any, param: any) {
     try {
@@ -137,8 +174,41 @@ export default function Example() {
     }
   }
 
+  async function checkValidZod(e: any) {
+    e.preventDefault();
+    try {
+      const validZod = zodSchema.safeParse(admin);
+      if (validZod.success === false) {
+        dismissToast();
+        console.log(validZod.error.issues);
+        validZod.error.issues.forEach((el) => {
+          pushToast({ message: el.message, isError: true });
+        });
+      } else {
+        const toastId = pushToast({
+          message: 'Posting ZOD Data',
+          isLoading: true,
+        });
+        setTimeout(() => {
+          updateToast({ toastId, message: 'Success Posting ZOD Data', isError: false });
+        }, 2000);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   function handleUserChange(e) {
-    setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+
+  function handleAdminChange(e) {
+    let valueNumber = e.target.name == 'age' ? Number(e.target.value) : e.target.value;
+    setAdmin({
+      ...admin,
+      // [e.target.name]: e.target.value,
+      [e.target.name]: valueNumber,
+    });
   }
 
   function onNext() {}
@@ -361,7 +431,7 @@ export default function Example() {
         </div>
       </Wrapper>
 
-      <Wrapper id='validation' name='Validation  (yup)' noChildren noClassName noProps>
+      <Wrapper id='validation' name='Validation (yup)' noChildren noClassName noProps>
         <LabeledInput
           data-testid='username-yup'
           label='Username'
@@ -399,6 +469,56 @@ export default function Example() {
           onChange={handleUserChange}
         />
         <Button onClick={checkValid}>Submit Yup</Button>
+      </Wrapper>
+
+      <Wrapper id='validation-zod' name='Validation (zod)' noChildren noClassName noProps>
+        <form onSubmit={checkValidZod}>
+          <LabeledInput
+            data-testid='username-zod'
+            label='Username'
+            name='username'
+            value={admin.username}
+            placeholder='Username'
+            onChange={handleAdminChange}
+          />
+          <LabeledInput
+            data-testid='email-zod'
+            label='Email'
+            name='email'
+            type='email'
+            value={admin.email}
+            placeholder='Email'
+            onChange={handleAdminChange}
+          />
+          <LabeledInput
+            data-testid='age-zod'
+            type='number'
+            label='Age'
+            name='age'
+            value={admin.age}
+            placeholder='Number'
+            onChange={handleAdminChange}
+          />
+          <LabeledInput
+            data-testid='password-zod'
+            type='password'
+            label='Password'
+            name='password'
+            value={admin.password}
+            placeholder='Password'
+            onChange={handleAdminChange}
+          />
+          <LabeledInput
+            data-testid='confirmPassword-zod'
+            type='password'
+            label='Confirm Password'
+            name='confirmPassword'
+            value={admin.confirmPassword}
+            placeholder='Confirm Password'
+            onChange={handleAdminChange}
+          />
+          <Button type='submit'>Submit Zod</Button>
+        </form>
       </Wrapper>
 
       <Wrapper
