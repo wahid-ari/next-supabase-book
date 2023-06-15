@@ -86,7 +86,7 @@ test.describe('Testing Statistic', () => {
   });
 });
 
-test.describe('Testing Link', () => {
+test.describe('Testing Link in Dashboard', () => {
   test('should open Author page', async ({ page }) => {
     await page.getByTestId('author-count').click();
     await expect(page).toHaveURL(/author/);
