@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AxiosProvider>
           <main className={inter.className}>
             <Toaster
-              gutter={0}
+              gutter={4}
               toastOptions={{
                 style: {
                   maxWidth: 380,

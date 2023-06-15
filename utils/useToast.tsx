@@ -16,26 +16,29 @@ type UpdateProps = {
 export default function useToast() {
   const pushToast = ({ message, isError, isLoading }: PushProps) => {
     if (!isError && !isLoading) {
-      toast.success(<span className='text-sm font-medium'>{message}</span>, {
+      toast.success(<span className='font-medium'>{message}</span>, {
         duration: 4000,
         position: 'top-right',
         style: {
           maxWidth: 380,
+          fontSize: '13px',
         },
       });
     } else if (!isLoading) {
-      toast.error(<span className='text-sm font-medium'>{message}</span>, {
+      toast.error(<span className='font-medium'>{message}</span>, {
         id: message,
         position: 'top-right',
         style: {
           maxWidth: 380,
+          fontSize: '13px',
         },
       });
     } else {
-      return toast.loading(<span className='text-sm font-medium'>{message}</span>, {
+      return toast.loading(<span className='font-medium'>{message}</span>, {
         position: 'top-right',
         style: {
           maxWidth: 380,
+          fontSize: '13px',
         },
       });
     }
@@ -43,20 +46,22 @@ export default function useToast() {
 
   const updateToast = ({ toastId, message, isError }: UpdateProps) => {
     if (!isError) {
-      toast.success(<span className='text-sm font-medium'>{message}</span>, {
+      toast.success(<span className='font-medium'>{message}</span>, {
         id: toastId,
         duration: 4000,
         position: 'top-right',
         style: {
           maxWidth: 380,
+          fontSize: '13px',
         },
       });
     } else {
-      toast.error(<span className='text-sm font-medium'>{message}</span>, {
+      toast.error(<span className='font-medium'>{message}</span>, {
         id: toastId,
         position: 'top-right',
         style: {
           maxWidth: 380,
+          fontSize: '13px',
         },
       });
     }
