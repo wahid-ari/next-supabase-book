@@ -6,15 +6,18 @@ export default function Card({
   link,
   count,
   icon,
+  ...props
 }: {
   title: string;
   link: string;
   count: number;
   icon?: ReactNode;
+  [props: string]: any;
 }) {
   return (
     <Link
       href={link}
+      {...props}
       className='group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800'
     >
       <div>

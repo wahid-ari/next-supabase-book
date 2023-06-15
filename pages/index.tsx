@@ -115,27 +115,45 @@ export default function Home() {
 
       <div className='mt-8 grid grid-cols-1 gap-4 min-[350px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
         {totalAuthors ? (
-          <Card title='Author' link='/author' count={totalAuthors.authors} icon={<UserGroupIcon />} />
+          <Card
+            title='Author'
+            link='/author'
+            count={totalAuthors.authors}
+            icon={<UserGroupIcon />}
+            data-testid='author-count'
+          />
         ) : (
           <Shimer className='!h-24 w-full' />
         )}
         {totalBooks ? (
-          <Card title='Book' link='/book' count={totalBooks.books} icon={<BookOpenIcon />} />
+          <Card title='Book' link='/book' count={totalBooks.books} icon={<BookOpenIcon />} data-testid='book-count' />
         ) : (
           <Shimer className='!h-24 w-full' />
         )}
         {totalQuotes ? (
-          <Card title='Quote' link='/quote' count={totalQuotes.quotes} icon={<AnnotationIcon />} />
+          <Card
+            title='Quote'
+            link='/quote'
+            count={totalQuotes.quotes}
+            icon={<AnnotationIcon />}
+            data-testid='quote-count'
+          />
         ) : (
           <Shimer className='!h-24 w-full' />
         )}
         {totalGenres ? (
-          <Card title='Genre' link='/genre' count={totalGenres.genres} icon={<ColorSwatchIcon />} />
+          <Card
+            title='Genre'
+            link='/genre'
+            count={totalGenres.genres}
+            icon={<ColorSwatchIcon />}
+            data-testid='genre-count'
+          />
         ) : (
           <Shimer className='!h-24 w-full' />
         )}
         {totalTags ? (
-          <Card title='Tag' link='/tag' count={totalTags.tags} icon={<CollectionIcon />} />
+          <Card title='Tag' link='/tag' count={totalTags.tags} icon={<CollectionIcon />} data-testid='tag-count' />
         ) : (
           <Shimer className='!h-24 w-full' />
         )}
@@ -164,7 +182,7 @@ export default function Home() {
         {dataBookByGenre ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-neutral-900'>
             <div className='bg-neutral-100/80 p-3 dark:bg-[#1F1F1F]'>
-              <Text.medium className='!text-sm'>Total Book by Genre</Text.medium>
+              <Text.medium>Total Book by Genre</Text.medium>
             </div>
             <div className='m-auto w-72 py-3'>
               <Pie options={options} data={dataBookByGenre} />
@@ -177,7 +195,7 @@ export default function Home() {
         {dataQuoteByTag ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-neutral-900'>
             <div className='bg-neutral-100/80 p-3 dark:bg-[#1F1F1F]'>
-              <Text.medium className='!text-sm'>Total Quote by Tag</Text.medium>
+              <Text.medium>Total Quote by Tag</Text.medium>
             </div>
             <div className='m-auto w-72 py-3'>
               <Doughnut options={options} data={dataQuoteByTag} />
@@ -192,7 +210,7 @@ export default function Home() {
         {dataBookByAuthor ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-neutral-900'>
             <div className='bg-neutral-100/80 p-3 dark:bg-[#1F1F1F]'>
-              <Text.medium className='!text-sm'>Total Book by Author</Text.medium>
+              <Text.medium>Total Book by Author</Text.medium>
             </div>
             <div className='p-3'>
               <Bar options={optionsBarChart(theme)} data={dataBookByAuthor} height={windowWidth > 500 ? 100 : 250} />
@@ -207,7 +225,7 @@ export default function Home() {
         {dataQuoteByAuthor ? (
           <div className='rounded-md border bg-white dark:border-neutral-800 dark:bg-neutral-900'>
             <div className='bg-neutral-100/80 p-3 dark:bg-[#1F1F1F]'>
-              <Text.medium className='!text-sm'>Total Quote by Author</Text.medium>
+              <Text.medium>Total Quote by Author</Text.medium>
             </div>
             <div className='p-3'>
               <Bar
