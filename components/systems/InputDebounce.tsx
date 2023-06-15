@@ -60,8 +60,6 @@ export default function InputDebounce({
           'dark:bg-neutral-900 dark:text-neutral-100 dark:ring-neutral-600 dark:focus:border-emerald-500',
           'dark:focus:ring-emerald-500'
         )}
-        autoComplete='off'
-        required
       />
     </div>
   );

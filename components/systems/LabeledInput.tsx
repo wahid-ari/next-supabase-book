@@ -41,8 +41,6 @@ export default function LabeledInput({
           'border-gray-300 bg-white outline-none dark:border-neutral-700 dark:bg-neutral-900',
           'border focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:focus:border-emerald-500 dark:focus:ring-emerald-500'
         )}
-        autoComplete='off'
-        required
       />
     </div>
   );

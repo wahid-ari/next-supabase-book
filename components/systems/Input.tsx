@@ -26,8 +26,6 @@ export default function Input({ className, type, name, placeholder, value, onCha
           'border-gray-300 transition-all dark:border-neutral-700 dark:text-neutral-100',
           'focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:focus:border-emerald-500 dark:focus:ring-emerald-500'
         )}
-        autoComplete='off'
-        required
       />
     </div>
   );
