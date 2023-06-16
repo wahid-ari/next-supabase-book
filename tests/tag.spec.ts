@@ -13,8 +13,8 @@ test.describe('Testing Tag Page', () => {
     await expect(page.getByRole('button', { name: 'Add New Tag' })).toBeVisible();
   });
   test('should render table and data', async ({ page }) => {
-    await expect(page.getByRole('cell', { name: 'Name' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'No', exact: true })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'Name' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Action' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Love' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Life' })).toBeVisible();
