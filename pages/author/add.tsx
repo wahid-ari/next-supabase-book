@@ -38,7 +38,7 @@ export default function Author() {
 
   async function handleSave() {
     const toastId = pushToast({
-      message: 'Creating author...',
+      message: 'Creating author',
       isLoading: true,
     });
     try {

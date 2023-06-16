@@ -57,7 +57,7 @@ export default function Author({ id }) {
 
   async function handleEdit() {
     const toastId = pushToast({
-      message: 'Updating author...',
+      message: 'Updating author',
       isLoading: true,
     });
     try {

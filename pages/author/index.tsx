@@ -38,7 +38,7 @@ export default function Author() {
 
   async function handleDelete() {
     const toastId = pushToast({
-      message: 'Deleting author...',
+      message: 'Deleting author',
       isLoading: true,
     });
     try {

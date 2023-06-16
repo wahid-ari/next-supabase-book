@@ -84,7 +84,7 @@ export default function Book() {
 
   async function handleSave() {
     const toastId = pushToast({
-      message: 'Creating book...',
+      message: 'Creating book',
       isLoading: true,
     });
     try {

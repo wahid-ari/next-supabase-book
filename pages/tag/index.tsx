@@ -49,7 +49,7 @@ export default function Tags() {
 
   async function handleCreate() {
     const toastId = pushToast({
-      message: `Creating ${name} tag...`,
+      message: `Creating ${name}`,
       isLoading: true,
     });
     try {
@@ -69,7 +69,7 @@ export default function Tags() {
 
   async function handleEdit() {
     const toastId = pushToast({
-      message: 'Updating tag...',
+      message: 'Updating tag',
       isLoading: true,
     });
     try {
@@ -89,7 +89,7 @@ export default function Tags() {
 
   async function handleDelete() {
     const toastId = pushToast({
-      message: `Deleting ${deleteItem.name} tag...`,
+      message: `Deleting ${deleteItem.name}`,
       isLoading: true,
     });
     try {

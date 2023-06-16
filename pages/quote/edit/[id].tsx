@@ -112,7 +112,7 @@ export default function Quote({ id }) {
 
   async function handleSave() {
     const toastId = pushToast({
-      message: 'Updating quote...',
+      message: 'Updating quote',
       isLoading: true,
     });
     try {

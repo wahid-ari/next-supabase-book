@@ -40,7 +40,7 @@ export default function Book() {
 
   async function handleDelete() {
     const toastId = pushToast({
-      message: 'Deleting book...',
+      message: 'Deleting book',
       isLoading: true,
     });
     try {

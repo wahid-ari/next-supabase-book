@@ -40,7 +40,7 @@ export default function Quote() {
 
   async function handleDelete() {
     const toastId = pushToast({
-      message: 'Deleting quote...',
+      message: 'Deleting quote',
       isLoading: true,
     });
     try {

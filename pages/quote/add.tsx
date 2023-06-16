@@ -76,7 +76,7 @@ export default function Quote() {
 
   async function handleSave() {
     const toastId = pushToast({
-      message: 'Creating quote...',
+      message: 'Creating quote',
       isLoading: true,
     });
     try {

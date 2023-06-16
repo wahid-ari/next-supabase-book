@@ -126,7 +126,7 @@ export default function Book({ id }) {
 
   async function handleEdit() {
     const toastId = pushToast({
-      message: 'Updating book...',
+      message: 'Updating book',
       isLoading: true,
     });
     try {
