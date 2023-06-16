@@ -8,6 +8,7 @@ test.describe('Testing Dashboard Page', () => {
   test('page has title', async ({ page }) => {
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Dashboard/);
+    await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
   });
 });
 
