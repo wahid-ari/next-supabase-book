@@ -177,7 +177,7 @@ export default function Search() {
                   onClick={resetBooksHistory}
                   className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
                 >
-                  Clear
+                  Clear Books
                 </button>
               </div>
               <div className='mt-2 space-y-4'>
@@ -204,7 +204,7 @@ export default function Search() {
                   onClick={resetAuthorsHistory}
                   className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500'
                 >
-                  Clear
+                  Clear Authors
                 </button>
               </div>
               <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
