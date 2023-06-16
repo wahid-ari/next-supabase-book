@@ -31,6 +31,7 @@ export default function LabeledInput({
       <input
         {...props}
         type={type}
+        id={name}
         name={name}
         placeholder={placeholder}
         value={value}
@@ -65,6 +66,7 @@ LabeledInput.disabled = ({ className, label, type, name, placeholder, defaultVal
       <input
         {...props}
         type={type}
+        id={name}
         name={name}
         placeholder={placeholder}
         defaultValue={defaultValue}

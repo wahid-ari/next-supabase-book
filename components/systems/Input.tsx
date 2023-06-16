@@ -16,6 +16,7 @@ export default function Input({ className, type, name, placeholder, value, onCha
       <input
         {...props}
         type={type}
+        id={name}
         name={name}
         placeholder={placeholder}
         value={value}
@@ -46,6 +47,7 @@ Input.disabled = ({ className, type, name, placeholder, defaultValue, ...props }
       <input
         {...props}
         type={type}
+        id={name}
         name={name}
         placeholder={placeholder}
         defaultValue={defaultValue}
