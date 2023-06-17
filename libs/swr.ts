@@ -147,3 +147,8 @@ export function useQuoteByTagData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/statistics/quote-by-tag`, fetcher);
   return { data, error, isLoading };
 }
+
+export function useLogsData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/log`, fetcher);
+  return { data, error, isLoading };
+}

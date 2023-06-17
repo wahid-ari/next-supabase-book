@@ -17,6 +17,7 @@ import {
   ExternalLinkIcon,
   BookOpenIcon,
   AnnotationIcon,
+  DocumentReportIcon,
 } from '@heroicons/react/outline';
 import NavLink from '@components/systems/NavLink';
 import NavAccordion from '@components/systems/NavAccordion';
@@ -113,6 +114,10 @@ export default function Sidebar() {
 
           <NavLink href='/tag' icon={<CollectionIcon className='h-4 w-4' />} className='mt-1'>
             Tag
+          </NavLink>
+
+          <NavLink href='/log' icon={<DocumentReportIcon className='h-4 w-4' />} className='mt-1'>
+            Log
           </NavLink>
 
           <NavLink href='/settings' icon={<CogIcon className='h-4 w-4' />} className='mt-1'>
