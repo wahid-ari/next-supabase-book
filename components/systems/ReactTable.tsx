@@ -17,11 +17,28 @@ type Props = {
   className?: string;
   bordered?: boolean;
   itemPerPage?: number[];
+  keyword?: string;
+  showInfo?: boolean;
+  filteredLength?: number;
   [props: string]: any;
 };
 
 export const ReactTable = forwardRef(
-  ({ columns, data, page_size = 5, className, bordered, itemPerPage = [5, 10, 20], ...props }: Props, ref) => {
+  (
+    {
+      columns,
+      data,
+      page_size = 5,
+      className,
+      bordered,
+      itemPerPage = [5, 10, 20],
+      keyword,
+      showInfo,
+      filteredLength,
+      ...props
+    }: Props,
+    ref
+  ) => {
     // Use the state and functions returned from useTable to build your UI
     const defaultColumn = useMemo(
       () => ({
@@ -73,6 +90,25 @@ export const ReactTable = forwardRef(
       state: { pageIndex, pageSize },
     } = instance;
     useImperativeHandle(ref, () => instance);
+
+    // this is for showing total data in table
+    let show = pageSize * (pageIndex + 1);
+    if (keyword == '') {
+      // if not searching and in the last page
+      if (pageIndex == pageOptions.length - 1) {
+        show = data.length;
+      }
+    } else {
+      // if searching and in the last page
+      if (pageIndex == pageOptions.length - 1) {
+        show = filteredLength;
+      }
+    }
+    // if searching, show total data from filteredLength
+    let dataLength = keyword == '' ? data.length : filteredLength;
+    let showText = `Showing ${pageIndex * pageSize + 1} to ${show} from ${dataLength} ${
+      keyword == '' ? 'total' : 'filtered'
+    } data`;
 
     return (
       <div className={clsx('w-full rounded border dark:border-neutral-800', className)}>
@@ -156,6 +192,12 @@ export const ReactTable = forwardRef(
             </tbody>
           </table>
         </div>
+
+        {showInfo ? (
+          <div className='pl-3 pt-3 text-center sm:text-left'>
+            <span className='text-sm text-neutral-600 dark:text-neutral-300'>{showText}</span>
+          </div>
+        ) : null}
 
         <div className='grid grid-cols-1 gap-4 pb-5 pt-3 sm:grid-cols-2 sm:p-3'>
           <div className='flex items-center justify-center gap-2 sm:justify-start'>
