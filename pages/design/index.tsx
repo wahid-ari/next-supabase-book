@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import * as yup from 'yup';
 import { z } from 'zod';
 import useToast from '@utils/useToast';
@@ -37,6 +37,7 @@ import Select from '@components/systems/Select';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import clsx from 'clsx';
 import FileInput from '@components/systems/FileInput';
+import { faker } from '@faker-js/faker';
 
 const searchBoxData = [
   {
@@ -67,8 +68,8 @@ export default function Example() {
     angka_positif: '',
   });
   const [admin, setAdmin] = useState({
-    username: '',
-    email: '',
+    usernamee: '',
+    emaill: '',
     age: '',
     password: '',
     confirmPassword: '',
@@ -113,11 +114,11 @@ export default function Example() {
 
   const zodSchema = z
     .object({
-      username: z
+      usernamee: z
         .string()
         .regex(/^[A-Za-z]+$/, { message: 'Username must be alphabet without space' })
         .min(1, { message: 'Username is required' }),
-      email: z.string().min(1, { message: 'Email is required' }).email({ message: 'Invalid email address' }),
+      emaill: z.string().min(1, { message: 'Email is required' }).email({ message: 'Invalid email address' }),
       age: z
         .number({
           required_error: 'Age is required',
@@ -303,7 +304,45 @@ export default function Example() {
     []
   );
 
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'No',
+        accessor: 'id',
+        width: 300,
+        Cell: (row) => {
+          return row.cell.row.index + 1;
+        },
+      },
+      {
+        Header: 'Name',
+        accessor: 'name',
+        width: 300,
+      },
+      {
+        Header: 'Email',
+        accessor: 'email',
+        width: 300,
+      },
+    ],
+    []
+  );
+
+  function createUser() {
+    return {
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+    };
+  }
+  const fakerUsers = useMemo(() => faker.helpers.multiple(createUser, { count: 50 }), []);
+
   const tableInstance = useRef(null);
+  const [inputDebounceValues, setInputDebounceValues] = useState('');
+  const tableInstances = useRef(null);
+  const [filteredLength, setFilteredLength] = useState(0);
+  useEffect(() => {
+    setFilteredLength(tableInstances?.current?.rows?.length);
+  }, [inputDebounceValues]);
 
   const [file, setFile] = useState({ name: '' });
   function handleFileChange(e: any) {
@@ -313,6 +352,15 @@ export default function Example() {
   const [selectedColor, setSelectedColor] = useState('blue');
   function handleSelectColor(e: any) {
     setSelectedColor(e.target.value);
+  }
+
+  // fix react hydration error
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
   }
 
   return (
@@ -477,17 +525,17 @@ export default function Example() {
           <LabeledInput
             data-testid='username-zod'
             label='Username'
-            name='username'
-            value={admin.username}
+            name='usernamee'
+            value={admin.usernamee}
             placeholder='Username'
             onChange={handleAdminChange}
           />
           <LabeledInput
             data-testid='email-zod'
             label='Email'
-            name='email'
+            name='emaill'
             type='email'
-            value={admin.email}
+            value={admin.emaill}
             placeholder='Email'
             onChange={handleAdminChange}
           />
@@ -671,7 +719,13 @@ export default function Example() {
         />
       </Wrapper>
 
-      <Wrapper id='reacttable' name='React Table' props={['columns', 'data', 'page_size', 'bordered']} noProps noWrap>
+      <Wrapper
+        id='reacttable'
+        name='React Table'
+        props={['columns', 'data', 'page_size', 'bordered', 'itemPerPage', 'keyword', 'showInfo', 'filteredLength']}
+        noProps
+        noWrap
+      >
         <LabeledInput
           label='Search Data'
           id='caridata'
@@ -683,6 +737,28 @@ export default function Example() {
           }}
         />
         <ReactTable data-testid='reacttable' columns={column} data={tabledata} ref={tableInstance} page_size={5} />
+        <br />
+        <InputDebounce
+          label='Search'
+          id='inputdebounces'
+          name='inputdebounces'
+          placeholder='Search'
+          value={inputDebounceValues}
+          onChange={(value) => {
+            setInputDebounceValues(value);
+            tableInstances?.current?.setGlobalFilter(value);
+          }}
+        />
+        <ReactTable
+          columns={columns}
+          data={fakerUsers}
+          ref={tableInstances}
+          page_size={10}
+          itemPerPage={[10, 20, 50, 100]}
+          keyword={inputDebounceValues}
+          showInfo
+          filteredLength={filteredLength}
+        />
       </Wrapper>
 
       <Wrapper id='usetoast' name='useToast (hook)' noProps noChildren noClassName>
@@ -917,7 +993,7 @@ export default function Example() {
 
       <Wrapper id='inputdisabled' name='Input.disabled' props={['type', 'name', 'placeholder', 'defaultValue']}>
         <Input.disabled
-          name='input'
+          name='input-disabled'
           placeholder='Input default'
           defaultValue='Has a value'
           data-testid='input-disabled'
@@ -933,10 +1009,16 @@ export default function Example() {
         name='LabeledInput'
         props={['label', 'name', 'type', 'placeholder', 'value', 'onChange']}
       >
-        <LabeledInput label='Email' name='email' placeholder='Email' type='text' data-testid='labeledinput' />
+        <LabeledInput
+          label='Email'
+          name='email-labeledinput'
+          placeholder='Email'
+          type='text'
+          data-testid='labeledinput'
+        />
         <LabeledInput
           label='Password'
-          name='password'
+          name='passwordd'
           placeholder='Your Password'
           type='password'
           data-testid='labeledinput-password'
