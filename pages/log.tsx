@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLogsData } from '@libs/swr';
 import Layout from '@components/layout/Layout';
-import TableSimple from '@components/systems/TableSimple';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import InputDebounce from '@components/systems/InputDebounce';
-import nookies from 'nookies';
+import ReactTable from '@components/systems/ReactTable';
 import Badge from '@components/systems/Badge';
+import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   // const cookies = nookies.get(context);
@@ -26,15 +26,83 @@ export default function Log() {
   const { data, error } = useLogsData();
   const [inputDebounceValue, setInputDebounceValue] = useState('');
 
-  const filteredData =
-    inputDebounceValue === ''
-      ? data
-      : data.filter((item: any) =>
-          item.book_users.name
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(inputDebounceValue.toLowerCase().replace(/\s+/g, ''))
-        );
+  const column = useMemo(
+    () => [
+      {
+        Header: 'No',
+        accessor: 'id',
+        width: 300,
+        Cell: (row: any) => {
+          // console.log(row.cell.row.index)
+          return row.cell.row.index + 1;
+        },
+      },
+      {
+        Header: 'User',
+        accessor: 'book_users.name',
+        width: 300,
+        Cell: (row: any) => {
+          const { values, original } = row.cell.row;
+          return original?.book_users?.name;
+        },
+      },
+      {
+        Header: 'Action',
+        accessor: 'action',
+        width: 300,
+        Cell: (row: any) => {
+          const { values, original } = row.cell.row;
+          return original.action == 'create' ? (
+            <Badge.green>CREATE</Badge.green>
+          ) : original.action == 'update' ? (
+            <Badge>UPDATE</Badge>
+          ) : (
+            <Badge.red>DELETE</Badge.red>
+          );
+        },
+      },
+      {
+        Header: 'Table',
+        accessor: 'table',
+        width: 300,
+        Cell: (row: any) => {
+          const { values, original } = row.cell.row;
+          return original?.table.replace('book_', '');
+        },
+      },
+      {
+        Header: 'Description',
+        accessor: 'description',
+        width: 300,
+      },
+      {
+        Header: 'Date',
+        accessor: 'created_at',
+        width: 300,
+        Cell: (row: any) => {
+          const { values, original } = row.cell.row;
+          return original?.created_at?.split('T')[0];
+        },
+      },
+      {
+        Header: 'Time',
+        accessor: '',
+        width: 300,
+        Cell: (row: any) => {
+          const { values, original } = row.cell.row;
+          let date = new Date(original?.created_at);
+          return date.toLocaleTimeString('en-US');
+        },
+      },
+    ],
+    []
+  );
+
+  const tableInstance = useRef(null);
+  const [filteredLength, setFilteredLength] = useState(0);
+  useEffect(() => {
+    setFilteredLength(tableInstance?.current?.rows?.length);
+  }, [inputDebounceValue]);
 
   if (error) {
     return (
@@ -56,46 +124,23 @@ export default function Log() {
         name='inputdebounce'
         placeholder='Search'
         value={inputDebounceValue}
-        onChange={(value) => setInputDebounceValue(value)}
+        onChange={(value) => {
+          setInputDebounceValue(value);
+          tableInstance?.current?.setGlobalFilter(value);
+        }}
       />
 
-      {filteredData ? (
-        <TableSimple
-          head={
-            <>
-              <TableSimple.td small>No</TableSimple.td>
-              <TableSimple.td>User</TableSimple.td>
-              <TableSimple.td>Action</TableSimple.td>
-              <TableSimple.td>Table</TableSimple.td>
-              <TableSimple.td>Description</TableSimple.td>
-              <TableSimple.td>Date</TableSimple.td>
-              <TableSimple.td>Time</TableSimple.td>
-            </>
-          }
-        >
-          {filteredData.map((item: any, index: number) => {
-            let date = new Date(item.created_at);
-            return (
-              <TableSimple.tr key={index}>
-                <TableSimple.td small>{index + 1}</TableSimple.td>
-                <TableSimple.td>{item.book_users.name}</TableSimple.td>
-                <TableSimple.td>
-                  {item.action == 'create' ? (
-                    <Badge.green>CREATE</Badge.green>
-                  ) : item.action == 'update' ? (
-                    <Badge>UPDATE</Badge>
-                  ) : (
-                    <Badge.red>DELETE</Badge.red>
-                  )}
-                </TableSimple.td>
-                <TableSimple.td>{item.table.replace('book_', '')}</TableSimple.td>
-                <TableSimple.td>{item.description}</TableSimple.td>
-                <TableSimple.td>{item.created_at.split('T')[0]}</TableSimple.td>
-                <TableSimple.td>{date.toLocaleTimeString('en-US')}</TableSimple.td>
-              </TableSimple.tr>
-            );
-          })}
-        </TableSimple>
+      {data ? (
+        <ReactTable
+          columns={column}
+          data={data}
+          ref={tableInstance}
+          page_size={20}
+          itemPerPage={[10, 20, 50, 100]}
+          keyword={inputDebounceValue}
+          showInfo
+          filteredLength={filteredLength}
+        />
       ) : (
         <Shimer className='!h-60' />
       )}
