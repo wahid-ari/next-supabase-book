@@ -288,7 +288,7 @@ export const ReactTable = forwardRef(
                 setPageSize(Number(e.target.value));
               }}
               className={clsx(
-                'block w-[100px] cursor-pointer rounded-md border border-gray-300 bg-white px-3',
+                'block w-[110px] cursor-pointer rounded-md border border-gray-300 bg-white px-3',
                 'py-[0.4rem] text-sm outline-none transition-all focus:border-emerald-500 focus:outline-none',
                 'focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
               )}
