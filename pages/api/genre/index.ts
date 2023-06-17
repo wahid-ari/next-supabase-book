@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(422).json({ error: error.message });
           }
           // Write logs
-          const errorLogs = await writeLogs(sessionPost.user_id, 'create', 'book_genres');
+          const errorLogs = await writeLogs(sessionPost.user_id, 'create', 'genre');
           if (errorLogs) {
             res.status(422).json({ error: error.message });
           }
@@ -88,7 +88,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(422).json({ error: error.message });
           }
           // Write logs
-          const errorLogs = await writeLogs(sessionPut.user_id, 'update', 'book_genres', body.id);
+          const errorLogs = await writeLogs(sessionPut.user_id, 'update', 'genre', body.id);
           if (errorLogs) {
             res.status(422).json({ error: error.message });
           }
@@ -109,7 +109,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(422).json({ error: error.message });
           }
           // Write logs
-          const errorLogs = await writeLogs(sessionDelete.user_id, 'delete', 'book_genres', query.id);
+          const errorLogs = await writeLogs(sessionDelete.user_id, 'delete', 'genre', query.id);
           if (errorLogs) {
             res.status(422).json({ error: error.message });
           }
