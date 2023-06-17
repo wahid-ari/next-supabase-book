@@ -27,6 +27,7 @@ export default function useToast() {
     } else if (!isLoading) {
       toast.error(<span className='font-medium'>{message}</span>, {
         id: message,
+        duration: 4000,
         position: 'top-right',
         style: {
           maxWidth: 380,
@@ -58,6 +59,7 @@ export default function useToast() {
     } else {
       toast.error(<span className='font-medium'>{message}</span>, {
         id: toastId,
+        duration: 4000,
         position: 'top-right',
         style: {
           maxWidth: 380,

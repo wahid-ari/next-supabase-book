@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return router.pathname == '/login' || router.pathname == '/register' ? (
     <>
       <Toaster
-        gutter={0}
+        gutter={4}
         toastOptions={{
           style: {
             maxWidth: 380,
