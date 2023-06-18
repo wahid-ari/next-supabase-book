@@ -1,18 +1,18 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/design');
+  await page.goto('http://localhost:3000/design/component');
 });
 
 test.describe('Testing Design Page', () => {
   test('page has title', async ({ page }) => {
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Design/);
-    await expect(page).toHaveURL(/design/);
+    await expect(page).toHaveURL(/component/);
   });
   test('page has Heading', async ({ page }) => {
     // Expect a title "to contain" a substring.
-    await expect(page.getByRole('heading', { name: 'Example' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Components' })).toBeVisible();
   });
   test('page has Table of Contents', async ({ page }) => {
     await expect(page.getByRole('link', { name: 'Table of Content' })).toBeVisible();
