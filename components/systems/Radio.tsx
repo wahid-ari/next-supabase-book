@@ -6,19 +6,21 @@ type Props = {
   name: string;
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  checked?: boolean;
   defaultChecked?: boolean;
   [props: string]: any;
 };
 
-export default function Radio({ id, label, name, value, onChange, defaultChecked, ...props }: Props) {
+export default function Radio({ id, label, name, value, onChange, checked, defaultChecked, ...props }: Props) {
   return (
     <div className='group mb-3 flex items-center'>
       <input
         {...props}
-        id={id}
+        id={value}
         type='radio'
         value={value}
         name={name}
+        checked={checked}
         defaultChecked={defaultChecked}
         className={clsx(
           'h-4 w-4 border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer',
@@ -26,7 +28,7 @@ export default function Radio({ id, label, name, value, onChange, defaultChecked
           'dark:border-neutral-700 dark:ring-offset-neutral-900 dark:focus:ring-emerald-600'
         )}
       />
-      <label htmlFor={id} className='ml-2 text-sm text-neutral-800 group-hover:cursor-pointer dark:text-neutral-300'>
+      <label htmlFor={value} className='ml-2 text-sm text-neutral-800 group-hover:cursor-pointer dark:text-neutral-300'>
         {label}
       </label>
     </div>

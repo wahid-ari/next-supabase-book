@@ -3,12 +3,13 @@ import { clsx } from 'clsx';
 
 type Props = {
   className?: string;
-  head: ReactNode;
+  head?: ReactNode;
   bordered?: boolean;
   children: ReactNode;
+  [props: string]: any;
 };
 
-export default function TableSimple({ className, head, bordered, children }: Props) {
+export default function TableSimple({ className, head, bordered, children, ...props }: Props) {
   return (
     <div
       className={clsx(
@@ -18,7 +19,7 @@ export default function TableSimple({ className, head, bordered, children }: Pro
       )}
     >
       <div className='overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-700'>
-        <table className='w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300'>
+        <table {...props} className='w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300'>
           <thead>
             <tr className='border-b bg-gray-50 text-sm font-medium dark:border-neutral-800 dark:bg-[#202020]'>
               {head}
@@ -34,11 +35,13 @@ export default function TableSimple({ className, head, bordered, children }: Pro
 type TrProps = {
   className?: string;
   children: ReactNode;
+  [props: string]: any;
 };
 
-TableSimple.tr = ({ className, children }: TrProps) => {
+TableSimple.tr = ({ className, children, ...props }: TrProps) => {
   return (
     <tr
+      {...props}
       className={clsx(
         'border-b bg-white text-sm text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200',
         className
@@ -51,14 +54,18 @@ TableSimple.tr = ({ className, children }: TrProps) => {
 
 type TdProps = {
   className?: string;
-  small?: boolean;
+  shrink?: boolean;
   bordered?: boolean;
   children: ReactNode;
+  [props: string]: any;
 };
 
-TableSimple.td = ({ className, small, bordered, children }: TdProps) => {
+TableSimple.td = ({ className, shrink, bordered, children, ...props }: TdProps) => {
   return (
-    <td className={clsx('p-3', small && 'w-1', bordered && 'border-x dark:border-x-neutral-800', className)}>
+    <td
+      {...props}
+      className={clsx('p-3', shrink && 'w-1', bordered && 'border-x dark:border-x-neutral-800', className)}
+    >
       {children}
     </td>
   );

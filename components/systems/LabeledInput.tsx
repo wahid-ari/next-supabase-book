@@ -48,6 +48,7 @@ export default function LabeledInput({
 }
 
 type DisabledProps = {
+  wrapperClassName?: string;
   className?: string;
   label: string;
   type?: string;
@@ -57,9 +58,18 @@ type DisabledProps = {
   [props: string]: any;
 };
 
-LabeledInput.disabled = ({ className, label, type, name, placeholder, defaultValue, ...props }: DisabledProps) => {
+LabeledInput.disabled = ({
+  wrapperClassName,
+  className,
+  label,
+  type,
+  name,
+  placeholder,
+  defaultValue,
+  ...props
+}: DisabledProps) => {
   return (
-    <div className='mb-4'>
+    <div className={clsx('mb-4', wrapperClassName)}>
       <label className='block text-sm text-gray-500 dark:text-neutral-300' htmlFor={name}>
         {label}
       </label>
