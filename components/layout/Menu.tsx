@@ -9,9 +9,10 @@ import Modal from '@components/systems/Modal';
 
 type Props = {
   className?: string;
+  [props: string]: any;
 };
 
-export default function Akun({ className }: Props) {
+export default function Akun({ className, ...props }: Props) {
   const admin = nookies.get(null, 'name');
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
@@ -28,10 +29,11 @@ export default function Akun({ className }: Props) {
 
   return (
     <>
-      <Menu as='div' className={`relative ${className && className}`}>
+      <Menu as='div' className={clsx('relative', className)}>
         {({ open }) => (
           <>
             <Menu.Button
+              {...props}
               className={clsx(
                 'inline-flex w-full items-center justify-center rounded text-gray-700 hover:text-gray-900',
                 'focus:outline-none dark:text-neutral-300 dark:hover:text-neutral-100',

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 
-export default function Breadcrumb() {
+export default function Breadcrumb({ ...props }: { [props: string]: any }) {
   const router = useRouter();
   const paths = router.pathname
     .split('/')
@@ -29,7 +29,7 @@ export default function Breadcrumb() {
   };
 
   return (
-    <nav className='flex w-full text-sm' aria-label='Breadcrumb'>
+    <nav className='flex w-full text-sm' aria-label='Breadcrumb' {...props}>
       <ol className='inline-flex flex-nowrap items-center space-x-1 whitespace-nowrap md:space-x-1'>
         <li className='-ml-0.5 inline-flex items-center'>
           <Link

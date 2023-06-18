@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 
-export default function ThemeChanger() {
+export default function ThemeChanger({ ...props }: { [props: string]: any }) {
   // https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -17,6 +17,7 @@ export default function ThemeChanger() {
 
   return theme == 'dark' ? (
     <button
+      {...props}
       onClick={() => setTheme('light')}
       aria-label='Light'
       className='rounded focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
@@ -25,6 +26,7 @@ export default function ThemeChanger() {
     </button>
   ) : (
     <button
+      {...props}
       onClick={() => setTheme('dark')}
       aria-label='Dark'
       className='rounded focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'

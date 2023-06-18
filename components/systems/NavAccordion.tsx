@@ -9,9 +9,10 @@ type Props = {
   routeName?: string;
   icon?: ReactNode;
   children: ReactNode;
+  [props: string]: any;
 };
 
-export default function NavAccordion({ title, routeName, icon, children }: Props) {
+export default function NavAccordion({ title, routeName, icon, children, ...props }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [cek, setCek] = useState(false);
   const router = useRouter();
@@ -31,6 +32,7 @@ export default function NavAccordion({ title, routeName, icon, children }: Props
         {({ open }) => (
           <>
             <Disclosure.Button
+              {...props}
               className={clsx(
                 'mb-1 flex w-full items-center justify-start gap-2 rounded py-2 pl-3 text-gray-700 outline-none transition-all',
                 'hover:text-emerald-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500',

@@ -9,15 +9,27 @@ type Props = {
   icon?: ReactNode;
   isHome?: boolean;
   children: ReactNode;
+  [props: string]: any;
 };
 
-export default function NavLink({ className, href, icon, isHome, children }: Props) {
+export default function NavLink({ className, href, icon, isHome, children, ...props }: Props) {
   const router = useRouter();
+  // const hrefSplit = href.split('/');
+  // const lastHref = hrefSplit[hrefSplit.length - 1];
+  // const pathnameSplit = router.pathname.split('/');
+  // const lastPathname = pathnameSplit[pathnameSplit.length - 1];
+  // console.log("href", href)
+  // console.log("hrefSplit", hrefSplit)
+  // console.log("lastHref", lastHref)
+  // console.log('pathnameSplit',  pathnameSplit);
+  // console.log('lastPathname',  lastPathname);
+  // console.log('------------------------------------');
 
   if (router.pathname.split('/')[1] == 'dashboard') {
     return (
       <Link
         passHref
+        {...props}
         href={href}
         className={clsx(
           className,
@@ -36,6 +48,7 @@ export default function NavLink({ className, href, icon, isHome, children }: Pro
   return (
     <Link
       passHref
+      {...props}
       href={href}
       className={clsx(
         className,
@@ -69,9 +82,18 @@ export default function NavLink({ className, href, icon, isHome, children }: Pro
   );
 }
 
-NavLink.logout = ({ href, icon, className, children }) => {
+type Logout = {
+  className?: string;
+  href: string;
+  icon?: ReactNode;
+  children: ReactNode;
+  [props: string]: any;
+};
+
+NavLink.logout = ({ href, icon, className, children, ...props }: Logout) => {
   return (
     <Link
+      {...props}
       passHref
       href={href}
       className={clsx(
