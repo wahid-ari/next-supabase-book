@@ -38,6 +38,7 @@ import * as HoverCard from '@radix-ui/react-hover-card';
 import clsx from 'clsx';
 import FileInput from '@components/systems/FileInput';
 import { faker } from '@faker-js/faker';
+import TableSimple from '@components/systems/TableSimple';
 
 const searchBoxData = [
   {
@@ -466,6 +467,15 @@ export default function Example() {
             <Link href='#tabletd'>Table.td</Link>
           </span>
           <span className='mb-3 block underline'>
+            <Link href='#table-simple'>TableSimple</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#tablesimple-tr'>TableTableSimple.tr</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#tablesimple-td'>TableTableSimple.td</Link>
+          </span>
+          <span className='mb-3 block underline'>
             <Link href='#text'>Text</Link>
           </span>
           <span className='mb-3 block underline'>
@@ -615,7 +625,7 @@ export default function Example() {
         name='Modal (HeadlessUI)'
         noClassName
         noProps
-        props={['open', 'title', 'children', 'isDanger', 'onClose', 'onConfirm', 'showIcon']}
+        props={['open', 'title', 'children', 'isDanger', 'onClose', 'onConfirm', 'showIcon', 'confirmText']}
       >
         <Button onClick={() => setOpenModal(true)}>Open Modal</Button>
         <br />
@@ -672,9 +682,9 @@ export default function Example() {
       <Wrapper
         id='reactselect'
         name='ReactSelect'
-        noProps
         noChildren
         props={[
+          'instanceId',
           'options',
           'isMulti',
           'noOptionsMessage',
@@ -1007,7 +1017,7 @@ export default function Example() {
       <Wrapper
         id='labeledinput'
         name='LabeledInput'
-        props={['label', 'name', 'type', 'placeholder', 'value', 'onChange']}
+        props={['label', 'name', 'type', 'placeholder', 'value', 'onChange', 'wrapperClassName']}
       >
         <LabeledInput
           label='Email'
@@ -1028,7 +1038,7 @@ export default function Example() {
       <Wrapper
         id='labeledinputdisabled'
         name='LabeledInput.disabled'
-        props={['label', 'type', 'name', 'placeholder', 'defaultValue']}
+        props={['label', 'type', 'name', 'placeholder', 'defaultValue', 'wrapperClassName']}
       >
         <LabeledInput.disabled
           label='Confirmation Password'
@@ -1069,7 +1079,7 @@ export default function Example() {
       <Wrapper
         id='textarea'
         name='TextArea'
-        props={['label', 'className', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
+        props={['label', 'className', 'name', 'placeholder', 'value', 'onChange', 'height']}
         noChildren
       >
         <TextArea label='TextArea' name='textarea' placeholder='text area' data-testid='textarea' />
@@ -1078,7 +1088,7 @@ export default function Example() {
       <Wrapper
         id='textareadisabled'
         name='TextArea.disabled'
-        props={['label', 'className', 'name', 'placeholder', 'value', 'onChange', 'height', '...props']}
+        props={['label', 'className', 'name', 'placeholder', 'value', 'onChange', 'height']}
         noChildren
       >
         <TextArea.disabled label='TextArea' name='textarea' placeholder='text area' data-testid='textarea-disabled' />
@@ -1095,10 +1105,9 @@ export default function Example() {
         />
       </Wrapper>
 
-      <Wrapper id='select' name='Select' props={['label', 'id', 'name', 'value', 'onChange']}>
+      <Wrapper id='select' name='Select' props={['label', 'name', 'value', 'onChange', 'defaultValue']}>
         <Select
           label='Select Color'
-          id='color'
           name='color'
           value={selectedColor ? selectedColor : 'Choose Color'}
           onChange={handleSelectColor}
@@ -1122,7 +1131,7 @@ export default function Example() {
         </Select.option>
       </Wrapper>
 
-      <Wrapper id='progress' name='Progress' variant={['percentage']} props={['percent']} noChildren noProps>
+      <Wrapper id='progress' name='Progress' variant={['percentage']} props={['percent']} noChildren>
         <Progress percent={45} data-testid='progress' />
         <br />
         <Progress.percentage percent={0} data-testid='progress-zero' />
@@ -1134,12 +1143,12 @@ export default function Example() {
         id='radio'
         name='Radio'
         variant={['disabled']}
-        props={['name', 'label', 'value', 'onChange', 'checked']}
+        props={['name', 'label', 'value', 'onChange', 'checked', 'defaultChecked']}
         noClassName
         noChildren
       >
-        <Radio name='radio' id='radio-blue' label='Blue' data-testid='radio' />
-        <Radio name='radio' id='radio-red' label='Red' defaultChecked data-testid='radio-checked' />
+        <Radio name='radio' value='radio-blue' label='Blue' data-testid='radio' />
+        <Radio name='radio' value='radio-red' label='Red' defaultChecked data-testid='radio-checked' />
         <Radio.disabled name='radios' label='Radio Disabled' data-testid='radio-disabled' />
         <Radio.disabled
           name='radios'
@@ -1169,7 +1178,7 @@ export default function Example() {
         </Tabs>
       </Wrapper>
 
-      <Wrapper id='tabitem' name='Tabs.panel' noProps>
+      <Wrapper id='tabitem' name='Tabs.panel'>
         <Tabs items={['Tab']}>
           <Tabs.panel data-testid='tabs-panel'>
             <Heading className='mb-0'>Tabs Panel</Heading>
@@ -1180,8 +1189,7 @@ export default function Example() {
       <Wrapper
         id='table'
         name='Table'
-        props={['head', 'totalPage', 'totalData', 'currentPage', 'next', 'prev']}
-        noProps
+        props={['head', 'totalPage', 'totalData', 'currentPage', 'next', 'prev', 'rowPerPage', 'noPagination']}
         noWrap
       >
         <Table
@@ -1259,6 +1267,65 @@ export default function Example() {
         </Table>
       </Wrapper>
 
+      <Wrapper id='table-simple' name='TableSimple' props={['head', 'bordered']} noWrap>
+        <TableSimple
+          data-testid='table-simple'
+          head={
+            <>
+              <TableSimple.td shrink>No</TableSimple.td>
+              <TableSimple.td>Column 1</TableSimple.td>
+              <TableSimple.td>Column 2</TableSimple.td>
+              <TableSimple.td>Column 3</TableSimple.td>
+              <TableSimple.td>Column 4</TableSimple.td>
+              <TableSimple.td>Column 5</TableSimple.td>
+            </>
+          }
+        >
+          {[0, 1, 2, 3, 4].map((e, index) => {
+            return (
+              <TableSimple.tr key={index}>
+                <TableSimple.td shrink>{index + 1}</TableSimple.td>
+                <TableSimple.td>
+                  <Badge>badge</Badge>
+                </TableSimple.td>
+                <TableSimple.td>
+                  <Badge.red>badge red</Badge.red>
+                </TableSimple.td>
+                <TableSimple.td>
+                  <Badge.dark>badge dark</Badge.dark>
+                </TableSimple.td>
+                <TableSimple.td>
+                  <Badge.green>badge green</Badge.green>
+                </TableSimple.td>
+                <TableSimple.td>
+                  <Badge.yellow>badge yellow</Badge.yellow>
+                </TableSimple.td>
+              </TableSimple.tr>
+            );
+          })}
+        </TableSimple>
+      </Wrapper>
+
+      <Wrapper id='tablesimple-tr' name='TableSimple.tr' noWrap noProps>
+        <TableSimple>
+          <TableSimple.tr data-testid='tablesimple-tr'>
+            <TableSimple.td>
+              <Badge>TableSimple.tr</Badge>
+            </TableSimple.td>
+          </TableSimple.tr>
+        </TableSimple>
+      </Wrapper>
+
+      <Wrapper id='tablesimple-td' name='TableSimple.td' props={['shrink', 'bordered']} noWrap noProps>
+        <TableSimple>
+          <TableSimple.tr>
+            <TableSimple.td data-testid='tablesimple-td'>
+              <Badge>TableSimple.td</Badge>
+            </TableSimple.td>
+          </TableSimple.tr>
+        </TableSimple>
+      </Wrapper>
+
       <Wrapper id='text' name='Text' variant={['light', 'medium', 'semibold', 'bold', 'extrabold']}>
         <Text.light data-testid='text-light' className='mb-2'>
           Light
@@ -1295,7 +1362,7 @@ export default function Example() {
         </Section.small>
       </Wrapper>
 
-      <Wrapper id='show-more' name='ShowMore' props={['count']} noProps>
+      <Wrapper id='show-more' name='ShowMore' props={['count']}>
         <ShowMore data-testid='showmore'>
           Id amet commodo exercitation aliqua irure exercitation adipisicing ipsum cillum elit. Cillum non dolor cillum
           mollit incididunt tempor quis reprehenderit labore velit sunt anim ipsum quis. Id nostrud anim ut excepteur

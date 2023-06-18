@@ -8,6 +8,17 @@ test.describe('Testing Design Page', () => {
   test('page has title', async ({ page }) => {
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Design/);
+    await expect(page).toHaveURL(/design/);
+  });
+  test('page has Heading', async ({ page }) => {
+    // Expect a title "to contain" a substring.
+    await expect(page.getByRole('heading', { name: 'Example' })).toBeVisible();
+  });
+  test('page has Table of Contents', async ({ page }) => {
+    await expect(page.getByRole('link', { name: 'Table of Content' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Validation', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Dialog', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Modal', exact: true })).toBeVisible();
   });
 });
 
@@ -568,6 +579,27 @@ test.describe('Testing Table Component', () => {
     const table = page.getByTestId('table-td');
     await expect(table).toBeVisible();
     await expect(table).toHaveClass(/p-4/);
+  });
+});
+
+test.describe('Testing TableSimple Component', () => {
+  // TableSimple ----------------------------------------------------
+  test('renders a TableSimple component', async ({ page }) => {
+    const table = page.getByTestId('table-simple');
+    await expect(table).toBeVisible();
+    await expect(table).toHaveClass(/w-full whitespace-nowrap text-neutral-800 dark:text-neutral-300/);
+  });
+  test('renders a TableSimple.tr component', async ({ page }) => {
+    const table = page.getByTestId('tablesimple-tr');
+    await expect(table).toBeVisible();
+    await expect(table).toHaveClass(
+      /border-b bg-white text-sm text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200/
+    );
+  });
+  test('renders a TableSimple.td component', async ({ page }) => {
+    const table = page.getByTestId('tablesimple-td');
+    await expect(table).toBeVisible();
+    await expect(table).toHaveClass(/p-3/);
   });
 });
 
