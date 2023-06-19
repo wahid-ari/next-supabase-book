@@ -19,7 +19,7 @@ test.describe('Testing Design Page', () => {
     await expect(page.getByRole('link', { name: 'Table of Content' })).toBeVisible();
     await expect(page.locator('#tableofcontent').getByRole('link', { name: 'Breadcrumb' })).toBeVisible();
     await expect(page.locator('#tableofcontent').getByRole('link', { name: 'NavAccordion' })).toBeVisible();
-    await expect(page.locator('#tableofcontent').getByRole('link', { name: 'NavLink' })).toBeVisible();
+    await expect(page.locator('#tableofcontent').getByRole('link', { name: 'NavLink', exact: true })).toBeVisible();
   });
 });
 
@@ -71,6 +71,13 @@ test.describe('Testing NavLink Component', () => {
     );
     await expect(navLink).toHaveText(/Layout/);
     await expect(navLink).toHaveAttribute('href', '/design/layout');
+  });
+  test('renders a NavLink.logout component', async ({ page }) => {
+    const navLink = page.getByTestId('nav-link-logout');
+    await expect(navLink).toBeVisible();
+    await expect(navLink).toHaveClass(/text-red-500 hover:text-red-600 dark:text-red-600 dark:hover:text-red-500/);
+    await expect(navLink).toHaveText(/Logout/);
+    await expect(navLink).toHaveAttribute('href', '/logout');
   });
 });
 
