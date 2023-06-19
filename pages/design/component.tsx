@@ -527,7 +527,7 @@ export default function Example() {
           placeholder='Positif Number'
           onChange={handleUserChange}
         />
-        <Button onClick={checkValid}>Submit Yup</Button>
+        <Button.success onClick={checkValid}>Submit Yup</Button.success>
       </Wrapper>
 
       <Wrapper id='validation-zod' name='Validation (zod)' noChildren noClassName noProps>
@@ -576,7 +576,7 @@ export default function Example() {
             placeholder='Confirm Password'
             onChange={handleAdminChange}
           />
-          <Button type='submit'>Submit Zod</Button>
+          <Button.success type='submit'>Submit Zod</Button.success>
         </form>
       </Wrapper>
 
@@ -587,7 +587,7 @@ export default function Example() {
         noProps
         props={['open', 'setOpen', 'title', 'children', 'isDanger', 'onClose', 'onConfirm', 'showIcon']}
       >
-        <Button onClick={() => setOpenDialog(true)}>Open Dialog</Button>
+        <Button.success onClick={() => setOpenDialog(true)}>Open Dialog</Button.success>
         <br />
         <br />
 
