@@ -12,6 +12,7 @@ html[class='dark'] {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
 }
 
 body {
