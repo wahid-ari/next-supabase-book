@@ -119,7 +119,6 @@ export default function Tag({ id }) {
               id='caridata'
               name='caridata'
               placeholder='Keyword'
-              className='max-w-xs !py-2'
               onChange={(e) => {
                 tableInstance.current.setGlobalFilter(e.target.value);
               }}
