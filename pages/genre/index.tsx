@@ -201,16 +201,16 @@ export default function Genre() {
         <TableSimple
           head={
             <>
-              <TableSimple.td small>No</TableSimple.td>
+              <TableSimple.td shrink>No</TableSimple.td>
               <TableSimple.td>Name</TableSimple.td>
-              <TableSimple.td small>Action</TableSimple.td>
+              <TableSimple.td shrink>Action</TableSimple.td>
             </>
           }
         >
           {filteredData.map((item: any, index: number) => {
             return (
               <TableSimple.tr key={index}>
-                <TableSimple.td small>{index + 1}</TableSimple.td>
+                <TableSimple.td shrink>{index + 1}</TableSimple.td>
                 <TableSimple.td>
                   <Link
                     href={`genre/detail/${item.id}`}
