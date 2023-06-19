@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html[class='light'] {
-  --primary-text-color: rgb(51, 50, 50);
-}
-
-html[class='dark'] {
-  --primary-text-color: rgb(238, 230, 230);
-}
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 2rem;
