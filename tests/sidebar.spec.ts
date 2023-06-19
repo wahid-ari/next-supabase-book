@@ -5,6 +5,11 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Testing Sidebar Link', () => {
+  test('should in Dashboard page', async ({ page }) => {
+    await expect(page.getByRole('link', { name: 'Dashboard' })).toHaveAttribute('href', '/');
+    await expect(page).toHaveURL('http://localhost:3000');
+    await expect(page).toHaveTitle(/Dashboard/);
+  });
   test('should open Search page', async ({ page }) => {
     await expect(page.getByRole('link', { name: 'Search' })).toHaveAttribute('href', '/search');
     await page.getByRole('link', { name: 'Search' }).click();
