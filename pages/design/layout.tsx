@@ -3,10 +3,10 @@ import Layout from '@components/layout/Layout';
 import Menu from '@components/layout/Menu';
 import Wrapper from '@components/systems/Wrapper';
 import Title from '@components/systems/Title';
-import { TemplateIcon, ViewBoardsIcon, ViewGridAddIcon } from '@heroicons/react/outline';
-import Breadcrumb from '@components/systems/Breadcrumb';
-import NavAccordion from '@components/systems/NavAccordion';
-import NavLink from '@components/systems/NavLink';
+import { LogoutIcon, TemplateIcon, ViewBoardsIcon, ViewGridAddIcon } from '@heroicons/react/outline';
+import Breadcrumb from '@components/layout/Breadcrumb';
+import NavAccordion from '@components/layout/NavAccordion';
+import NavLink from '@components/layout/NavLink';
 import ThemeChanger from '@components/layout/ThemeChanger';
 import { useTheme } from 'next-themes';
 import Text from '@components/systems/Text';
@@ -40,6 +40,9 @@ export default function Example() {
           </span>
           <span className='mb-3 block underline'>
             <Link href='#nav-link'>NavLink</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#nav-link-logout'>NavLink.logout</Link>
           </span>
           <span className='mb-3 block underline'>
             <Link href='#menu'>Menu</Link>
@@ -98,6 +101,14 @@ export default function Example() {
         </div>
       </Wrapper>
 
+      <Wrapper id='nav-link-logout' name='NavLink.logout' props={['href', 'icon']}>
+        <div className='w-64'>
+          <NavLink.logout data-testid='nav-link-logout' href='/logout' icon={<LogoutIcon className='h-4 w-4' />}>
+            Logout
+          </NavLink.logout>
+        </div>
+      </Wrapper>
+
       <Wrapper id='theme-changer' name='ThemeChanger' noChildren noClassName>
         <ThemeChanger data-testid='theme-changer' />
         <Text data-testid='theme-changer-value'>{theme}</Text>
@@ -124,7 +135,9 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='sidebar' name='Sidebar' noChildren>
-        <Sidebar data-testid='sidebar' className='!z-0 !flex w-64' />
+        <div className='overflow-hidden'>
+          <Sidebar data-testid='sidebar' className='!z-0 !flex w-64' />
+        </div>
       </Wrapper>
     </Layout>
   );
