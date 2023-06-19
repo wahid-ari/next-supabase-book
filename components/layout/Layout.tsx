@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
-import Breadcrumb from '@components/systems/Breadcrumb';
+import Breadcrumb from '@components/layout/Breadcrumb';
 import Navbar from './Navbar';
 import Menu from './Menu';
 import clsx from 'clsx';

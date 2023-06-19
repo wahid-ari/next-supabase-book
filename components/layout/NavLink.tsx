@@ -25,6 +25,7 @@ export default function NavLink({ className, href, icon, isHome, children, ...pr
   // console.log('lastPathname',  lastPathname);
   // console.log('------------------------------------');
 
+  // this is for activate navlink component when in '/dashboard' pathname
   if (router.pathname.split('/')[1] == 'dashboard') {
     return (
       <Link
@@ -99,8 +100,8 @@ NavLink.logout = ({ href, icon, className, children, ...props }: Logout) => {
       className={clsx(
         className,
         'flex w-full items-center justify-start px-4 py-2 transition-all',
-        'gap-3 rounded text-sm hover:bg-red-100 dark:hover:bg-neutral-800',
-        'text-red-800 dark:text-red-500 dark:hover:text-red-400'
+        'gap-2 rounded text-sm font-medium hover:bg-red-100 dark:hover:bg-neutral-800',
+        'text-red-500 hover:text-red-600 dark:text-red-600 dark:hover:text-red-500'
       )}
     >
       {icon}

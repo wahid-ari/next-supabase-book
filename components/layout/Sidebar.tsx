@@ -21,8 +21,8 @@ import {
   ViewBoardsIcon,
   ViewGridAddIcon,
 } from '@heroicons/react/outline';
-import NavLink from '@components/systems/NavLink';
-import NavAccordion from '@components/systems/NavAccordion';
+import NavLink from '@components/layout/NavLink';
+import NavAccordion from '@components/layout/NavAccordion';
 import Modal from '@components/systems/Modal';
 import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
@@ -172,7 +172,7 @@ export default function Sidebar({ className, ...props }: { className?: string; [
               href='/login'
               className={clsx(
                 'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
-                'rounded text-emerald-600 hover:bg-red-100 dark:hover:bg-neutral-800',
+                'rounded text-emerald-600 hover:bg-emerald-100 dark:hover:bg-neutral-800',
                 'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
               )}
             >
