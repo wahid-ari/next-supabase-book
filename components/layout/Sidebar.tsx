@@ -18,6 +18,8 @@ import {
   BookOpenIcon,
   AnnotationIcon,
   DocumentReportIcon,
+  ViewBoardsIcon,
+  ViewGridAddIcon,
 } from '@heroicons/react/outline';
 import NavLink from '@components/systems/NavLink';
 import NavAccordion from '@components/systems/NavAccordion';
@@ -26,7 +28,7 @@ import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
 import nookies from 'nookies';
 
-export default function Sidebar() {
+export default function Sidebar({ className, ...props }: { className?: string; [props: string]: any }) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -60,9 +62,11 @@ export default function Sidebar() {
   return (
     <>
       <div
+        {...props}
         className={clsx(
           'z-50 flex h-screen max-h-screen w-screen flex-col flex-nowrap border-r bg-white dark:border-neutral-800 dark:bg-neutral-900 lg:w-60',
-          showNav ? 'fixed lg:relative' : 'top-0 hidden lg:sticky lg:flex'
+          showNav ? 'fixed lg:relative' : 'top-0 hidden lg:sticky lg:flex',
+          className
         )}
       >
         <div className='flex items-center justify-between gap-2 px-5'>
@@ -140,10 +144,10 @@ export default function Sidebar() {
           </a>
 
           <NavAccordion title='Design' routeName='design' icon={<TemplateIcon className='h-4 w-4' />}>
-            <NavLink href='/design/component' icon={<TemplateIcon className='h-4 w-4' />}>
+            <NavLink href='/design/component' icon={<ViewGridAddIcon className='h-4 w-4' />}>
               Component
             </NavLink>
-            <NavLink href='/design/layout' className='mt-1.5' icon={<TemplateIcon className='h-4 w-4' />}>
+            <NavLink href='/design/layout' className='mt-1.5' icon={<ViewBoardsIcon className='h-4 w-4' />}>
               Layout
             </NavLink>
           </NavAccordion>

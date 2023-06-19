@@ -12,9 +12,10 @@ type Props = {
   title: string;
   description?: string;
   prefetch?: string[];
+  [props: string]: any;
 };
 
-export default function Layout({ children, title, description, prefetch }: Props) {
+export default function Layout({ children, title, description, prefetch, ...props }: Props) {
   const admin = nookies.get(null, 'name');
   const [mounted, setMounted] = useState(false);
   // useEffect only runs on the client, so now we can safely show the UI
@@ -27,6 +28,7 @@ export default function Layout({ children, title, description, prefetch }: Props
       <HeadSeo title={title} description={description} prefetch={prefetch} />
 
       <div
+        {...props}
         className='font-inter min-h-screen w-full bg-white text-sm dark:bg-neutral-900 lg:grid'
         style={{ gridTemplateColumns: 'auto 1fr' }}
       >

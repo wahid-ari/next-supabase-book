@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
 import nookies from 'nookies';
 
-export default function Navbar() {
+export default function Navbar({ className, ...props }: { className?: string; [props: string]: any }) {
   const { setShowNav } = useContext(GlobalContext);
   const admin = nookies.get(null, 'name');
   const [mounted, setMounted] = useState(false);
@@ -22,11 +22,13 @@ export default function Navbar() {
 
   return (
     <div
+      {...props}
       className={clsx(
         'sticky top-0 z-40 h-11 dark:text-neutral-50 lg:hidden',
         'flex w-full items-center justify-between gap-4 border-b p-3 px-5 dark:border-neutral-800',
         'bg-white/50 dark:bg-neutral-900/30',
-        'backdrop-blur-md backdrop-filter'
+        'backdrop-blur-md backdrop-filter',
+        className
       )}
     >
       <div className='flex gap-x-3'>

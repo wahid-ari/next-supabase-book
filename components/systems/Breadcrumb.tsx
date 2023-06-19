@@ -29,8 +29,8 @@ export default function Breadcrumb({ ...props }: { [props: string]: any }) {
   };
 
   return (
-    <nav className='flex w-full text-sm' aria-label='Breadcrumb' {...props}>
-      <ol className='inline-flex flex-nowrap items-center space-x-1 whitespace-nowrap md:space-x-1'>
+    <nav className='flex w-full text-sm' aria-label='Breadcrumb'>
+      <ol {...props} className='inline-flex flex-nowrap items-center space-x-1 whitespace-nowrap md:space-x-1'>
         <li className='-ml-0.5 inline-flex items-center'>
           <Link
             href='/'
@@ -51,7 +51,7 @@ export default function Breadcrumb({ ...props }: { [props: string]: any }) {
               return (
                 <li aria-current='page' key={index} className='flex items-center'>
                   <ChevronRightIcon className='h-5 w-5 text-gray-500 dark:text-neutral-400' />
-                  <span className='ml-1 mr-4 text-emerald-600 dark:text-emerald-500'>
+                  <span className='ml-1 mr-4 font-medium text-emerald-600 dark:text-emerald-500'>
                     {capitalizeFirstLetter(path)}
                   </span>
                 </li>

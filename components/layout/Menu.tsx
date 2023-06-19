@@ -40,7 +40,7 @@ export default function Akun({ className, ...props }: Props) {
                 'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
               )}
             >
-              {mounted && admin?.name}
+              {(mounted && admin?.name) || 'Menu'}
 
               <ChevronDownIcon
                 className={clsx('ml-1 h-5 w-4 pb-0.5 transition-all duration-200', open ? 'rotate-180' : 'rotate-0')}
