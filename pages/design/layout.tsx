@@ -1,13 +1,31 @@
 import Link from 'next/link';
 import Layout from '@components/layout/Layout';
+import Menu from '@components/layout/Menu';
 import Wrapper from '@components/systems/Wrapper';
 import Title from '@components/systems/Title';
-import { TemplateIcon } from '@heroicons/react/outline';
+import { TemplateIcon, ViewBoardsIcon, ViewGridAddIcon } from '@heroicons/react/outline';
 import Breadcrumb from '@components/systems/Breadcrumb';
 import NavAccordion from '@components/systems/NavAccordion';
 import NavLink from '@components/systems/NavLink';
+import ThemeChanger from '@components/layout/ThemeChanger';
+import { useTheme } from 'next-themes';
+import Text from '@components/systems/Text';
+import { useState, useEffect } from 'react';
+import Navbar from '@components/layout/Navbar';
+import Sidebar from '@components/layout/Sidebar';
 
 export default function Example() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <Layout title='Design System - MyBook'>
       <Title>Layout</Title>
@@ -23,6 +41,21 @@ export default function Example() {
           <span className='mb-3 block underline'>
             <Link href='#nav-link'>NavLink</Link>
           </span>
+          <span className='mb-3 block underline'>
+            <Link href='#menu'>Menu</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#theme-changer'>ThemeChanger</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#navbar'>Navbar</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#layout'>Layout</Link>
+          </span>
+          <span className='mb-3 block underline'>
+            <Link href='#sidebar'>Sidebar</Link>
+          </span>
         </div>
       </Wrapper>
 
@@ -31,22 +64,67 @@ export default function Example() {
       </Wrapper>
 
       <Wrapper id='nav-accordion' name='NavAccordion' props={['title', 'routeName', 'icon']} noClassName>
-        <NavAccordion
-          data-testid='nav-accordion'
-          title='Design'
-          routeName='design'
-          icon={<TemplateIcon className='h-4 w-4' />}
-        >
-          <NavLink data-testid='nav-accordion-link' href='/design' icon={<TemplateIcon className='h-4 w-4' />}>
-            Example
-          </NavLink>
-        </NavAccordion>
+        <div className='w-64'>
+          <NavAccordion
+            data-testid='nav-accordion'
+            title='Design'
+            routeName='design'
+            icon={<TemplateIcon className='h-4 w-4' />}
+          >
+            <NavLink
+              data-testid='nav-accordion-link'
+              href='/design/component'
+              icon={<ViewGridAddIcon className='h-4 w-4' />}
+            >
+              Component
+            </NavLink>
+            <NavLink href='/design/layout' className='mt-1.5' icon={<ViewBoardsIcon className='h-4 w-4' />}>
+              Layout
+            </NavLink>
+          </NavAccordion>
+        </div>
       </Wrapper>
 
       <Wrapper id='nav-link' name='NavLink' props={['href', 'icon', 'isHome']}>
-        <NavLink data-testid='nav-link' href='/design' icon={<TemplateIcon className='h-4 w-4' />}>
-          Example
-        </NavLink>
+        <div className='w-64'>
+          <NavLink
+            data-testid='nav-link'
+            href='/design/layout'
+            className='mt-1.5'
+            icon={<ViewBoardsIcon className='h-4 w-4' />}
+          >
+            Layout
+          </NavLink>
+        </div>
+      </Wrapper>
+
+      <Wrapper id='theme-changer' name='ThemeChanger' noChildren noClassName>
+        <ThemeChanger data-testid='theme-changer' />
+        <Text data-testid='theme-changer-value'>{theme}</Text>
+      </Wrapper>
+
+      <Wrapper id='menu' name='Menu' noChildren>
+        <div className='ml-16 flex'>
+          <Menu data-testid='menu' />
+        </div>
+      </Wrapper>
+
+      <Wrapper id='navbar' name='Navbar' noChildren>
+        <Navbar data-testid='navbar' className='lg:!flex' />
+        <Text className='mt-4 !text-red-600'>Navbar should visible only in small to medium screen</Text>
+        <Text className='!text-red-600'>
+          we pass classname={"'"}flex{"'"} to Navbar here only for test purpose
+        </Text>
+      </Wrapper>
+
+      <Wrapper id='layout' name='Layout' noClassName props={['title', 'description', 'prefetch']}>
+        <Layout data-testid='layout' title='Design System - MyBook'>
+          <Title>Content</Title>
+        </Layout>
+      </Wrapper>
+
+      <Wrapper id='sidebar' name='Sidebar' noChildren>
+        <Sidebar data-testid='sidebar' className='!z-0 !flex w-64' />
       </Wrapper>
     </Layout>
   );
