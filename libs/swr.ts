@@ -152,3 +152,8 @@ export function useLogsData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/log`, fetcher);
   return { data, error, isLoading };
 }
+
+export function useSessionsData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/session`, fetcher);
+  return { data, error, isLoading };
+}
