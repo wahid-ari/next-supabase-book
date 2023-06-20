@@ -2,7 +2,7 @@ import ThemeChanger from '@components/layout/ThemeChanger';
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/design/layout');
+  await page.goto('/design/layout');
 });
 
 test.describe('Testing Design Page', () => {
