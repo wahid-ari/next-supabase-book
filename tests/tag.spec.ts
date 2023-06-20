@@ -1,8 +1,28 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000/tag');
 });
+
+async function logout(page: Page) {
+  await page.goto('http://localhost:3000/session');
+  await page.getByRole('button', { name: 'Delete All' }).click();
+  await expect(page.getByRole('heading', { name: 'Delete All Session' })).toBeVisible();
+  await page.getByRole('button', { name: 'Delete' }).click();
+  await expect(page.getByText('Deleting All Session')).toBeVisible();
+  await expect(page.getByText('Success delete all session')).toBeVisible();
+  await page.goto('http://localhost:3000/logout');
+  await expect(page).toHaveTitle(/Dashboard/);
+  await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+}
+
+async function login(page: Page) {
+  await page.goto('http://localhost:3000/login');
+  await page.getByPlaceholder('Username').fill('develop');
+  await page.getByPlaceholder('Password').fill('password');
+  await page.getByRole('button', { name: 'Login' }).click();
+  await expect(page.getByText('Success Login')).toBeVisible();
+}
 
 test.describe('Testing Tag Page', () => {
   test('should have title, url, search form and add button', async ({ page }) => {
@@ -30,13 +50,19 @@ test.describe('Testing Tag Page', () => {
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText('Please provide bearer token in headers')).toBeVisible();
   });
+  test('should fill required field when creating new tag', async ({ page }) => {
+    // Login
+    await login(page);
+    // go to tag page
+    await page.getByRole('link', { name: 'Tag', exact: true }).click();
+    // add new tag
+    await page.getByRole('button', { name: 'Add New Tag' }).click();
+    await page.getByRole('button', { name: 'Save' }).click();
+    await expect(page.getByText('Name required')).toBeVisible();
+  });
   test('should can create, edit and delete tag after login', async ({ page }) => {
     // Login
-    await page.goto('http://localhost:3000/login');
-    await page.getByPlaceholder('Username').fill('develop');
-    await page.getByPlaceholder('Password').fill('password');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await expect(page.getByText('Success Login')).toBeVisible();
+    await login(page);
     // go to tag page
     await page.getByRole('link', { name: 'Tag', exact: true }).click();
     // add new tag
@@ -66,5 +92,7 @@ test.describe('Testing Tag Page', () => {
     await expect(page.getByText('Success delete tag')).toBeVisible();
     await page.reload();
     await expect(page.getByRole('cell', { name: 'Edit Tag Test' })).not.toBeVisible();
+
+    await logout(page);
   });
 });
