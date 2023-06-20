@@ -16,7 +16,9 @@
     "test-dashboard": "npx playwright test dashboard",
     "test-ui": "npx playwright test --ui",
     "test-report": "npx playwright show-report",
-    "test-trace": "npx playwright show-trace trace.zip",
+    "test-trace": "npx playwright test --trace on",
+    "test-trace-quote": "npx playwright test --trace on quote",
+    "test-show-trace": "npx playwright show-trace trace.zip",
     "test-generator": "npx playwright codegen http://localhost:3000"
   },
   "dependencies": {
