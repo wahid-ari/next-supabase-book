@@ -24,7 +24,6 @@ export default function HeadSeo({ title, description, prefetch }: Props) {
 
   return (
     <Head>
-      {/* TODO https://swr.vercel.app/docs/prefetching */}
       <title>{headTitle}</title>
       <meta name='description' content={headDescription} />
       <meta name='og:description' content={headDescription} />
@@ -53,6 +52,7 @@ export default function HeadSeo({ title, description, prefetch }: Props) {
         href={`${process.env.NEXT_PUBLIC_API_ROUTE}/sitemap.xml`}
       />
 
+      {/* TODO https://swr.vercel.app/docs/prefetching */}
       {prefetch?.length > 0 &&
         prefetch?.map((item, index) => {
           return <link key={index} rel='preload' href={item} as='fetch' crossOrigin='anonymous' />;

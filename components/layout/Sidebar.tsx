@@ -20,6 +20,7 @@ import {
   DocumentReportIcon,
   ViewBoardsIcon,
   ViewGridAddIcon,
+  TableIcon,
 } from '@heroicons/react/outline';
 import NavLink from '@components/layout/NavLink';
 import NavAccordion from '@components/layout/NavAccordion';
@@ -124,6 +125,10 @@ export default function Sidebar({ className, ...props }: { className?: string; [
             Log
           </NavLink>
 
+          <NavLink href='/session' icon={<TableIcon className='h-4 w-4' />} className='mt-1'>
+            Session
+          </NavLink>
+
           <NavLink href='/settings' icon={<CogIcon className='h-4 w-4' />} className='mt-1'>
             Settings
           </NavLink>
@@ -157,6 +162,7 @@ export default function Sidebar({ className, ...props }: { className?: string; [
         <div className='px-3 py-2'>
           {mounted && admin.name ? (
             <button
+              data-testid='button-logout'
               onClick={() => setOpenModal(true)}
               className={clsx(
                 'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
@@ -190,6 +196,7 @@ export default function Sidebar({ className, ...props }: { className?: string; [
         onClose={() => setOpenModal(false)}
         onConfirm={handleLogout}
         confirmText='Logout'
+        confirmTestId='confirm-logout'
       >
         Are you sure want to logout?
       </Modal>

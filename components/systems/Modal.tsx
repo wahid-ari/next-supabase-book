@@ -12,6 +12,7 @@ type Props = {
   onConfirm?: () => void;
   showIcon?: boolean;
   confirmText?: string;
+  confirmTestId?: string;
   [props: string]: any;
 };
 
@@ -24,6 +25,7 @@ export default function Modal({
   onConfirm,
   showIcon,
   confirmText,
+  confirmTestId,
   ...props
 }: Props) {
   return (
@@ -89,11 +91,11 @@ export default function Modal({
                 </Button.secondary>
 
                 {isDanger ? (
-                  <Button.danger className='w-full sm:w-auto' onClick={onConfirm}>
+                  <Button.danger data-testid={confirmTestId} className='w-full sm:w-auto' onClick={onConfirm}>
                     {confirmText || 'Delete'}
                   </Button.danger>
                 ) : (
-                  <Button className='w-full sm:w-auto' onClick={onConfirm}>
+                  <Button data-testid={confirmTestId} className='w-full sm:w-auto' onClick={onConfirm}>
                     Confirm
                   </Button>
                 )}
