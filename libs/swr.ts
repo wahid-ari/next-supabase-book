@@ -149,11 +149,11 @@ export function useQuoteByTagData() {
 }
 
 export function useLogsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/log`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/log`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 export function useSessionsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/session`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/session`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
