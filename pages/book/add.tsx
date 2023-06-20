@@ -90,12 +90,12 @@ export default function Book() {
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book`, createItem);
       if (res.status == 200) {
-        updateToast({ toastId, message: res.data.message, isError: false });
+        updateToast({ toastId, message: res?.data?.message, isError: false });
         router.push('/book');
       }
     } catch (error) {
       console.error(error);
-      updateToast({ toastId, message: error.response.data.error, isError: true });
+      updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book`);
     }

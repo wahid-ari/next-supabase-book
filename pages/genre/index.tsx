@@ -57,11 +57,11 @@ export default function Genre() {
       if (res.status == 200) {
         setOpenCreateDialog(false);
         setName('');
-        updateToast({ toastId, message: res.data.message, isError: false });
+        updateToast({ toastId, message: res?.data?.message, isError: false });
       }
     } catch (error) {
       console.error(error);
-      updateToast({ toastId, message: error.response.data.error, isError: true });
+      updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
     }
@@ -77,11 +77,11 @@ export default function Genre() {
       if (res.status == 201) {
         setOpenEditDialog(false);
         setEditItem({ id: null, name: '' });
-        updateToast({ toastId, message: res.data.message, isError: false });
+        updateToast({ toastId, message: res?.data?.message, isError: false });
       }
     } catch (error) {
       console.error(error);
-      updateToast({ toastId, message: error.response.data.error, isError: true });
+      updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
     }
@@ -97,11 +97,11 @@ export default function Genre() {
       if (res.status == 200) {
         setOpenDeleteDialog(false);
         setDeleteItem({ id: null, name: '' });
-        updateToast({ toastId, message: res.data.message, isError: false });
+        updateToast({ toastId, message: res?.data?.message, isError: false });
       }
     } catch (error) {
       console.error(error);
-      updateToast({ toastId, message: error.response.data.error, isError: true });
+      updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
     }

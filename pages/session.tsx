@@ -52,11 +52,11 @@ export default function Sessions() {
       const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/session`);
       if (res.status == 200) {
         setOpenDeleteAllDialog(false);
-        updateToast({ toastId, message: res.data.message, isError: false });
+        updateToast({ toastId, message: res?.data?.message, isError: false });
       }
     } catch (error) {
       console.error(error);
-      updateToast({ toastId, message: error.response.data.error, isError: true });
+      updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/session`);
     }

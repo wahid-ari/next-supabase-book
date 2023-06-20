@@ -73,7 +73,7 @@ export default function Login() {
           Router.replace('/');
         }
       } catch (error) {
-        updateToast({ toastId, message: error.response.data.error, isError: true });
+        updateToast({ toastId, message: error?.response?.data?.error, isError: true });
         console.error(error);
       }
     }
@@ -155,6 +155,7 @@ export default function Login() {
                   required
                 />
                 <button
+                  aria-label='show password'
                   onClick={() => setShowPassword(!showPassword)}
                   className='absolute right-0 z-10 mr-0.5 mt-2 rounded-md border-gray-300 p-1.5 outline-none ring-gray-300 backdrop-blur-lg focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600'
                 >
