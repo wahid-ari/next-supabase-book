@@ -26,7 +26,7 @@ async function login(page: Page) {
 
 test.describe('Testing Genre Page', () => {
   test('should have title, url, search form and add button', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await expect(page).toHaveURL(/genre/);
     await expect(page).toHaveTitle(/Genre/);
     await expect(page.getByRole('heading', { name: 'Genre' })).toBeVisible();
@@ -34,7 +34,7 @@ test.describe('Testing Genre Page', () => {
     await expect(page.getByRole('button', { name: 'Add New Genre' })).toBeVisible();
   });
   test('should render table and data', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await expect(page.getByRole('cell', { name: 'No', exact: true })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Name' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Action' })).toBeVisible();
@@ -42,13 +42,13 @@ test.describe('Testing Genre Page', () => {
     await expect(page.getByRole('cell', { name: 'Biography' })).toBeVisible();
   });
   test('should show filter result', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await page.getByPlaceholder('Search').fill('art');
     await expect(page.getByRole('cell', { name: 'Art' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Biography' })).not.toBeVisible();
   });
   test('should only can create new genre after login', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await page.getByRole('button', { name: 'Add New Genre' }).click();
     await page.getByPlaceholder('Biography').fill('Genre');
     await page.getByRole('button', { name: 'Save' }).click();

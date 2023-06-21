@@ -14,6 +14,7 @@
     "type-check": "tsc",
     "test": "npx playwright test",
     "test-dashboard": "npx playwright test dashboard",
+    "test-book": "npx playwright test tests/book.spec.ts",
     "test-ui": "npx playwright test --ui",
     "test-report": "npx playwright show-report",
     "test-trace": "npx playwright test --trace on",

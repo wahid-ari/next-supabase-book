@@ -26,7 +26,7 @@ async function login(page: Page) {
 
 test.describe('Testing Tag Page', () => {
   test('should have title, url, search form and add button', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await expect(page).toHaveURL(/tag/);
     await expect(page).toHaveTitle(/Tag/);
     await expect(page.getByRole('heading', { name: 'Tag' })).toBeVisible();
@@ -34,7 +34,7 @@ test.describe('Testing Tag Page', () => {
     await expect(page.getByRole('button', { name: 'Add New Tag' })).toBeVisible();
   });
   test('should render table and data', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await expect(page.getByRole('cell', { name: 'No', exact: true })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Name' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Action' })).toBeVisible();
@@ -42,13 +42,13 @@ test.describe('Testing Tag Page', () => {
     await expect(page.getByRole('cell', { name: 'Life' })).toBeVisible();
   });
   test('should show filter result', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await page.getByPlaceholder('Search').fill('love');
     await expect(page.getByRole('cell', { name: 'Love' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Life' })).not.toBeVisible();
   });
   test('should only can create new tag after login', async ({ page }) => {
-    await goToPage(page)
+    await goToPage(page);
     await page.getByRole('button', { name: 'Add New Tag' }).click();
     await page.getByPlaceholder('Life').fill('Tag');
     await page.getByRole('button', { name: 'Save' }).click();
