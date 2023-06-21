@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import nookies from 'nookies';
 import Modal from '@components/systems/Modal';
+import { useMounted } from '@hooks/useMounted';
 
 type Props = {
   className?: string;
@@ -16,11 +17,7 @@ export default function Akun({ className, ...props }: Props) {
   const admin = nookies.get(null, 'name');
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   function handleLogout() {
     setOpenModal(false);

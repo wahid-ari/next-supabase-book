@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { GlobalContext } from '@utils/GlobalContext';
+import { GlobalContext } from 'context/GlobalContext';
 import {
   XIcon,
   LogoutIcon,
@@ -28,17 +28,14 @@ import Modal from '@components/systems/Modal';
 import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
 import nookies from 'nookies';
+import { useMounted } from '@hooks/useMounted';
 
 export default function Sidebar({ className, ...props }: { className?: string; [props: string]: any }) {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { showNav, setShowNav } = useContext(GlobalContext);
   const admin = nookies.get(null, 'type');
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, [admin]);
+  const mounted = useMounted();
 
   const hideMenu = () => {
     setShowNav(false);

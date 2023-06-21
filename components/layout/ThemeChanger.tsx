@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
+import { useMounted } from '@hooks/useMounted';
 
 export default function ThemeChanger({ ...props }: { [props: string]: any }) {
-  // https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  const mounted = useMounted();
   if (!mounted) {
     return null;
   }

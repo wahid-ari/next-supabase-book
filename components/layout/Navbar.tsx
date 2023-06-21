@@ -1,20 +1,17 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import Link from 'next/link';
 import { MenuIcon } from '@heroicons/react/solid';
-import { GlobalContext } from '@utils/GlobalContext';
+import { GlobalContext } from 'context/GlobalContext';
 import Menu from './Menu';
 import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
 import nookies from 'nookies';
+import { useMounted } from '@hooks/useMounted';
 
 export default function Navbar({ className, ...props }: { className?: string; [props: string]: any }) {
   const { setShowNav } = useContext(GlobalContext);
   const admin = nookies.get(null, 'name');
-  const [mounted, setMounted] = useState(false);
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   const showMenu = () => {
     setShowNav(true);

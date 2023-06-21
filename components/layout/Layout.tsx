@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode } from 'react';
 import Sidebar from './Sidebar';
 import Breadcrumb from '@components/layout/Breadcrumb';
 import Navbar from './Navbar';
@@ -6,6 +6,7 @@ import Menu from './Menu';
 import clsx from 'clsx';
 import nookies from 'nookies';
 import HeadSeo from './HeadSeo';
+import { useMounted } from '@hooks/useMounted';
 
 type Props = {
   children: ReactNode;
@@ -17,11 +18,7 @@ type Props = {
 
 export default function Layout({ children, title, description, prefetch, ...props }: Props) {
   const admin = nookies.get(null, 'name');
-  const [mounted, setMounted] = useState(false);
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   return (
     <>
