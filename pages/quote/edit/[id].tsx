@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useQuoteData, useAuthorsData, useTagsData } from '@libs/swr';
 import axios from 'axios';
-import useToast from '@utils/useToast';
+import useToast from '@hooks/useToast';
 import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Button from '@components/systems/Button';

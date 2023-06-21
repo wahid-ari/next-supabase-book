@@ -10,18 +10,13 @@ import NavLink from '@components/layout/NavLink';
 import ThemeChanger from '@components/layout/ThemeChanger';
 import { useTheme } from 'next-themes';
 import Text from '@components/systems/Text';
-import { useState, useEffect } from 'react';
 import Navbar from '@components/layout/Navbar';
 import Sidebar from '@components/layout/Sidebar';
+import { useMounted } from '@hooks/useMounted';
 
 export default function Example() {
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  const mounted = useMounted();
   if (!mounted) {
     return null;
   }

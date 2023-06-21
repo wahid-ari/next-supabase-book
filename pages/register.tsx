@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Router from 'next/router';
 import axios from 'axios';
-import useToast from '@utils/useToast';
+import useToast from '@hooks/useToast';
 import Button from '@components/systems/Button';
 import Heading from '@components/systems/Heading';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';

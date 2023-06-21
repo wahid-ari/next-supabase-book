@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, useRef, useMemo, useEffect } from 'react';
 import * as yup from 'yup';
 import { z } from 'zod';
-import useToast from '@utils/useToast';
+import useToast from '@hooks/useToast';
 import Layout from '@components/layout/Layout';
 import Badge from '@components/systems/Badge';
 import Button from '@components/systems/Button';
@@ -39,6 +39,7 @@ import clsx from 'clsx';
 import FileInput from '@components/systems/FileInput';
 import { faker } from '@faker-js/faker';
 import TableSimple from '@components/systems/TableSimple';
+import { useMounted } from '@hooks/useMounted';
 
 const searchBoxData = [
   {
@@ -355,11 +356,7 @@ export default function Example() {
     setSelectedColor(e.target.value);
   }
 
-  // fix react hydration error
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
   if (!mounted) {
     return null;
   }
@@ -789,7 +786,7 @@ export default function Example() {
           {`// look validation for example`}
           <br />
           <br />
-          {`import useToast from '@utils/useToast()'`}
+          {`import useToast from '@hooks/useToast()'`}
           <br />
           <br />
           {`const { updateToast, pushToast, dismissToast } = useToast();`}

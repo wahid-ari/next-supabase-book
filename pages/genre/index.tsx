@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { mutate } from 'swr';
 import { useGenresData } from '@libs/swr';
 import axios from 'axios';
-import useToast from '@utils/useToast';
+import useToast from '@hooks/useToast';
 import { PlusSmIcon } from '@heroicons/react/outline';
 import Layout from '@components/layout/Layout';
 import TableSimple from '@components/systems/TableSimple';

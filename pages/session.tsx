@@ -10,7 +10,7 @@ import InputDebounce from '@components/systems/InputDebounce';
 import Button from '@components/systems/Button';
 import { TrashIcon } from '@heroicons/react/outline';
 import Dialog from '@components/systems/Dialog';
-import useToast from '@utils/useToast';
+import useToast from '@hooks/useToast';
 import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {

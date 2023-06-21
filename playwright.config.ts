@@ -6,6 +6,9 @@ import { defineConfig, devices } from '@playwright/test';
  */
 // require('dotenv').config();
 
+// Explore test-results
+// https://trace.playwright.dev/
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
