@@ -3,7 +3,9 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
       "@data/*": ["data/*"],
+      "@hooks/*": ["hooks/*"],
       "@libs/*": ["libs/*"],
       "@pages/*": ["pages/*"],
       "@public/*": ["public/*"],
