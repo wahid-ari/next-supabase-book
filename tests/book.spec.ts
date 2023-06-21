@@ -61,7 +61,7 @@ test.describe('Testing Book Page', () => {
     await page.getByRole('link', { name: 'Add New Book' }).click();
     await expect(page.getByPlaceholder('Search and Select Author')).toBeVisible();
     await expect(page.locator('label').filter({ hasText: 'Genre' })).toBeVisible();
-    await page.getByPlaceholder('The Hunger Games').fill('New Book');
+    await page.getByPlaceholder('Book Title').fill('New Book');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText('Please provide bearer token in headers')).toBeVisible();
   });
@@ -83,7 +83,7 @@ test.describe('Testing Book Page', () => {
     // go to add book page
     await page.getByRole('link', { name: 'Add New Book' }).click();
     // create book
-    await page.getByPlaceholder('The Hunger Games').fill('New Book');
+    await page.getByPlaceholder('Book Title').fill('New Book');
     await page.getByRole('button', { name: 'Author Show options' }).click();
     await page.getByRole('option', { name: 'Suzanne Collins' }).click();
     await page.getByRole('button', { name: 'Save' }).click();
@@ -105,7 +105,7 @@ test.describe('Testing Book Page', () => {
       .getByRole('row', { name: '301 New Book Suzanne Collins - Edit Delete' })
       .getByRole('link', { name: 'Edit' })
       .click();
-    await page.getByPlaceholder('The Hunger Games').fill('New Book Edit');
+    await page.getByPlaceholder('Book Title').fill('New Book Edit');
     await page.getByRole('button', { name: 'Author Show options' }).click();
     await page.getByRole('option', { name: 'Jane Austen' }).click();
     await page.getByRole('button', { name: 'Update' }).click();

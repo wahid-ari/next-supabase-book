@@ -50,7 +50,7 @@ test.describe('Testing Genre Page', () => {
   test('should only can create new genre after login', async ({ page }) => {
     await goToPage(page);
     await page.getByRole('button', { name: 'Add New Genre' }).click();
-    await page.getByPlaceholder('Biography').fill('Genre');
+    await page.getByPlaceholder('Genre Name').fill('Genre');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText('Please provide bearer token in headers')).toBeVisible();
   });
@@ -72,7 +72,7 @@ test.describe('Testing Genre Page', () => {
     await page.getByRole('link', { name: 'Genre', exact: true }).click();
     // add new genre
     await page.getByRole('button', { name: 'Add New Genre' }).click();
-    await page.getByPlaceholder('Biography').fill('New Genre Test');
+    await page.getByPlaceholder('Genre Name').fill('New Genre Test');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText(/Creating/)).toBeVisible();
     await expect(page.getByText('Success add genre')).toBeVisible();

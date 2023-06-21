@@ -60,7 +60,7 @@ test.describe('Testing Quote Page', () => {
     await page.getByRole('link', { name: 'Add New Quote' }).click();
     await expect(page.getByPlaceholder('Search and Select Author')).toBeVisible();
     await expect(page.getByText('Tags', { exact: true })).toBeVisible();
-    await page.getByPlaceholder('Be yourself; everyone else is already taken.').fill('New Quote');
+    await page.getByPlaceholder('Be yourself, everyone else is already taken.').fill('New Quote');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText('Please provide bearer token in headers')).toBeVisible();
   });
@@ -82,7 +82,7 @@ test.describe('Testing Quote Page', () => {
     // go to add quote page
     await page.getByRole('link', { name: 'Add New Quote' }).click();
     // create quote
-    await page.getByPlaceholder('Be yourself; everyone else is already taken.').fill('New Quote');
+    await page.getByPlaceholder('Be yourself, everyone else is already taken.').fill('New Quote');
     await page.getByRole('button', { name: 'Author Show options' }).click();
     await page.getByRole('option', { name: 'Suzanne Collins' }).click();
     await page.getByRole('button', { name: 'Save' }).click();
@@ -104,7 +104,7 @@ test.describe('Testing Quote Page', () => {
       .getByRole('row', { name: '271 "New Quote" Suzanne Collins Edit Delete' })
       .getByRole('link', { name: 'Edit' })
       .click();
-    await page.getByPlaceholder('Be yourself; everyone else is already taken.').fill('New Quote Edit');
+    await page.getByPlaceholder('Be yourself, everyone else is already taken.').fill('New Quote Edit');
     await page.getByRole('button', { name: 'Author Show options' }).click();
     await page.getByRole('option', { name: 'Jane Austen' }).click();
     await page.getByRole('button', { name: 'Update' }).click();

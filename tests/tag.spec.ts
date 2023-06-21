@@ -50,7 +50,7 @@ test.describe('Testing Tag Page', () => {
   test('should only can create new tag after login', async ({ page }) => {
     await goToPage(page);
     await page.getByRole('button', { name: 'Add New Tag' }).click();
-    await page.getByPlaceholder('Life').fill('Tag');
+    await page.getByPlaceholder('Tag Name').fill('Tag');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText('Please provide bearer token in headers')).toBeVisible();
   });
@@ -72,7 +72,7 @@ test.describe('Testing Tag Page', () => {
     await page.getByRole('link', { name: 'Tag', exact: true }).click();
     // add new tag
     await page.getByRole('button', { name: 'Add New Tag' }).click();
-    await page.getByPlaceholder('Life').fill('New Tag Test');
+    await page.getByPlaceholder('Tag Name').fill('New Tag Test');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByText(/Creating/)).toBeVisible();
     await expect(page.getByText('Success add tag')).toBeVisible();
