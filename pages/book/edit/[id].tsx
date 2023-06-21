@@ -167,7 +167,7 @@ export default function Book({ id }) {
               name='title'
               value={editItem.title}
               onChange={(e) => setEditItem({ ...editItem, title: e.target.value })}
-              placeholder='The Hunger Games'
+              placeholder='Book Title'
             />
 
             {listOfGenres ? (
@@ -233,7 +233,7 @@ export default function Book({ id }) {
               height={4}
               value={editItem.description}
               onChange={(e) => setEditItem({ ...editItem, description: e.target.value })}
-              placeholder='Could you survive on your own in the wild, with every one out to make sure you dont live to see the morning?'
+              placeholder='Book Description'
             />
           </div>
           <div>

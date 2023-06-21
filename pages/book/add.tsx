@@ -123,7 +123,7 @@ export default function Book() {
             name='title'
             value={createItem.title}
             onChange={(e) => setCreateItem({ ...createItem, title: e.target.value })}
-            placeholder='The Hunger Games'
+            placeholder='Book Title'
           />
 
           {listOfGenres ? (
@@ -189,7 +189,7 @@ export default function Book() {
             height={4}
             value={createItem.description}
             onChange={(e) => setCreateItem({ ...createItem, description: e.target.value })}
-            placeholder='Could you survive on your own in the wild, with every one out to make sure you dont live to see the morning?'
+            placeholder='Book Description'
           />
         </div>
         <div>

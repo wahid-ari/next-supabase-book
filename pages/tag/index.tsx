@@ -159,7 +159,7 @@ export default function Tags() {
             name='name'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder='Life'
+            placeholder='Tag Name'
           />
         </div>
       </Dialog>

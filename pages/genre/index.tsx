@@ -159,7 +159,7 @@ export default function Genre() {
             name='name'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder='Biography'
+            placeholder='Genre Name'
           />
         </div>
       </Dialog>

@@ -151,7 +151,7 @@ export default function Quote({ id }) {
             name='quote'
             value={editItem.quote}
             onChange={(e) => setEditItem({ ...editItem, quote: e.target.value })}
-            placeholder='Be yourself; everyone else is already taken.'
+            placeholder='Be yourself, everyone else is already taken.'
           />
 
           {filteredAuthor ? (

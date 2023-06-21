@@ -97,7 +97,7 @@ export default function Author({ id }) {
             name='name'
             value={editItem.name}
             onChange={(e) => setEditItem({ ...editItem, name: e.target.value })}
-            placeholder='Suzanne Collins'
+            placeholder='Author Name'
           />
 
           <LabeledInput
@@ -124,7 +124,7 @@ export default function Author({ id }) {
             name='youtube'
             value={editItem.born}
             onChange={(e) => setEditItem({ ...editItem, born: e.target.value })}
-            placeholder='Hartford, Connecticut, The United States'
+            placeholder='The United States'
           />
 
           <LabeledInput
@@ -133,7 +133,7 @@ export default function Author({ id }) {
             name='web'
             value={editItem.web}
             onChange={(e) => setEditItem({ ...editItem, web: e.target.value })}
-            placeholder='http://suzannecollinsbooks.com'
+            placeholder='http://suzannecollins.com'
           />
 
           <TextArea
@@ -141,7 +141,7 @@ export default function Author({ id }) {
             name='bio'
             value={editItem.bio}
             onChange={(e) => setEditItem({ ...editItem, bio: e.target.value })}
-            placeholder='Suzanne Collins has been busy writing for childrens television. She has worked on the staffs of several Nickelodeon shows, including the Emmy-nominated hit Clarissa Explains it All and The Mystery Files of Shelby Woo.'
+            placeholder='Author Bio'
           />
 
           <Button.success onClick={handleEdit} className='w-full'>

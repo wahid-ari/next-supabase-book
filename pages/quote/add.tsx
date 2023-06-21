@@ -113,7 +113,7 @@ export default function Quote() {
           name='quote'
           value={createItem.quote}
           onChange={(e) => setCreateItem({ ...createItem, quote: e.target.value })}
-          placeholder='Be yourself; everyone else is already taken.'
+          placeholder='Be yourself, everyone else is already taken.'
         />
 
         {filteredAuthor ? (
