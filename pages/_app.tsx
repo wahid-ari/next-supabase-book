@@ -1,8 +1,8 @@
 import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { GlobalProvider } from '@utils/GlobalContext';
-import { AxiosProvider } from '@utils/AxiosContext';
+import { GlobalProvider } from '@context/GlobalContext';
+import { AxiosProvider } from '@context/AxiosContext';
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
 import { Inter } from 'next/font/google';
