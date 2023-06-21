@@ -7,7 +7,7 @@ export async function getSessionToken(res: NextApiResponse, header: string, toke
   if (!header) return res.status(401).json({ error: 'Please provide bearer token in headers' });
   const { data } = await supabase.from('book_sessions').select('*').eq('token', token).single();
   if (data) return data;
-  else res.status(401).json({ message: 'Token invalid' });
+  else res.status(401).json({ error: 'Token invalid' });
 }
 
 export async function writeLogs(user_id: number, action: string, table: string = '', data_id: string | string[] = '') {
