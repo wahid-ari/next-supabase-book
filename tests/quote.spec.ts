@@ -110,7 +110,7 @@ test.describe('Testing Quote Page', () => {
     await page.getByRole('button', { name: 'Update' }).click();
     await expect(page.getByText(/Updating/)).toBeVisible();
     await expect(page.getByText('Success update quote')).toBeVisible();
-    // cek new created quote
+    // cek new edited quote
     await goToLastPage(page);
     await expect(page.getByRole('cell', { name: '"New Quote Edit"' })).toBeVisible();
   });
@@ -129,7 +129,7 @@ test.describe('Testing Quote Page', () => {
     await page.getByRole('button', { name: 'Delete' }).click();
     await expect(page.getByText(/Deleting/)).toBeVisible();
     await expect(page.getByText('Success delete quote')).toBeVisible();
-    // cek new created quote
+    // cek deleted quote
     await goToLastPage(page);
     await expect(page.getByRole('cell', { name: '"New Quote Edit"' })).not.toBeVisible();
 
