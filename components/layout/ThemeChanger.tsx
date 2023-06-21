@@ -5,9 +5,7 @@ import { useMounted } from '@hooks/useMounted';
 export default function ThemeChanger({ ...props }: { [props: string]: any }) {
   const { theme, setTheme } = useTheme();
   const mounted = useMounted();
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <button

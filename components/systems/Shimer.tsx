@@ -7,9 +7,7 @@ import { useMounted } from '@hooks/useMounted';
 export default function Shimer({ className, dataTestId }: { className?: string; dataTestId?: string }) {
   const { theme } = useTheme();
   const mounted = useMounted();
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return theme == 'dark' ? (
     <Skeleton

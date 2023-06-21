@@ -157,32 +157,34 @@ export default function Sidebar({ className, ...props }: { className?: string; [
 
         <hr className='mt-2 dark:border-neutral-800' />
         <div className='px-3 py-2'>
-          {mounted && admin.name ? (
-            <button
-              data-testid='button-logout'
-              onClick={() => setOpenModal(true)}
-              className={clsx(
-                'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
-                'rounded text-red-600 hover:bg-red-100 dark:hover:bg-neutral-800',
-                'focus-visible:outline-none focus-visible:ring focus-visible:ring-red-500'
-              )}
-            >
-              <LogoutIcon className='h-4 w-4' />
-              Logout
-            </button>
-          ) : (
-            <Link
-              href='/login'
-              className={clsx(
-                'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
-                'rounded text-emerald-600 hover:bg-emerald-100 dark:hover:bg-neutral-800',
-                'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
-              )}
-            >
-              <LoginIcon className='h-4 w-4' />
-              Login
-            </Link>
-          )}
+          {mounted ? (
+            admin.name ? (
+              <button
+                data-testid='button-logout'
+                onClick={() => setOpenModal(true)}
+                className={clsx(
+                  'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
+                  'rounded text-red-600 hover:bg-red-100 dark:hover:bg-neutral-800',
+                  'focus-visible:outline-none focus-visible:ring focus-visible:ring-red-500'
+                )}
+              >
+                <LogoutIcon className='h-4 w-4' />
+                Logout
+              </button>
+            ) : (
+              <Link
+                href='/login'
+                className={clsx(
+                  'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
+                  'rounded text-emerald-600 hover:bg-emerald-100 dark:hover:bg-neutral-800',
+                  'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
+                )}
+              >
+                <LoginIcon className='h-4 w-4' />
+                Login
+              </Link>
+            )
+          ) : null}
         </div>
       </div>
       <Modal
