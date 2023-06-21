@@ -48,7 +48,7 @@ ChartJS.register(
 );
 
 export default function Home() {
-  const { data, error } = useCountsData();
+  // const { data, error } = useCountsData();
   const { data: totalAuthors, error: errorTotalAuthors } = useTotalAuthorsData();
   const { data: totalBooks, error: errorTotalBooks } = useTotalBooksData();
   const { data: totalGenres, error: errorTotalGenres } = useTotalGenresData();

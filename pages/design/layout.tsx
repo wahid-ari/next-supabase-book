@@ -17,9 +17,6 @@ import { useMounted } from '@hooks/useMounted';
 export default function Example() {
   const { theme } = useTheme();
   const mounted = useMounted();
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <Layout title='Design System - MyBook'>
@@ -106,7 +103,7 @@ export default function Example() {
 
       <Wrapper id='theme-changer' name='ThemeChanger' noChildren noClassName>
         <ThemeChanger data-testid='theme-changer' />
-        <Text data-testid='theme-changer-value'>{theme}</Text>
+        {mounted ? <Text data-testid='theme-changer-value'>{theme}</Text> : null}
       </Wrapper>
 
       <Wrapper id='menu' name='Menu' noChildren>

@@ -57,6 +57,7 @@ const searchBoxData = [
 ];
 
 export default function Example() {
+  const mounted = useMounted();
   const [inputDebounceValue, setInputDebounceValue] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDangerDialog, setOpenDangerDialog] = useState(false);
@@ -354,11 +355,6 @@ export default function Example() {
   const [selectedColor, setSelectedColor] = useState('blue');
   function handleSelectColor(e: any) {
     setSelectedColor(e.target.value);
-  }
-
-  const mounted = useMounted();
-  if (!mounted) {
-    return null;
   }
 
   return (
@@ -755,16 +751,18 @@ export default function Example() {
             tableInstances?.current?.setGlobalFilter(value);
           }}
         />
-        <ReactTable
-          columns={columns}
-          data={fakerUsers}
-          ref={tableInstances}
-          page_size={10}
-          itemPerPage={[10, 20, 50, 100]}
-          keyword={inputDebounceValues}
-          showInfo
-          filteredLength={filteredLength}
-        />
+        {mounted ? (
+          <ReactTable
+            columns={columns}
+            data={fakerUsers}
+            ref={tableInstances}
+            page_size={10}
+            itemPerPage={[10, 20, 50, 100]}
+            keyword={inputDebounceValues}
+            showInfo
+            filteredLength={filteredLength}
+          />
+        ) : null}
       </Wrapper>
 
       <Wrapper id='usetoast' name='useToast (hook)' noProps noChildren noClassName>
