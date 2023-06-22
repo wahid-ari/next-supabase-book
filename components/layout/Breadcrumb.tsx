@@ -38,7 +38,7 @@ export default function Breadcrumb({ ...props }: { [props: string]: any }) {
             passHref
             className={clsx(
               'inline-flex items-center rounded text-gray-700 transition-all hover:text-gray-900',
-              'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500',
+              'focus-visible:outline-none focus-visible:ring focus-visible:ring-orange-500',
               'dark:text-neutral-300 dark:hover:text-neutral-100'
             )}
           >
@@ -52,7 +52,7 @@ export default function Breadcrumb({ ...props }: { [props: string]: any }) {
               return (
                 <li aria-current='page' key={index} className='flex items-center'>
                   <ChevronRightIcon className='h-5 w-5 text-gray-500 dark:text-neutral-400' />
-                  <span className='ml-1 mr-4 font-medium text-emerald-600 dark:text-emerald-500'>
+                  <span className='ml-1 mr-4 font-medium text-orange-600 dark:text-orange-500'>
                     {capitalizeFirstLetter(path)}
                   </span>
                 </li>
@@ -66,7 +66,7 @@ export default function Breadcrumb({ ...props }: { [props: string]: any }) {
                     href={(index !== 0 ? '/' : '') + paths.slice(0, index).join('/') + '/' + path}
                     className={clsx(
                       'ml-1 rounded text-gray-600 transition-all hover:text-gray-800',
-                      'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500',
+                      'focus-visible:outline-none focus-visible:ring focus-visible:ring-orange-500',
                       'dark:text-neutral-300 dark:hover:text-neutral-200'
                     )}
                   >

@@ -134,9 +134,9 @@ export default function Sidebar({ className, ...props }: { className?: string; [
             href='https://my-book-docs.vercel.app'
             className={clsx(
               'my-1 flex w-full items-center justify-start gap-2 px-3 py-2 transition-all',
-              'rounded text-sm font-medium text-gray-600 hover:text-emerald-600 dark:text-neutral-300',
-              'hover:bg-gray-100 dark:hover:bg-neutral-800 dark:hover:text-emerald-500',
-              'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
+              'rounded text-sm font-medium text-gray-600 hover:text-orange-600 dark:text-neutral-300',
+              'hover:bg-gray-100 dark:hover:bg-neutral-800 dark:hover:text-orange-500',
+              'focus-visible:outline-none focus-visible:ring focus-visible:ring-orange-500'
             )}
             target='_blank'
             rel='noopener noreferrer'
@@ -176,8 +176,8 @@ export default function Sidebar({ className, ...props }: { className?: string; [
                 href='/login'
                 className={clsx(
                   'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
-                  'rounded text-emerald-600 hover:bg-emerald-100 dark:hover:bg-neutral-800',
-                  'focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500'
+                  'rounded text-orange-600 hover:bg-orange-100 dark:hover:bg-neutral-800',
+                  'focus-visible:outline-none focus-visible:ring focus-visible:ring-orange-500'
                 )}
               >
                 <LoginIcon className='h-4 w-4' />

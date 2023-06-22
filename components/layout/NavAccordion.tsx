@@ -35,8 +35,8 @@ export default function NavAccordion({ title, routeName, icon, children, ...prop
               {...props}
               className={clsx(
                 'mb-1 flex w-full items-center justify-start gap-2 rounded py-2 pl-3 text-gray-700 outline-none transition-all',
-                'hover:text-emerald-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-emerald-500',
-                'dark:text-neutral-300 dark:hover:text-emerald-500'
+                'hover:text-orange-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-orange-500',
+                'dark:text-neutral-300 dark:hover:text-orange-500'
               )}
             >
               <div className='flex-grow text-left text-sm'>
