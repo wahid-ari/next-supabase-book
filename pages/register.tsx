@@ -16,7 +16,7 @@ export async function getServerSideProps(context: any) {
   if (cookies.token) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/dashboard',
       },
     };
   }
@@ -64,7 +64,7 @@ export default function Register() {
         //   });
         //   Router.replace('/');
         // }
-        Router.replace('/');
+        Router.replace('/dashboard');
       }
     } catch (error) {
       dismissToast();

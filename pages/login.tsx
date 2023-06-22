@@ -15,7 +15,7 @@ export async function getServerSideProps(context: any) {
   if (cookies.token) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/dashboard',
       },
     };
   }
@@ -35,7 +35,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    Router.prefetch('/');
+    Router.prefetch('/dashboard');
   }, []);
 
   async function handleLogin(e: any) {
@@ -70,7 +70,7 @@ export default function Login() {
             message: 'Success Login',
             isError: false,
           });
-          Router.replace('/');
+          Router.replace('/dashboard');
         }
       } catch (error) {
         updateToast({ toastId, message: error?.response?.data?.error, isError: true });
@@ -185,7 +185,7 @@ export default function Login() {
             <p className='mt-2 text-center font-normal dark:text-neutral-800'>
               Continue to{' '}
               <Link
-                href='/'
+                href='/dashboard'
                 className='rounded font-medium text-emerald-600 transition-all duration-300 hover:text-emerald-500 hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
               >
                 Dashboard
