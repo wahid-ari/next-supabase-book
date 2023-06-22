@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 export default function Breadcrumb({ ...props }: { [props: string]: any }) {
   const router = useRouter();
+  // dont show breadcrumb item in detail page
   const paths = router.pathname
     .split('/')
     .slice(1)

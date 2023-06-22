@@ -7,7 +7,7 @@ type Props = {
   type?: string;
   name: string;
   placeholder?: string;
-  value?: string;
+  value?: string | string[];
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   [props: string]: any;
 };

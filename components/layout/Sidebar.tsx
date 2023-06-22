@@ -90,7 +90,7 @@ export default function Sidebar({ className, ...props }: { className?: string; [
             'scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-800'
           )}
         >
-          <NavLink isHome href='/' icon={<ViewGridIcon className='h-4 w-4' />}>
+          <NavLink isHome href='/dashboard' icon={<ViewGridIcon className='h-4 w-4' />}>
             Dashboard
           </NavLink>
 
