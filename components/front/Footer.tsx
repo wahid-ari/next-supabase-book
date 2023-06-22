@@ -3,12 +3,12 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 const linkClassName = clsx(
-  'hover-underline-animation rounded text-[15px] hover:text-neutral-900',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:hover:text-neutral-100'
+  'hover-underline-animation rounded text-[15px] hover:text-neutral-900 px-0.5',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:hover:text-neutral-100'
 );
 const linkIconClassName = clsx(
   'rounded text-neutral-700 transition-all duration-200 hover:text-neutral-900',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-neutral-300 dark:hover:text-white'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:text-neutral-300 dark:hover:text-white'
 );
 
 export default function Footer({ className, ...props }: { className?: string; [props: string]: any }) {
@@ -22,7 +22,7 @@ export default function Footer({ className, ...props }: { className?: string; [p
               <div
                 className={clsx(
                   'flex items-center rounded font-medium text-neutral-900',
-                  'group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-sky-500'
+                  'group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-orange-500'
                 )}
               >
                 <Image alt='Logo' src='/icon.png' width={30} height={30} className='mr-2 rounded-lg' />
@@ -37,7 +37,9 @@ export default function Footer({ className, ...props }: { className?: string; [p
           </div>
           <div className='grid grid-cols-2 gap-8 min-[500px]:grid-cols-3 sm:gap-6 md:w-2/4'>
             <div>
-              <h2 className='mb-4 text-sm font-semibold uppercase text-neutral-800 dark:text-neutral-200'>Sitemap</h2>
+              <h2 className='mb-4 px-0.5 text-sm font-semibold uppercase text-neutral-800 dark:text-neutral-200'>
+                Sitemap
+              </h2>
               <ul className='text-neutral-700 dark:text-neutral-300'>
                 <li className='mb-2'>
                   <Link href='/' className={linkClassName}>
@@ -47,7 +49,9 @@ export default function Footer({ className, ...props }: { className?: string; [p
               </ul>
             </div>
             <div>
-              <h2 className='mb-4 text-sm font-semibold uppercase text-neutral-800 dark:text-neutral-200'>Sitemap</h2>
+              <h2 className='mb-4 px-0.5 text-sm font-semibold uppercase text-neutral-800 dark:text-neutral-200'>
+                Sitemap
+              </h2>
               <ul className='text-neutral-700 dark:text-neutral-300'>
                 <li className='mb-2'>
                   <Link href='/studios' className={linkClassName}>
@@ -57,7 +61,9 @@ export default function Footer({ className, ...props }: { className?: string; [p
               </ul>
             </div>
             <div>
-              <h2 className='mb-4 text-sm font-semibold uppercase text-neutral-800 dark:text-neutral-200'>Resources</h2>
+              <h2 className='mb-4 px-0.5 text-sm font-semibold uppercase text-neutral-800 dark:text-neutral-200'>
+                Resources
+              </h2>
               <ul className='text-neutral-700 dark:text-neutral-300'>
                 <li className='mb-2'>
                   <a href='https://my-movie-docs.vercel.app' target='_blank' rel='noreferrer' className={linkClassName}>
@@ -81,7 +87,7 @@ export default function Footer({ className, ...props }: { className?: string; [p
               href='/'
               className={clsx(
                 'hover-underline-animation rounded transition-all duration-200',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
               )}
             >
               MyBook™
@@ -108,7 +114,7 @@ export default function Footer({ className, ...props }: { className?: string; [p
             {/* <a
               href='https://github.com'
               target='_blank'
-              className='rounded text-neutral-700 transition-all duration-200 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-neutral-300 dark:hover:text-white'
+              className='rounded text-neutral-700 transition-all duration-200 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:text-neutral-300 dark:hover:text-white'
             >
               <svg className='h-5 w-5' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
                 <path

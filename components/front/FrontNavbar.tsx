@@ -13,11 +13,11 @@ function CustomActiveLink({ href, children }: { href: string; children: ReactNod
   return (
     <ActiveLink
       href={href}
-      activeClassName='!text-sky-500 dark:text-sky-500'
+      activeClassName='!text-orange-500 dark:!text-orange-500'
       className={clsx(
         'px-1 text-[15px] font-medium text-gray-700 transition-all duration-200',
-        'rounded hover:text-sky-500 dark:text-neutral-200 dark:hover:text-sky-500',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+        'rounded hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
       )}
     >
       {children}
@@ -28,7 +28,7 @@ function CustomActiveLink({ href, children }: { href: string; children: ReactNod
 const activeCn = clsx(
   'block rounded px-3 py-1.5 text-[15px] font-medium',
   'text-gray-600 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-800',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
 );
 
 export default function FrontNavbar({ className, ...props }: { className?: string; [props: string]: any }) {
@@ -52,7 +52,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
             <Link
               href='/'
               passHref
-              className='rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+              className='rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
             >
               <div className='flex items-center justify-center font-medium text-gray-900 md:justify-start'>
                 <Image alt='Logo' src='/icon.png' width={30} height={30} className='mr-2 rounded-lg' />
@@ -74,8 +74,8 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                   <Popover.Button
                     className={clsx(
                       'group flex items-center space-x-2 rounded px-1 text-[15px] font-medium transition-all duration-200',
-                      ' text-gray-700 hover:text-sky-500 dark:text-neutral-200 dark:hover:text-sky-500',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+                      ' text-gray-700 hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                     )}
                   >
                     <span>More</span>
@@ -111,9 +111,9 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                       <Popover.Button
                         aria-label='Search'
                         className={clsx(
-                          'group flex items-center space-x-2 rounded px-1 text-[15px] font-medium transition-all duration-200',
-                          ' text-gray-700 hover:text-sky-500 dark:text-neutral-200 dark:hover:text-sky-500',
-                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+                          'group flex items-center space-x-2 rounded p-0.5 text-[15px] font-medium transition-all duration-200',
+                          ' text-gray-700 hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                         )}
                       >
                         <SearchIcon className='h-5 w-5' />
@@ -140,12 +140,13 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
 
             <div className='hidden items-center gap-3 md:flex'>
               <ThemeChanger />
+              {/* FIX this  */}
               <Link
                 href='/dashboard'
                 className={clsx(
                   'px-1 text-[15px] font-medium text-gray-700 transition-all duration-200',
-                  'rounded hover:text-sky-500 dark:text-neutral-200 dark:hover:text-sky-500',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+                  'rounded hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                 )}
                 passHref
               >
@@ -157,8 +158,8 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     href='/dashboard'
                     className={clsx(
                       'px-1 text-[15px] font-medium text-gray-700 transition-all duration-200',
-                      'rounded hover:text-sky-500 dark:text-neutral-200 dark:hover:text-sky-500',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+                      'rounded hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                     )}
                     passHref
                   >
@@ -168,8 +169,8 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                   <Link
                     href='/login'
                     className={clsx(
-                      'rounded bg-sky-500 px-3 py-1 text-sm font-medium text-white transition-all duration-200',
-                      'hover:bg-sky-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400'
+                      'rounded bg-orange-500 px-3 py-1 text-sm font-medium text-white transition-all duration-200',
+                      'hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400'
                     )}
                     passHref
                   >
@@ -187,7 +188,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 className={clsx(
                   'inline-flex items-center justify-center rounded transition-all',
                   'text-gray-500 hover:text-gray-600 dark:text-neutral-300 dark:hover:text-neutral-100',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500'
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                 )}
               >
                 <span className='sr-only'>Open main menu</span>
@@ -230,7 +231,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     className={clsx(
                       'rounded p-1 text-gray-700 transition-all dark:text-neutral-300',
                       'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-100',
-                      'focus:outline-none focus:ring-2 focus:ring-sky-500'
+                      'focus:outline-none focus:ring-2 focus:ring-orange-500'
                     )}
                   >
                     <span className='sr-only'>Close main menu</span>
@@ -240,22 +241,13 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 {/* EndCLose Mobile Menu Button  */}
               </div>
               <div className='my-4 flex flex-col space-y-1 px-4'>
-                <ActiveLink href='/' activeClassName='!text-sky-500 dark:text-sky-500' className={activeCn}>
+                <ActiveLink href='/' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
                   Home
-                </ActiveLink>
-                <ActiveLink href='/movies' activeClassName='!text-sky-500 dark:text-sky-500' className={activeCn}>
-                  Movies
-                </ActiveLink>
-                <ActiveLink href='/actors' activeClassName='!text-sky-500 dark:text-sky-500' className={activeCn}>
-                  Actors
-                </ActiveLink>
-                <ActiveLink href='/directors' activeClassName='!text-sky-500 dark:text-sky-500' className={activeCn}>
-                  Directors
                 </ActiveLink>
                 <Menu>
                   {({ open }) => (
                     <>
-                      <Menu.Button className='w-full rounded px-3 py-1.5 text-[15px] font-medium text-gray-600 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-neutral-200 dark:hover:bg-neutral-800'>
+                      <Menu.Button className='w-full rounded px-3 py-1.5 text-[15px] font-medium text-gray-600 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:text-neutral-200 dark:hover:bg-neutral-800'>
                         <div className='flex items-center justify-between'>
                           <span>More</span>
                           <ChevronRightIcon
@@ -270,44 +262,37 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                       <Menu.Items className='space-y-1 px-3'>
                         <Menu.Item>
                           <ActiveLink
-                            activeClassName='!text-sky-500 dark:text-sky-500'
+                            activeClassName='!text-orange-500 dark:text-orange-500'
                             href='/studios'
                             className={activeCn}
                           >
                             Studios
                           </ActiveLink>
                         </Menu.Item>
-                        <Menu.Item>
-                          <ActiveLink
-                            activeClassName='!text-sky-500 dark:text-sky-500'
-                            href='/categories'
-                            className={activeCn}
-                          >
-                            Categories
-                          </ActiveLink>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <ActiveLink
-                            activeClassName='!text-sky-500 dark:text-sky-500'
-                            href='/countries'
-                            className={activeCn}
-                          >
-                            Countries
-                          </ActiveLink>
-                        </Menu.Item>
                       </Menu.Items>
                     </>
                   )}
                 </Menu>
-                <ActiveLink href='/browse' activeClassName='!text-sky-500 dark:text-sky-500' className={activeCn}>
+                <ActiveLink href='/browse' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
                   Browse
                 </ActiveLink>
+                {/* FIX this  */}
+                <Link
+                  href='/dashboard'
+                  className={clsx(
+                    'block rounded px-3 py-1.5 text-[15px] font-medium text-gray-600 hover:bg-gray-100',
+                    'hover:text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500',
+                    'dark:text-neutral-200 dark:hover:bg-neutral-800'
+                  )}
+                >
+                  Dashboard
+                </Link>
                 {mounted && (
                   <Link
                     href={`${admin.name ? '/dashboard' : '/login'}`}
                     className={clsx(
                       'block rounded px-3 py-1.5 text-[15px] font-medium text-gray-600 hover:bg-gray-100',
-                      'hover:text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500',
+                      'hover:text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500',
                       'dark:text-neutral-200 dark:hover:bg-neutral-800'
                     )}
                   >

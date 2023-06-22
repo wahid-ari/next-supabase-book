@@ -38,7 +38,8 @@ export default function BackToTop({ className, ...props }: { className?: string;
           onClick={scrollToTop}
           className={clsx(
             'flex items-center gap-1 rounded-full bg-transparent p-1 pl-1.5 text-[13px] text-neutral-700',
-            'transition-all duration-300 ease-in hover:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-700'
+            'transition-all duration-300 ease-in hover:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-700',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
           )}
         >
           <ChevronUpIcon className='h-5 w-5' />

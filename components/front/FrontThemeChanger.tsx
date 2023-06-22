@@ -11,7 +11,8 @@ export default function FrontThemeChanger({ variant = 'icon', ...props }: { vari
     return (
       <button
         className={clsx(
-          'rounded-full border-2 hover:border-neutral-400 focus:border-sky-500 focus:outline-none dark:border-neutral-700 dark:hover:border-neutral-500 dark:focus:border-sky-500',
+          'rounded-full border-2 hover:border-neutral-400 dark:border-neutral-700 dark:hover:border-neutral-500',
+          'focus:border-orange-500 focus:outline-none dark:focus:border-orange-500',
           'inline-flex h-8 items-center justify-center overflow-hidden transition-all duration-200',
           {
             'w-8': variant === 'icon',
@@ -27,7 +28,8 @@ export default function FrontThemeChanger({ variant = 'icon', ...props }: { vari
       {...props}
       onClick={() => setTheme(theme == 'dark' ? 'light' : 'dark')}
       className={clsx(
-        'rounded-full border-2 hover:border-neutral-300 focus:border-sky-500 focus:outline-none dark:border-neutral-700 dark:hover:border-neutral-600 dark:focus:border-sky-500',
+        'rounded-full border-2 hover:border-neutral-300 dark:border-neutral-700 dark:hover:border-neutral-600',
+        'focus:border-orange-500 focus:outline-none dark:focus:border-orange-500',
         'inline-flex h-8 items-center justify-center overflow-hidden transition-all duration-200',
         {
           'w-8': variant === 'icon',

@@ -23,9 +23,9 @@ export default function Button({ className, type, value, onClick, disabled, chil
       value={value}
       className={clsx(
         className,
-        disabled ? 'cursor-not-allowed' : 'hover:bg-sky-700 dark:hover:bg-sky-700',
-        'rounded bg-sky-600 px-3 py-1.5 text-sm font-medium text-white outline-none transition-all',
-        'focus:ring-2 focus:ring-sky-400 dark:bg-sky-600'
+        disabled ? 'cursor-not-allowed' : 'hover:bg-orange-600 dark:hover:bg-orange-600',
+        'rounded bg-orange-500 px-3 py-1.5 text-sm font-medium text-white outline-none transition-all',
+        'focus:ring-2 focus:ring-orange-400 dark:bg-orange-500'
       )}
     >
       {children}
