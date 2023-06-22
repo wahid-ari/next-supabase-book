@@ -8,7 +8,17 @@ import Title from '@components/systems/Title';
 import Text from '@components/systems/Text';
 import Button from '@components/systems/Button';
 import Heading from '@components/systems/Heading';
-import { ColorSwatchIcon, FilmIcon, FlagIcon, LibraryIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/outline';
+import {
+  AnnotationIcon,
+  BookOpenIcon,
+  CollectionIcon,
+  ColorSwatchIcon,
+  FilmIcon,
+  FlagIcon,
+  LibraryIcon,
+  UserGroupIcon,
+  UsersIcon,
+} from '@heroicons/react/outline';
 import { useSearchHistoryStore } from '@store/useStore';
 import { useMounted } from '@hooks/useMounted';
 
@@ -105,7 +115,7 @@ export default function Browse() {
           <LabeledInput
             wrapperClassName='w-full'
             name='search'
-            placeholder='Search movie, actor, director or studio'
+            placeholder='Search Title, Author, ISBN'
             type='text'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -236,63 +246,63 @@ export default function Browse() {
       <Heading h3 className='mt-6 !text-[19px]'>
         Browse
       </Heading>
-      <div className='mt-2 grid grid-cols-1 gap-6 min-[400px]:grid-cols-2 sm:grid-cols-3'>
+      <div className='mt-2 grid grid-cols-1 gap-6 min-[400px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
         <Link
-          href='/movies'
+          href='/books'
           className='group h-20 rounded-lg bg-gradient-to-br from-red-500 to-yellow-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500'
         >
           <div className='flex h-full w-full items-center justify-between gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
             <h2 className='bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Movie
+              Book
             </h2>
-            <FilmIcon className='h-10 w-10 text-yellow-500 transition-all duration-300 ease-in group-hover:text-white' />
+            <BookOpenIcon className='h-10 w-10 text-yellow-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
         </Link>
         <Link
-          href='/actors'
+          href='/authors'
           className='group h-20 rounded-lg bg-gradient-to-br from-cyan-500 to-purple-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500'
         >
           <div className='flex h-full w-full items-center justify-between gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
             <h2 className='bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Actor
+              Author
             </h2>
             <UserGroupIcon className='h-10 w-10 text-purple-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
         </Link>
         <Link
-          href='/directors'
+          href='/quotes'
           className='group h-20 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500'
         >
           <div className='flex h-full w-full items-center justify-between gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
             <h2 className='bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Director
+              Quote
             </h2>
-            <UsersIcon className='h-10 w-10 text-pink-500 transition-all duration-300 ease-in group-hover:text-white' />
+            <AnnotationIcon className='h-10 w-10 text-pink-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
         </Link>
         <Link
-          href='/studios'
+          href='/genres'
           className='group h-20 rounded-lg bg-gradient-to-br from-emerald-500 to-blue-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500'
         >
           <div className='flex h-full w-full items-center justify-between gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
             <h2 className='bg-gradient-to-r from-emerald-500 to-blue-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Studio
+              Genre
             </h2>
-            <LibraryIcon className='h-10 w-10 text-blue-500 transition-all duration-300 ease-in group-hover:text-white' />
+            <ColorSwatchIcon className='h-10 w-10 text-blue-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
         </Link>
         <Link
-          href='/categories'
+          href='/tags'
           className='group h-20 rounded-lg bg-gradient-to-br from-red-500 to-sky-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500'
         >
           <div className='flex h-full w-full items-center justify-between gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
             <h2 className='bg-gradient-to-r from-red-500 to-sky-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Category
+              Tag
             </h2>
-            <ColorSwatchIcon className='h-10 w-10 text-sky-500 transition-all duration-300 ease-in group-hover:text-white' />
+            <CollectionIcon className='h-10 w-10 text-sky-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
         </Link>
-        <Link
+        {/* <Link
           href='/countries'
           className='group h-20 rounded-lg bg-gradient-to-br from-orange-500 to-lime-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500'
         >
@@ -302,7 +312,7 @@ export default function Browse() {
             </h2>
             <FlagIcon className='h-10 w-10 text-lime-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
-        </Link>
+        </Link> */}
       </div>
     </FrontLayout>
   );
