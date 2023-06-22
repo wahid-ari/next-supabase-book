@@ -19,7 +19,7 @@ export default function AuthorListItem({ href, image, name, web, ...props }: Pro
     <div {...props} className='flex items-center gap-3'>
       <Link
         href={href}
-        className='rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:text-emerald-500'
+        className='rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:hover:text-orange-500'
       >
         {image ? (
           <div className='relative h-16 w-16'>
@@ -46,7 +46,7 @@ export default function AuthorListItem({ href, image, name, web, ...props }: Pro
           href={href}
           className={clsx(
             'rounded text-[15px] font-medium text-neutral-700 transition-all duration-200 dark:text-neutral-100',
-            'hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:text-emerald-500'
+            'hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:hover:text-orange-500'
           )}
         >
           {name}
@@ -56,7 +56,7 @@ export default function AuthorListItem({ href, image, name, web, ...props }: Pro
             href={web}
             className={clsx(
               'mt-1 flex w-16 items-center rounded text-sm font-medium transition-all duration-200',
-              'text-emerald-500 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+              'text-orange-500 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500'
             )}
             target='_blank'
             rel='noreferrer'

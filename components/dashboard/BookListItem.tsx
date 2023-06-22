@@ -19,7 +19,7 @@ export default function BookListItem({ href, image, title, published, ...props }
     <div {...props} className='flex gap-3'>
       <Link
         href={href}
-        className='rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:text-emerald-500'
+        className='rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:hover:text-orange-500'
       >
         {image ? (
           <div className='relative h-20 w-14'>
@@ -46,7 +46,7 @@ export default function BookListItem({ href, image, title, published, ...props }
           href={href}
           className={clsx(
             'rounded text-[15px] font-medium text-neutral-700 transition-all duration-200 dark:text-neutral-100',
-            'hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:text-emerald-500'
+            'hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:hover:text-orange-500'
           )}
         >
           {title}
