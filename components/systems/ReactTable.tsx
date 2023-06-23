@@ -211,7 +211,7 @@ export const ReactTable = forwardRef(
               aria-label='First'
               title='First'
               className={clsx(
-                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500',
                 canPreviousPage
                   ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
                   : 'cursor-not-allowed'
@@ -225,7 +225,7 @@ export const ReactTable = forwardRef(
               aria-label='Prev'
               title='Prev'
               className={clsx(
-                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500',
                 canPreviousPage
                   ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
                   : 'cursor-not-allowed'
@@ -242,7 +242,7 @@ export const ReactTable = forwardRef(
               aria-label='Next'
               title='Next'
               className={clsx(
-                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500',
                 canNextPage
                   ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
                   : 'cursor-not-allowed'
@@ -256,7 +256,7 @@ export const ReactTable = forwardRef(
               aria-label='Last'
               title='Last'
               className={clsx(
-                'rounded border border-transparent p-1 transition-all duration-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500',
+                'rounded border border-transparent p-1 transition-all duration-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500',
                 canNextPage
                   ? 'hover:border hover:border-neutral-300 dark:hover:border-neutral-700'
                   : 'cursor-not-allowed'
@@ -280,8 +280,8 @@ export const ReactTable = forwardRef(
               }}
               className={clsx(
                 'w-[72px] rounded-md border border-gray-300 bg-white px-3 py-[0.4rem] text-sm outline-none',
-                'transition-all focus:border-emerald-500 focus:outline-none focus:ring-2',
-                'focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+                'transition-all focus:border-orange-500 focus:outline-none focus:ring-2',
+                'focus:ring-orange-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
               )}
               placeholder='1'
             />
@@ -293,8 +293,8 @@ export const ReactTable = forwardRef(
               }}
               className={clsx(
                 'block w-[110px] cursor-pointer rounded-md border border-gray-300 bg-white px-3',
-                'py-[0.4rem] text-sm outline-none transition-all focus:border-emerald-500 focus:outline-none',
-                'focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+                'py-[0.4rem] text-sm outline-none transition-all focus:border-orange-500 focus:outline-none',
+                'focus:ring-2 focus:ring-orange-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
               )}
             >
               {itemPerPage.map((pageSize) => (

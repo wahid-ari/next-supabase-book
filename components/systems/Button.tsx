@@ -46,7 +46,7 @@ Button.secondary = ({ className, type, value, onClick, disabled, children, ...pr
         disabled ? 'cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-neutral-900',
         'rounded bg-gray-50 px-3 py-1.5 text-sm font-medium text-neutral-800 outline-none transition-all',
         'border border-neutral-300 dark:border-neutral-800',
-        'focus:ring-2 focus:ring-emerald-500 dark:bg-neutral-800 dark:text-neutral-300'
+        'focus:ring-2 focus:ring-orange-500 dark:bg-neutral-800 dark:text-neutral-300'
       )}
     >
       {children}
@@ -66,7 +66,27 @@ Button.tertary = ({ className, type, value, onClick, disabled, children, ...prop
         className,
         disabled ? 'cursor-not-allowed' : 'hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
         'rounded px-3 py-1.5 text-sm font-medium text-neutral-600 outline-none transition-all dark:text-neutral-300',
-        'focus:ring-2 focus:ring-emerald-500'
+        'focus:ring-2 focus:ring-orange-500'
+      )}
+    >
+      {children}
+    </button>
+  );
+};
+
+Button.blue = ({ className, type, value, onClick, disabled, children, ...props }: Props) => {
+  return (
+    <button
+      {...props}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      value={value}
+      className={clsx(
+        className,
+        disabled ? 'cursor-not-allowed' : 'hover:bg-sky-600 dark:hover:bg-sky-600',
+        'rounded bg-sky-500 px-3 py-1.5 text-sm font-medium text-white outline-none transition-all dark:bg-sky-500',
+        'focus:ring-2 focus:ring-sky-400 '
       )}
     >
       {children}

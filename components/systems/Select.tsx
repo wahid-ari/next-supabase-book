@@ -28,8 +28,8 @@ export default function Select({ label, name, className, defaultValue, onChange,
         className={clsx(
           className,
           'mt-2 block w-full cursor-pointer rounded-md border border-gray-300 bg-white px-3 py-[0.3rem]',
-          'text-sm font-medium outline-none transition-all focus:border-emerald-500 focus:outline-none',
-          'focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
+          'text-sm font-medium outline-none transition-all focus:border-orange-500 focus:outline-none',
+          'focus:ring-2 focus:ring-orange-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white'
         )}
       >
         {children}

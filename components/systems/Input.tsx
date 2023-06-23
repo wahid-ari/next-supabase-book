@@ -25,7 +25,7 @@ export default function Input({ className, type, name, placeholder, value, onCha
           className,
           'mt-2 w-full rounded-md border bg-white px-4 py-[0.6rem] text-sm font-medium outline-none dark:bg-neutral-900',
           'border-gray-300 transition-all dark:border-neutral-700 dark:text-neutral-100',
-          'focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:focus:border-emerald-500 dark:focus:ring-emerald-500'
+          'focus:border-orange-500 focus:ring-1 focus:ring-orange-500 dark:focus:border-orange-500 dark:focus:ring-orange-500'
         )}
       />
     </div>

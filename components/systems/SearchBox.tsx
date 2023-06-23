@@ -34,7 +34,7 @@ export default function SearchBox({
         <div className='relative my-2 w-full cursor-default overflow-hidden rounded-md border border-neutral-300 p-[1px] text-left text-sm dark:border-neutral-600'>
           <Combobox.Input
             {...props}
-            className='w-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm font-medium text-neutral-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500 dark:bg-neutral-900 dark:text-white'
+            className='w-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm font-medium text-neutral-900 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 dark:bg-neutral-900 dark:text-white'
             displayValue={(data: any) => data?.name}
             placeholder={placeholder}
             onChange={onChangeQuery}
@@ -62,7 +62,7 @@ export default function SearchBox({
                   className={({ active }) =>
                     clsx(
                       'relative cursor-default select-none py-2 pl-10 pr-4',
-                      active ? 'bg-emerald-600 text-white' : 'text-gray-900 dark:text-white'
+                      active ? 'bg-orange-600 text-white' : 'text-gray-900 dark:text-white'
                     )
                   }
                   value={item}

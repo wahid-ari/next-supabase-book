@@ -21,9 +21,9 @@ export default function Checkbox({ label, name, value, onChange, defaultChecked,
         defaultChecked={defaultChecked}
         type='checkbox'
         className={clsx(
-          'h-4 w-4 rounded border-neutral-300 focus:ring-2 focus:ring-emerald-500 group-hover:cursor-pointer',
-          'text-emerald-600 dark:bg-neutral-900 dark:text-emerald-600 dark:checked:bg-emerald-600',
-          'dark:border-neutral-700 dark:ring-offset-neutral-900 dark:focus:ring-emerald-600'
+          'h-4 w-4 rounded border-neutral-300 focus:ring-2 focus:ring-orange-500 group-hover:cursor-pointer',
+          'text-orange-500 dark:bg-neutral-900 dark:text-orange-500 dark:checked:bg-orange-500',
+          'dark:border-neutral-700 dark:ring-offset-neutral-900 dark:focus:ring-orange-500'
         )}
       />
       <label htmlFor={name} className='ml-2 text-sm text-neutral-800 group-hover:cursor-pointer dark:text-neutral-300'>
@@ -51,8 +51,8 @@ Checkbox.disabled = ({ label, name, defaultChecked, ...props }: DisabledProps) =
         defaultChecked={defaultChecked}
         type='checkbox'
         className={clsx(
-          defaultChecked ? 'dark:bg-emerald-600' : 'dark:bg-transparent',
-          'h-4 w-4 rounded border-neutral-300 text-emerald-600 group-hover:cursor-not-allowed dark:border-neutral-700'
+          defaultChecked ? 'dark:bg-orange-500' : 'dark:bg-transparent',
+          'h-4 w-4 rounded border-neutral-300 text-orange-500 group-hover:cursor-not-allowed dark:border-neutral-700'
         )}
       />
       <label

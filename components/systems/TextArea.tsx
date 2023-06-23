@@ -30,7 +30,7 @@ export default function TextArea({ label, className, name, placeholder, value, o
         className={clsx(
           className,
           'mt-2 w-full rounded-md bg-white p-3 text-sm outline-none transition-all dark:bg-neutral-900 dark:text-white',
-          'min-h-[80px] border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500 dark:border-neutral-700'
+          'min-h-[80px] border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 dark:border-neutral-700'
         )}
       />
     </div>
