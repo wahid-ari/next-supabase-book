@@ -22,13 +22,18 @@ body {
 .banner {
   background: linear-gradient(
       145deg,
-      rgba(4, 120, 87, 0.5) 34%,
+      rgba(196, 98, 6, 0.5) 34%,
       transparent 34%,
       transparent 64%,
-      rgba(5, 150, 105, 0.5) 64%,
-      rgba(5, 150, 105, 0.5) 100%
+      rgba(207, 124, 16, 0.849) 64%,
+      rgba(235, 134, 2, 0.5) 100%
     ),
-    linear-gradient(40deg, rgb(4, 120, 87) 0%, /* rgb(4, 120, 87) 62%, */ rgb(16, 185, 129) 62%, rgb(16, 185, 129) 100%);
+    linear-gradient(
+      40deg,
+      rgb(235, 125, 23) 0%,
+      /* rgb(4, 120, 87) 62%, */ rgb(185, 92, 16) 62%,
+      rgb(185, 106, 16) 100%
+    );
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
@@ -69,11 +74,11 @@ html {
 }
 
 .react-select__control--is-focused {
-  @apply !outline-none !ring-2 !ring-emerald-600;
+  @apply !outline-none !ring-2 !ring-orange-500;
 }
 
 .react-select__multi-value {
-  background-color: #10b981 !important;
+  background-color: #f97316 !important;
   border-radius: 4px !important;
   margin-right: 4px !important;
   color: white !important;
@@ -143,11 +148,11 @@ html {
 /* NProgress */
 /* Progress Bar on Top of Page  */
 html[class='light'] {
-  --nprogress-color: #10b981;
+  --nprogress-color: #f97316;
 }
 
 html[class='dark'] {
-  --nprogress-color: #10b981;
+  --nprogress-color: #f97316;
 }
 
 #nprogress .bar {

@@ -127,7 +127,7 @@ export default function Register() {
                 placeholder='Username'
                 value={form.name}
                 onChange={handleChange}
-                className='mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm font-medium outline-none ring-gray-300 transition-all focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 dark:bg-white dark:text-neutral-800'
+                className='mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm font-medium outline-none ring-gray-300 transition-all focus:border-orange-600 focus:ring-1 focus:ring-orange-600 dark:bg-white dark:text-neutral-800'
                 autoComplete='off'
                 required
               />
@@ -143,7 +143,7 @@ export default function Register() {
                 placeholder='Username'
                 value={form.username}
                 onChange={handleChange}
-                className='mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm font-medium outline-none ring-gray-300 transition-all focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 dark:bg-white dark:text-neutral-800'
+                className='mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm font-medium outline-none ring-gray-300 transition-all focus:border-orange-600 focus:ring-1 focus:ring-orange-600 dark:bg-white dark:text-neutral-800'
                 autoComplete='off'
                 required
               />
@@ -160,13 +160,13 @@ export default function Register() {
                   placeholder='Password'
                   value={form.password}
                   onChange={handleChange}
-                  className='mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm font-medium outline-none ring-gray-300 transition-all focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 dark:bg-white dark:text-neutral-800'
+                  className='mt-2 w-full rounded-md border border-gray-300 bg-white px-4 py-[0.6rem] text-sm font-medium outline-none ring-gray-300 transition-all focus:border-orange-600 focus:ring-1 focus:ring-orange-600 dark:bg-white dark:text-neutral-800'
                   autoComplete='off'
                   required
                 />
                 <button
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-0 z-10 mr-0.5 mt-2 rounded-md border-gray-300 p-1.5 outline-none ring-gray-300 backdrop-blur-lg focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600'
+                  className='absolute right-0 z-10 mr-0.5 mt-2 rounded-md border-gray-300 p-1.5 outline-none ring-gray-300 backdrop-blur-lg focus:border-orange-600 focus:ring-1 focus:ring-orange-600'
                 >
                   {showPassword ? (
                     <EyeIcon className='h-5 w-5 text-gray-600' />
@@ -177,15 +177,15 @@ export default function Register() {
               </div>
             </div>
 
-            <Button.success onClick={handleRegister} className='w-full !text-base'>
+            <Button onClick={handleRegister} className='w-full !text-base'>
               {loading ? 'Registering...' : 'Register'}
-            </Button.success>
+            </Button>
 
             <p className='mt-4 text-center font-normal dark:text-neutral-800'>
               Already have an account?{' '}
               <Link
                 href='/login'
-                className='rounded font-medium text-emerald-600 transition-all duration-300 hover:text-emerald-500 hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                className='rounded font-medium text-orange-600 transition-all duration-300 hover:text-orange-500 hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500'
               >
                 Login Now
               </Link>
@@ -195,7 +195,7 @@ export default function Register() {
               Continue to{' '}
               <Link
                 href='/'
-                className='rounded font-medium text-emerald-600 transition-all duration-300 hover:text-emerald-500 hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                className='rounded font-medium text-orange-600 transition-all duration-300 hover:text-orange-500 hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500'
               >
                 Dashboard
               </Link>
