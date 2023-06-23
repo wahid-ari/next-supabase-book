@@ -79,7 +79,7 @@ export default function Author({ id }) {
                       {data?.web ? (
                         <a
                           href={data?.web}
-                          className='flex w-16 items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                          className='flex w-16 items-center rounded text-[15px] font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -97,7 +97,7 @@ export default function Author({ id }) {
                       {data?.link ? (
                         <a
                           href={data?.link}
-                          className='flex w-16 items-center rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                          className='flex w-16 items-center rounded text-[15px] font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -122,7 +122,7 @@ export default function Author({ id }) {
                     <Link
                       key={item.id}
                       href={`/book/detail/${item.id}`}
-                      className='group mb-5 flex gap-3 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500'
+                      className='group mb-5 flex gap-3 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                     >
                       {item.image_small ? (
                         <Image
@@ -142,7 +142,7 @@ export default function Author({ id }) {
                         </div>
                       )}
                       <div>
-                        <p className='text-[15px] font-medium text-neutral-700 transition-all duration-200 group-hover:text-emerald-500 dark:text-neutral-100 '>
+                        <p className='text-[15px] font-medium text-neutral-700 transition-all duration-200 group-hover:text-orange-500 dark:text-neutral-100 '>
                           {item.title}
                         </p>
                         <p className='text-sm text-neutral-600 dark:text-neutral-200'>

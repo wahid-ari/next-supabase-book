@@ -115,9 +115,9 @@ export default function Author() {
           placeholder='Author Bio'
         />
 
-        <Button.success onClick={handleSave} className='w-full'>
+        <Button onClick={handleSave} className='w-full'>
           Save
-        </Button.success>
+        </Button>
       </div>
     </Layout>
   );

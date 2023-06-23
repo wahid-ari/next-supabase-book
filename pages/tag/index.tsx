@@ -129,10 +129,10 @@ export default function Tags() {
     <Layout title='Tags - MyBook' prefetch={['/api/tag']}>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Tags</Title>
-        <Button.success onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>
+        <Button onClick={() => setOpenCreateDialog(true)} className='flex items-center gap-2'>
           <PlusSmIcon className='h-5 w-5' />
           Add New Tag
-        </Button.success>
+        </Button>
       </div>
 
       <InputDebounce
@@ -214,15 +214,18 @@ export default function Tags() {
                 <TableSimple.td>
                   <Link
                     href={`tag/detail/${item.id}`}
-                    className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+                    className='rounded text-sm font-medium transition-all duration-200 hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                   >
                     {item.name}
                   </Link>
                 </TableSimple.td>
                 <TableSimple.td>
-                  <Button className='mr-2 !px-[6px] !py-[2px]' onClick={() => handleShowEditModal(item.id, item.name)}>
+                  <Button.blue
+                    className='mr-2 !px-[6px] !py-[2px]'
+                    onClick={() => handleShowEditModal(item.id, item.name)}
+                  >
                     Edit
-                  </Button>
+                  </Button.blue>
                   <Button.danger
                     className='!px-[6px] !py-[2px]'
                     onClick={() => handleShowDeleteModal(item.id, item.name)}

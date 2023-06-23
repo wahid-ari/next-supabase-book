@@ -189,9 +189,9 @@ export default function Quote({ id }) {
                   ...theme,
                   colors: {
                     ...theme.colors,
-                    primary: `#10b981`,
-                    primary25: `#10b981`,
-                    primary50: `#10b981`,
+                    primary: `#f97316`,
+                    primary25: `#f97316`,
+                    primary50: `#f97316`,
                     neutral40: `#EF4444`,
                   },
                 })}
@@ -201,9 +201,9 @@ export default function Quote({ id }) {
             <Shimer className='h-8' />
           )}
 
-          <Button.success onClick={handleSave} className='w-full'>
+          <Button onClick={handleSave} className='w-full'>
             Update
-          </Button.success>
+          </Button>
         </div>
       ) : (
         <Shimer className='!h-60' />

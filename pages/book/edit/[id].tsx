@@ -190,9 +190,9 @@ export default function Book({ id }) {
                     ...theme,
                     colors: {
                       ...theme.colors,
-                      primary: `#10b981`,
-                      primary25: `#10b981`,
-                      primary50: `#10b981`,
+                      primary: `#f97316`,
+                      primary25: `#f97316`,
+                      primary50: `#f97316`,
                       neutral40: `#EF4444`,
                     },
                   })}

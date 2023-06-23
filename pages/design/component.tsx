@@ -265,8 +265,8 @@ export default function Example() {
           return (
             <Link
               href={`#`}
-              className='rounded text-sm font-medium text-emerald-500 hover:text-emerald-600 focus:border-emerald-500 
-            focus:outline-none focus:ring-1 focus:ring-emerald-500'
+              className='rounded text-sm font-medium text-orange-500 hover:text-orange-600 focus:border-orange-500 
+            focus:outline-none focus:ring-2 focus:ring-orange-500'
             >
               {values.name}
             </Link>
@@ -362,7 +362,7 @@ export default function Example() {
       <Title>Components</Title>
 
       <Wrapper id='tableofcontent' name='Table of Content' noChildren noClassName noProps>
-        <div className='columns-2 text-emerald-600 dark:text-emerald-500 sm:columns-3'>
+        <div className='columns-2 text-orange-600 dark:text-orange-500 sm:columns-3'>
           <span className='mb-3 block underline'>
             <Link href='#validation'>Validation</Link>
           </span>
@@ -520,7 +520,7 @@ export default function Example() {
           placeholder='Positif Number'
           onChange={handleUserChange}
         />
-        <Button.success onClick={checkValid}>Submit Yup</Button.success>
+        <Button onClick={checkValid}>Submit Yup</Button>
       </Wrapper>
 
       <Wrapper id='validation-zod' name='Validation (zod)' noChildren noClassName noProps>
@@ -569,7 +569,7 @@ export default function Example() {
             placeholder='Confirm Password'
             onChange={handleAdminChange}
           />
-          <Button.success type='submit'>Submit Zod</Button.success>
+          <Button type='submit'>Submit Zod</Button>
         </form>
       </Wrapper>
 
@@ -580,7 +580,7 @@ export default function Example() {
         noProps
         props={['open', 'setOpen', 'title', 'children', 'isDanger', 'onClose', 'onConfirm', 'showIcon']}
       >
-        <Button.success onClick={() => setOpenDialog(true)}>Open Dialog</Button.success>
+        <Button onClick={() => setOpenDialog(true)}>Open Dialog</Button>
         <br />
         <br />
 
@@ -713,9 +713,9 @@ export default function Example() {
             ...theme,
             colors: {
               ...theme.colors,
-              primary: `#10b981`,
-              primary25: `#10b981`,
-              primary50: `#10b981`,
+              primary: `#f97316`,
+              primary25: `#f97316`,
+              primary50: `#f97316`,
               neutral40: `#EF4444`,
             },
           })}
@@ -844,7 +844,7 @@ export default function Example() {
           <HoverCard.Trigger data-testid='hovercard' asChild>
             <Link
               href='#'
-              className='rounded text-sm font-medium transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+              className='rounded text-sm font-medium transition-all duration-200 hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
             >
               Hover Me
             </Link>

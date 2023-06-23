@@ -44,7 +44,7 @@ export default function Quote({ id }) {
           <p className='mb-1 text-base'>&#8220;{data.quote}&#8221;</p>
           <Link
             href={`author/detail/${data?.book_authors?.id}`}
-            className='rounded text-base font-medium italic transition-all duration-200 hover:text-emerald-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
+            className='rounded text-base font-medium italic transition-all duration-200 hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
           >
             - {data?.book_authors?.name}
           </Link>
@@ -53,14 +53,16 @@ export default function Quote({ id }) {
               Tags :{' '}
               {data?.tags_array.map((item: any, index: number) => {
                 return (
-                  <Link
-                    key={index + 1}
-                    href={`/tag/detail/${item.id}`}
-                    className='rounded text-[15px] font-medium text-emerald-500 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500'
-                  >
-                    {item.name}
+                  <>
+                    <Link
+                      key={index + 1}
+                      href={`/tag/detail/${item.id}`}
+                      className='rounded text-[15px] font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+                    >
+                      {item.name}
+                    </Link>
                     {index < data.tags_array.length - 1 ? ', ' : ''}
-                  </Link>
+                  </>
                 );
               })}
             </p>

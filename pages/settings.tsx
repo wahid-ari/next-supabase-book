@@ -18,7 +18,7 @@ export default function Settings() {
       <Text className='mb-2 mt-5'>Dark Mode</Text>
       <div
         onClick={handleDarkMode}
-        className='relative h-6 w-11 cursor-pointer rounded-full bg-neutral-300 transition-all dark:bg-emerald-500'
+        className='relative h-6 w-11 cursor-pointer rounded-full bg-neutral-300 transition-all dark:bg-orange-500'
       >
         <div className='absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-all dark:left-6'></div>
       </div>
