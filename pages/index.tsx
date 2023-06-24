@@ -1,20 +1,23 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { useBooksData } from '@libs/swr';
+import { useBooksData, useAuthorsData } from '@libs/swr';
 import clsx from 'clsx';
 import FrontLayout from '@components/front/FrontLayout';
 import Shimer from '@components/systems/Shimer';
 import { ArrowSmRightIcon } from '@heroicons/react/outline';
 import BookItem from '@components/front/item/BookItem';
-import Image from 'next/image';
+import AuthorItem from '@components/front/item/AuthorItem';
 
 export default function Home() {
   const { data: books, error: errorBooks } = useBooksData();
+  const { data: authors, error: errorAuthors } = useAuthorsData();
   // const movieWithBackdrop = data?.filter((item) => item.backdrop_url != null && item.backdrop_url != '');
   // const fiveMovieWithBackdrop = movieWithBackdrop?.slice(0, 5);
   // const shuffledBooks = books?.sort(() => 0.5 - Math.random());
-  const spliceBooks = books?.slice(0, 12);
+  const spliceBooks = books?.slice(0, 6);
+  const spliceAuthors = authors?.slice(0, 6);
 
-  if (errorBooks) {
+  if (errorBooks || errorAuthors) {
     return (
       <FrontLayout
         title='Home - MyBook'
@@ -86,32 +89,60 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className='mt-4 grid grid-cols-2 gap-4 min-[520px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
-          {spliceBooks ? (
-            spliceBooks.map((item: any) => {
-              return (
-                <BookItem
-                  key={item.id}
-                  href={`/books/${item.id}`}
-                  title={item.title}
-                  imageSrc={item.image}
-                  author={item?.book_authors?.name}
-                />
-              );
-            })
-          ) : (
-            <div className='flex gap-5 px-1'>
-              <Shimer className='!h-64 !w-[190px]' />
-              <Shimer className='!h-64 !w-[190px]' />
-              <Shimer className='!h-64 !w-[190px]' />
-              <Shimer className='!h-64 !w-[190px]' />
-              <Shimer className='!h-64 !w-[190px]' />
-              <Shimer className='!h-64 !w-[190px]' />
-            </div>
-          )}
+        <div className='mt-4 grid grid-cols-2 gap-6 min-[520px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
+          {spliceBooks
+            ? spliceBooks.map((item: any) => {
+                return (
+                  <BookItem
+                    key={item.id}
+                    href={`/books/${item.id}`}
+                    title={item.title}
+                    imageSrc={item.image}
+                    author={item?.book_authors?.name}
+                  />
+                );
+              })
+            : [...Array(6)].map((item) => <Shimer key={item} className='h-64 sm:!h-72' />)}
         </div>
       </section>
       {/* Books End*/}
+
+      {/* Authors Start*/}
+      <section className='mt-24'>
+        <div className='mt-4 flex items-center justify-between p-1'>
+          <div>
+            <div className='mb-0.5 h-1 w-5 rounded bg-orange-500' />
+            <Link
+              href={`/books`}
+              className={clsx(
+                'group flex items-center rounded text-xl font-medium',
+                'text-neutral-700 hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                'transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+              )}
+            >
+              Authors
+              <ArrowSmRightIcon
+                className={clsx(
+                  'ml-1 h-6 w-6 text-neutral-600 transition-all duration-100',
+                  'group-hover:translate-x-0.5 group-hover:text-orange-500 dark:text-neutral-300'
+                )}
+              />
+            </Link>
+          </div>
+        </div>
+        <div className='mt-4 grid grid-cols-2 gap-x-4 gap-y-6 min-[520px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
+          {spliceAuthors
+            ? spliceAuthors.map((item: any) => {
+                return <AuthorItem key={item.id} href={`/authors/${item.id}`} name={item.name} imageSrc={item.image} />;
+              })
+            : [...Array(6)].map((item) => (
+                <div key={item} className='flex justify-center'>
+                  <Shimer className='!h-32 !w-32 !rounded-full' />
+                </div>
+              ))}
+        </div>
+      </section>
+      {/* Authors End*/}
     </FrontLayout>
   );
 }
