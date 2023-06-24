@@ -27,7 +27,7 @@ export default function Wrapper({
   children,
 }: Props) {
   return (
-    <section id={id} className='pt-8'>
+    <section id={id} className='scroll-mt-8 pt-8'>
       <Heading className='group transition-all duration-500'>
         <span className='text-neutral-500 transition-all duration-500 group-hover:text-black dark:group-hover:text-white'>
           #
