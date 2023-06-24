@@ -55,7 +55,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
               className='rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
             >
               <div className='flex items-center justify-center font-medium text-gray-900 md:justify-start'>
-                <Image alt='Logo' src='/icon.png' width={30} height={30} className='mr-2 rounded-lg' />
+                <Image alt='Logo' src='/icon.png' width={30} height={30} className='mr-2 rounded-lg' unoptimized />
                 <span className='text-xl font-semibold text-neutral-800 dark:text-neutral-100'>MyBook</span>
               </div>
             </Link>
@@ -251,7 +251,11 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 <ActiveLink href='/books' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
                   Book
                 </ActiveLink>
-                <ActiveLink href='/authors' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
+                <ActiveLink
+                  href='/authors'
+                  activeClassName='!text-orange-500 dark:text-orange-500'
+                  className={activeCn}
+                >
                   Author
                 </ActiveLink>
                 <ActiveLink href='/quotes' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
