@@ -13,13 +13,13 @@ type Props = {
   [props: string]: any;
 };
 
-export default function MovieSliderItem({ href = '#', imageSrc, title, author, ...props }: Props) {
+export default function BookItem({ href = '#', imageSrc, title, author, ...props }: Props) {
   const [isLoading, setLoading] = useState(true);
   const sizes = `(max-width: 360px) 100vw, (max-width: 480px) 50vw, 33vw`;
 
   return (
     <Link href={href} className='group rounded focus-visible:outline-none' {...props}>
-      <div className='m-1 h-[304px] rounded border shadow dark:border-neutral-800 sm:h-[354px]'>
+      <div className='h-[304px] rounded border shadow dark:border-neutral-800 sm:h-[354px]'>
         <div className='relative h-52 w-full overflow-hidden sm:h-64'>
           {imageSrc ? (
             <Image
@@ -34,6 +34,7 @@ export default function MovieSliderItem({ href = '#', imageSrc, title, author, .
               fill
               sizes={sizes}
               onLoadingComplete={() => setLoading(false)}
+              unoptimized
             />
           ) : (
             <div className='flex h-full w-full items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
