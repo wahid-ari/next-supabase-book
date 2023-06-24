@@ -23,7 +23,7 @@ export default function Example() {
       <Title>Layout</Title>
 
       <Wrapper id='tableofcontent' name='Table of Content' noChildren noClassName noProps>
-        <div className='columns-2 text-emerald-600 dark:text-emerald-500 sm:columns-3'>
+        <div className='columns-2 text-orange-500 dark:text-orange-500 sm:columns-3'>
           <span className='mb-3 block underline'>
             <Link href='#breadcrumb'>Breadcrumb</Link>
           </span>

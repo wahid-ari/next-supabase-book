@@ -362,7 +362,7 @@ export default function Example() {
       <Title>Components</Title>
 
       <Wrapper id='tableofcontent' name='Table of Content' noChildren noClassName noProps>
-        <div className='columns-2 text-orange-600 dark:text-orange-500 sm:columns-3'>
+        <div className='columns-2 text-orange-500 dark:text-orange-500 sm:columns-3'>
           <span className='mb-3 block underline'>
             <Link href='#validation'>Validation</Link>
           </span>
@@ -922,6 +922,7 @@ export default function Example() {
       >
         <div className='flex flex-wrap items-center gap-2'>
           <Button data-testid='button-primary'>Primary</Button>
+          <Button.blue data-testid='button-blue'>Blue</Button.blue>
           <Button.success data-testid='button-success'>Success</Button.success>
           <Button.danger data-testid='button-danger' className='flex items-center gap-2'>
             <ArrowSmRightIcon className='h-4 w-4' />
