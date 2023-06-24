@@ -12,8 +12,8 @@ async function logout(page: Page) {
   await expect(page.getByText('Deleting All Session')).toBeVisible();
   await expect(page.getByText('Success delete all session')).toBeVisible();
   await page.goto('http://localhost:3000/logout');
-  // await expect(page).toHaveTitle(/Dashboard/);
-  await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+  await expect(page).toHaveURL('/');
+  await expect(page).toHaveTitle(/Home/);
 }
 
 async function login(page: Page) {

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000');
+  await page.goto('http://localhost:3000/dashboard');
 });
 
 test.describe('Testing Dashboard Page', () => {
@@ -18,7 +18,7 @@ test.describe('Testing Data Count', () => {
     await expect(author).toBeVisible();
     await expect(author).toContainText('Author');
     await expect(author).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800/
+      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
     );
     await expect(author).toHaveAttribute('href', '/author');
   });
@@ -27,7 +27,7 @@ test.describe('Testing Data Count', () => {
     await expect(book).toBeVisible();
     await expect(book).toContainText('Book');
     await expect(book).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800/
+      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
     );
     await expect(book).toHaveAttribute('href', '/book');
   });
@@ -36,7 +36,7 @@ test.describe('Testing Data Count', () => {
     await expect(quote).toBeVisible();
     await expect(quote).toContainText('Quote');
     await expect(quote).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800/
+      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
     );
     await expect(quote).toHaveAttribute('href', '/quote');
   });
@@ -45,7 +45,7 @@ test.describe('Testing Data Count', () => {
     await expect(genre).toBeVisible();
     await expect(genre).toContainText('Genre');
     await expect(genre).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800/
+      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
     );
     await expect(genre).toHaveAttribute('href', '/genre');
   });
@@ -54,7 +54,7 @@ test.describe('Testing Data Count', () => {
     await expect(tag).toBeVisible();
     await expect(tag).toContainText('Tag');
     await expect(tag).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow dark:border-neutral-800/
+      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
     );
     await expect(tag).toHaveAttribute('href', '/tag');
   });
