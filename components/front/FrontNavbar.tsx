@@ -65,6 +65,9 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
             <div className='hidden md:block'>
               <div className='flex items-center md:space-x-2 min-[800px]:space-x-4 min-[900px]:space-x-6 lg:space-x-8'>
                 <CustomActiveLink href='/'>Home</CustomActiveLink>
+                <CustomActiveLink href='/books'>Book</CustomActiveLink>
+                <CustomActiveLink href='/authors'>Author</CustomActiveLink>
+                <CustomActiveLink href='/quotes'>Quote</CustomActiveLink>
 
                 <Popover
                   className='relative'
@@ -98,7 +101,8 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     leaveTo='opacity-0 scale-95'
                   >
                     <Popover.Panel className='absolute top-8 z-[11] flex w-40 flex-col space-y-2.5 rounded bg-white px-4 py-4 shadow dark:bg-[#1a1a1a]'>
-                      <CustomActiveLink href='/studios'>Studios</CustomActiveLink>
+                      <CustomActiveLink href='/genres'>Genre</CustomActiveLink>
+                      <CustomActiveLink href='/tags'>Tag</CustomActiveLink>
                     </Popover.Panel>
                   </Transition>
                 </Popover>
@@ -244,6 +248,15 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 <ActiveLink href='/' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
                   Home
                 </ActiveLink>
+                <ActiveLink href='/books' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
+                  Book
+                </ActiveLink>
+                <ActiveLink href='/authors' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
+                  Author
+                </ActiveLink>
+                <ActiveLink href='/quotes' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
+                  Quote
+                </ActiveLink>
                 <Menu>
                   {({ open }) => (
                     <>
@@ -263,10 +276,19 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                         <Menu.Item>
                           <ActiveLink
                             activeClassName='!text-orange-500 dark:text-orange-500'
-                            href='/studios'
+                            href='/genres'
                             className={activeCn}
                           >
-                            Studios
+                            Genre
+                          </ActiveLink>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <ActiveLink
+                            activeClassName='!text-orange-500 dark:text-orange-500'
+                            href='/tags'
+                            className={activeCn}
+                          >
+                            Tag
                           </ActiveLink>
                         </Menu.Item>
                       </Menu.Items>
