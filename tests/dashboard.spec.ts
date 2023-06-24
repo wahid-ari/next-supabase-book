@@ -17,45 +17,35 @@ test.describe('Testing Data Count', () => {
     const author = page.getByTestId('author-count');
     await expect(author).toBeVisible();
     await expect(author).toContainText('Author');
-    await expect(author).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
-    );
+    await expect(author).toHaveClass(/group flex items-center justify-between gap-2 rounded-md border p-4 shadow/);
     await expect(author).toHaveAttribute('href', '/author');
   });
   test('page show total book', async ({ page }) => {
     const book = page.getByTestId('book-count');
     await expect(book).toBeVisible();
     await expect(book).toContainText('Book');
-    await expect(book).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
-    );
+    await expect(book).toHaveClass(/group flex items-center justify-between gap-2 rounded-md border p-4 shadow/);
     await expect(book).toHaveAttribute('href', '/book');
   });
   test('page show total quote', async ({ page }) => {
     const quote = page.getByTestId('quote-count');
     await expect(quote).toBeVisible();
     await expect(quote).toContainText('Quote');
-    await expect(quote).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
-    );
+    await expect(quote).toHaveClass(/group flex items-center justify-between gap-2 rounded-md border p-4 shadow/);
     await expect(quote).toHaveAttribute('href', '/quote');
   });
   test('page show total genre', async ({ page }) => {
     const genre = page.getByTestId('genre-count');
     await expect(genre).toBeVisible();
     await expect(genre).toContainText('Genre');
-    await expect(genre).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
-    );
+    await expect(genre).toHaveClass(/group flex items-center justify-between gap-2 rounded-md border p-4 shadow/);
     await expect(genre).toHaveAttribute('href', '/genre');
   });
   test('page show total tag', async ({ page }) => {
     const tag = page.getByTestId('tag-count');
     await expect(tag).toBeVisible();
     await expect(tag).toContainText('Tag');
-    await expect(tag).toHaveClass(
-      /group flex items-center justify-between gap-2 rounded-md border p-4 shadow/
-    );
+    await expect(tag).toHaveClass(/group flex items-center justify-between gap-2 rounded-md border p-4 shadow/);
     await expect(tag).toHaveAttribute('href', '/tag');
   });
 });
