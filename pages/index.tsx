@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useBooksData, useAuthorsData } from '@libs/swr';
+import { useBooksData, useAuthorsData, useQuotesData, useTagTotalQuoteData, useGenreTotalBookData } from '@libs/swr';
 import clsx from 'clsx';
 import FrontLayout from '@components/front/FrontLayout';
 import Shimer from '@components/systems/Shimer';
@@ -11,13 +11,17 @@ import AuthorItem from '@components/front/item/AuthorItem';
 export default function Home() {
   const { data: books, error: errorBooks } = useBooksData();
   const { data: authors, error: errorAuthors } = useAuthorsData();
+  const { data: quotes, error: errorQuotes } = useQuotesData();
+  const { data: genres, error: errorGenres } = useGenreTotalBookData();
+  const { data: tags, error: errorTags } = useTagTotalQuoteData();
   // const movieWithBackdrop = data?.filter((item) => item.backdrop_url != null && item.backdrop_url != '');
   // const fiveMovieWithBackdrop = movieWithBackdrop?.slice(0, 5);
   // const shuffledBooks = books?.sort(() => 0.5 - Math.random());
-  const spliceBooks = books?.slice(0, 6);
-  const spliceAuthors = authors?.slice(0, 6);
+  const spliceBooks = books?.slice(0, 12);
+  const spliceAuthors = authors?.slice(0, 12);
+  const spliceQuotes = quotes?.slice(0, 6);
 
-  if (errorBooks || errorAuthors) {
+  if (errorBooks || errorAuthors || errorQuotes || errorGenres || errorTags) {
     return (
       <FrontLayout
         title='Home - MyBook'
@@ -60,6 +64,7 @@ export default function Home() {
               src='/header.png'
               width={700}
               height={700}
+              priority
               unoptimized
             />
           </div>
@@ -70,7 +75,7 @@ export default function Home() {
       <section id='section-books' className='scroll-mt-20'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-0.5 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/books`}
               className={clsx(
@@ -102,16 +107,61 @@ export default function Home() {
                   />
                 );
               })
-            : [...Array(6)].map((item) => <Shimer key={item} className='h-64 sm:!h-72' />)}
+            : [...Array(6).keys()].map((item) => <Shimer key={item} className='h-64 sm:!h-72' />)}
         </div>
       </section>
       {/* Books End*/}
+
+      {/* Genres Start */}
+      <section className='mt-24'>
+        <div className='mt-4 flex items-center justify-between p-1'>
+          <div>
+            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <Link
+              href={`/genres`}
+              className={clsx(
+                'group flex items-center rounded text-xl font-medium',
+                'text-neutral-700 hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                'transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+              )}
+            >
+              Genres
+              <ArrowSmRightIcon
+                className={clsx(
+                  'ml-1 h-6 w-6 text-neutral-600 transition-all duration-100',
+                  'group-hover:translate-x-0.5 group-hover:text-orange-500 dark:text-neutral-300'
+                )}
+              />
+            </Link>
+          </div>
+        </div>
+        <div className='mt-4 grid grid-cols-2 gap-4 min-[560px]:grid-cols-3 sm:gap-6 md:grid-cols-4 xl:grid-cols-6'>
+          {genres
+            ? genres.slice(0, 12).map((item: any) => (
+                <Link
+                  key={item.id}
+                  href={`/genres/${item.id}`}
+                  className={clsx(
+                    'flex flex-wrap items-center justify-between rounded border p-4 text-[15px] font-medium',
+                    'transition-all duration-300 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-600',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:border-neutral-800',
+                    'text-neutral-600 hover:text-white dark:text-neutral-200 dark:hover:text-white'
+                  )}
+                >
+                  <span>{item.label}</span>
+                  {item.total}
+                </Link>
+              ))
+            : [...Array(6).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
+        </div>
+      </section>
+      {/* Genres End */}
 
       {/* Authors Start*/}
       <section className='mt-24'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-0.5 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/books`}
               className={clsx(
@@ -135,7 +185,7 @@ export default function Home() {
             ? spliceAuthors.map((item: any) => {
                 return <AuthorItem key={item.id} href={`/authors/${item.id}`} name={item.name} imageSrc={item.image} />;
               })
-            : [...Array(6)].map((item) => (
+            : [...Array(6).keys()].map((item) => (
                 <div key={item} className='flex justify-center'>
                   <Shimer className='!h-32 !w-32 !rounded-full' />
                 </div>
@@ -143,6 +193,96 @@ export default function Home() {
         </div>
       </section>
       {/* Authors End*/}
+
+      {/* Quotes Start */}
+      <section className='mt-24'>
+        <div className='mt-4 flex items-center justify-between p-1'>
+          <div>
+            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <Link
+              href={`/quotes`}
+              className={clsx(
+                'group flex items-center rounded text-xl font-medium',
+                'text-neutral-700 hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                'transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+              )}
+            >
+              Quotes
+              <ArrowSmRightIcon
+                className={clsx(
+                  'ml-1 h-6 w-6 text-neutral-600 transition-all duration-100',
+                  'group-hover:translate-x-0.5 group-hover:text-orange-500 dark:text-neutral-300'
+                )}
+              />
+            </Link>
+          </div>
+        </div>
+        <div className='mt-4'>
+          {spliceQuotes
+            ? spliceQuotes.map((item: any) => (
+                <div key={item.id} className='mb-4 border-b pb-2 dark:border-b-neutral-800'>
+                  <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
+                  <Link
+                    href={`author/${item?.book_authors?.id}`}
+                    className={clsx(
+                      'rounded text-[15px] font-medium italic transition-all duration-200',
+                      'text-neutral-500 hover:text-orange-500 dark:text-neutral-300 dark:hover:text-orange-500',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+                    )}
+                  >
+                    - {item?.book_authors?.name}
+                  </Link>
+                </div>
+              ))
+            : [...Array(6).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
+        </div>
+      </section>
+      {/* Quotes End */}
+
+      {/* Tags Start */}
+      <section className='mt-24'>
+        <div className='mt-4 flex items-center justify-between p-1'>
+          <div>
+            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <Link
+              href={`/tags`}
+              className={clsx(
+                'group flex items-center rounded text-xl font-medium',
+                'text-neutral-700 hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                'transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+              )}
+            >
+              Tags
+              <ArrowSmRightIcon
+                className={clsx(
+                  'ml-1 h-6 w-6 text-neutral-600 transition-all duration-100',
+                  'group-hover:translate-x-0.5 group-hover:text-orange-500 dark:text-neutral-300'
+                )}
+              />
+            </Link>
+          </div>
+        </div>
+        <div className='mt-4 grid grid-cols-2 gap-4 min-[560px]:grid-cols-3 sm:gap-6 md:grid-cols-4 xl:grid-cols-6'>
+          {tags
+            ? tags.slice(0, 12).map((item: any) => (
+                <Link
+                  key={item.id}
+                  href={`/tags/${item.id}`}
+                  className={clsx(
+                    'flex items-center justify-between rounded border p-3 text-[15px] font-medium',
+                    'text-neutral-600 shadow transition-all duration-300 hover:text-orange-500',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500',
+                    'dark:border-neutral-800 dark:bg-[#1a1919] dark:text-neutral-200 dark:hover:text-orange-500'
+                  )}
+                >
+                  <span>{item.label}</span>
+                  {item.total}
+                </Link>
+              ))
+            : [...Array(6).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
+        </div>
+      </section>
+      {/* Tags End */}
     </FrontLayout>
   );
 }
