@@ -144,18 +144,6 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
 
             <div className='hidden items-center gap-3 md:flex'>
               <ThemeChanger />
-              {/* FIX this  */}
-              <Link
-                href='/dashboard'
-                className={clsx(
-                  'px-1 text-[15px] font-medium text-gray-700 transition-all duration-200',
-                  'rounded hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
-                )}
-                passHref
-              >
-                Dashboard
-              </Link>
               {mounted ? (
                 admin.name ? (
                   <Link
@@ -173,8 +161,8 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                   <Link
                     href='/login'
                     className={clsx(
-                      'rounded bg-orange-500 px-3 py-1 text-sm font-medium text-white transition-all duration-200',
-                      'hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400'
+                      'rounded border border-orange-500 px-3 py-1 text-sm font-medium transition-all duration-200 hover:bg-neutral-100 dark:text-white',
+                      'hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 dark:text-white dark:hover:bg-neutral-800'
                     )}
                     passHref
                   >
@@ -302,17 +290,6 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 <ActiveLink href='/browse' activeClassName='!text-orange-500 dark:text-orange-500' className={activeCn}>
                   Browse
                 </ActiveLink>
-                {/* FIX this  */}
-                <Link
-                  href='/dashboard'
-                  className={clsx(
-                    'block rounded px-3 py-1.5 text-[15px] font-medium text-gray-600 hover:bg-gray-100',
-                    'hover:text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500',
-                    'dark:text-neutral-200 dark:hover:bg-neutral-800'
-                  )}
-                >
-                  Dashboard
-                </Link>
                 {mounted && (
                   <Link
                     href={`${admin.name ? '/dashboard' : '/login'}`}
