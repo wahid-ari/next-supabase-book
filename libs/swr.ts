@@ -84,6 +84,12 @@ export function useAuthorData(id: string, seo?: boolean) {
   return { data, error, isLoading };
 }
 
+// get total Book and Quote in from each Author
+export function useAuthorTotalBookQuoteData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/author/total-book-quote`, fetcher);
+  return { data, error, isLoading };
+}
+
 export function useTagsData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/tag`, fetcher);
   return { data, error, isLoading };
