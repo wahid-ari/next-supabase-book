@@ -183,7 +183,7 @@ html[class='dark'] {
   left: 0;
   transform-origin: bottom center;
   transition: transform 0.3s ease-out;
-  @apply bg-neutral-500 dark:bg-neutral-300;
+  @apply bg-orange-500 dark:bg-orange-500;
 }
 
 .hover-underline-animation:hover:after {

@@ -46,6 +46,21 @@ export default function Footer({ className, ...props }: { className?: string; [p
                     Home
                   </Link>
                 </li>
+                <li className='mb-2'>
+                  <Link href='/books' className={linkClassName}>
+                    Book
+                  </Link>
+                </li>
+                <li className='mb-2'>
+                  <Link href='/authors' className={linkClassName}>
+                    Author
+                  </Link>
+                </li>
+                <li className='mb-2'>
+                  <Link href='/quotes' className={linkClassName}>
+                    Quote
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
@@ -54,8 +69,18 @@ export default function Footer({ className, ...props }: { className?: string; [p
               </h2>
               <ul className='text-neutral-700 dark:text-neutral-300'>
                 <li className='mb-2'>
-                  <Link href='/studios' className={linkClassName}>
-                    Studios
+                  <Link href='/genres' className={linkClassName}>
+                    Genre
+                  </Link>
+                </li>
+                <li className='mb-2'>
+                  <Link href='/tags' className={linkClassName}>
+                    Tag
+                  </Link>
+                </li>
+                <li className='mb-2'>
+                  <Link href='/browse' className={linkClassName}>
+                    Browse
                   </Link>
                 </li>
               </ul>
