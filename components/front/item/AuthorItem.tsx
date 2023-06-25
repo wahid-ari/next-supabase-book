@@ -9,10 +9,11 @@ type Props = {
   href: string;
   imageSrc?: string;
   name: string;
+  book?: number;
   [props: string]: any;
 };
 
-export default function AuthorItem({ href = '#', imageSrc, name, ...props }: Props) {
+export default function AuthorItem({ href = '#', imageSrc, name, book, ...props }: Props) {
   const [isLoading, setLoading] = useState(true);
   const sizes = `(max-width: 360px) 100vw, (max-width: 480px) 50vw, 33vw`;
 
@@ -34,7 +35,7 @@ export default function AuthorItem({ href = '#', imageSrc, name, ...props }: Pro
             unoptimized
           />
         ) : (
-          <div className='flex h-full w-full items-center justify-center rounded-t bg-neutral-200 dark:bg-neutral-800'>
+          <div className='flex h-full w-full items-center justify-center rounded-full bg-neutral-200 dark:bg-neutral-800'>
             <PhotographIcon className='h-16 w-16 text-neutral-500' />
           </div>
         )}
@@ -48,6 +49,9 @@ export default function AuthorItem({ href = '#', imageSrc, name, ...props }: Pro
         >
           {name}
         </Text.medium>
+        <span className='line-clamp-1 px-1 text-center text-[14px] text-neutral-600 dark:text-neutral-400'>
+          {book} Published Books
+        </span>
       </div>
     </Link>
   );
