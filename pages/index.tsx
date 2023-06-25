@@ -1,22 +1,30 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useBooksData, useAuthorsData, useQuotesData, useTagTotalQuoteData, useGenreTotalBookData } from '@libs/swr';
+import {
+  useBooksData,
+  useQuotesData,
+  useTagTotalQuoteData,
+  useGenreTotalBookData,
+  useAuthorTotalBookQuoteData,
+} from '@libs/swr';
 import clsx from 'clsx';
 import FrontLayout from '@components/front/FrontLayout';
 import Shimer from '@components/systems/Shimer';
-import { ArrowSmRightIcon } from '@heroicons/react/outline';
+import { ArrowCircleDownIcon, ArrowDownIcon, ArrowSmRightIcon } from '@heroicons/react/outline';
 import BookItem from '@components/front/item/BookItem';
 import AuthorItem from '@components/front/item/AuthorItem';
 
 export default function Home() {
   const { data: books, error: errorBooks } = useBooksData();
-  const { data: authors, error: errorAuthors } = useAuthorsData();
+  const { data: authors, error: errorAuthors } = useAuthorTotalBookQuoteData();
   const { data: quotes, error: errorQuotes } = useQuotesData();
   const { data: genres, error: errorGenres } = useGenreTotalBookData();
   const { data: tags, error: errorTags } = useTagTotalQuoteData();
   // const movieWithBackdrop = data?.filter((item) => item.backdrop_url != null && item.backdrop_url != '');
   // const fiveMovieWithBackdrop = movieWithBackdrop?.slice(0, 5);
   // const shuffledBooks = books?.sort(() => 0.5 - Math.random());
+  // const shuffledAuthors = authors?.sort(() => 0.5 - Math.random());
+  // const shuffledQuotes = quotes?.sort(() => 0.5 - Math.random());
   const spliceBooks = books?.slice(0, 12);
   const spliceAuthors = authors?.slice(0, 12);
   const spliceQuotes = quotes?.slice(0, 6);
@@ -39,22 +47,27 @@ export default function Home() {
       description="Find books you'll love, and keep track of the books you want to read. Be part of the largest community
         of book lovers on MyBook"
     >
-      <header className='mb-16 sm:mb-12'>
-        <div className='mx-auto flex flex-col items-center py-10 sm:px-4 md:flex-row md:py-24 lg:px-8'>
+      <header className='mb-16 py-10 sm:mb-12 md:py-24'>
+        <div className='flex flex-col items-center  md:flex-row '>
           <div className='mb-12 flex flex-col items-center text-center md:mb-0 md:w-1/2 md:items-start md:pr-8 md:text-left lg:flex-grow lg:pr-16 xl:pr-24'>
-            <h1 className='mb-4 text-3xl font-medium text-neutral-900 dark:text-white sm:text-4xl'>
+            <h1 className='mb-4 text-3xl font-medium text-neutral-900 dark:text-white md:text-4xl'>
               Knowledge is power, <br className='hidden lg:inline-block' />
               and power is best shared among readers.
             </h1>
-            <p className='mb-8 leading-relaxed dark:text-neutral-300'>
+            <p className='mb-8 leading-relaxed dark:text-neutral-300 md:text-lg'>
               The site for readers and book recommendations. Find books you love, and keep track of the books you want
               to read. <span className='hidden sm:inline'>Be part of the community of book lovers on MyBook.</span>
             </p>
             <Link
               href='#section-books'
-              className='inline-flex rounded border-0 bg-orange-500 px-6 py-2 text-white hover:bg-orange-600 focus:outline-none'
+              className={clsx(
+                'group inline-flex items-center gap-2 rounded border border-orange-500 px-6 py-2 font-semibold transition-all',
+                'hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+              )}
             >
-              Explore
+              Explore Now
+              <ArrowCircleDownIcon className='h-5 w-5 animate-bounce text-orange-500' />
             </Link>
           </div>
           <div className='min-[520px]:w-5/6 md:w-1/2 lg:w-full lg:max-w-lg xl:max-w-xl'>
@@ -183,7 +196,15 @@ export default function Home() {
         <div className='mt-4 grid grid-cols-2 gap-x-4 gap-y-6 min-[520px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
           {spliceAuthors
             ? spliceAuthors.map((item: any) => {
-                return <AuthorItem key={item.id} href={`/authors/${item.id}`} name={item.name} imageSrc={item.image} />;
+                return (
+                  <AuthorItem
+                    key={item.id}
+                    href={`/authors/${item.id}`}
+                    name={item.name}
+                    imageSrc={item.image}
+                    book={item?.book_books?.length}
+                  />
+                );
               })
             : [...Array(6).keys()].map((item) => (
                 <div key={item} className='flex justify-center'>
