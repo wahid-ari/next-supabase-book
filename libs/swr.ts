@@ -76,9 +76,14 @@ export function useAuthorsData() {
   return { data, error, isLoading };
 }
 
-export function useAuthorData(id: string, seo?: boolean) {
+export function useAuthorData(id: string) {
+  const { data, error, isLoading } = useSWR(`${API_URL}/author?id=${id}`, fetcher);
+  return { data, error, isLoading };
+}
+
+export function useAuthorBySlugData(slug: string, seo?: boolean) {
   const { data, error, isLoading } = useSWR(
-    seo ? `${API_URL}/author?id=${id}&seo=true` : `${API_URL}/author?id=${id}`,
+    seo ? `${API_URL}/author?slug=${slug}&seo=true` : `${API_URL}/author?slug=${slug}`,
     fetcher
   );
   return { data, error, isLoading };
