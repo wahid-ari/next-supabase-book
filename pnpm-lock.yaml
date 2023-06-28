@@ -70,6 +70,9 @@ dependencies:
   react-table:
     specifier: ^7.8.0
     version: 7.8.0(react@18.2.0)
+  slug:
+    specifier: ^8.2.2
+    version: 8.2.2
   swr:
     specifier: ^2.0.0
     version: 2.0.0(react@18.2.0)
@@ -3649,6 +3652,11 @@ packages:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
     dev: true
+
+  /slug@8.2.2:
+    resolution: {integrity: sha512-5ByW6qXqPeG0Tmlkh24JhdXhvQsbaJSjVr3GgGxUV0BSskZKKBZZfFWxezap8+fh1vxBN9GVbqI1V6nqAFxlBg==}
+    hasBin: true
+    dev: false
 
   /source-map-js@1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
