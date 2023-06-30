@@ -1,10 +1,8 @@
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_ROUTE}`;
 
-function generateSiteMap(books: any, authors: any, genres: any, tags: any) {
+function generateSiteMap(authors: any, books: any, genres: any, tags: any) {
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
-
-  // TODO create endpoint for sitemap
 
   return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -40,7 +38,7 @@ function generateSiteMap(books: any, authors: any, genres: any, tags: any) {
     .map((book: any) => {
       return `
       <url>
-        <loc>${`${BASE_URL}/books/detail/${book.id}`}</loc>
+        <loc>${`${BASE_URL}/books/${book.slug}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
@@ -51,7 +49,7 @@ function generateSiteMap(books: any, authors: any, genres: any, tags: any) {
       .map((author: any) => {
         return `
       <url>
-        <loc>${`${BASE_URL}/authors/detail/${author.id}`}</loc>
+        <loc>${`${BASE_URL}/authors/${author.slug}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
@@ -62,7 +60,7 @@ function generateSiteMap(books: any, authors: any, genres: any, tags: any) {
       .map((genre: any) => {
         return `
       <url>
-        <loc>${`${BASE_URL}/genres/detail/${genre.id}`}</loc>
+        <loc>${`${BASE_URL}/genres/${genre.slug}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
@@ -73,7 +71,7 @@ function generateSiteMap(books: any, authors: any, genres: any, tags: any) {
       .map((tag: any) => {
         return `
       <url>
-        <loc>${`${BASE_URL}/tags/detail/${tag.id}`}</loc>
+        <loc>${`${BASE_URL}/tags/${tag.slug}`}</loc>
         <lastmod>${today.toISOString()}</lastmod>
       </url>
     `;
@@ -90,17 +88,11 @@ export default function SiteMap() {
 
 export async function getServerSideProps({ res }) {
   // We make an API call to gather the URLs for our site
-  const getAllBooks = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book`);
-  const books = await getAllBooks.json();
-  const getAllAuthors = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/author`);
-  const authors = await getAllAuthors.json();
-  const getAllGenres = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
-  const genres = await getAllGenres.json();
-  const getAllTags = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/tag`);
-  const tags = await getAllTags.json();
+  const getAll = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/sitemap`);
+  const { authors, books, genres, tags } = await getAll.json();
 
   // We generate the XML sitemap with the data
-  const sitemap = generateSiteMap(books, authors, genres, tags);
+  const sitemap = generateSiteMap(authors, books, genres, tags);
 
   res.setHeader('Content-Type', 'text/xml');
   // we send the XML to the browser
