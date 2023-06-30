@@ -160,7 +160,7 @@ html[class='dark'] {
 
 #nprogress .bar {
   /* background: var(--nprogress-color) !important; */
-  @apply !bg-emerald-500 !shadow-emerald-500/50 dark:!bg-emerald-400 dark:!shadow-emerald-400/50;
+  @apply !bg-orange-500 !shadow-orange-500/50 dark:!bg-orange-400 dark:!shadow-orange-400/50;
 }
 
 #nprogress .spinner-icon {
