@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { supabase, getSessionToken, writeLogs } from '@libs/supabase';
+import slug from 'slug';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
@@ -8,24 +9,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   switch (method) {
     case 'GET':
-      if (!query.id) {
+      if (!query.id && !query.slug) {
         const { data } = await supabase.from('book_tags').select(`*`).order('id');
         res.status(200).json(data);
-      } else if (query.id && query.seo) {
-        const { data } = await supabase.from('book_tags').select(`name`).eq('id', query.id).single();
+      } else if (query.slug && query.seo) {
+        const { data } = await supabase.from('book_tags').select(`name`).eq('slug', query.slug).single();
         // https://nextjs.org/docs/api-reference/next.config.js/headers#cache-control
         res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
         res.status(200).json(data);
       } else {
-        const { data: tags } = await supabase.from('book_tags').select(`*`).eq('id', query.id).order('id');
+        let column = query.id ? 'id' : 'slug';
+        let param = query.id ? query.id : query.slug;
+        const { data: tags } = await supabase.from('book_tags').select(`*`).eq(column, param).order('id');
         const { data: quotes_tags } = await supabase
           .from('book_quotes_tags')
           .select(`*`)
-          .eq('tag_id', query.id)
+          .eq('tag_id', tags[0].id)
           .order('id');
         const { data: quotes } = await supabase
           .from('book_quotes')
-          .select(`*, book_authors (id, name, image)`)
+          .select(`*, book_authors (id, slug, name, image)`)
           .order('id');
 
         const quotes_by_tags = [];
@@ -51,8 +54,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!body.name) {
           res.status(422).json({ error: 'Name required' });
         } else {
+          let nameSlug = slug(body.name);
+          const { data: isSlugExist } = await supabase.from('book_tags').select(`*`).eq('slug', nameSlug).order('id');
+          // if slug already exist, add tags.length + 1 to slug to make it unique
+          if (isSlugExist.length > 0) {
+            const { data: tags } = await supabase.from('book_tags').select(`id`, { count: 'exact' });
+            nameSlug = `${nameSlug}-${tags.length + 1}`;
+          }
           const { error } = await supabase.from('book_tags').insert([
             {
+              slug: nameSlug,
               name: body.name,
               link: body.link,
             },
