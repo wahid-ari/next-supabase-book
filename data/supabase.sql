@@ -8,6 +8,7 @@ create table
     web text null default ''::text,
     bio text null default ''::text,
     created_at timestamp with time zone null default now(),
+    slug text not null default ''::text,
     constraint book_authors_pkey primary key (id)
   ) tablespace pg_default;
 
@@ -29,6 +30,7 @@ create table
     image text null default ''::text,
     image_small text null default ''::text,
     description text null default ''::text,
+    slug text null,
     constraint book_books_pkey primary key (id),
     constraint book_books_author_id_fkey foreign key (author_id) references book_authors (id)
   ) tablespace pg_default;
@@ -50,6 +52,7 @@ create table
     name text not null default ''::text,
     link text null default ''::text,
     created_at timestamp with time zone null default now(),
+    slug text null,
     constraint book_genres_pkey primary key (id)
   ) tablespace pg_default;
 
@@ -103,6 +106,7 @@ create table
     name text not null default ''::text,
     link text null default ''::text,
     created_at timestamp with time zone null default now(),
+    slug text null,
     constraint book_tags_pkey primary key (id)
   ) tablespace pg_default;
 
