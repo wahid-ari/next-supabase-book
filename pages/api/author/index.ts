@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { supabase, getSessionToken, writeLogs } from '@libs/supabase';
+import slug from 'slug';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
@@ -48,8 +49,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!body.name) {
           res.status(422).json({ error: 'Name required' });
         } else {
+          let nameSlug = slug(body.name);
+          const { data: isSlugExist } = await supabase
+            .from('book_authors')
+            .select(`*`)
+            .eq('slug', nameSlug)
+            .order('id');
+          // if slug already exist, add authors.length + 1 to slug to make it unique
+          if (isSlugExist.length > 0) {
+            const { data: authors } = await supabase.from('book_authors').select(`id`, { count: 'exact' });
+            nameSlug = `${nameSlug}-${authors.length + 1}`;
+          }
           const { error } = await supabase.from('book_authors').insert([
             {
+              slug: nameSlug,
               name: body.name,
               link: body.link,
               image: body.image,
