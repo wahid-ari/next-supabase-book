@@ -239,23 +239,32 @@ export default function Home() {
           </div>
         </div>
         <div className='mt-4'>
-          {spliceQuotes
-            ? spliceQuotes.map((item: any) => (
-                <div key={item.id} className='mb-4 border-b pb-2 dark:border-b-neutral-800'>
-                  <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
-                  <Link
-                    href={`author/${item?.book_authors?.id}`}
-                    className={clsx(
-                      'rounded text-[15px] font-medium italic transition-all duration-200',
-                      'text-neutral-500 hover:text-orange-500 dark:text-neutral-300 dark:hover:text-orange-500',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
-                    )}
-                  >
-                    - {item?.book_authors?.name}
-                  </Link>
-                </div>
-              ))
-            : [...Array(6).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
+          {spliceQuotes ? (
+            spliceQuotes.map((item: any) => (
+              <div key={item.id} className='mb-4 border-b pb-2 dark:border-b-neutral-800'>
+                <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
+                <Link
+                  href={`author/${item?.book_authors?.id}`}
+                  className={clsx(
+                    'rounded text-[15px] font-medium italic transition-all duration-200',
+                    'text-neutral-500 hover:text-orange-500 dark:text-neutral-300 dark:hover:text-orange-500',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+                  )}
+                >
+                  - {item?.book_authors?.name}
+                </Link>
+              </div>
+            ))
+          ) : (
+            <>
+              <Shimer className='!h-12 !w-[50%]' />
+              <Shimer className='!h-12 !w-[60%]' />
+              <Shimer className='!h-12 !w-[70%]' />
+              <Shimer className='!h-12 !w-[80%]' />
+              <Shimer className='!h-12 !w-[90%]' />
+              <Shimer className='!h-12 !w-[100%]' />
+            </>
+          )}
         </div>
       </section>
       {/* Quotes End */}
