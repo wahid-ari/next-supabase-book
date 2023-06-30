@@ -49,7 +49,7 @@ export default function Genre() {
 
   async function handleCreate() {
     const toastId = pushToast({
-      message: `Creating ${name} genre`,
+      message: `Creating ${name}`,
       isLoading: true,
     });
     try {
@@ -89,7 +89,7 @@ export default function Genre() {
 
   async function handleDelete() {
     const toastId = pushToast({
-      message: `Deleting ${deleteItem.name} genre`,
+      message: `Deleting ${deleteItem.name}`,
       isLoading: true,
     });
     try {
