@@ -114,6 +114,8 @@ export default function Author({ id }) {
               <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.bio}</p>
             </div>
 
+            <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
+
             {data?.books?.length > 0 ? (
               <div className='mt-5'>
                 <Heading>{data?.name} Books</Heading>
@@ -155,8 +157,10 @@ export default function Author({ id }) {
               </div>
             ) : null}
 
+            <hr className='mt-10 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
+
             {data?.quotes?.length > 0 ? (
-              <div className='mt-6'>
+              <div className='mt-8'>
                 <Heading>{data?.name} Quotes</Heading>
                 {data?.quotes.map((item: any) => {
                   return (
