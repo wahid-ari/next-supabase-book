@@ -240,8 +240,11 @@ export default function Home() {
         </div>
         <div className='mt-4'>
           {spliceQuotes ? (
-            spliceQuotes.map((item: any) => (
-              <div key={item.id} className='mb-4 border-b pb-2 dark:border-b-neutral-800'>
+            spliceQuotes.map((item: any, index: number) => (
+              <div
+                key={item.id}
+                className={clsx('mb-4 pb-4', index != spliceQuotes.length - 1 && 'border-b dark:border-b-neutral-800')}
+              >
                 <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
                 <Link
                   href={`author/${item?.book_authors?.id}`}

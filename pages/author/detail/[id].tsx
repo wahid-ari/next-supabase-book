@@ -8,6 +8,7 @@ import Shimer from '@components/systems/Shimer';
 import nookies from 'nookies';
 import Heading from '@components/systems/Heading';
 import Link from 'next/link';
+import clsx from 'clsx';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
@@ -114,11 +115,13 @@ export default function Author({ id }) {
               <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.bio}</p>
             </div>
 
-            <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
+            {data?.books?.length > 0 && <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />}
 
             {data?.books?.length > 0 ? (
               <div className='mt-5'>
-                <Heading>{data?.name} Books</Heading>
+                <Heading h3 className='mb-6'>
+                  {data?.name} Books
+                </Heading>
                 {data?.books.map((item: any) => {
                   return (
                     <Link
@@ -157,14 +160,22 @@ export default function Author({ id }) {
               </div>
             ) : null}
 
-            <hr className='mt-10 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
+            {data?.quotes?.length > 0 && <hr className='mt-10 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />}
 
             {data?.quotes?.length > 0 ? (
               <div className='mt-8'>
-                <Heading>{data?.name} Quotes</Heading>
-                {data?.quotes.map((item: any) => {
+                <Heading h3 className='mb-6'>
+                  {data?.name} Quotes
+                </Heading>
+                {data?.quotes.map((item: any, index: number) => {
                   return (
-                    <div key={item.id} className='mb-4 border-b pb-2 dark:border-b-neutral-700'>
+                    <div
+                      key={item.id}
+                      className={clsx(
+                        'mb-4 pb-4',
+                        index != data?.quotes?.length - 1 && 'border-b dark:border-b-neutral-700'
+                      )}
+                    >
                       <p className='text-[15px] font-medium text-neutral-900 dark:text-neutral-100'>
                         &#8220;{item.quote}&#8221;
                       </p>

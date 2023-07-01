@@ -64,7 +64,7 @@ export default function Quote({ id }) {
             </div>
           </blockquote>
           <Link
-            href={`author/detail/${data?.book_authors?.id}`}
+            href={`/author/detail/${data?.book_authors?.id}`}
             className='rounded pl-4 text-base font-semibold italic text-neutral-700 transition-all duration-200 hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:text-neutral-100'
           >
             - {data?.book_authors?.name}
