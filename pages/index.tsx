@@ -113,7 +113,7 @@ export default function Home() {
                 return (
                   <BookItem
                     key={item.id}
-                    href={`/books/${item.id}`}
+                    href={`/books/${item.slug}`}
                     title={item.title}
                     imageSrc={item.image}
                     author={item?.book_authors?.name}
@@ -153,7 +153,7 @@ export default function Home() {
             ? genres.slice(0, 12).map((item: any) => (
                 <Link
                   key={item.id}
-                  href={`/genres/${item.id}`}
+                  href={`/genres/${item.slug}`}
                   className={clsx(
                     'flex flex-wrap items-center justify-between rounded border p-4 text-[15px] font-medium',
                     'transition-all duration-300 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-600',
@@ -199,7 +199,7 @@ export default function Home() {
                 return (
                   <AuthorItem
                     key={item.id}
-                    href={`/authors/${item.id}`}
+                    href={`/authors/${item.slug}`}
                     name={item.name}
                     imageSrc={item.image}
                     book={item?.book_books?.length}
@@ -247,7 +247,7 @@ export default function Home() {
               >
                 <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
                 <Link
-                  href={`author/${item?.book_authors?.id}`}
+                  href={`author/${item?.book_authors?.slug}`}
                   className={clsx(
                     'rounded text-[15px] font-medium italic transition-all duration-200',
                     'text-neutral-500 hover:text-orange-500 dark:text-neutral-300 dark:hover:text-orange-500',
@@ -300,7 +300,7 @@ export default function Home() {
             ? tags.slice(0, 12).map((item: any) => (
                 <Link
                   key={item.id}
-                  href={`/tags/${item.id}`}
+                  href={`/tags/${item.slug}`}
                   className={clsx(
                     'flex items-center justify-between rounded border p-3 text-[15px] font-medium',
                     'text-neutral-600 shadow transition-all duration-300 hover:text-orange-500',
