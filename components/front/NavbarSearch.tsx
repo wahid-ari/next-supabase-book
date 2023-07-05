@@ -34,7 +34,7 @@ export default function NavbarSearch({ ...props }: { [props: string]: any }) {
             'bg-gray-50 focus:border-orange-500 focus:ring-orange-500 dark:border-neutral-800 dark:bg-neutral-800',
             'dark:text-white dark:placeholder-gray-400 dark:focus:border-orange-500 dark:focus:ring-orange-500'
           )}
-          placeholder='Search Movie, Actors...'
+          placeholder='Search Title, Author, ISBN'
           required
         />
         <button
