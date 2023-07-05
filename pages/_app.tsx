@@ -24,8 +24,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   function handleStart(url: string) {
     let splitUrl = url.split('/');
+    let isDetail =
+      (splitUrl[1] == 'books' || splitUrl[1] == 'authors' || splitUrl[1] == 'genres' || splitUrl[1] == 'tags') &&
+      splitUrl.length > 2;
     // Show progress only in Detail Pages
-    if (splitUrl.includes('detail')) {
+    if (splitUrl.includes('detail') || isDetail) {
       NProgress.start();
     }
   }
