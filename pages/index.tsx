@@ -10,7 +10,7 @@ import {
 import clsx from 'clsx';
 import FrontLayout from '@components/front/FrontLayout';
 import Shimer from '@components/systems/Shimer';
-import { ArrowCircleDownIcon, ArrowDownIcon, ArrowSmRightIcon } from '@heroicons/react/outline';
+import { ArrowCircleDownIcon, ArrowSmRightIcon } from '@heroicons/react/outline';
 import BookItem from '@components/front/item/BookItem';
 import AuthorItem from '@components/front/item/AuthorItem';
 
@@ -25,9 +25,9 @@ export default function Home() {
   // const shuffledBooks = books?.sort(() => 0.5 - Math.random());
   // const shuffledAuthors = authors?.sort(() => 0.5 - Math.random());
   // const shuffledQuotes = quotes?.sort(() => 0.5 - Math.random());
-  const spliceBooks = books?.slice(0, 12);
-  const spliceAuthors = authors?.slice(0, 12);
-  const spliceQuotes = quotes?.slice(0, 6);
+  const sliceBooks = books?.slice(0, 12);
+  const sliceAuthors = authors?.slice(0, 12);
+  const sliceQuotes = quotes?.slice(0, 6);
 
   if (errorBooks || errorAuthors || errorQuotes || errorGenres || errorTags) {
     return (
@@ -108,8 +108,8 @@ export default function Home() {
           </div>
         </div>
         <div className='mt-4 grid grid-cols-2 gap-6 min-[520px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
-          {spliceBooks
-            ? spliceBooks.map((item: any) => {
+          {sliceBooks
+            ? sliceBooks.map((item: any) => {
                 return (
                   <BookItem
                     key={item.id}
@@ -120,7 +120,7 @@ export default function Home() {
                   />
                 );
               })
-            : [...Array(6).keys()].map((item) => <Shimer key={item} className='h-64 sm:!h-72' />)}
+            : [...Array(12).keys()].map((item) => <Shimer key={item} className='h-64 sm:!h-72' />)}
         </div>
       </section>
       {/* Books End*/}
@@ -165,7 +165,7 @@ export default function Home() {
                   {item.total}
                 </Link>
               ))
-            : [...Array(6).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
+            : [...Array(12).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
         </div>
       </section>
       {/* Genres End */}
@@ -194,8 +194,8 @@ export default function Home() {
           </div>
         </div>
         <div className='mt-4 grid grid-cols-2 gap-x-4 gap-y-6 min-[520px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
-          {spliceAuthors
-            ? spliceAuthors.map((item: any) => {
+          {sliceAuthors
+            ? sliceAuthors.map((item: any) => {
                 return (
                   <AuthorItem
                     key={item.id}
@@ -206,7 +206,7 @@ export default function Home() {
                   />
                 );
               })
-            : [...Array(6).keys()].map((item) => (
+            : [...Array(12).keys()].map((item) => (
                 <div key={item} className='flex justify-center'>
                   <Shimer className='!h-32 !w-32 !rounded-full' />
                 </div>
@@ -239,11 +239,11 @@ export default function Home() {
           </div>
         </div>
         <div className='mt-4'>
-          {spliceQuotes ? (
-            spliceQuotes.map((item: any, index: number) => (
+          {sliceQuotes ? (
+            sliceQuotes.map((item: any, index: number) => (
               <div
                 key={item.id}
-                className={clsx('mb-4 pb-4', index != spliceQuotes.length - 1 && 'border-b dark:border-b-neutral-800')}
+                className={clsx('mb-4 pb-4', index != sliceQuotes.length - 1 && 'border-b dark:border-b-neutral-800')}
               >
                 <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
                 <Link
@@ -312,7 +312,7 @@ export default function Home() {
                   {item.total}
                 </Link>
               ))
-            : [...Array(6).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
+            : [...Array(12).keys()].map((item) => <Shimer key={item} className='!h-12' />)}
         </div>
       </section>
       {/* Tags End */}

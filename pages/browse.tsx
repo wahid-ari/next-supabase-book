@@ -37,12 +37,12 @@ export default function Browse() {
 
   const resetAllSearchHistory = useSearchHistoryStore((state: any) => state.resetAllSearchHistory);
 
-  function compareSearchResult(history, newResults) {
+  function compareSearchResult(history: any, newResults: any) {
     let newHistory = history;
     // iterate each search result
     for (const newResult of newResults) {
       // check if new result already in the history
-      const exists = history.findIndex((item) => item.id == newResult.id) > -1;
+      const exists = history.findIndex((item: any) => item.id == newResult.id) > -1;
       if (!exists) {
         newHistory.push(newResult);
       }
@@ -77,7 +77,7 @@ export default function Browse() {
     }
   }, [data]);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: any) {
     e.preventDefault();
     if (query !== '') {
       router.push(`?q=${query}`);
