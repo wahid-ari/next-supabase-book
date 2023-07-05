@@ -115,7 +115,7 @@ export default function Home() {
                     key={item.id}
                     href={`/books/${item.slug}`}
                     title={item.title}
-                    imageSrc={item.image}
+                    imageSrc={item.image.replace('SY75_', '')}
                     author={item?.book_authors?.name}
                   />
                 );
