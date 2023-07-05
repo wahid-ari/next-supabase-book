@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         items.push({
           id: genre.id,
           label: genre.name,
+          slug: genre.slug,
           total: 0,
         });
       }

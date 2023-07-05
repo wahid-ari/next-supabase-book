@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!query.id) {
         const { data } = await supabase
           .from('book_quotes')
-          .select(`id, author_id, quote, book_authors (id, name)`)
+          .select(`id, author_id, quote, book_authors (id, name, slug)`)
           .order('id');
         res.status(200).json(data);
       } else {

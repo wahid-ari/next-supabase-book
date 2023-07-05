@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         items.push({
           id: tag.id,
           label: tag.name,
+          slug: tag.slug,
           total: 0,
         });
       }
