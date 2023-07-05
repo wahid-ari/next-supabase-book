@@ -53,7 +53,7 @@ export default function Book({ slug, seo }) {
             <div className='top-16 mx-auto w-3/5 self-start overflow-hidden sm:sticky sm:mx-0 sm:w-1/4 lg:w-1/5'>
               <Image
                 alt={data?.title}
-                src={data?.image.replace('SY75_', '')}
+                src={data?.image.replace('SY75_', '').replace('jpg', '_SX200_.jpg')}
                 width={250}
                 height={250}
                 className={`mx-auto w-52 rounded ${isLoading ? 'blur-2xl' : 'blur-0'}`}

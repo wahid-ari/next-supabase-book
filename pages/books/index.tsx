@@ -51,7 +51,7 @@ export default function Browse() {
                   key={item.id}
                   href={`/books/${item.slug}`}
                   title={item.title}
-                  imageSrc={item.image.replace('SY75_', '')}
+                  imageSrc={item.image.replace('SY75_', '').replace('jpg', '_SX200_.jpg')}
                   author={item?.book_authors?.name}
                 />
               );

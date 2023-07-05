@@ -22,8 +22,30 @@ module.exports = {
     // API_ROUTE: "http://localhost:3000",
   },
   reactStrictMode: true,
+  // https://nextjs.org/docs/pages/api-reference/components/image#remotepatterns
+  // https://vercel.com/docs/concepts/image-optimization/managing-image-optimization-costs#how-to-minimize-image-optimization-costs
   images: {
-    domains: ['images-na.ssl-images-amazon.com', 'i.gr-assets.com'],
+    // domains: ['images-na.ssl-images-amazon.com', 'i.gr-assets.com', 'images.gr-assets.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images-na.ssl-images-amazon.com',
+        port: '',
+        pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.gr-assets.com',
+        port: '',
+        pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.gr-assets.com',
+        port: '',
+        pathname: '/authors/**',
+      },
+    ],
     unoptimized: true,
   },
 };

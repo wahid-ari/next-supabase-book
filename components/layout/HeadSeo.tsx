@@ -13,7 +13,7 @@ export default function HeadSeo({ title, description, prefetch }: Props) {
   // the title and hydration will likely fail and fall back to client rendering
   // https://github.com/vercel/next.js/discussions/38256#discussioncomment-3070196
   let headTitle = `${title}`;
-  let headDescription = `${description ? description.slice(0, 160) + '...' : title}`;
+  let headDescription = `${description ? description.slice(0, 160) : title}`;
 
   let ogTitle = title.split('- MyBook');
 
