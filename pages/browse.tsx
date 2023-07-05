@@ -8,19 +8,11 @@ import Title from '@components/systems/Title';
 import Text from '@components/systems/Text';
 import Button from '@components/systems/Button';
 import Heading from '@components/systems/Heading';
-import {
-  AnnotationIcon,
-  BookOpenIcon,
-  CollectionIcon,
-  ColorSwatchIcon,
-  FilmIcon,
-  FlagIcon,
-  LibraryIcon,
-  UserGroupIcon,
-  UsersIcon,
-} from '@heroicons/react/outline';
+import { AnnotationIcon, BookOpenIcon, CollectionIcon, ColorSwatchIcon, UserGroupIcon } from '@heroicons/react/outline';
 import { useSearchHistoryStore } from '@store/useStore';
 import { useMounted } from '@hooks/useMounted';
+import BookListItem from '@components/dashboard/BookListItem';
+import AuthorListItem from '@components/dashboard/AuthorListItem';
 
 const fetcher = (url: string) => fetch(url).then((result) => result.json());
 
@@ -35,15 +27,15 @@ export default function Browse() {
     setQuery(search);
   }, [search]);
 
-  const moviesHistory = useSearchHistoryStore((state) => state.movies);
-  const setMoviesHistory = useSearchHistoryStore((state) => state.setMovies);
-  const resetMoviesHistory = useSearchHistoryStore((state) => state.resetMovies);
+  const booksHistory = useSearchHistoryStore((state: any) => state.booksHistory);
+  const setBooksHistory = useSearchHistoryStore((state: any) => state.setBooksHistory);
+  const resetBooksHistory = useSearchHistoryStore((state: any) => state.resetBooksHistory);
 
-  const actorsHistory = useSearchHistoryStore((state) => state.actors);
-  const setActorsHistory = useSearchHistoryStore((state) => state.setActors);
-  const resetActorsHistory = useSearchHistoryStore((state) => state.resetActors);
+  const authorsHistory = useSearchHistoryStore((state: any) => state.authorsHistory);
+  const setAuthorsHistory = useSearchHistoryStore((state: any) => state.setAuthorsHistory);
+  const resetAuthorsHistory = useSearchHistoryStore((state: any) => state.resetAuthorsHistory);
 
-  const resetAllSearchHistory = useSearchHistoryStore((state) => state.resetAllSearchHistory);
+  const resetAllSearchHistory = useSearchHistoryStore((state: any) => state.resetAllSearchHistory);
 
   function compareSearchResult(history, newResults) {
     let newHistory = history;
@@ -59,28 +51,28 @@ export default function Browse() {
   }
 
   useEffect(() => {
-    if (data?.movies?.length > 0) {
+    if (data?.books?.length > 0) {
       // if already searching
-      if (moviesHistory.length > 0) {
+      if (booksHistory.length > 0) {
         // compare history with new search result
-        let newMovies = compareSearchResult(moviesHistory, data?.movies);
-        if (newMovies != moviesHistory) {
-          setMoviesHistory(newMovies);
+        let newBooks = compareSearchResult(booksHistory, data?.books);
+        if (newBooks != booksHistory) {
+          setBooksHistory(newBooks);
         }
       } else {
         // first time searching, set search result to search history directly
-        setMoviesHistory(data?.movies);
+        setBooksHistory(data?.books);
       }
     }
-    // Actors
-    if (data?.actors?.length > 0) {
-      if (actorsHistory.length > 0) {
-        let newActors = compareSearchResult(actorsHistory, data?.actors);
-        if (newActors != actorsHistory) {
-          setActorsHistory(newActors);
+    // Authors
+    if (data?.authors?.length > 0) {
+      if (authorsHistory.length > 0) {
+        let newAuthors = compareSearchResult(authorsHistory, data?.authors);
+        if (newAuthors != authorsHistory) {
+          setAuthorsHistory(newAuthors);
         }
       } else {
-        setActorsHistory(data?.actors);
+        setAuthorsHistory(data?.authors);
       }
     }
   }, [data]);
@@ -119,6 +111,7 @@ export default function Browse() {
             type='text'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            required
           />
           <Button type='submit' value='Submit' className='mb-4 !px-8 !py-2.5'>
             Search
@@ -130,48 +123,53 @@ export default function Browse() {
         <>
           {!data && <Text>Searching...</Text>}
 
-          {data?.movies?.length < 1 && data?.actors?.length < 1 ? (
+          {data?.books.length < 1 && data?.authors.length < 1 ? (
             <div className='mb-12 mt-8 rounded border border-red-500 p-3'>
               <p className='text-red-500'>{`No results for "${query || search}"`}</p>
             </div>
           ) : null}
 
-          {data?.movies?.length > 0 ? (
+          {data?.books.length > 0 ? (
             <>
               <Heading h2 className='mt-6 !text-[19px]'>
-                Movies
+                Books
               </Heading>
-              <div className='mt-2 flex flex-col gap-4 pb-4'>
-                {/* {data?.movies?.map((item, index) => (
-                  <MovieListItem
+              <div className='mt-2 space-y-6'>
+                {data?.books?.map((item: any, index: number) => (
+                  <BookListItem
                     key={index}
-                    href={`/movies/${item.id}`}
-                    imageSrc={item.image_url}
-                    name={item.name}
-                    description={item.description}
-                    date={item.release_date}
+                    href={`/books/${item.slug}`}
+                    image={item.image_small?.replace('SX50', 'SX150').replace('SY75', 'SX150')}
+                    title={item.title}
+                    published={item.published}
                   />
-                ))} */}
+                ))}
               </div>
             </>
           ) : null}
 
-          {data?.actors?.length > 0 ? (
+          {data?.authors?.length > 0 ? (
             <>
               <Heading h2 className='mt-6 !text-[19px]'>
-                Actors
+                Authors
               </Heading>
-              <div className='mt-2 grid grid-cols-2 gap-4 gap-y-8 pb-4 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 min-[830px]:grid-cols-6 xl:grid-cols-8'>
-                {/* {data?.actors?.map((item, index) => (
-                  <ActorGridItem key={index} href={`/actors/${item.id}`} imageSrc={item.image_url} name={item.name} />
-                ))} */}
+              <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
+                {data?.authors?.map((item: any, index: number) => (
+                  <AuthorListItem
+                    key={index}
+                    href={`/authors/${item.slug}`}
+                    image={item.image}
+                    name={item.name}
+                    web={item.web}
+                  />
+                ))}
               </div>
             </>
           ) : null}
         </>
       ) : (
         <>
-          {moviesHistory?.length > 0 || actorsHistory?.length > 0 ? (
+          {booksHistory?.length > 0 || authorsHistory?.length > 0 ? (
             <>
               <div className='mt-6 flex items-center justify-between'>
                 <Heading h2 className='!mb-0 !text-[20px]'>
@@ -185,56 +183,56 @@ export default function Browse() {
                 </button>
               </div>
 
-              {moviesHistory?.length > 0 ? (
+              {booksHistory?.length > 0 ? (
                 <>
                   <div className='mt-6 flex items-center justify-between'>
                     <Heading h2 className='!text-[18px]'>
-                      Movies
+                      Books
                     </Heading>
                     <button
-                      onClick={resetMoviesHistory}
+                      onClick={resetBooksHistory}
                       className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500'
                     >
-                      Clear
+                      Clear Books
                     </button>
                   </div>
-                  <div className='mt-2 flex flex-col gap-4 pb-4'>
-                    {/* {moviesHistory?.map((item, index) => (
-                      <MovieListItem
+                  <div className='mt-2 space-y-6'>
+                    {booksHistory?.map((item: any, index: number) => (
+                      <BookListItem
                         key={index}
-                        href={`/movies/${item.id}`}
-                        imageSrc={item.image_url}
-                        name={item.name}
-                        description={item.description}
-                        date={item.release_date}
+                        href={`/books/${item.slug}`}
+                        image={item.image_small?.replace('SX50', 'SX150').replace('SY75', 'SX150')}
+                        title={item.title}
+                        published={item.published}
                       />
-                    ))} */}
+                    ))}
                   </div>
                 </>
               ) : null}
 
-              {actorsHistory?.length > 0 ? (
+              {authorsHistory?.length > 0 ? (
                 <>
-                  <div className='mt-6 flex items-center justify-between'>
+                  <div className='mt-8 flex items-center justify-between'>
                     <Heading h2 className='!text-[18px]'>
-                      Actors
+                      Authors
                     </Heading>
                     <button
-                      onClick={resetActorsHistory}
+                      onClick={resetAuthorsHistory}
                       className='rounded text-[15px] font-medium text-red-500 hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500'
                     >
-                      Clear
+                      Clear Authors
                     </button>
                   </div>
-                  <div className='mt-2 grid grid-cols-2 gap-4 gap-y-8 pb-4 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 min-[830px]:grid-cols-6 xl:grid-cols-8'>
-                    {/* {actorsHistory?.map((item, index) => (
-                      <ActorGridItem
+                  <div className='mt-2 grid grid-cols-1 gap-4 pb-4 min-[500px]:grid-cols-2 md:grid-cols-3'>
+                    {authorsHistory?.map((item: any, index: number) => (
+                      <AuthorListItem
                         key={index}
-                        href={`/actors/${item.id}`}
-                        imageSrc={item.image_url}
+                        href={`/authors/${item.slug}`}
+                        image={item.image}
                         name={item.name}
+                        web={item.web}
                       />
-                    ))} */}
+                    ))}
                   </div>
                 </>
               ) : null}
@@ -302,17 +300,6 @@ export default function Browse() {
             <CollectionIcon className='h-10 w-10 text-sky-500 transition-all duration-300 ease-in group-hover:text-white' />
           </div>
         </Link>
-        {/* <Link
-          href='/countries'
-          className='group h-20 rounded-lg bg-gradient-to-br from-orange-500 to-lime-500 p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500'
-        >
-          <div className='flex h-full w-full items-center justify-between gap-2 rounded-md bg-white px-4 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-neutral-900'>
-            <h2 className='bg-gradient-to-r from-orange-500 to-lime-500 bg-clip-text text-xl font-bold text-transparent transition-all duration-300 ease-in group-hover:text-white'>
-              Country
-            </h2>
-            <FlagIcon className='h-10 w-10 text-lime-500 transition-all duration-300 ease-in group-hover:text-white' />
-          </div>
-        </Link> */}
       </div>
     </FrontLayout>
   );
