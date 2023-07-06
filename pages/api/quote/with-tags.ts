@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET':
       const { data } = await supabase
         .from('book_quotes')
-        .select(`id, author_id, quote, book_authors (id, name, slug)`)
+        .select(`id, author_id, quote, book_authors (id, name, slug, image)`)
         .order('id');
       const { data: tags } = await supabase.from('book_tags').select(`id, name, slug`).order('id');
       const { data: quote_tags } = await supabase.from('book_quotes_tags').select(`*`).order('id');
