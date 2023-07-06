@@ -10,10 +10,11 @@ type Props = {
   imageSrc?: string;
   name: string;
   book?: number;
+  quote?: number;
   [props: string]: any;
 };
 
-export default function AuthorItem({ href = '#', imageSrc, name, book, ...props }: Props) {
+export default function AuthorItem({ href = '#', imageSrc, name, book, quote, ...props }: Props) {
   const [isLoading, setLoading] = useState(true);
   const sizes = `(max-width: 360px) 100vw, (max-width: 480px) 50vw, 33vw`;
 
@@ -49,8 +50,8 @@ export default function AuthorItem({ href = '#', imageSrc, name, book, ...props 
         >
           {name}
         </Text.medium>
-        <span className='line-clamp-1 px-1 text-center text-[14px] text-neutral-600 dark:text-neutral-400'>
-          {book} Published Books
+        <span className='line-clamp-1 px-1 text-center text-[14px] text-neutral-500 dark:text-neutral-400'>
+          {book > 0 ? book + ' Published book' : quote + ' Published quote'}
         </span>
       </div>
     </Link>
