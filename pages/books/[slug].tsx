@@ -129,7 +129,9 @@ export default function Books({ slug, seo }) {
                   </tr>
                 </tbody>
               </table>
-              <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.description}</p>
+              <p className='mt-4 text-justify text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
+                {data?.description}
+              </p>
 
               <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />
               <Heading h2>About the author</Heading>
@@ -177,7 +179,10 @@ export default function Books({ slug, seo }) {
                 </div>
               </div>
               {data?.book_authors?.bio ? (
-                <ShowMore count={400} className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
+                <ShowMore
+                  count={400}
+                  className='mt-4 text-justify text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'
+                >
                   {data?.book_authors?.bio}
                 </ShowMore>
               ) : null}

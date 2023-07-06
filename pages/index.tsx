@@ -245,9 +245,9 @@ export default function Home() {
                 key={item.id}
                 className={clsx('mb-4 pb-4', index != sliceQuotes.length - 1 && 'border-b dark:border-b-neutral-800')}
               >
-                <p className='mb-1 text-base'>&#8220;{item.quote}&#8221;</p>
+                <p className='mb-1 text-justify text-base'>&#8220;{item.quote}&#8221;</p>
                 <Link
-                  href={`author/${item?.book_authors?.slug}`}
+                  href={`authors/${item?.book_authors?.slug}`}
                   className={clsx(
                     'rounded text-[15px] font-medium italic transition-all duration-200',
                     'text-neutral-500 hover:text-orange-500 dark:text-neutral-300 dark:hover:text-orange-500',

@@ -115,14 +115,16 @@ export default function Authors({ slug, seo }) {
                   </tr>
                 </tbody>
               </table>
-              <p className='mt-4 text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>{data?.bio}</p>
+              <p className='mt-4 text-justify text-[15px] leading-6 text-neutral-700 dark:text-neutral-200'>
+                {data?.bio}
+              </p>
             </div>
 
             {data?.books?.length > 0 && <hr className='my-8 h-px border-0 bg-neutral-300 dark:bg-neutral-700' />}
 
             {data?.books?.length > 0 ? (
               <div className='mt-5'>
-                <Heading h3 className='mb-6'>
+                <Heading h2 className='mb-6 text-xl'>
                   {data?.name} Books
                 </Heading>
                 {data?.books?.map((item: any) => {
@@ -144,7 +146,7 @@ export default function Authors({ slug, seo }) {
 
             {data?.quotes?.length > 0 ? (
               <div className='mt-8'>
-                <Heading h3 className='mb-6'>
+                <Heading h2 className='mb-6 text-xl'>
                   {data?.name} Quotes
                 </Heading>
                 {data?.quotes.map((item: any, index: number) => {
@@ -156,7 +158,7 @@ export default function Authors({ slug, seo }) {
                         index != data?.quotes?.length - 1 && 'border-b dark:border-b-neutral-700'
                       )}
                     >
-                      <p className='text-[15px] font-medium text-neutral-900 dark:text-neutral-100'>
+                      <p className='text-justify text-[15px] font-medium text-neutral-900 dark:text-neutral-100'>
                         &#8220;{item.quote}&#8221;
                       </p>
                       <p className='mt-1 text-sm italic text-neutral-700 dark:text-neutral-300'>- {data?.name}</p>
