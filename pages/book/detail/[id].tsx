@@ -92,16 +92,15 @@ export default function Book({ id }) {
                       <p className='font-medium text-neutral-700 dark:text-neutral-200'>
                         {data?.genre_array.map((item: any, index: number) => {
                           return (
-                            <>
+                            <span key={index + 1}>
                               <Link
-                                key={index + 1}
                                 href={`/genre/detail/${item.id}`}
                                 className='rounded text-[15px] font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                               >
                                 {item.name}
                               </Link>
                               {index < data.genre_array.length - 1 ? ', ' : ''}
-                            </>
+                            </span>
                           );
                         })}
                         {data.genre_array?.length < 1 && '-'}
