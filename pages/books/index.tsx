@@ -7,7 +7,7 @@ import InputDebounce from '@components/systems/InputDebounce';
 import Button from '@components/systems/Button';
 import BookItem from '@components/front/item/BookItem';
 
-export default function Browse() {
+export default function Books() {
   const { data, error } = useBooksData();
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);

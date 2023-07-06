@@ -29,7 +29,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default function Book({ slug, seo }) {
+export default function Books({ slug, seo }) {
   const { data, error } = useBookData(null, slug);
   const [isLoading, setLoading] = useState(true);
 
