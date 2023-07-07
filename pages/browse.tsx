@@ -121,7 +121,7 @@ export default function Browse() {
 
       {search ? (
         <>
-          {!data && <Text>Searching...</Text>}
+          {!data && <Text>Searching &#8220;{search}&#8221;...</Text>}
 
           {data?.books.length < 1 && data?.authors.length < 1 ? (
             <div className='mb-12 mt-8 rounded border border-red-500 p-3'>
