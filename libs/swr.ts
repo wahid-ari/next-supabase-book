@@ -95,11 +95,8 @@ export function useTagsData() {
   return { data, error, isLoading };
 }
 
-export function useTagData(id: string, seo?: boolean) {
-  const { data, error, isLoading } = useSWR(
-    seo ? `${API_URL}/tag?id=${id}&seo=true` : `${API_URL}/tag?id=${id}`,
-    fetcher
-  );
+export function useTagData(id: string, slug?: boolean) {
+  const { data, error, isLoading } = useSWR(slug ? `${API_URL}/tag?slug=${slug}` : `${API_URL}/tag?id=${id}`, fetcher);
   return { data, error, isLoading };
 }
 
@@ -114,9 +111,9 @@ export function useGenresData() {
   return { data, error, isLoading };
 }
 
-export function useGenreData(id: string, seo?: boolean) {
+export function useGenreData(id: string, slug?: boolean) {
   const { data, error, isLoading } = useSWR(
-    seo ? `${API_URL}/genre?id=${id}&seo=true` : `${API_URL}/genre?id=${id}`,
+    slug ? `${API_URL}/genre?slug=${slug}` : `${API_URL}/genre?id=${id}`,
     fetcher
   );
   return { data, error, isLoading };
