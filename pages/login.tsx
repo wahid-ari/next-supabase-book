@@ -172,7 +172,7 @@ export default function Login() {
               {loading ? 'Logging in...' : 'Login'}
             </Button>
 
-            <p className='mt-4 text-center font-normal dark:text-neutral-800'>
+            {/* <p className='mt-4 text-center font-normal dark:text-neutral-800'>
               Dont have an account?{' '}
               <Link
                 href='/register'
@@ -180,7 +180,7 @@ export default function Login() {
               >
                 Register Now
               </Link>
-            </p>
+            </p> */}
 
             <p className='mt-2 text-center font-normal dark:text-neutral-800'>
               Continue to{' '}

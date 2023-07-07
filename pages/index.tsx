@@ -238,7 +238,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className='mt-4 divide-y dark:divide-neutral-800'>
+        <div className={clsx('mt-4', sliceQuotes && 'divide-y dark:divide-neutral-800')}>
           {sliceQuotes ? (
             sliceQuotes.map((item: any) => (
               <div key={item.id} className='py-4'>
@@ -270,7 +270,7 @@ export default function Home() {
       {/* Quotes End */}
 
       {/* Tags Start */}
-      <section className='mt-24'>
+      <section className='my-24'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
             <div className='mb-1 h-1 w-5 rounded bg-orange-500' />

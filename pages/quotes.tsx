@@ -1,14 +1,26 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import clsx from 'clsx';
+import { PhotographIcon } from '@heroicons/react/outline';
 import { useQuotesWithTagsData } from '@libs/swr';
 import FrontLayout from '@components/front/FrontLayout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import InputDebounce from '@components/systems/InputDebounce';
 import Button from '@components/systems/Button';
-import Link from 'next/link';
-import clsx from 'clsx';
-import { PhotographIcon } from '@heroicons/react/outline';
-import Image from 'next/image';
+
+function Skeleton({ children }: { children: ReactNode }) {
+  return (
+    <div className='py-2'>
+      <div className='flex items-center gap-4 pb-1'>
+        <Shimer className='!h-14 !w-14 !rounded-full' />
+        <div className='w-full'>{children}</div>
+      </div>
+      <Shimer className='!h-5 !w-[15%]' />
+    </div>
+  );
+}
 
 export default function Quotes() {
   const { data, error } = useQuotesWithTagsData();
@@ -48,7 +60,7 @@ export default function Quotes() {
         />
       </div>
 
-      <div className='mt-4 divide-y dark:divide-neutral-800'>
+      <div className={clsx('mt-4', filtered && 'divide-y dark:divide-neutral-800')}>
         {filtered ? (
           filtered.slice(0, page * 18).map((item: any) => {
             return (
@@ -110,54 +122,21 @@ export default function Quotes() {
           })
         ) : (
           <>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[50%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[60%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[70%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[80%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[100%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[50%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[60%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[70%]' />
-              </div>
-            </div>
+            <Skeleton>
+              <Shimer className={`!h-12 !w-[50%]`} />
+            </Skeleton>
+            <Skeleton>
+              <Shimer className={`!h-12 !w-[80%]`} />
+            </Skeleton>
+            <Skeleton>
+              <Shimer className={`!h-12 !w-[40%]`} />
+            </Skeleton>
+            <Skeleton>
+              <Shimer className={`!h-12 !w-[60%]`} />
+            </Skeleton>
+            <Skeleton>
+              <Shimer className={`!h-12 !w-[90%]`} />
+            </Skeleton>
           </>
         )}
       </div>

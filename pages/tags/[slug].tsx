@@ -68,7 +68,7 @@ export default function Tags({ slug, seo }) {
         />
       </div>
 
-      <div className='mt-4 divide-y dark:divide-neutral-800'>
+      <div className={clsx('mt-4', filtered && 'divide-y dark:divide-neutral-800')}>
         {filtered ? (
           filtered.slice(0, page * 18).map((item: any) => {
             return (
@@ -112,22 +112,6 @@ export default function Tags({ slug, seo }) {
                 >
                   - {item?.book_authors?.name}
                 </Link>
-                {/* <div className='mt-4 text-sm font-medium text-neutral-700 dark:text-neutral-200'>
-                  Tags :{' '}
-                  {item.tags.map((tag: any, i: number) => {
-                    return (
-                      <span key={tag.slug}>
-                        <Link
-                          href={`/tags/${tag.slug}`}
-                          className='rounded text-sm font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
-                        >
-                          {tag.name}
-                        </Link>
-                        {i < item.tags.length - 1 ? ', ' : ''}
-                      </span>
-                    );
-                  })}
-                </div> */}
               </div>
             );
           })
@@ -167,18 +151,6 @@ export default function Tags({ slug, seo }) {
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[50%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[60%]' />
-              </div>
-            </div>
-            <div className='flex items-center gap-4 py-2'>
-              <Shimer className='!h-14 !w-14 !rounded-full' />
-              <div className='w-full'>
-                <Shimer className='!h-12 !w-[70%]' />
               </div>
             </div>
           </>
