@@ -24,12 +24,27 @@ function generateSiteMap(authors: any, books: any, genres: any, tags: any) {
         <priority>0.80</priority>
       </url>
       <url>
+        <loc>${BASE_URL}/quotes</loc>
+        <lastmod>${today.toISOString()}</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
         <loc>${BASE_URL}/genres</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>0.80</priority>
       </url>
       <url>
         <loc>${BASE_URL}/tags</loc>
+        <lastmod>${today.toISOString()}</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>${BASE_URL}/browse</loc>
+        <lastmod>${today.toISOString()}</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>${BASE_URL}/login</loc>
         <lastmod>${today.toISOString()}</lastmod>
         <priority>0.80</priority>
       </url>
