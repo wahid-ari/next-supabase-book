@@ -43,7 +43,7 @@ export default function Authors({ slug, seo }) {
   }
 
   return (
-    <FrontLayout title={`${seo?.name + ' - MyBook'}`} description={`${seo?.description + ' - MyBook'}`}>
+    <FrontLayout title={`${seo?.name + ' - MyBook'}`} description={`${seo?.bio + ' - MyBook'}`}>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>{seo?.name}</Title>
       </div>

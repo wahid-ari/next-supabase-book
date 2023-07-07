@@ -90,14 +90,14 @@ export default function Browse() {
 
   if (error) {
     return (
-      <FrontLayout title='Browse - MyBook' description='Browse books - MyBook'>
+      <FrontLayout title='Browse - MyBook' description='Browse Books - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </FrontLayout>
     );
   }
 
   return (
-    <FrontLayout title='Browse - MyBook' description='Browse books - MyBook'>
+    <FrontLayout title='Browse - MyBook' description='Browse Books - MyBook'>
       <div className='py-2'>
         <Title>Search</Title>
       </div>

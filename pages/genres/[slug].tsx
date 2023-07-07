@@ -41,7 +41,7 @@ export default function Genres({ slug, seo }) {
 
   if (error) {
     return (
-      <Layout title='Book Detail - MyBook'>
+      <Layout title='Genre Detail - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );

@@ -46,14 +46,14 @@ export default function Tags({ slug, seo }) {
 
   if (error) {
     return (
-      <Layout title='Book Detail - MyBook'>
+      <Layout title='Tag Detail - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
       </Layout>
     );
   }
 
   return (
-    <FrontLayout title={`${seo?.name + ' - MyBook'}`} description={`${seo?.name + ' - MyBook'}`}>
+    <FrontLayout title={`${seo?.name + ' Quotes - MyBook'}`} description={`Browse ${seo?.name + ' Quotes - MyBook'}`}>
       <div className='flex flex-wrap items-center justify-between gap-2'>
         <Title>{seo.name} Quotes</Title>
         <InputDebounce

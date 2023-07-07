@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest) {
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
               viewBox='0 0 24 24'
-              stroke-width='3'
+              stroke-width='2'
               stroke='currentColor'
               className='h-6 w-6'
             >
