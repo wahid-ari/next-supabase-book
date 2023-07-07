@@ -48,14 +48,11 @@ export default function Quotes() {
         />
       </div>
 
-      <div className='mt-4'>
+      <div className='mt-4 divide-y dark:divide-neutral-800'>
         {filtered ? (
-          filtered.slice(0, page * 18).map((item: any, index: number) => {
+          filtered.slice(0, page * 18).map((item: any) => {
             return (
-              <div
-                key={item.id}
-                className={clsx('mb-4 pb-4', index != filtered.length - 1 && 'border-b dark:border-b-neutral-800')}
-              >
+              <div key={item.id} className='py-4'>
                 <p className='mb-1 text-justify text-base'>
                   <Link href={`/authors/${item?.author?.slug}`} className='rounded-full focus-visible:outline-none'>
                     <span className='relative float-left mr-4 h-14 w-14 overflow-hidden'>
@@ -113,49 +110,49 @@ export default function Quotes() {
           })
         ) : (
           <>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[50%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[60%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[70%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[80%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[100%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[50%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[60%]' />
               </div>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 py-2'>
               <Shimer className='!h-14 !w-14 !rounded-full' />
               <div className='w-full'>
                 <Shimer className='!h-12 !w-[70%]' />
@@ -172,7 +169,7 @@ export default function Quotes() {
       )}
 
       {query !== '' && filtered?.length < 1 && (
-        <p className='py-32 text-center'>There are no movies with name &quot;{query}&quot;</p>
+        <p className='py-32 text-center'>There are no quotes with author name &quot;{query}&quot;</p>
       )}
     </FrontLayout>
   );
