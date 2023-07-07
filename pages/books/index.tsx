@@ -66,7 +66,7 @@ export default function Books() {
       )}
 
       {query !== '' && filtered?.length < 1 && (
-        <p className='py-32 text-center'>There are no movies with name &quot;{query}&quot;</p>
+        <p className='py-32 text-center'>There are no books with name &quot;{query}&quot;</p>
       )}
     </FrontLayout>
   );
