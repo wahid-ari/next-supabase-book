@@ -1,13 +1,14 @@
-import { useState, useEffect, Fragment, ReactNode } from 'react';
+import { useState, Fragment, ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon, ChevronRightIcon, MenuIcon, XIcon, SearchIcon } from '@heroicons/react/outline';
 import ActiveLink from '@components/front/ActiveLink';
 import clsx from 'clsx';
-import ThemeChanger from './FrontThemeChanger';
-import nookies from 'nookies';
+import FrontThemeChanger from './FrontThemeChanger';
 import NavbarSearch from './NavbarSearch';
+import { useSession } from 'next-auth/react';
+import { useMounted } from '@hooks/useMounted';
 
 function CustomActiveLink({ href, children }: { href: string; children: ReactNode }) {
   return (
@@ -32,13 +33,10 @@ const activeCn = clsx(
 );
 
 export default function FrontNavbar({ className, ...props }: { className?: string; [props: string]: any }) {
-  const admin = nookies.get(null, 'name');
-  const [mounted, setMounted] = useState(false);
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { data: session, status }: { data: any; status: any } = useSession();
+  const mounted = useMounted();
   const [isShowMore, setIsShowMore] = useState(false);
+
   return (
     <Popover
       {...props}
@@ -143,9 +141,9 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
             {/* End Nav Link  */}
 
             <div className='hidden items-center gap-3 md:flex'>
-              <ThemeChanger />
-              {mounted ? (
-                admin.name ? (
+              <FrontThemeChanger />
+              {mounted && status != 'loading' ? (
+                session?.name ? (
                   <Link
                     href='/dashboard'
                     className={clsx(
@@ -170,7 +168,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                   </Link>
                 )
               ) : (
-                <span className='text-[15px] font-medium text-neutral-700 dark:text-neutral-200'>Dashboard</span>
+                <span className='text-[15px] font-medium text-neutral-700 dark:text-neutral-200'>Loading</span>
               )}
             </div>
 
@@ -218,7 +216,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 </div>
                 {/* CLose Mobile Menu Button  */}
                 <div className='mr-3 flex items-center gap-2'>
-                  <ThemeChanger />
+                  <FrontThemeChanger />
                   <Popover.Button
                     className={clsx(
                       'rounded p-1 text-gray-700 transition-all dark:text-neutral-300',
@@ -292,14 +290,14 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                 </ActiveLink>
                 {mounted && (
                   <Link
-                    href={`${admin.name ? '/dashboard' : '/login'}`}
+                    href={`${session?.name ? '/dashboard' : '/login'}`}
                     className={clsx(
                       'block rounded px-3 py-1.5 text-[15px] font-medium text-gray-600 hover:bg-gray-100',
                       'hover:text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500',
                       'dark:text-neutral-200 dark:hover:bg-neutral-800'
                     )}
                   >
-                    {admin.name ? 'Dashboard' : 'Login'}
+                    {session?.name ? 'Dashboard' : 'Login'}
                   </Link>
                 )}
               </div>

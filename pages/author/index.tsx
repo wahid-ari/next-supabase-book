@@ -13,22 +13,8 @@ import Button from '@components/systems/Button';
 import ReactTable from '@components/systems/ReactTable';
 import LinkButton from '@components/systems/LinkButton';
 import InputDebounce from '@components/systems/InputDebounce';
-import nookies from 'nookies';
 
-// export async function getServerSideProps(context: any) {
-//   const cookies = nookies.get(context);
-//   if (!cookies.token) {
-//     return {
-//       redirect: {
-//         destination: '/login',
-//       },
-//     };
-//   }
-//   return {
-//     props: {},
-//   };
-// }
-
+Author.auth = true;
 export default function Author() {
   const { data, error } = useAuthorsData();
   const { updateToast, pushToast } = useToast();

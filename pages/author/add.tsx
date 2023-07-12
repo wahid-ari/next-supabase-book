@@ -8,22 +8,8 @@ import Title from '@components/systems/Title';
 import LabeledInput from '@components/systems/LabeledInput';
 import Button from '@components/systems/Button';
 import TextArea from '@components/systems/TextArea';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
-
+Author.auth = true;
 export default function Author() {
   const { updateToast, pushToast } = useToast();
   const [createItem, setCreateItem] = useState({

@@ -12,18 +12,9 @@ import Shimer from '@components/systems/Shimer';
 import Label from '@components/systems/Label';
 import Select from 'react-select';
 import SearchBox from '@components/systems/SearchBox';
-import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
   return {
     props: {
       id: id,
@@ -31,6 +22,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
+Quote.auth = true;
 export default function Quote({ id }) {
   const { data, error } = useQuoteData(id);
   const { data: authors, error: errorAuthors } = useAuthorsData();

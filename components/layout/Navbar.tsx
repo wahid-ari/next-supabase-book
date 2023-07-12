@@ -5,12 +5,12 @@ import { GlobalContext } from 'context/GlobalContext';
 import Menu from './Menu';
 import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
-import nookies from 'nookies';
+import { useSession } from 'next-auth/react';
 import { useMounted } from '@hooks/useMounted';
 
 export default function Navbar({ className, ...props }: { className?: string; [props: string]: any }) {
   const { setShowNav } = useContext(GlobalContext);
-  const admin = nookies.get(null, 'name');
+  const { data: session, status }: { data: any; status: any } = useSession();
   const mounted = useMounted();
 
   const showMenu = () => {
@@ -55,7 +55,7 @@ export default function Navbar({ className, ...props }: { className?: string; [p
           <ThemeChanger />
         </div>
 
-        {mounted && admin.name ? <Menu className='lg:hidden' /> : null}
+        {mounted && session?.name ? <Menu className='lg:hidden' /> : null}
       </div>
     </div>
   );

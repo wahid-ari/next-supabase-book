@@ -13,23 +13,9 @@ import Dialog from '@components/systems/Dialog';
 import Button from '@components/systems/Button';
 import LabeledInput from '@components/systems/LabeledInput';
 import InputDebounce from '@components/systems/InputDebounce';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {},
-  };
-}
-
-export default function Tags() {
+Tag.auth = true;
+export default function Tag() {
   const { data, error } = useTagsData();
   const { updateToast, pushToast } = useToast();
   const [openCreateDialog, setOpenCreateDialog] = useState(false);

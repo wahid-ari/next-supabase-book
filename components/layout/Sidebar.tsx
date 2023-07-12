@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { GlobalContext } from 'context/GlobalContext';
 import {
   XIcon,
@@ -27,15 +26,11 @@ import NavAccordion from '@components/layout/NavAccordion';
 import Modal from '@components/systems/Modal';
 import clsx from 'clsx';
 import ThemeChanger from './ThemeChanger';
-import nookies from 'nookies';
-import { useMounted } from '@hooks/useMounted';
 
 export default function Sidebar({ className, ...props }: { className?: string; [props: string]: any }) {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const { showNav, setShowNav } = useContext(GlobalContext);
-  const admin = nookies.get(null, 'type');
-  const mounted = useMounted();
 
   const hideMenu = () => {
     setShowNav(false);
@@ -157,34 +152,18 @@ export default function Sidebar({ className, ...props }: { className?: string; [
 
         <hr className='mt-2 dark:border-neutral-800' />
         <div className='px-3 py-2'>
-          {mounted ? (
-            admin.name ? (
-              <button
-                data-testid='button-logout'
-                onClick={() => setOpenModal(true)}
-                className={clsx(
-                  'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
-                  'rounded text-red-600 hover:bg-red-100 dark:hover:bg-neutral-800',
-                  'focus-visible:outline-none focus-visible:ring focus-visible:ring-red-500'
-                )}
-              >
-                <LogoutIcon className='h-4 w-4' />
-                Logout
-              </button>
-            ) : (
-              <Link
-                href='/login'
-                className={clsx(
-                  'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
-                  'rounded text-orange-600 hover:bg-orange-100 dark:hover:bg-neutral-800',
-                  'focus-visible:outline-none focus-visible:ring focus-visible:ring-orange-500'
-                )}
-              >
-                <LoginIcon className='h-4 w-4' />
-                Login
-              </Link>
-            )
-          ) : null}
+          <button
+            data-testid='button-logout'
+            onClick={() => setOpenModal(true)}
+            className={clsx(
+              'flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-semibold transition-all',
+              'rounded text-red-600 hover:bg-red-100 dark:hover:bg-neutral-800',
+              'focus-visible:outline-none focus-visible:ring focus-visible:ring-red-500'
+            )}
+          >
+            <LogoutIcon className='h-4 w-4' />
+            Logout
+          </button>
         </div>
       </div>
       <Modal

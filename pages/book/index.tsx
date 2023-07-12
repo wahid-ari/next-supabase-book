@@ -15,22 +15,8 @@ import LinkButton from '@components/systems/LinkButton';
 import InputDebounce from '@components/systems/InputDebounce';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import clsx from 'clsx';
-import nookies from 'nookies';
 
-// export async function getServerSideProps(context: any) {
-//   const cookies = nookies.get(context);
-//   if (!cookies.token) {
-//     return {
-//       redirect: {
-//         destination: '/login',
-//       },
-//     };
-//   }
-//   return {
-//     props: {},
-//   };
-// }
-
+Book.auth = true;
 export default function Book() {
   const { data, error } = useBooksData();
   const { updateToast, pushToast } = useToast();

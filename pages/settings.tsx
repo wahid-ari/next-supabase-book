@@ -3,6 +3,7 @@ import Text from '@components/systems/Text';
 import Title from '@components/systems/Title';
 import { useTheme } from 'next-themes';
 
+Settings.auth = true;
 export default function Settings() {
   const { theme, setTheme } = useTheme();
 

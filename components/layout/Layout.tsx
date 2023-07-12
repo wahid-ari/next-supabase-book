@@ -4,9 +4,9 @@ import Breadcrumb from '@components/layout/Breadcrumb';
 import Navbar from './Navbar';
 import Menu from './Menu';
 import clsx from 'clsx';
-import nookies from 'nookies';
 import HeadSeo from './HeadSeo';
 import { useMounted } from '@hooks/useMounted';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   children: ReactNode;
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function Layout({ children, title, description, prefetch, ...props }: Props) {
-  const admin = nookies.get(null, 'name');
+  const { data: session, status }: { data: any; status: any } = useSession();
   const mounted = useMounted();
 
   return (
@@ -54,7 +54,7 @@ export default function Layout({ children, title, description, prefetch, ...prop
           >
             <Breadcrumb />
 
-            {mounted && admin.name ? <Menu /> : null}
+            {mounted && session?.name ? <Menu /> : null}
           </div>
 
           <div className='px-5 py-5'>{children}</div>

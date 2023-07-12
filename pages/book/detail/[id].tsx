@@ -8,18 +8,9 @@ import Shimer from '@components/systems/Shimer';
 import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
 import Heading from '@components/systems/Heading';
 import ShowMore from '@components/systems/ShowMore';
-import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
   return {
     props: {
       id: id,
@@ -27,6 +18,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
+Book.auth = true;
 export default function Book({ id }) {
   const { data, error } = useBookData(id);
   const [isLoading, setLoading] = useState(true);

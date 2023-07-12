@@ -9,19 +9,10 @@ import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import LabeledInput from '@components/systems/LabeledInput';
 import Button from '@components/systems/Button';
-import nookies from 'nookies';
 import TextArea from '@components/systems/TextArea';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
   return {
     props: {
       id: id,
@@ -29,6 +20,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
+Author.auth = true;
 export default function Author({ id }) {
   const { data, error } = useAuthorData(id);
   const { updateToast, pushToast } = useToast();

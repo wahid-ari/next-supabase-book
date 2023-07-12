@@ -9,7 +9,6 @@ import Shimer from '@components/systems/Shimer';
 import Heading from '@components/systems/Heading';
 import ShowMore from '@components/systems/ShowMore';
 import FrontLayout from '@components/front/FrontLayout';
-import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   // https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props#caching-with-server-side-rendering-ssr

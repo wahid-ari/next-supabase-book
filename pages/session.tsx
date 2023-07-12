@@ -11,22 +11,8 @@ import Button from '@components/systems/Button';
 import { TrashIcon } from '@heroicons/react/outline';
 import Dialog from '@components/systems/Dialog';
 import useToast from '@hooks/useToast';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {},
-  };
-}
-
+Sessions.auth = true;
 export default function Sessions() {
   const { data, error } = useSessionsData();
   const { updateToast, pushToast } = useToast();
@@ -112,6 +98,7 @@ export default function Sessions() {
               <TableSimple.td shrink>No</TableSimple.td>
               <TableSimple.td shrink>ID</TableSimple.td>
               <TableSimple.td>Name</TableSimple.td>
+              <TableSimple.td>Token</TableSimple.td>
               <TableSimple.td shrink>Date</TableSimple.td>
               <TableSimple.td shrink>Time</TableSimple.td>
             </>
@@ -123,6 +110,7 @@ export default function Sessions() {
                 <TableSimple.td shrink>{index + 1}</TableSimple.td>
                 <TableSimple.td>{item.user_id}</TableSimple.td>
                 <TableSimple.td>{item.book_users.name}</TableSimple.td>
+                <TableSimple.td>{item.token.split('.')[2]}</TableSimple.td>
                 <TableSimple.td>{item.created_at.split('T')[0]}</TableSimple.td>
                 <TableSimple.td>{getTime(item.created_at)}</TableSimple.td>
               </TableSimple.tr>

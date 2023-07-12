@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
@@ -9,7 +8,6 @@ import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import Heading from '@components/systems/Heading';
 import FrontLayout from '@components/front/FrontLayout';
-import nookies from 'nookies';
 import AuthorBookItem from '@components/front/item/AuthorBookItem';
 
 export async function getServerSideProps(context: any) {

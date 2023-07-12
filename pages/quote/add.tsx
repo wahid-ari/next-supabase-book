@@ -12,22 +12,8 @@ import Shimer from '@components/systems/Shimer';
 import Label from '@components/systems/Label';
 import Select from 'react-select';
 import SearchBox from '@components/systems/SearchBox';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
-
+Quote.auth = true;
 export default function Quote() {
   const { data: authors, error: errorAuthors } = useAuthorsData();
   const { data: tags, error: errorTags } = useTagsData();

@@ -3,18 +3,9 @@ import { useQuoteData } from '@libs/swr';
 import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
-import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
   return {
     props: {
       id: id,
@@ -22,6 +13,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
+Quote.auth = true;
 export default function Quote({ id }) {
   const { data, error } = useQuoteData(id);
 

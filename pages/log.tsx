@@ -6,22 +6,8 @@ import Shimer from '@components/systems/Shimer';
 import InputDebounce from '@components/systems/InputDebounce';
 import ReactTable from '@components/systems/ReactTable';
 import Badge from '@components/systems/Badge';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {},
-  };
-}
-
+Log.auth = true;
 export default function Log() {
   const { data, error } = useLogsData();
   const [inputDebounceValue, setInputDebounceValue] = useState('');

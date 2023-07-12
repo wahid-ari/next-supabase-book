@@ -10,7 +10,6 @@ import Shimer from '@components/systems/Shimer';
 import FrontLayout from '@components/front/FrontLayout';
 import InputDebounce from '@components/systems/InputDebounce';
 import Button from '@components/systems/Button';
-import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   // https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props#caching-with-server-side-rendering-ssr

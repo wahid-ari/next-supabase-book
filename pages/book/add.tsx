@@ -13,22 +13,8 @@ import SearchBox from '@components/systems/SearchBox';
 import Shimer from '@components/systems/Shimer';
 import Label from '@components/systems/Label';
 import Select from 'react-select';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
-
+Book.auth = true;
 export default function Book() {
   const { data: authors, error: errorAuthors } = useAuthorsData();
   const { data: genres, error: errorGenres } = useGenresData();

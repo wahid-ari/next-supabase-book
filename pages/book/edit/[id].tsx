@@ -13,18 +13,9 @@ import TextArea from '@components/systems/TextArea';
 import Label from '@components/systems/Label';
 import SearchBox from '@components/systems/SearchBox';
 import Select from 'react-select';
-import nookies from 'nookies';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
   return {
     props: {
       id: id,
@@ -32,6 +23,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
+Book.auth = true;
 export default function Book({ id }) {
   const { data, error } = useBookData(id);
   const { data: authors, error: errorAuthors } = useAuthorsData();

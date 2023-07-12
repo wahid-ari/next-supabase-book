@@ -13,22 +13,8 @@ import Dialog from '@components/systems/Dialog';
 import Button from '@components/systems/Button';
 import LabeledInput from '@components/systems/LabeledInput';
 import InputDebounce from '@components/systems/InputDebounce';
-import nookies from 'nookies';
 
-// export async function getServerSideProps(context: any) {
-//   const cookies = nookies.get(context);
-//   if (!cookies.token) {
-//     return {
-//       redirect: {
-//         destination: '/login',
-//       },
-//     };
-//   }
-//   return {
-//     props: {},
-//   };
-// }
-
+Genre.auth = true;
 export default function Genre() {
   const { data, error } = useGenresData();
   const { updateToast, pushToast } = useToast();

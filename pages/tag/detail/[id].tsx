@@ -8,25 +8,8 @@ import ReactTable from '@components/systems/ReactTable';
 import LabeledInput from '@components/systems/LabeledInput';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import clsx from 'clsx';
-import nookies from 'nookies';
 
-export async function getServerSideProps(context: any) {
-  const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
-  return {
-    props: {
-      id: id,
-    }, // will be passed to the page component as props
-  };
-}
-
+Tag.auth = true;
 export default function Tag({ id }) {
   const { data, error } = useTagData(id);
 

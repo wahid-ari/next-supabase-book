@@ -5,21 +5,12 @@ import { ExternalLinkIcon, PhotographIcon } from '@heroicons/react/outline';
 import Layout from '@components/layout/Layout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
-import nookies from 'nookies';
 import Heading from '@components/systems/Heading';
 import Link from 'next/link';
 import clsx from 'clsx';
 
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
-  // const cookies = nookies.get(context);
-  // if (!cookies.token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //   };
-  // }
   return {
     props: {
       id: id,
@@ -27,6 +18,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
+Author.auth = true;
 export default function Author({ id }) {
   const { data, error } = useAuthorData(id);
   const [isLoading, setLoading] = useState(true);
