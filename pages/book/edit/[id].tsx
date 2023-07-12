@@ -278,9 +278,9 @@ export default function Book({ id }) {
               placeholder='https://www.goodreads.com/book/show/2767052-the-hunger-games'
             />
 
-            <Button.success onClick={handleEdit} className='mt-3.5 w-full'>
+            <Button onClick={handleEdit} className='mt-3.5 w-full'>
               Update
-            </Button.success>
+            </Button>
           </div>
         </div>
       ) : (
