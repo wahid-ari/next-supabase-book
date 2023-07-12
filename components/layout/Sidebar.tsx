@@ -140,14 +140,14 @@ export default function Sidebar({ className, ...props }: { className?: string; [
             Docs
           </a>
 
-          <NavAccordion title='Design' routeName='design' icon={<TemplateIcon className='h-4 w-4' />}>
+          {/* <NavAccordion title='Design' routeName='design' icon={<TemplateIcon className='h-4 w-4' />}>
             <NavLink href='/design/component' icon={<ViewGridAddIcon className='h-4 w-4' />}>
               Component
             </NavLink>
             <NavLink href='/design/layout' className='mt-1.5' icon={<ViewBoardsIcon className='h-4 w-4' />}>
               Layout
             </NavLink>
-          </NavAccordion>
+          </NavAccordion> */}
         </div>
 
         <hr className='mt-2 dark:border-neutral-800' />
