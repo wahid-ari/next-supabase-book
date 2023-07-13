@@ -1,6 +1,5 @@
 import { useState, useRef, useMemo } from 'react';
 import Link from 'next/link';
-import { mutate } from 'swr';
 import { useAuthorsData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -16,7 +15,7 @@ import InputDebounce from '@components/systems/InputDebounce';
 
 Author.auth = true;
 export default function Author() {
-  const { data, error } = useAuthorsData();
+  const { data, error, mutate } = useAuthorsData();
   const { updateToast, pushToast } = useToast();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteItem, setDeleteItem] = useState({ id: null, name: '' });
@@ -38,7 +37,7 @@ export default function Author() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/author`);
+      mutate();
     }
   }
 

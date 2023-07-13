@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import { useAuthorsData, useGenresData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -18,6 +18,7 @@ Book.auth = true;
 export default function Book() {
   const { data: authors, error: errorAuthors } = useAuthorsData();
   const { data: genres, error: errorGenres } = useGenresData();
+  const { mutate } = useSWRConfig();
   const { updateToast, pushToast } = useToast();
   const [createItem, setCreateItem] = useState({
     author_id: null,

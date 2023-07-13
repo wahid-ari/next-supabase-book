@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { mutate } from 'swr';
 import { useGenresData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -16,7 +15,7 @@ import InputDebounce from '@components/systems/InputDebounce';
 
 Genre.auth = true;
 export default function Genre() {
-  const { data, error } = useGenresData();
+  const { data, error, mutate } = useGenresData();
   const { updateToast, pushToast } = useToast();
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -49,7 +48,7 @@ export default function Genre() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
+      mutate();
     }
   }
 
@@ -69,7 +68,7 @@ export default function Genre() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
+      mutate();
     }
   }
 
@@ -89,7 +88,7 @@ export default function Genre() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`);
+      mutate();
     }
   }
 

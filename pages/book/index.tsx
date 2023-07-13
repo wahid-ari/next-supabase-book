@@ -1,6 +1,5 @@
 import { useState, useRef, useMemo } from 'react';
 import Link from 'next/link';
-import { mutate } from 'swr';
 import { useBooksData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -18,7 +17,7 @@ import clsx from 'clsx';
 
 Book.auth = true;
 export default function Book() {
-  const { data, error } = useBooksData();
+  const { data, error, mutate } = useBooksData();
   const { updateToast, pushToast } = useToast();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteItem, setDeleteItem] = useState({ id: null, name: '' });
@@ -40,7 +39,7 @@ export default function Book() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book`);
+      mutate();
     }
   }
 

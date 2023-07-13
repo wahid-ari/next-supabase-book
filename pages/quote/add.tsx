@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import { useAuthorsData, useTagsData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -17,6 +17,7 @@ Quote.auth = true;
 export default function Quote() {
   const { data: authors, error: errorAuthors } = useAuthorsData();
   const { data: tags, error: errorTags } = useTagsData();
+  const { mutate } = useSWRConfig();
   const { updateToast, pushToast } = useToast();
   const [createItem, setCreateItem] = useState({
     quote: '',

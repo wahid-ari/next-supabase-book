@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import { useAuthorsData, useBookData, useGenresData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -25,9 +25,10 @@ export async function getServerSideProps(context: any) {
 
 Book.auth = true;
 export default function Book({ id }) {
-  const { data, error } = useBookData(id);
+  const { data, error, mutate: mutateBook } = useBookData(id);
   const { data: authors, error: errorAuthors } = useAuthorsData();
   const { data: genres, error: errorGenres } = useGenresData();
+  const { mutate } = useSWRConfig();
   const { updateToast, pushToast } = useToast();
   const [editItem, setEditItem] = useState({
     author_id: null,
@@ -132,7 +133,7 @@ export default function Book({ id }) {
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book`);
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/book?id=${id}`);
+      mutateBook();
     }
   }
 

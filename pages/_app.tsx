@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: CustomAppPro
       (splitUrl[1] == 'books' || splitUrl[1] == 'authors' || splitUrl[1] == 'genres' || splitUrl[1] == 'tags') &&
       splitUrl.length > 2;
     // Show progress only in Detail Pages
-    if (splitUrl.includes('detail') || isDetail) {
+    if (splitUrl.includes('detail') || splitUrl.includes('edit') || isDetail) {
       NProgress.start();
     }
   }

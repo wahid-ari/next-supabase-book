@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import { useQuoteData, useAuthorsData, useTagsData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -24,9 +24,10 @@ export async function getServerSideProps(context: any) {
 
 Quote.auth = true;
 export default function Quote({ id }) {
-  const { data, error } = useQuoteData(id);
+  const { data, error, mutate: mutateQuote } = useQuoteData(id);
   const { data: authors, error: errorAuthors } = useAuthorsData();
   const { data: tags, error: errorTags } = useTagsData();
+  const { mutate } = useSWRConfig();
   const { updateToast, pushToast } = useToast();
   const [editItem, setEditItem] = useState({
     quote: '',
@@ -118,7 +119,7 @@ export default function Quote({ id }) {
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/quote`);
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/quote?id=${id}`);
+      mutateQuote();
     }
   }
 

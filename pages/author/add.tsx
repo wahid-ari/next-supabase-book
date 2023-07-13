@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
 import Layout from '@components/layout/Layout';
@@ -11,6 +11,7 @@ import TextArea from '@components/systems/TextArea';
 
 Author.auth = true;
 export default function Author() {
+  const { mutate } = useSWRConfig();
   const { updateToast, pushToast } = useToast();
   const [createItem, setCreateItem] = useState({
     name: '',

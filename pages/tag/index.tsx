@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { mutate } from 'swr';
 import { useTagsData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -16,7 +15,7 @@ import InputDebounce from '@components/systems/InputDebounce';
 
 Tag.auth = true;
 export default function Tag() {
-  const { data, error } = useTagsData();
+  const { data, error, mutate } = useTagsData();
   const { updateToast, pushToast } = useToast();
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -49,7 +48,7 @@ export default function Tag() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/tag`);
+      mutate();
     }
   }
 
@@ -69,7 +68,7 @@ export default function Tag() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/tag`);
+      mutate();
     }
   }
 
@@ -89,7 +88,7 @@ export default function Tag() {
       console.error(error);
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/tag`);
+      mutate();
     }
   }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import { useAuthorData } from '@libs/swr';
 import axios from 'axios';
 import useToast from '@hooks/useToast';
@@ -22,7 +22,8 @@ export async function getServerSideProps(context: any) {
 
 Author.auth = true;
 export default function Author({ id }) {
-  const { data, error } = useAuthorData(id);
+  const { data, error, mutate: mutateAuthor } = useAuthorData(id);
+  const { mutate } = useSWRConfig();
   const { updateToast, pushToast } = useToast();
   const [editItem, setEditItem] = useState({
     name: '',
@@ -63,7 +64,7 @@ export default function Author({ id }) {
       updateToast({ toastId, message: error?.response?.data?.error, isError: true });
     } finally {
       mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/author`);
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/author?id=${id}`);
+      mutateAuthor();
     }
   }
 
