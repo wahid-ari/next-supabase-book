@@ -6,43 +6,43 @@ const API_URL = `${process.env.NEXT_PUBLIC_API_ROUTE}/api`;
 
 // get total record count on each table for dashboard
 export function useCountsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 // get total books record count for dashboard
 export function useTotalBooksData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-books`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-books`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 // get total authors record count for dashboard
 export function useTotalAuthorsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-authors`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-authors`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 // get total genres record count for dashboard
 export function useTotalGenresData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-genres`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-genres`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 // get total quotes record count for dashboard
 export function useTotalQuotesData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-quotes`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-quotes`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 // get total tags record count for dashboard
 export function useTotalTagsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-tags`, fetcher);
+  const { data, error, isLoading } = useSWR(`${API_URL}/dashboard/total-tags`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading };
 }
 
 // all books
 export function useBooksData() {
-  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/book`, fetcher);
+  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/book`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading, mutate };
 }
 
@@ -50,36 +50,22 @@ export function useBooksData() {
 export function useBookData(id: string, slug?: string) {
   const { data, error, isLoading, mutate } = useSWR(
     slug ? `${API_URL}/book?slug=${slug}` : `${API_URL}/book?id=${id}`,
-    fetcher
+    fetcher,
+    { refreshInterval: 1000 }
   );
   return { data, error, isLoading, mutate };
 }
 
-export function useQuotesData() {
-  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/quote`, fetcher);
-  return { data, error, isLoading, mutate };
-}
-
-// get all Quotes with all Tags in each Quote
-export function useQuotesWithTagsData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/quote/with-tags`, fetcher);
-  return { data, error, isLoading };
-}
-
-export function useQuoteData(id: string) {
-  const { data, error, isLoading, mutate } = useSWR(id ? `${API_URL}/quote?id=${id}` : `${API_URL}/quote`, fetcher);
-  return { data, error, isLoading, mutate };
-}
-
 export function useAuthorsData() {
-  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/author`, fetcher);
+  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/author`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading, mutate };
 }
 
 export function useAuthorData(id: string, slug?: string) {
   const { data, error, isLoading, mutate } = useSWR(
     slug ? `${API_URL}/author?slug=${slug}` : `${API_URL}/author?id=${id}`,
-    fetcher
+    fetcher,
+    { refreshInterval: 1000 }
   );
   return { data, error, isLoading, mutate };
 }
@@ -90,27 +76,26 @@ export function useAuthorTotalBookQuoteData() {
   return { data, error, isLoading };
 }
 
-export function useTagsData() {
-  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/tag`, fetcher);
+export function useQuotesData() {
+  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/quote`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading, mutate };
 }
 
-export function useTagData(id: string, slug?: boolean) {
-  const { data, error, isLoading, mutate } = useSWR(
-    slug ? `${API_URL}/tag?slug=${slug}` : `${API_URL}/tag?id=${id}`,
-    fetcher
-  );
-  return { data, error, isLoading, mutate };
-}
-
-// get total Quote in each Tag
-export function useTagTotalQuoteData() {
-  const { data, error, isLoading } = useSWR(`${API_URL}/tag/total-quote`, fetcher);
+// get all Quotes with all Tags in each Quote
+export function useQuotesWithTagsData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/quote/with-tags`, fetcher);
   return { data, error, isLoading };
 }
 
+export function useQuoteData(id: string) {
+  const { data, error, isLoading, mutate } = useSWR(id ? `${API_URL}/quote?id=${id}` : `${API_URL}/quote`, fetcher, {
+    refreshInterval: 1000,
+  });
+  return { data, error, isLoading, mutate };
+}
+
 export function useGenresData() {
-  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/genre`, fetcher);
+  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/genre`, fetcher, { refreshInterval: 1000 });
   return { data, error, isLoading, mutate };
 }
 
@@ -125,6 +110,25 @@ export function useGenreData(id: string, slug?: boolean) {
 // get total Book in each Genre
 export function useGenreTotalBookData() {
   const { data, error, isLoading } = useSWR(`${API_URL}/genre/total-book`, fetcher);
+  return { data, error, isLoading };
+}
+
+export function useTagsData() {
+  const { data, error, isLoading, mutate } = useSWR(`${API_URL}/tag`, fetcher, { refreshInterval: 1000 });
+  return { data, error, isLoading, mutate };
+}
+
+export function useTagData(id: string, slug?: boolean) {
+  const { data, error, isLoading, mutate } = useSWR(
+    slug ? `${API_URL}/tag?slug=${slug}` : `${API_URL}/tag?id=${id}`,
+    fetcher
+  );
+  return { data, error, isLoading, mutate };
+}
+
+// get total Quote in each Tag
+export function useTagTotalQuoteData() {
+  const { data, error, isLoading } = useSWR(`${API_URL}/tag/total-quote`, fetcher);
   return { data, error, isLoading };
 }
 
