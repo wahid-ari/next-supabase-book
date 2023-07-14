@@ -7,9 +7,9 @@ import TableSimple from '@components/systems/TableSimple';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import InputDebounce from '@components/systems/InputDebounce';
-import Button from '@components/systems/Button';
-import { TrashIcon } from '@heroicons/react/outline';
-import Dialog from '@components/systems/Dialog';
+// import Button from '@components/systems/Button';
+// import { TrashIcon } from '@heroicons/react/outline';
+// import Dialog from '@components/systems/Dialog';
 import useToast from '@hooks/useToast';
 
 Sessions.auth = true;
@@ -17,7 +17,7 @@ export default function Sessions() {
   const { data, error } = useSessionsData();
   const { updateToast, pushToast } = useToast();
   const [inputDebounceValue, setInputDebounceValue] = useState('');
-  const [openDeleteAllDialog, setOpenDeleteAllDialog] = useState(false);
+  // const [openDeleteAllDialog, setOpenDeleteAllDialog] = useState(false);
 
   const filteredData =
     inputDebounceValue === ''
@@ -29,24 +29,24 @@ export default function Sessions() {
             .includes(inputDebounceValue.toLowerCase().replace(/\s+/g, ''))
         );
 
-  async function handleDeleteAll() {
-    const toastId = pushToast({
-      message: `Deleting All Session`,
-      isLoading: true,
-    });
-    try {
-      const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/session`);
-      if (res.status == 200) {
-        setOpenDeleteAllDialog(false);
-        updateToast({ toastId, message: res?.data?.message, isError: false });
-      }
-    } catch (error) {
-      console.error(error);
-      updateToast({ toastId, message: error?.response?.data?.error, isError: true });
-    } finally {
-      mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/session`);
-    }
-  }
+  // async function handleDeleteAll() {
+  //   const toastId = pushToast({
+  //     message: `Deleting All Session`,
+  //     isLoading: true,
+  //   });
+  //   try {
+  //     const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/session`);
+  //     if (res.status == 200) {
+  //       setOpenDeleteAllDialog(false);
+  //       updateToast({ toastId, message: res?.data?.message, isError: false });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     updateToast({ toastId, message: error?.response?.data?.error, isError: true });
+  //   } finally {
+  //     mutate(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/session`);
+  //   }
+  // }
 
   function getTime(date: string) {
     let time = new Date(date);
@@ -65,13 +65,13 @@ export default function Sessions() {
     <Layout title='Sessions - MyBook' prefetch={['/api/session']}>
       <div className='mb-4 flex flex-wrap items-center justify-between gap-y-3'>
         <Title>Sessions</Title>
-        <Button.danger onClick={() => setOpenDeleteAllDialog(true)} className='flex items-center gap-2'>
+        {/* <Button.danger onClick={() => setOpenDeleteAllDialog(true)} className='flex items-center gap-2'>
           <TrashIcon className='h-5 w-5' />
           Delete All
-        </Button.danger>
+        </Button.danger> */}
       </div>
 
-      <Dialog
+      {/* <Dialog
         title='Delete All Session'
         open={openDeleteAllDialog}
         isDanger
@@ -80,7 +80,7 @@ export default function Sessions() {
         onConfirm={handleDeleteAll}
       >
         <div className='mt-5 text-center sm:text-left'>Are you sure want to delete All Session ?</div>
-      </Dialog>
+      </Dialog> */}
 
       <InputDebounce
         label='Search'
