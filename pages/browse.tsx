@@ -185,8 +185,8 @@ export default function Browse() {
 
               {booksHistory?.length > 0 ? (
                 <>
-                  <div className='mt-6 flex items-center justify-between'>
-                    <Heading h2 className='!text-[18px]'>
+                  <div className='mb-4 mt-6 flex items-center justify-between'>
+                    <Heading h2 className='!mb-0 !text-[18px] '>
                       Books
                     </Heading>
                     <button
@@ -212,8 +212,8 @@ export default function Browse() {
 
               {authorsHistory?.length > 0 ? (
                 <>
-                  <div className='mt-8 flex items-center justify-between'>
-                    <Heading h2 className='!text-[18px]'>
+                  <div className='mb-4 mt-8 flex items-center justify-between'>
+                    <Heading h2 className='!mb-0 !text-[18px] '>
                       Authors
                     </Heading>
                     <button

@@ -247,7 +247,7 @@ export default function Home() {
                   href={`authors/${item?.book_authors?.slug}`}
                   className={clsx(
                     'rounded text-[15px] font-medium italic transition-all duration-200',
-                    'text-neutral-500 hover:text-orange-500 dark:text-neutral-300 dark:hover:text-orange-500',
+                    'text-orange-500 hover:text-orange-600 dark:text-orange-500 dark:hover:text-orange-600',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                   )}
                 >

@@ -19,8 +19,8 @@ export default function BookItem({ href = '#', imageSrc, title, author, ...props
 
   return (
     <Link href={href} className='group rounded focus-visible:outline-none' {...props}>
-      <div className='h-[304px] rounded border shadow dark:border-neutral-800 sm:h-[354px]'>
-        <div className='relative h-52 w-full overflow-hidden sm:h-64'>
+      <div className='h-[316px] rounded border shadow dark:border-neutral-800 sm:h-[354px]'>
+        <div className='relative h-56 w-full overflow-hidden sm:h-64'>
           {imageSrc ? (
             <Image
               title={title}
