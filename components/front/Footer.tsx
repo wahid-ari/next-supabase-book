@@ -83,6 +83,11 @@ export default function Footer({ className, ...props }: { className?: string; [p
                     Browse
                   </Link>
                 </li>
+                <li className='mb-2'>
+                  <Link href='/login' className={linkClassName}>
+                    Login
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

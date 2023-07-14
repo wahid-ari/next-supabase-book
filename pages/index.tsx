@@ -61,7 +61,7 @@ export default function Home() {
             <Link
               href='#section-books'
               className={clsx(
-                'group inline-flex items-center gap-2 rounded-lg border border-orange-500 px-6 py-2 font-semibold transition-all',
+                'group inline-flex items-center gap-2 rounded-lg border-2 border-orange-500 px-6 py-2 font-semibold transition-all',
                 'hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
               )}
