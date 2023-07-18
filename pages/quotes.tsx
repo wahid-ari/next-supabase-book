@@ -3,12 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { PhotographIcon } from '@heroicons/react/outline';
-import { useQuotesWithTagsData } from '@libs/swr';
+import { useQuotesWithTagsData, useTagsData } from '@libs/swr';
 import FrontLayout from '@components/front/FrontLayout';
 import Title from '@components/systems/Title';
 import Shimer from '@components/systems/Shimer';
 import InputDebounce from '@components/systems/InputDebounce';
 import Button from '@components/systems/Button';
+import SearchBox from '@components/systems/SearchBox';
 
 function Skeleton({ children }: { children: ReactNode }) {
   return (
@@ -24,19 +25,38 @@ function Skeleton({ children }: { children: ReactNode }) {
 
 export default function Quotes() {
   const { data, error } = useQuotesWithTagsData();
+  const { data: tagsData, error: errorTagsData } = useTagsData();
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [selectedTag, setSelectedTag] = useState(null);
+  const [queryTag, setQueryTag] = useState('');
+  const filteredTag =
+    queryTag === ''
+      ? tagsData
+      : tagsData.filter((item: any) =>
+          item.name.toLowerCase().replace(/\s+/g, '').includes(queryTag.toLowerCase().replace(/\s+/g, ''))
+        );
   const filtered =
     query === ''
       ? data
       : data.filter((item: any) =>
           item.author.name.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
         );
-  let lastPage = page > filtered?.length / 18;
+
+  let filteredQuotebyTag = [];
+  filtered?.filter((item: any) => {
+    item.tags.forEach((tag: any) => {
+      if (tag.id == selectedTag?.id) {
+        filteredQuotebyTag.push(item);
+      }
+    });
+  });
+  const filteredSearched = selectedTag == null ? filtered : filteredQuotebyTag;
+  let lastPage = page > filteredSearched?.length / 18;
   const [isLoading, setLoading] = useState(true);
   const sizes = `(max-width: 360px) 100vw, (max-width: 480px) 50vw, 33vw`;
 
-  if (error) {
+  if (error || errorTagsData) {
     return (
       <FrontLayout title='Quotes - MyBook' description='Browse Quotes - MyBook'>
         <div className='flex h-[36rem] items-center justify-center text-base'>Failed to load</div>
@@ -48,21 +68,38 @@ export default function Quotes() {
     <FrontLayout title='Quotes - MyBook' description='Browse Quotes - MyBook'>
       <div className='flex flex-wrap items-center justify-between gap-2'>
         <Title>Quotes</Title>
-        <InputDebounce
-          id='search'
-          name='search'
-          wrapperClassName='pt-2'
-          placeholder='Search by Author'
-          className='max-w-xs !py-2'
-          debounce={500}
-          value={query}
-          onChange={(value) => setQuery(value)}
-        />
+        <div className='flex gap-2 pt-2'>
+          <div>
+            {filteredTag ? (
+              <SearchBox
+                value={selectedTag}
+                placeholder='Tag'
+                onChange={setSelectedTag}
+                onChangeQuery={(e) => setQueryTag(e.target.value)}
+                afterLeave={() => setQueryTag('')}
+                filtered={filteredTag}
+                query={queryTag}
+                boxClassName='h-[33px]'
+              />
+            ) : (
+              <Shimer className='mt-2 !h-9 !w-56' />
+            )}
+          </div>
+          <InputDebounce
+            id='search'
+            name='search'
+            placeholder='Author'
+            className='max-w-xs !py-2'
+            debounce={500}
+            value={query}
+            onChange={(value) => setQuery(value)}
+          />
+        </div>
       </div>
 
       <div className={clsx('mt-4', filtered && 'divide-y dark:divide-neutral-800')}>
-        {filtered ? (
-          filtered.slice(0, page * 18).map((item: any) => {
+        {filteredSearched ? (
+          filteredSearched.slice(0, page * 18).map((item: any) => {
             return (
               <div key={item.id} className='py-4'>
                 <p className='mb-1 text-justify text-base'>
@@ -147,8 +184,14 @@ export default function Quotes() {
         </div>
       )}
 
-      {query !== '' && filtered?.length < 1 && (
+      {query !== '' && filtered?.length < 1 && selectedTag == null && (
         <p className='py-32 text-center'>There are no quotes with author name &quot;{query}&quot;</p>
+      )}
+
+      {query !== '' && filteredSearched?.length < 1 && selectedTag != null && (
+        <p className='py-32 text-center'>
+          There are no quotes with author name &quot;{query}&quot; and tag &quot;{selectedTag?.name}&quot;
+        </p>
       )}
     </FrontLayout>
   );

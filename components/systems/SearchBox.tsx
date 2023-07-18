@@ -7,6 +7,7 @@ type Props = {
   label?: string;
   value?: string[];
   placeholder?: string;
+  boxClassName?: string;
   onChange?: any;
   query?: string;
   onChangeQuery?: (e: any) => void;
@@ -19,6 +20,7 @@ export default function SearchBox({
   label,
   value,
   placeholder,
+  boxClassName,
   onChange,
   query,
   onChangeQuery,
@@ -34,7 +36,10 @@ export default function SearchBox({
         <div className='relative my-2 w-full cursor-default overflow-hidden rounded-md border border-neutral-300 p-[1px] text-left text-sm dark:border-neutral-600'>
           <Combobox.Input
             {...props}
-            className='w-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm font-medium text-neutral-900 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 dark:bg-neutral-900 dark:text-white'
+            className={clsx(
+              'w-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm font-medium text-neutral-900 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 dark:bg-neutral-900 dark:text-white',
+              boxClassName
+            )}
             displayValue={(data: any) => data?.name}
             placeholder={placeholder}
             onChange={onChangeQuery}
