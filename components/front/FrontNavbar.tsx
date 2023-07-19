@@ -159,8 +159,8 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                   <Link
                     href='/login'
                     className={clsx(
-                      'px-1 text-[15px] font-medium text-gray-700 transition-all duration-200',
-                      'rounded hover:text-orange-500 dark:text-neutral-200 dark:hover:text-orange-500',
+                      'bg-orange-500 px-3 py-1 text-[15px] font-medium transition-all duration-200',
+                      'rounded text-white hover:bg-orange-600 dark:text-white',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
                     )}
                     passHref
@@ -168,9 +168,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     Login
                   </Link>
                 )
-              ) : (
-                <span className='text-[15px] font-medium text-neutral-700 dark:text-neutral-200'>Loading</span>
-              )}
+              ) : null}
             </div>
 
             {/* Mobile menu button */}

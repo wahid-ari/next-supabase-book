@@ -40,6 +40,7 @@ import FileInput from '@components/systems/FileInput';
 import { faker } from '@faker-js/faker';
 import TableSimple from '@components/systems/TableSimple';
 import { useMounted } from '@hooks/useMounted';
+import LoadingDots from '@components/systems/LoadingDots';
 
 const searchBoxData = [
   {
@@ -480,6 +481,9 @@ export default function Example() {
           <span className='mb-3 block underline'>
             <Link href='#show-more'>ShowMore</Link>
           </span>
+          <span className='mb-3 block underline'>
+            <Link href='#loading-dots'>LoadingDots</Link>
+          </span>
         </div>
       </Wrapper>
 
@@ -657,7 +661,17 @@ export default function Example() {
         noClassName
         noProps
         noChildren
-        props={['label', 'value', 'placeholder', 'onChange', 'query', 'onChangeQuery', 'afterLeave', 'filtered']}
+        props={[
+          'label',
+          'value',
+          'boxClassName',
+          'placeholder',
+          'onChange',
+          'query',
+          'onChangeQuery',
+          'afterLeave',
+          'filtered',
+        ]}
       >
         <SearchBox
           data-testid='searchbox'
@@ -1365,6 +1379,14 @@ export default function Example() {
           id consectetur aliqua. Quis culpa do est non irure aliquip proident exercitation aliqua mollit anim dolor
           labore.
         </ShowMore>
+      </Wrapper>
+
+      <Wrapper id='loading-dots' name='LoadingDots' props={['medium', 'large']} noChildren>
+        <LoadingDots data-testid='loadingdots' />
+        <br />
+        <LoadingDots medium data-testid='loadingdots-medium' />
+        <br />
+        <LoadingDots large data-testid='loadingdots-large' />
       </Wrapper>
     </Layout>
   );

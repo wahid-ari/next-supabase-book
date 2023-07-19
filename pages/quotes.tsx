@@ -68,7 +68,7 @@ export default function Quotes() {
     <FrontLayout title='Quotes - MyBook' description='Browse Quotes - MyBook'>
       <div className='flex flex-wrap items-center justify-between gap-2'>
         <Title>Quotes</Title>
-        <div className='flex gap-2 pt-2'>
+        <div className='grid grid-cols-2 gap-2 pt-2'>
           <div>
             {filteredTag ? (
               <SearchBox
@@ -79,10 +79,10 @@ export default function Quotes() {
                 afterLeave={() => setQueryTag('')}
                 filtered={filteredTag}
                 query={queryTag}
-                boxClassName='h-[33px]'
+                boxClassName='h-[34px]'
               />
             ) : (
-              <Shimer className='mt-2 !h-9 !w-56' />
+              <Shimer className='mt-2 !h-9 !w-full' />
             )}
           </div>
           <InputDebounce
