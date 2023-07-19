@@ -168,7 +168,9 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     Login
                   </Link>
                 )
-              ) : null}
+              ) : (
+                <span className='text-[15px] font-medium text-neutral-700 dark:text-neutral-200'>Loading</span>
+              )}
             </div>
 
             {/* Mobile menu button */}
