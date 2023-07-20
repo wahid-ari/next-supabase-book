@@ -48,7 +48,7 @@ export default function Home() {
         of book lovers on MyBook"
     >
       <header className='mb-16 py-10 sm:mb-12 md:py-24'>
-        <div className='flex flex-col items-center  md:flex-row '>
+        <div className='flex flex-col items-center md:flex-row'>
           <div className='mb-12 flex flex-col items-center text-center md:mb-0 md:w-1/2 md:items-start md:pr-8 md:text-left lg:flex-grow lg:pr-16 xl:pr-24'>
             <h1 className='mb-4 text-3xl font-medium text-neutral-900 dark:text-white md:text-4xl'>
               Knowledge is power, <br className='hidden lg:inline-block' />
@@ -61,9 +61,9 @@ export default function Home() {
             <Link
               href='#section-books'
               className={clsx(
-                'group inline-flex items-center gap-2 rounded-lg border-2 border-orange-500 px-6 py-2 font-semibold transition-all',
+                'group inline-flex items-center gap-3 rounded-lg border-2 border-orange-500 px-6 py-2 font-semibold transition-all',
                 'hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-600'
               )}
             >
               Explore Now
@@ -88,7 +88,7 @@ export default function Home() {
       <section id='section-books' className='scroll-mt-20'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1.5 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/books`}
               className={clsx(
@@ -129,7 +129,7 @@ export default function Home() {
       <section className='mt-24'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1.5 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/genres`}
               className={clsx(
@@ -174,7 +174,7 @@ export default function Home() {
       <section className='mt-24'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1.5 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/books`}
               className={clsx(
@@ -219,7 +219,7 @@ export default function Home() {
       <section className='mt-24'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1.5 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/quotes`}
               className={clsx(
@@ -273,7 +273,7 @@ export default function Home() {
       <section className='my-24'>
         <div className='mt-4 flex items-center justify-between p-1'>
           <div>
-            <div className='mb-1 h-1 w-5 rounded bg-orange-500' />
+            <div className='mb-1.5 h-1 w-5 rounded bg-orange-500' />
             <Link
               href={`/tags`}
               className={clsx(

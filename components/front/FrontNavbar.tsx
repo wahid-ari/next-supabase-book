@@ -98,7 +98,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     leaveFrom='opacity-100 scale-100'
                     leaveTo='opacity-0 scale-95'
                   >
-                    <Popover.Panel className='absolute top-8 z-[11] flex w-40 flex-col space-y-2.5 rounded bg-white px-4 py-4 shadow dark:bg-[#1a1a1a]'>
+                    <Popover.Panel className='absolute top-8 z-[11] flex w-40 flex-col space-y-2.5 rounded bg-white px-4 py-4 shadow dark:border dark:border-neutral-800 dark:bg-[#1a1a1a]'>
                       <CustomActiveLink href='/genres'>Genre</CustomActiveLink>
                       <CustomActiveLink href='/tags'>Tag</CustomActiveLink>
                     </Popover.Panel>
@@ -161,7 +161,7 @@ export default function FrontNavbar({ className, ...props }: { className?: strin
                     className={clsx(
                       'bg-orange-500 px-3 py-1 text-[15px] font-medium transition-all duration-200',
                       'rounded text-white hover:bg-orange-600 dark:text-white',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500'
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-600 dark:focus-visible:ring-orange-400'
                     )}
                     passHref
                   >
