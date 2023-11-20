@@ -29,8 +29,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'POST':
       if (!body.username) {
         res.status(422).json({ error: 'Username required' });
+        return;
       } else if (!body.password) {
         res.status(422).json({ error: 'Password required' });
+        return;
       } else {
         const { data, error } = await supabase
           .from('book_users')
@@ -40,6 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .single();
         if (error) {
           res.status(422).json({ error: 'User not found' });
+          return;
         }
         const isMatch = await compare(body.password, data?.password);
         if (!isMatch) {
@@ -61,6 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // const decode = jwt.verify(token, process.env.JWT_SECRET);
         // console.log(decode)
         res.status(200).json({ ...data, token });
+        return;
       }
       break;
 

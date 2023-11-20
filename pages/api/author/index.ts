@@ -12,11 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!query.id && !query.slug) {
         const { data } = await supabase.from('book_authors').select(`*`).order('id');
         res.status(200).json(data);
+        return;
       } else if (query.slug && query.seo) {
         const { data } = await supabase.from('book_authors').select(`name, bio`).eq('slug', query.slug).single();
         // https://nextjs.org/docs/api-reference/next.config.js/headers#cache-control
         res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
         res.status(200).json(data);
+        return;
       } else {
         let column = query.id ? 'id' : 'slug';
         let param = query.id ? query.id : query.slug;
@@ -39,6 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
         // res.status(200).json(data[0]);
         res.status(200).json(ready);
+        return;
       }
       break;
 
@@ -48,6 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (sessionPost) {
         if (!body.name) {
           res.status(422).json({ error: 'Name required' });
+          return;
         } else {
           let nameSlug = slug(body.name);
           const { data: isSlugExist } = await supabase
@@ -73,13 +77,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           ]);
           if (error) {
             res.status(422).json({ error: error.message });
+            return;
           }
           // Write logs
           const errorLogs = await writeLogs(sessionPost.user_id, 'create', 'author');
           if (errorLogs) {
             res.status(422).json({ error: error.message });
+            return;
           }
           res.status(200).json({ message: 'Success add author' });
+          return;
         }
       }
       break;
@@ -90,6 +97,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (sessionPut) {
         if (!body.name) {
           res.status(422).json({ error: 'Name required' });
+          return;
         } else {
           const { error } = await supabase
             .from('book_authors')
@@ -104,13 +112,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .eq('id', body.id);
           if (error) {
             res.status(422).json({ error: error.message });
+            return;
           }
           // Write logs
           const errorLogs = await writeLogs(sessionPut.user_id, 'update', 'author', body.id);
           if (errorLogs) {
             res.status(422).json({ error: error.message });
+            return;
           }
           res.status(201).json({ message: 'Success update author' });
+          return;
         }
       }
       break;
@@ -121,17 +132,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (sessionDelete) {
         if (!query.id) {
           res.status(422).json({ error: 'Id required' });
+          return;
         } else {
           const { error } = await supabase.from('book_authors').delete().eq('id', query.id);
           if (error) {
             res.status(422).json({ error: error.message });
+            return;
           }
           // Write logs
           const errorLogs = await writeLogs(sessionDelete.user_id, 'delete', 'author', query.id);
           if (errorLogs) {
             res.status(422).json({ error: error.message });
+            return;
           }
           res.status(200).json({ message: 'Success delete author' });
+          return;
         }
       }
       break;

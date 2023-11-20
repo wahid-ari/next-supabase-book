@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .select(`id, author_id, quote, book_authors (id, name, slug)`)
           .order('id');
         res.status(200).json(data);
+        return;
       } else {
         const { data: tags } = await supabase.from('book_tags').select(`*`).order('id');
         const { data: quotes_tags } = await supabase
@@ -50,6 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (sessionPost) {
         if (!body.quote) {
           res.status(422).json({ error: 'Quote required' });
+          return;
         } else {
           // get tags string from array
           let tags_string = ',';
@@ -70,6 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .select();
           if (error) {
             res.status(422).json({ error: error.message });
+            return;
           }
           // get quote id after inserting
           const quoteId = data[0].id;
@@ -87,14 +90,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const { error } = await supabase.from('book_quotes_tags').insert(tags);
             if (error) {
               res.status(422).json({ error: error.message });
+              return;
             }
           }
           // Write logs
           const errorLogs = await writeLogs(sessionPost.user_id, 'create', 'quote');
           if (errorLogs) {
             res.status(422).json({ error: error.message });
+            return;
           }
           res.status(200).json({ message: 'Success add quote' });
+          return;
         }
       }
       break;
@@ -105,6 +111,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (sessionPut) {
         if (!body.quote) {
           res.status(422).json({ error: 'Quote required' });
+          return;
         } else {
           // get tags string from array
           let tags_string = ',';
@@ -123,11 +130,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .eq('id', body.id);
           if (error) {
             res.status(422).json({ error: error.message });
+            return;
           }
           // delete tags related to edited quote
           const { error: errorQuotesTags } = await supabase.from('book_quotes_tags').delete().eq('quote_id', body.id);
           if (errorQuotesTags) {
             res.status(422).json({ error: errorQuotesTags.message });
+            return;
           }
           // if edited quote have tags
           if (body.tags?.length > 0) {
@@ -143,14 +152,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const { error } = await supabase.from('book_quotes_tags').insert(tags);
             if (error) {
               res.status(422).json({ error: error.message });
+              return;
             }
           }
           // Write logs
           const errorLogs = await writeLogs(sessionPut.user_id, 'update', 'quote', body.id);
           if (errorLogs) {
             res.status(422).json({ error: error.message });
+            return;
           }
           res.status(201).json({ message: 'Success update quote' });
+          return;
         }
       }
       break;
@@ -161,19 +173,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (sessionDelete) {
         if (!query.id) {
           res.status(422).json({ error: 'Id required' });
+          return;
         } else {
           // delete tags related to quote in book_quotes_tags table
           const { error: errorQuotesTags } = await supabase.from('book_quotes_tags').delete().eq('quote_id', query.id);
           const { error } = await supabase.from('book_quotes').delete().eq('id', query.id);
           if (error || errorQuotesTags) {
             res.status(422).json({ error: error.message });
+            return;
           }
           // Write logs
           const errorLogs = await writeLogs(sessionDelete.user_id, 'delete', 'quote', query.id);
           if (errorLogs) {
             res.status(422).json({ error: error.message });
+            return;
           }
           res.status(200).json({ message: 'Success delete quote' });
+          return;
         }
       }
       break;
